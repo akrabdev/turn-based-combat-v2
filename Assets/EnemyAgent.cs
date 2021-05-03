@@ -22,8 +22,8 @@ public class EnemyAgent : Agent
 
     public override void OnEpisodeBegin()
     {
-        
-
+        Debug.Log("Episode beginning");
+        BattleSystemSc.SetupBattle();
     }
     public override void OnActionReceived(float[] vectorAction)
     {

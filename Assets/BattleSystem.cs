@@ -30,28 +30,21 @@ public class BattleSystem : MonoBehaviour
     void Start()
     {
 		state = BattleState.START;
-        agent = GetComponent<EnemyAgent>();
-		StartCoroutine(SetupBattle());
+        agent = enemy.GetComponent<EnemyAgent>();
+		SetupBattle();
     }
 
-	IEnumerator SetupBattle()
+	public void SetupBattle()
 	{
-		//GameObject playerGO = Instantiate(playerPrefab, playerBattleStation);
-		playerUnit = player.GetComponent<Unit>();
-
-		//GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
-		enemyUnit = enemy.GetComponent<Unit>();
-
-		dialogueText.text = "A wild " + enemyUnit.unitName + " approaches...";
-
-		playerHUD.SetHUD(playerUnit);
-		enemyHUD.SetHUD(enemyUnit);
-
-		yield return new WaitForSeconds(2f);
-
-		state = BattleState.PLAYERTURN;
-		PlayerTurn();
-	}
+        playerUnit = player.GetComponent<Unit>();
+        enemyUnit = enemy.GetComponent<Unit>();
+        playerUnit.currentHP = playerUnit.maxHP;
+        enemyUnit.currentHP = enemyUnit.maxHP;
+        playerHUD.SetHUD(playerUnit);
+        enemyHUD.SetHUD(enemyUnit);
+        state = BattleState.PLAYERTURN;
+        PlayerTurn();
+    }
 
 	IEnumerator PlayerAttack()
 	{
@@ -68,9 +61,9 @@ public class BattleSystem : MonoBehaviour
 		}
         else
 		{
-
-            state = BattleState.ENEMYTURN;
             agent.AddReward(-0.2f);
+            state = BattleState.ENEMYTURN;
+            
             //StartCoroutine(EnemyTurn());
             //EnemyTurn();
         }
@@ -79,31 +72,34 @@ public class BattleSystem : MonoBehaviour
 	public void EnemyTurn(float[] vectorAction)
 	{
         dialogueText.text = enemyUnit.unitName + " attacks!";
-        
-        if(vectorAction[0] == 1)
+        if(vectorAction != null)
         {
-            bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
-            playerHUD.SetHP(playerUnit.currentHP);
-            if (isDead)
+            if (vectorAction[0] == 1)
             {
-                state = BattleState.LOST;
-                EndBattle();
+                bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
+                playerHUD.SetHP(playerUnit.currentHP);
+                if (isDead)
+                {
+                    state = BattleState.LOST;
+                    EndBattle();
+                }
+                else
+                {
+                    agent.AddReward(0.5f);
+                    state = BattleState.PLAYERTURN;
+                    PlayerTurn();
+                }
             }
-            else
+            else if (vectorAction[1] == 1)
             {
-                state = BattleState.PLAYERTURN;
+                enemyUnit.Heal(5);
                 agent.AddReward(0.5f);
+                enemyHUD.SetHP(enemyUnit.currentHP);
+                state = BattleState.PLAYERTURN;
                 PlayerTurn();
             }
         }
-        else if (vectorAction[1] == 1)
-        {
-            enemyUnit.Heal(5);
-            agent.AddReward(0.5f);
-            enemyHUD.SetHP(enemyUnit.currentHP);
-            state = BattleState.PLAYERTURN;
-            PlayerTurn();
-        }
+        
 
         //yield return new waitforseconds(1f);
 
@@ -135,9 +131,11 @@ public class BattleSystem : MonoBehaviour
 		{
 			dialogueText.text = "You were defeated.";
 		}
+        agent.EndEpisode();
+        Debug.Log("Ended episode from battlesystem.cs");
 	}
 
-	void PlayerTurn()
+	public void PlayerTurn()
 	{
 		dialogueText.text = "Choose an action:";
 	}
