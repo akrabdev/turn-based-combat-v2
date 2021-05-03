@@ -27,6 +27,9 @@ public class EnemyAgent : Agent
     }
     public override void OnActionReceived(float[] vectorAction)
     {
+        //Debug.Log("Received agent action");
+        Debug.Log(vectorAction[0]);
+        Debug.Log(vectorAction[1]);
         if (BattleSystemSc.state == BattleState.ENEMYTURN)
         {
             BattleSystemSc.EnemyTurn(vectorAction);
@@ -35,7 +38,6 @@ public class EnemyAgent : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
 
-        // Observe the local rotation
         sensor.AddObservation(PlayerUnit.currentHP);
         sensor.AddObservation(EnemyUnit.currentHP);
 

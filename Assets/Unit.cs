@@ -15,7 +15,8 @@ public class Unit : MonoBehaviour
 
 	public bool TakeDamage(int dmg)
 	{
-		currentHP -= dmg;
+        int randDmg = Random.Range(dmg - 5, dmg + 5);
+		currentHP -= randDmg;
 
 		if (currentHP <= 0)
 			return true;
@@ -25,7 +26,8 @@ public class Unit : MonoBehaviour
 
 	public void Heal(int amount)
 	{
-		currentHP += amount;
+        int randHeal = Random.Range(amount - 5, amount + 5);
+		currentHP += randHeal;
 		if (currentHP > maxHP)
 			currentHP = maxHP;
 	}
