@@ -11,6 +11,8 @@ public class BattleSystem : MonoBehaviour
 	public GameObject player;
 	public GameObject enemy;
 
+    public Animator anim;
+
 	public Transform playerBattleStation;
 	public Transform enemyBattleStation;
 
@@ -31,6 +33,7 @@ public class BattleSystem : MonoBehaviour
     {
 		state = BattleState.START;
         agent = enemy.GetComponent<EnemyAgent>();
+        anim = player.GetComponent<Animator>();
 		//SetupBattle();
     }
 
@@ -72,7 +75,23 @@ public class BattleSystem : MonoBehaviour
     // FOR AUTOMATION
     void PlayerAttack()
     {
-        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+        //0.2 = 0.6 * P(crit|attack)
+        int missChance = Random.Range(0, 9);
+        if (missChance > 6)
+        {
+            //dialogueText.text = "Miss!";
+            Debug.Log("Miss!");
+            return;
+        }
+        int critChance = Random.Range(0, 9);
+        int damage = playerUnit.damage;
+        if (critChance > 6)
+        {
+            damage *= 2;
+            //dialogueText.text = "Critical!";
+            Debug.Log("Critical!");
+        }
+        bool isDead = enemyUnit.TakeDamage(damage);
         enemyHUD.SetHP(enemyUnit.currentHP);
         dialogueText.text = "The attack is successful!";
 
@@ -116,7 +135,7 @@ public class BattleSystem : MonoBehaviour
             else if (vectorAction[1] == 1)
             {
                 dialogueText.text = enemyUnit.unitName + " heals!";
-                enemyUnit.Heal(7);
+                enemyUnit.Heal(10);
                 //agent.AddReward(0.5f);
                 enemyHUD.SetHP(enemyUnit.currentHP);
                 state = BattleState.PLAYERTURN;
@@ -151,15 +170,20 @@ public class BattleSystem : MonoBehaviour
 		if(state == BattleState.WON)
 		{
             Debug.Log("Agent lost");
-            agent.AddReward(-1f);
+            if (agent.trainingMode)
+                agent.AddReward(-1f);
             dialogueText.text = "You won the battle!";
 		} else if (state == BattleState.LOST)
 		{
             Debug.Log("Agent won");
-            agent.AddReward(0.5f);
+            if(agent.trainingMode)
+                agent.AddReward(0.5f);
             dialogueText.text = "You were defeated.";
 		}
-        agent.EndEpisode();
+        if (agent.trainingMode)
+            agent.EndEpisode();
+        else
+            SetupBattle();
         Debug.Log("Ended episode from battlesystem.cs");
 	}
 
@@ -167,11 +191,14 @@ public class BattleSystem : MonoBehaviour
 	{
 		dialogueText.text = "Choose an action:";
         //For automation
-        int rand = Random.Range(0, 9);
-        if (rand > 4)
-            PlayerAttack();
-        else
-            PlayerHeal();
+        if (agent.trainingMode)
+        {
+            int rand = Random.Range(0, 9);
+            if (rand > 4)
+                PlayerAttack();
+            else
+                PlayerHeal();
+        }
     }
 
     //IEnumerator PlayerHeal()
@@ -188,10 +215,42 @@ public class BattleSystem : MonoBehaviour
     //FOR AUTOMATION
     void PlayerHeal()
     {
-        playerUnit.Heal(7);
+        playerUnit.Heal(10);
 
         playerHUD.SetHP(playerUnit.currentHP);
         dialogueText.text = "You feel renewed strength!";
+
+        state = BattleState.ENEMYTURN;
+    }
+
+    void moveLeft()
+    {
+        player.transform.Translate(-1f, 0, 0);
+        dialogueText.text = "You move to the left!";
+
+        state = BattleState.ENEMYTURN;
+    }
+
+    void moveRight()
+    {
+        player.transform.Translate(1f, 0, 0);
+        dialogueText.text = "You move to the right!";
+
+        state = BattleState.ENEMYTURN;
+    }
+
+    void moveUp()
+    {
+        player.transform.Translate(0, 1f, 0);
+        dialogueText.text = "You move up!";
+
+        state = BattleState.ENEMYTURN;
+    }
+
+    void moveDown()
+    {
+        player.transform.Translate(0, -1f, 0);
+        dialogueText.text = "You move down!";
 
         state = BattleState.ENEMYTURN;
     }
@@ -213,5 +272,46 @@ public class BattleSystem : MonoBehaviour
         //StartCoroutine(PlayerHeal());
         PlayerHeal();
 	}
+
+    public void OnLeftButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+            return;
+
+        //StartCoroutine(PlayerHeal());
+        anim.SetTrigger("MoveLeft");
+        moveLeft();
+    }
+
+    public void OnRightButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+            return;
+
+        anim.SetTrigger("MoveRight");
+        //StartCoroutine(PlayerHeal());
+        moveRight();
+    }
+
+    public void OnUpButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+            return;
+
+        //StartCoroutine(PlayerHeal());
+        anim.SetTrigger("MoveUp");
+        moveUp();
+        
+    }
+
+    public void OnDownButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+            return;
+
+        anim.SetTrigger("MoveDown");
+        //StartCoroutine(PlayerHeal());
+        moveDown();
+    }
 
 }

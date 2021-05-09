@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BattleHUD : MonoBehaviour
 {
-
+    public GameObject objectToFollow;
 	public Text nameText;
 	public Text levelText;
 	public Slider hpSlider;
@@ -22,5 +22,10 @@ public class BattleHUD : MonoBehaviour
 	{
 		hpSlider.value = hp;
 	}
+
+    public void Update()
+    {
+        transform.position = objectToFollow.transform.position + new Vector3(0, 1f, 0);
+    }
 
 }

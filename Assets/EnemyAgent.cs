@@ -6,6 +6,7 @@ using Unity.MLAgents.Sensors;
 
 public class EnemyAgent : Agent
 {
+    public bool trainingMode;
     public GameObject Player;
     public GameObject BattleSystemOb;
     Unit EnemyUnit;
@@ -17,6 +18,10 @@ public class EnemyAgent : Agent
         EnemyUnit = this.gameObject.GetComponent<Unit>();
         PlayerUnit = Player.GetComponent<Unit>();
         BattleSystemSc = BattleSystemOb.GetComponent<BattleSystem>();
+        if(!trainingMode)
+        {
+            MaxStep = 0;
+        }
         
     }
 
@@ -28,8 +33,8 @@ public class EnemyAgent : Agent
     public override void OnActionReceived(float[] vectorAction)
     {
         //Debug.Log("Received agent action");
-        Debug.Log(vectorAction[0]);
-        Debug.Log(vectorAction[1]);
+        //Debug.Log(vectorAction[0]);
+        //Debug.Log(vectorAction[1]);
         if (BattleSystemSc.state == BattleState.ENEMYTURN)
         {
             BattleSystemSc.EnemyTurn(vectorAction);
