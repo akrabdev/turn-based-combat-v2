@@ -28,13 +28,17 @@ public class BattleSystem : MonoBehaviour
 
     private EnemyAgent agent;
 
+    //public CombatManager combatManager;
+
     // Start is called before the first frame update
     void Start()
     {
 		state = BattleState.START;
         agent = enemy.GetComponent<EnemyAgent>();
         anim = player.GetComponent<Animator>();
-		//SetupBattle();
+        //combatManager.player = playerUnit;
+        //combatManager.enemy = enemyUnit;
+        //SetupBattle();
     }
 
 	public void SetupBattle()
@@ -98,13 +102,14 @@ public class BattleSystem : MonoBehaviour
         if (isDead)
         {
             state = BattleState.WON;
+            playerUnit.addExperience(50*enemyUnit.unitLevel);
             EndBattle();
         }
         else
         {
             //agent.AddReward(-0.2f);
             state = BattleState.ENEMYTURN;
-
+            //combatManager.switchTurn();
             //StartCoroutine(EnemyTurn());
             //EnemyTurn();
         }
@@ -123,12 +128,14 @@ public class BattleSystem : MonoBehaviour
                 if (isDead)
                 {
                     state = BattleState.LOST;
+                    playerUnit.removeExperience(10 * enemyUnit.unitLevel);
                     EndBattle();
                 }
                 else
                 {
                     //agent.AddReward(0.5f);
                     state = BattleState.PLAYERTURN;
+
                     PlayerTurn();
                 }
             }
@@ -223,6 +230,16 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.ENEMYTURN;
     }
 
+    void PlayerShield()
+    {
+        //playerUnit.Shield();
+        //call ability manager (shield and player
+        playerUnit.buffs["Shield"] = 1;
+        dialogueText.text = "You shielded yourself!";
+
+        state = BattleState.ENEMYTURN;
+    }
+
     void moveLeft()
     {
         player.transform.Translate(-1f, 0, 0);
@@ -312,6 +329,14 @@ public class BattleSystem : MonoBehaviour
         anim.SetTrigger("MoveDown");
         //StartCoroutine(PlayerHeal());
         moveDown();
+    }
+
+    public void OnShieldButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+            return;
+        //StartCoroutine(PlayerHeal());
+        PlayerShield();
     }
 
 }
