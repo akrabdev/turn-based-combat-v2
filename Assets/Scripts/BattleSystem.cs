@@ -3,25 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BattleState { IDLE, START, PLAYERTURN, ENEMYTURN, WON, LOST }
+public enum BattleState { IDLE, START, PLAYERTURN, ENEMYTURN, WON, LOST, ESCAPE}
 
 public class BattleSystem : MonoBehaviour
 {
 
-	public GameObject player;
-	public GameObject enemy;
+	GameObject player;
+	GameObject enemy;
 
 	Unit playerUnit;
 	Unit enemyUnit;
 
-	public Text dialogueText;
+    EnemyAgent agent;
 
-	public BattleHUD playerHUD;
-	public BattleHUD enemyHUD;
+    public Text dialogueText;
 
 	public BattleState state;
 
-    private EnemyAgent agent;
+    
 
     //public CombatManager combatManager;
 
@@ -29,20 +28,26 @@ public class BattleSystem : MonoBehaviour
     void Start()
     {
 		state = BattleState.IDLE;
-        agent = enemy.GetComponent<EnemyAgent>();
+        
         //combatManager.player = playerUnit;
         //combatManager.enemy = enemyUnit;
         //SetupBattle();
     }
 
-	public void SetupBattle()
+	public void SetupBattle(GameObject playerInBattle, GameObject enemyInBattle)
 	{
+        player = playerInBattle;
+        enemy = enemyInBattle;
+        dialogueText.text = "You have entered a battle against " + enemy.name;
         playerUnit = player.GetComponent<Unit>();
         enemyUnit = enemy.GetComponent<Unit>();
-        playerUnit.currentHP = playerUnit.maxHP;
-        enemyUnit.currentHP = enemyUnit.maxHP;
-        playerHUD.SetHUD(playerUnit);
-        enemyHUD.SetHUD(enemyUnit);
+        //playerUnit.currentHP = playerUnit.maxHP;
+        //enemyUnit.currentHP = enemyUnit.maxHP;
+        playerUnit.SetHUD();
+        enemyUnit.SetHUD();
+        agent = enemy.GetComponent<EnemyAgent>();
+        agent.BattleSystemSc = this;
+        agent.UnfreezeAgent();
         state = BattleState.PLAYERTURN;
         PlayerTurn();
     }
@@ -90,7 +95,7 @@ public class BattleSystem : MonoBehaviour
             Debug.Log("Critical!");
         }
         bool isDead = enemyUnit.TakeDamage(damage);
-        enemyHUD.SetHP(enemyUnit.currentHP);
+        //enemyHUD.SetHP(enemyUnit.currentHP);
         dialogueText.text = "The attack is successful!";
 
         if (isDead)
@@ -118,7 +123,7 @@ public class BattleSystem : MonoBehaviour
             {
                 dialogueText.text = enemyUnit.unitName + " attacks!";
                 bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
-                playerHUD.SetHP(playerUnit.currentHP);
+                //playerHUD.SetHP(playerUnit.currentHP);
                 if (isDead)
                 {
                     state = BattleState.LOST;
@@ -138,7 +143,7 @@ public class BattleSystem : MonoBehaviour
                 dialogueText.text = enemyUnit.unitName + " heals!";
                 enemyUnit.Heal(10);
                 //agent.AddReward(0.5f);
-                enemyHUD.SetHP(enemyUnit.currentHP);
+                //enemyHUD.SetHP(enemyUnit.currentHP);
                 state = BattleState.PLAYERTURN;
                 PlayerTurn();
             }
@@ -166,7 +171,7 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    void EndBattle()
+    public void EndBattle()
 	{
 		if(state == BattleState.WON)
 		{
@@ -174,6 +179,7 @@ public class BattleSystem : MonoBehaviour
             if (agent.trainingMode)
                 agent.AddReward(-1f);
             dialogueText.text = "You won the battle!";
+            Destroy(enemy);
 		} else if (state == BattleState.LOST)
 		{
             Debug.Log("Agent won");
@@ -181,10 +187,19 @@ public class BattleSystem : MonoBehaviour
                 agent.AddReward(0.5f);
             dialogueText.text = "You were defeated.";
 		}
+        else if (state == BattleState.ESCAPE)
+        {
+            Debug.Log("Player escaped");
+            if (agent.trainingMode)
+                agent.AddReward(0.25f);
+            dialogueText.text = "You escaped the fight.";
+            enemyUnit.currentHP = enemyUnit.maxHP;
+            enemyUnit.SetHP();
+        }
         if (agent.trainingMode)
             agent.EndEpisode();
-        else
-            SetupBattle();
+        //else
+        //    SetupBattle();
         Debug.Log("Ended episode from battlesystem.cs");
 	}
 
@@ -218,7 +233,7 @@ public class BattleSystem : MonoBehaviour
     {
         playerUnit.Heal(10);
 
-        playerHUD.SetHP(playerUnit.currentHP);
+        //playerHUD.SetHP(playerUnit.currentHP);
         dialogueText.text = "You feel renewed strength!";
 
         state = BattleState.ENEMYTURN;

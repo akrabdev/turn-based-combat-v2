@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - BattleSystem
   layers:
   - Default
   - TransparentFX
@@ -46,4 +47,7 @@ TagManager:
     locked: 0
   - name: Canvas
     uniqueID: 2097310883
+    locked: 0
+  - name: Main Canvas
+    uniqueID: 2473390211
     locked: 0

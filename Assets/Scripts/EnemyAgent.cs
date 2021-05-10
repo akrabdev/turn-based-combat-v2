@@ -7,17 +7,19 @@ using Unity.MLAgents.Sensors;
 public class EnemyAgent : Agent
 {
     public bool trainingMode;
-    public GameObject Player;
-    public GameObject BattleSystemOb;
+    public bool isFrozen;
+    GameObject Player;
     Unit EnemyUnit;
     Unit PlayerUnit;
-    BattleSystem BattleSystemSc;
+    public BattleSystem BattleSystemSc;
 
     public override void Initialize()
     {
-        EnemyUnit = this.gameObject.GetComponent<Unit>();
+        Player = GameObject.FindGameObjectWithTag("Player");
+        Debug.Log(Player.CompareTag("Player"));
+        EnemyUnit = GetComponent<Unit>();
         PlayerUnit = Player.GetComponent<Unit>();
-        BattleSystemSc = BattleSystemOb.GetComponent<BattleSystem>();
+        //BattleSystemSc = BattleSystemOb.GetComponent<BattleSystem>();
         if(!trainingMode)
         {
             MaxStep = 0;
@@ -28,10 +30,12 @@ public class EnemyAgent : Agent
     public override void OnEpisodeBegin()
     {
         Debug.Log("Episode beginning");
-        BattleSystemSc.SetupBattle();
+        //BattleSystemSc.SetupBattle();
     }
     public override void OnActionReceived(float[] vectorAction)
     {
+        if (isFrozen)
+            return;
         //Debug.Log("Received agent action");
         //Debug.Log(vectorAction[0]);
         //Debug.Log(vectorAction[1]);
@@ -42,10 +46,21 @@ public class EnemyAgent : Agent
     }
     public override void CollectObservations(VectorSensor sensor)
     {
-
         sensor.AddObservation(PlayerUnit.currentHP);
         sensor.AddObservation(EnemyUnit.currentHP);
+    }
 
+    public void FreezeAgent()
+    {
+        Debug.Assert(trainingMode == false, "Freeze/unfreeze not supported in training");
+        isFrozen = true;
+        //GetComponent<Rigidbody>().Sleep();
+    }
 
+    public void UnfreezeAgent()
+    {
+        Debug.Assert(trainingMode == false, "Freeze/unfreeze not supported in training");
+        isFrozen = false;
+        //GetComponent<Rigidbody>().Sleep();
     }
 }

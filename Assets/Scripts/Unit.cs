@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class Unit : MonoBehaviour
 	public int maxHP;
 	public int currentHP;
 
+    public Text nameText;
+    public Text levelText;
+    public Slider hpSlider;
+
     //Just for deleveling for now
     private bool hpUpdated;
     //[System.Serializable]
@@ -22,22 +27,24 @@ public class Unit : MonoBehaviour
     //    public string name;
     //    public int turn;
     //}
-    
+
     //public buffsStruct[] buffsArray;
 
     //public Dictionary<string, int> buffs;
 
-    //private void Start()
-    //{
-    //    buffs = new Dictionary<string, int>();
-    //    buffs.Add("Shield", 0);
+    private void Start()
+    {
+        SetHUD();
+        //buffs = new Dictionary<string, int>();
+        //buffs.Add("Shield", 0);
 
-    //}
+    }
 
     public bool TakeDamage(int dmg)
 	{
         int randDmg = Random.Range(dmg - 5, dmg + 5);
 		currentHP -= randDmg;
+        SetHP();
 
 		if (currentHP <= 0)
 			return true;
@@ -108,6 +115,19 @@ public class Unit : MonoBehaviour
         else
             maxHP = Mathf.RoundToInt(50 * Mathf.Log10(unitLevel) + 100);
         //\ 200\cdot\log\left(x\right)\ +\ 100
+    }
+
+    public void SetHUD()
+    {
+        nameText.text = unitName;
+        levelText.text = "Lvl " + unitLevel;
+        hpSlider.maxValue = maxHP;
+        hpSlider.value = currentHP;
+    }
+
+    public void SetHP()
+    {
+        hpSlider.value = currentHP;
     }
 
 }
