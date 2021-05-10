@@ -14,7 +14,8 @@ public class Unit : MonoBehaviour
 	public int maxHP;
 	public int currentHP;
 
-    public bool hpUpdated;
+    //Just for deleveling for now
+    private bool hpUpdated;
     //[System.Serializable]
     //public struct buffsStruct
     //{
