@@ -230,15 +230,15 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.ENEMYTURN;
     }
 
-    void PlayerShield()
-    {
-        //playerUnit.Shield();
-        //call ability manager (shield and player
-        playerUnit.buffs["Shield"] = 1;
-        dialogueText.text = "You shielded yourself!";
+    //void PlayerShield()
+    //{
+    //    //playerUnit.Shield();
+    //    //call ability manager (shield and player
+    //    playerUnit.buffs["Shield"] = 1;
+    //    dialogueText.text = "You shielded yourself!";
 
-        state = BattleState.ENEMYTURN;
-    }
+    //    state = BattleState.ENEMYTURN;
+    //}
 
     void moveLeft()
     {
@@ -331,12 +331,12 @@ public class BattleSystem : MonoBehaviour
         moveDown();
     }
 
-    public void OnShieldButton()
-    {
-        if (state != BattleState.PLAYERTURN)
-            return;
-        //StartCoroutine(PlayerHeal());
-        PlayerShield();
-    }
+    //public void OnShieldButton()
+    //{
+    //    if (state != BattleState.PLAYERTURN)
+    //        return;
+    //    //StartCoroutine(PlayerHeal());
+    //    PlayerShield();
+    //}
 
 }
