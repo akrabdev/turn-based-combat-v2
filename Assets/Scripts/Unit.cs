@@ -11,6 +11,7 @@ public class Unit : MonoBehaviour
     public int experiencePoints;
 
 	public int damage;
+    public int magicPower;
 
 	public int maxHP;
 	public int currentHP;
@@ -52,9 +53,9 @@ public class Unit : MonoBehaviour
 			return false;
 	}
 
-	public void Heal(int amount)
+	public void Heal()
 	{
-        int randHeal = Random.Range(amount - 5, amount + 5);
+        int randHeal = Random.Range(magicPower - 5, magicPower + 5);
 		currentHP += randHeal;
 		if (currentHP > maxHP)
 			currentHP = maxHP;

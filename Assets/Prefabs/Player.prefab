@@ -821,7 +821,7 @@ GameObject:
   - component: {fileID: 1925253945594304151}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -857,6 +857,7 @@ MonoBehaviour:
   unitLevel: 1
   experiencePoints: 0
   damage: 10
+  magicPower: 0
   maxHP: 100
   currentHP: 100
   nameText: {fileID: 1518661645}
@@ -991,3 +992,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e08107d099c59bc4eb0c551ed80241d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bs: {fileID: 0}

@@ -24,7 +24,7 @@ public class BattleSystem : MonoBehaviour
 
 	public BattleState state;
 
-    
+    public ParticleSystem bloodEffect;
 
     //public CombatManager combatManager;
 
@@ -82,42 +82,50 @@ public class BattleSystem : MonoBehaviour
     //}
 
     // FOR AUTOMATION
-    void PlayerAttack()
+    void Attack(Unit unitAttacking, Unit unitBeingAttacked)
     {
-        //0.2 = 0.6 * P(crit|attack)
+        if (Vector3.Distance(enemy.transform.position, player.transform.position) >= 1.5)
+        {
+            StartCoroutine(infoBarManager.UpdateText("Must be in range"));
+            return;
+        }
+            
         int missChance = Random.Range(0, 9);
         if (missChance > 6)
         {
-            //dialogueText.text = "Miss!";
             Debug.Log("Miss!");
+            //Switch turn
             return;
         }
         int critChance = Random.Range(0, 9);
-        int damage = playerUnit.damage;
+        int damage = unitAttacking.damage;
         if (critChance > 6)
         {
             damage *= 2;
-            //dialogueText.text = "Critical!";
             Debug.Log("Critical!");
         }
-        bool isDead = enemyUnit.TakeDamage(damage);
+        bool isDead = unitBeingAttacked.TakeDamage(damage);
+        ParticleSystem blood = Instantiate(bloodEffect, unitBeingAttacked.transform.position, unitBeingAttacked.transform.rotation);
+        Destroy(blood.gameObject, 1f);
         //enemyHUD.SetHP(enemyUnit.currentHP);
-        StartCoroutine(infoBarManager.UpdateText("The attack is successful!"));
-        //dialogueText.text = "The attack is successful!";
+        StartCoroutine(infoBarManager.UpdateText(unitAttacking.unitName + "'s attack is successful!"));
 
-        if (isDead)
+        if (isDead && unitBeingAttacked.gameObject.CompareTag("Player"))
+        {
+            state = BattleState.LOST;
+            EndBattle();
+        }
+        else if (isDead && unitBeingAttacked.gameObject.CompareTag("Enemy"))
         {
             state = BattleState.WON;
-            playerUnit.addExperience(50*enemyUnit.unitLevel);
             EndBattle();
         }
         else
         {
-            //agent.AddReward(-0.2f);
-            state = BattleState.ENEMYTURN;
-            //combatManager.switchTurn();
-            //StartCoroutine(EnemyTurn());
-            //EnemyTurn();
+            if (state == BattleState.ENEMYTURN)
+                state = BattleState.PLAYERTURN;
+            else
+                state = BattleState.ENEMYTURN;
         }
     }
 
@@ -128,55 +136,44 @@ public class BattleSystem : MonoBehaviour
         {
             if (vectorAction[0] == 1)
             {
-                //dialogueText.text = enemyUnit.unitName + " attacks!";
-                StartCoroutine(infoBarManager.UpdateText(enemyUnit.unitName + " attacks!"));
-                bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
-                //playerHUD.SetHP(playerUnit.currentHP);
-                if (isDead)
-                {
-                    state = BattleState.LOST;
-                    playerUnit.removeExperience(10 * enemyUnit.unitLevel);
-                    EndBattle();
-                }
-                else
-                {
-                    //agent.AddReward(0.5f);
-                    state = BattleState.PLAYERTURN;
-
-                    PlayerTurn();
-                }
+                Attack(enemyUnit, playerUnit);
+                PlayerTurn();
             }
             else if (vectorAction[1] == 1)
             {
-                //dialogueText.text = enemyUnit.unitName + " heals!";
-                StartCoroutine(infoBarManager.UpdateText(enemyUnit.unitName + " heals!"));
-                enemyUnit.Heal(10);
-                //agent.AddReward(0.5f);
-                //enemyHUD.SetHP(enemyUnit.currentHP);
+                Heal(enemyUnit);
+                PlayerTurn();
+            }
+
+            else if (vectorAction[2] == 1)
+            {
+                StartCoroutine(infoBarManager.UpdateText(enemyUnit.unitName + " moves left!"));
+                enemy.transform.Translate(new Vector3(-1, 0, 0));
+                state = BattleState.PLAYERTURN;
+                PlayerTurn();
+            }
+            else if (vectorAction[3] == 1)
+            {
+                StartCoroutine(infoBarManager.UpdateText(enemyUnit.unitName + " moves right!"));
+                enemy.transform.Translate(new Vector3(1, 0, 0));
+                state = BattleState.PLAYERTURN;
+                PlayerTurn();
+            }
+            else if (vectorAction[4] == 1)
+            {
+                StartCoroutine(infoBarManager.UpdateText(enemyUnit.unitName + " moves up!"));
+                enemy.transform.Translate(new Vector3(0, 1, 0));
+                state = BattleState.PLAYERTURN;
+                PlayerTurn();
+            }
+            else if (vectorAction[5] == 1)
+            {
+                StartCoroutine(infoBarManager.UpdateText(enemyUnit.unitName + " moves down!"));
+                enemy.transform.Translate(new Vector3(0, -1, 0));
                 state = BattleState.PLAYERTURN;
                 PlayerTurn();
             }
         }
-        
-
-        //yield return new waitforseconds(1f);
-
-        //bool isdead = playerunit.takedamage(enemyunit.damage);
-
-        //playerhud.sethp(playerunit.currenthp);
-
-        //yield return new waitforseconds(1f);
-
-        //if (isdead)
-        //{
-        //    state = battlestate.lost;
-        //    endbattle();
-        //}
-        //else
-        //{
-        //    state = battlestate.playerturn;
-        //    playerturn();
-        //}
 
     }
 
@@ -185,6 +182,7 @@ public class BattleSystem : MonoBehaviour
 		if(state == BattleState.WON)
 		{
             Debug.Log("Agent lost");
+            playerUnit.addExperience(50 * enemyUnit.unitLevel);
             if (agent.trainingMode)
                 agent.AddReward(-1f);
             //dialogueText.text = "You won the battle!";
@@ -193,7 +191,8 @@ public class BattleSystem : MonoBehaviour
 		} else if (state == BattleState.LOST)
 		{
             Debug.Log("Agent won");
-            if(agent.trainingMode)
+            playerUnit.removeExperience(10 * enemyUnit.unitLevel);
+            if (agent.trainingMode)
                 agent.AddReward(0.5f);
             StartCoroutine(infoBarManager.UpdateText("You were defeated."));
             //dialogueText.text = "You were defeated.";
@@ -225,9 +224,9 @@ public class BattleSystem : MonoBehaviour
         {
             int rand = Random.Range(0, 9);
             if (rand > 4)
-                PlayerAttack();
+                Attack(playerUnit, enemyUnit);
             else
-                PlayerHeal();
+                Heal(playerUnit);
         }
     }
 
@@ -243,15 +242,18 @@ public class BattleSystem : MonoBehaviour
     //	state = BattleState.ENEMYTURN;
     //}
     //FOR AUTOMATION
-    void PlayerHeal()
+    void Heal(Unit healingUnit)
     {
-        playerUnit.Heal(10);
+        healingUnit.Heal();
 
         //playerHUD.SetHP(playerUnit.currentHP);
         StartCoroutine(infoBarManager.UpdateText("You feel renewed strength."));
         //dialogueText.text = "You feel renewed strength!";
 
-        state = BattleState.ENEMYTURN;
+        if (state == BattleState.ENEMYTURN)
+            state = BattleState.PLAYERTURN;
+        else
+            state = BattleState.ENEMYTURN;
     }
 
     //void PlayerShield()
@@ -271,9 +273,9 @@ public class BattleSystem : MonoBehaviour
 		if (state != BattleState.PLAYERTURN)
 			return;
         //StartCoroutine(PlayerAttack());
-        PlayerAttack();
-		
-	}
+        
+
+    }
 
 	public void OnHealButton()
 	{
@@ -281,7 +283,7 @@ public class BattleSystem : MonoBehaviour
 			return;
 
         //StartCoroutine(PlayerHeal());
-        PlayerHeal();
+        Heal(playerUnit);
 	}
 
     

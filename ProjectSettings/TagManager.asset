@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - BattleSystem
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -50,4 +51,7 @@ TagManager:
     locked: 0
   - name: Main Canvas
     uniqueID: 2473390211
+    locked: 0
+  - name: Effects
+    uniqueID: 3189019781
     locked: 0

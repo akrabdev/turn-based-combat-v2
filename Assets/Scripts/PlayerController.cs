@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Animator anim;
+    public BattleSystem bs;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,19 +16,51 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            moveLeft();
+            if (bs.state == BattleState.IDLE)
+            {
+                moveLeft();
+            }
+            else if (bs.state == BattleState.PLAYERTURN)
+            {
+                moveLeft();
+                bs.state = BattleState.ENEMYTURN;
+            }
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            moveRight();
+            if (bs.state == BattleState.IDLE)
+            {
+                moveRight();
+            }
+            else if (bs.state == BattleState.PLAYERTURN)
+            {
+                moveRight();
+                bs.state = BattleState.ENEMYTURN;
+            }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            moveDown();
+            if (bs.state == BattleState.IDLE)
+            {
+                moveDown();
+            }
+            else if (bs.state == BattleState.PLAYERTURN)
+            {
+                moveDown();
+                bs.state = BattleState.ENEMYTURN;
+            }
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            moveUp();
+            if (bs.state == BattleState.IDLE)
+            {
+                moveUp();
+            }
+            else if (bs.state == BattleState.PLAYERTURN)
+            {
+                moveUp();
+                bs.state = BattleState.ENEMYTURN;
+            }
         }
     }
 

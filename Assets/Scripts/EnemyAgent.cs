@@ -16,7 +16,6 @@ public class EnemyAgent : Agent
     public override void Initialize()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
-        Debug.Log(Player.CompareTag("Player"));
         EnemyUnit = GetComponent<Unit>();
         PlayerUnit = Player.GetComponent<Unit>();
         //BattleSystemSc = BattleSystemOb.GetComponent<BattleSystem>();
