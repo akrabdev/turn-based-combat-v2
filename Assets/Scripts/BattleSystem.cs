@@ -273,7 +273,7 @@ public class BattleSystem : MonoBehaviour
 		if (state != BattleState.PLAYERTURN)
 			return;
         //StartCoroutine(PlayerAttack());
-        
+        Attack(playerUnit, enemyUnit);
 
     }
 
