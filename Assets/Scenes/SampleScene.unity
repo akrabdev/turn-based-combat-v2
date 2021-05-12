@@ -5125,7 +5125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 696eb9adec37cf245a37fe04f310d607, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trainingMode: 0
+  trainingMode: 1
 --- !u!114 &1222944067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6073,6 +6073,11 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2514056320926447459, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2514056320926447468, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
       propertyPath: m_Name
@@ -6142,6 +6147,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7087746454564289345, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: isFrozen
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7087746454564289345, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: trainingMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7087746454564289345, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
