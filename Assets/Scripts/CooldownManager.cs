@@ -9,7 +9,7 @@ public class CooldownManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -25,7 +25,7 @@ public class CooldownManager : MonoBehaviour
         for (int i = 0; i < spellsOnCooldown.Count; i++)
         {
             spellsOnCooldown[i].currentCooldown -= 1;
-            if(spellsOnCooldown[i].currentCooldown<=0)
+            if (spellsOnCooldown[i].currentCooldown <= 0)
             {
                 spellsOnCooldown[i].currentCooldown = 0;
                 spellsOnCooldown.Remove(spellsOnCooldown[i]);
@@ -35,10 +35,11 @@ public class CooldownManager : MonoBehaviour
 
     public void StartCooldown(Spell spell)
     {
-        if(!spellsOnCooldown.Contains(spell))
+        if (!spellsOnCooldown.Contains(spell))
         {
             spell.currentCooldown = spell.maxCooldown;
             spellsOnCooldown.Add(spell);
         }
     }
 }
+// Cooldown Manager Com
