@@ -39,6 +39,35 @@ public class BattleSystem : MonoBehaviour
         //SetupBattle();
     }
 
+    public void SwitchTurn()
+    {
+        CooldownManager.instance.SwitchTurn();
+        if (state == BattleState.IDLE)
+        {
+            int randomTurn = Random.Range(0, 10);
+            if (randomTurn > 4)
+            {
+                state = BattleState.PLAYERTURN;
+                PlayerTurn();
+            }
+            else
+            {
+                state = BattleState.ENEMYTURN;
+                agent.RequestDecision();
+            }
+        }
+        else if (state == BattleState.PLAYERTURN)
+        {
+            state = BattleState.ENEMYTURN;
+            agent.RequestDecision();
+        }
+        else if (state == BattleState.ENEMYTURN)
+        {
+            state = BattleState.PLAYERTURN;
+            PlayerTurn();
+        }
+    }
+
     public void SetupBattle(GameObject playerInBattle, GameObject enemyInBattle)
     {
 
@@ -66,9 +95,8 @@ public class BattleSystem : MonoBehaviour
             playerUnit.SetHP();
         }
         //agent.BattleSystemSc = this;
-        
-        state = BattleState.PLAYERTURN;
-        PlayerTurn();
+
+        SwitchTurn();
     }
 
     // FOR AUTOMATION
@@ -118,18 +146,7 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            if (state == BattleState.ENEMYTURN)
-            {
-               
-                state = BattleState.PLAYERTURN;
-                PlayerTurn();
-            }
-            else
-            {
-                agent.RequestDecision();
-                state = BattleState.ENEMYTURN;
-            }
-                
+            SwitchTurn();   
         }
     }
 
@@ -201,6 +218,7 @@ public class BattleSystem : MonoBehaviour
                 playerUnit.addExperience(50 * enemyUnit.unitLevel);
                 Destroy(enemy);
             }
+            state = BattleState.IDLE;
         }
         else if (state == BattleState.LOST)
 		{
@@ -213,7 +231,7 @@ public class BattleSystem : MonoBehaviour
                 enemyUnit.SetHP();
                 playerUnit.removeExperience(10 * enemyUnit.unitLevel);
             }
-            //dialogueText.text = "You were defeated.";
+            state = BattleState.IDLE;
         }
         else if (state == BattleState.ESCAPE)
         {
@@ -222,13 +240,14 @@ public class BattleSystem : MonoBehaviour
             //dialogueText.text = "You escaped the fight.";
             enemyUnit.currentHP = enemyUnit.maxHP;
             enemyUnit.SetHP();
+            state = BattleState.IDLE;
         }
+        
         if (!agent.trainingMode)
             DialoguePanel.SetActive(false);
         else
         {
-            state = BattleState.PLAYERTURN;
-            PlayerTurn();
+            SwitchTurn();
         }
 
 	}
@@ -236,25 +255,10 @@ public class BattleSystem : MonoBehaviour
     void Heal(Unit healingUnit)
     {
         healingUnit.Heal();
-        //else if (healingUnit.gameObject.CompareTag("Player") && agent.trainingMode)
-        //    agent.AddReward(-0.1f);
-        //Debug.Log(Quaternion.Euler(new Vector3(-90, 0, 0)));
         ParticleSystem healing = Instantiate(healEffect, healingUnit.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
         Destroy(healing.gameObject, 1f);
-        //playerHUD.SetHP(playerUnit.currentHP);
         StartCoroutine(infoBarManager.UpdateText("You feel renewed strength."));
-        //dialogueText.text = "You feel renewed strength!";
-
-        if (state == BattleState.ENEMYTURN)
-        {
-            state = BattleState.PLAYERTURN;
-            PlayerTurn();
-        }
-        else
-        {
-            agent.RequestDecision();
-            state = BattleState.ENEMYTURN;
-        }
+        SwitchTurn();
     }
 
     public void PlayerTurn()
@@ -310,21 +314,6 @@ public class BattleSystem : MonoBehaviour
                 
         //}
     }
-
-    //IEnumerator PlayerHeal()
-    //{
-    //	playerUnit.Heal(7);
-
-    //	playerHUD.SetHP(playerUnit.currentHP);
-    //	dialogueText.text = "You feel renewed strength!";
-
-    //	yield return new WaitForSeconds(2f);
-
-    //	state = BattleState.ENEMYTURN;
-    //}
-    //FOR AUTOMATION
-    
-
     //void PlayerShield()
     //{
     //    //playerUnit.Shield();
@@ -334,8 +323,6 @@ public class BattleSystem : MonoBehaviour
 
     //    state = BattleState.ENEMYTURN;
     //}
-
-    
 
     public void OnAttackButton()
 	{

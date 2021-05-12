@@ -16,9 +16,14 @@ public class Unit : MonoBehaviour
 	public int maxHP;
 	public int currentHP;
 
+    public int maxMana;
+    public int currentMana;
+
     public Text nameText;
     public Text levelText;
+
     public Slider hpSlider;
+    public Slider manaSlider;
 
     //Just for deleveling for now
     private bool hpUpdated;
@@ -124,11 +129,18 @@ public class Unit : MonoBehaviour
         levelText.text = "Lvl " + unitLevel;
         hpSlider.maxValue = maxHP;
         hpSlider.value = currentHP;
+        manaSlider.maxValue = maxMana;
+        manaSlider.value = currentMana;
     }
 
     public void SetHP()
     {
         hpSlider.value = currentHP;
+    }
+
+    public void SetMana()
+    {
+        manaSlider.value = currentMana;
     }
 
 }
