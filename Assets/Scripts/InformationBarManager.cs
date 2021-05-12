@@ -7,6 +7,7 @@ public class InformationBarManager : MonoBehaviour
 {
     // Start is called before the first frame update
     Text informationText;
+    public bool trainingMode;
     private void Awake()
     {
         informationText = GetComponent<Text>();
@@ -16,11 +17,19 @@ public class InformationBarManager : MonoBehaviour
     public IEnumerator UpdateText(string inputText)
     {
         /*informationText.text = inputText + "\n"*/;
-        gameObject.SetActive(true);
-        informationText.text += inputText + "\n" ;
-        yield return new WaitForSeconds(3);
-        informationText.text = "";
-        gameObject.SetActive(false);
+        if(trainingMode)
+        {
+            yield return new WaitForSeconds(0);
+        }
+        else
+        {
+            gameObject.SetActive(true);
+            informationText.text += inputText + "\n";
+            yield return new WaitForSeconds(3);
+            informationText.text = "";
+            gameObject.SetActive(false);
+        }
+        
         
     }
 }

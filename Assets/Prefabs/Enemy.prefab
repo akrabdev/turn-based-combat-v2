@@ -816,7 +816,6 @@ GameObject:
   - component: {fileID: 5823730836849333166}
   - component: {fileID: 7087746454564289345}
   - component: {fileID: 2514056320926447459}
-  - component: {fileID: 2514056320926447458}
   - component: {fileID: 2514056320926447457}
   - component: {fileID: 6053500627494387622}
   - component: {fileID: 6831902731722756095}
@@ -859,7 +858,7 @@ MonoBehaviour:
   unitLevel: 1
   experiencePoints: 0
   damage: 10
-  magicPower: 0
+  magicPower: 10
   maxHP: 100
   currentHP: 100
   nameText: {fileID: 2101677546}
@@ -881,8 +880,8 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
-  trainingMode: 0
-  isFrozen: 1
+  trainingMode: 1
+  isFrozen: 0
   BattleSystemSc: {fileID: 0}
 --- !u!114 &2514056320926447459
 MonoBehaviour:
@@ -899,29 +898,15 @@ MonoBehaviour:
   m_BrainParameters:
     VectorObservationSize: 2
     NumStackedVectorObservations: 1
-    VectorActionSize: 0200000002000000
+    VectorActionSize: 02000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
-  m_Model: {fileID: 5022602860645237092, guid: f1bbb8a189d43ea4891b32a8f3128f0c, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: EnemyAgent
   TeamId: 0
-  m_UseChildSensors: 1
---- !u!114 &2514056320926447458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2514056320926447468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DecisionPeriod: 5
-  TakeActionsBetweenDecisions: 1
+  m_UseChildSensors: 0
 --- !u!212 &2514056320926447457
 SpriteRenderer:
   m_ObjectHideFlags: 0

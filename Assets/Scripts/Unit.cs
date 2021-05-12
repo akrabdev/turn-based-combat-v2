@@ -59,12 +59,12 @@ public class Unit : MonoBehaviour
 		currentHP += randHeal;
 		if (currentHP > maxHP)
 			currentHP = maxHP;
+        SetHP();
 	}
 
     public void addExperience(int amount)
     {
         experiencePoints += amount;
-        //\ 200\cdot\log\left(x\right)\ +\ 100
         if (experiencePoints >= Mathf.RoundToInt( 200 * Mathf.Log10(unitLevel) + 100))
 
         {

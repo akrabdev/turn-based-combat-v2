@@ -22,8 +22,8 @@ public class AggroManager : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //BattleSystem battleSystem = Instantiate(BattleInstance);
-        if(collision.gameObject.CompareTag("Player"))
-            bs.SetupBattle(collision.gameObject, this.gameObject);
+        if(collision.gameObject.CompareTag("Player") && bs.state == BattleState.IDLE)
+            bs.SetupBattle(collision.gameObject, gameObject);
         
 
     }

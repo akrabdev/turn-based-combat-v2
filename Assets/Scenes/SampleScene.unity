@@ -5127,6 +5127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 696eb9adec37cf245a37fe04f310d607, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trainingMode: 0
 --- !u!114 &1222944067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5871,6 +5872,8 @@ MonoBehaviour:
   state: 0
   bloodEffect: {fileID: 1459749182504912367, guid: 37d4ccc12ccb812489dbfa0979084ed8,
     type: 3}
+  healEffect: {fileID: 1367366625453341121, guid: bfc4e885be7d0924d9a2bbb3354ef0d6,
+    type: 3}
 --- !u!4 &6034814878287353324
 Transform:
   m_ObjectHideFlags: 0
@@ -5995,6 +5998,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7531800829717688910, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
+        type: 3}
+      propertyPath: magicPower
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4390a9edcb174f4fbd1b1180aa8ed0b, type: 3}
 --- !u!1001 &8947653763900799131
@@ -6022,6 +6030,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1187784431, guid: 2588ab61f93d5ab499fc73b80823c803, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2514056320926447459, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 1e7165e021425a343ad1566bed1074ef,
+        type: 3}
+    - target: {fileID: 2514056320926447459, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: m_UseChildSensors
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2514056320926447468, guid: 2588ab61f93d5ab499fc73b80823c803,
@@ -6084,5 +6103,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7087746454564289345, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: MaxStep
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7087746454564289345, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: isFrozen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7087746454564289345, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: trainingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7087746454564289345, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: BattleSystemSc
+      value: 
+      objectReference: {fileID: 6034814878287353323}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2588ab61f93d5ab499fc73b80823c803, type: 3}
