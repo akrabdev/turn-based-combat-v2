@@ -5095,7 +5095,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1222944065
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6036,13 +6036,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 1e7165e021425a343ad1566bed1074ef,
+      objectReference: {fileID: 5022602860645237092, guid: 9c0cd01fed4d7dc409af9faf35060323,
         type: 3}
-    - target: {fileID: 2514056320926447459, guid: 2588ab61f93d5ab499fc73b80823c803,
-        type: 3}
-      propertyPath: m_UseChildSensors
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2514056320926447468, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
       propertyPath: m_Name
@@ -6106,7 +6101,7 @@ PrefabInstance:
     - target: {fileID: 7087746454564289345, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
       propertyPath: MaxStep
-      value: 0
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 7087746454564289345, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
