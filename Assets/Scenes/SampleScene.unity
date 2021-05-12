@@ -4487,7 +4487,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &874584807
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5125,7 +5125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 696eb9adec37cf245a37fe04f310d607, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trainingMode: 1
+  trainingMode: 0
 --- !u!114 &1222944067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6077,7 +6077,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5022602860645237092, guid: 383d4d6909296b1489853e9c36be12ff,
+        type: 3}
     - target: {fileID: 2514056320926447468, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
       propertyPath: m_Name
@@ -6151,12 +6152,12 @@ PrefabInstance:
     - target: {fileID: 7087746454564289345, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
       propertyPath: isFrozen
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7087746454564289345, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
       propertyPath: trainingMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7087746454564289345, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
