@@ -20,10 +20,10 @@ public class ItemContainer : IItemContainer
         for (int i = 0; i < itemSlots.Length; i++)
         {
             // Slot not empty?
-            if (itemSlots[i] != null)
+            if (itemSlots[i].item != null)
             {
                 // Slot with same item to be added?
-                if (itemSlots[i] == itemSlot)
+                if (itemSlots[i].item == itemSlot.item)
                 {
                     int slotRemainingSpace = itemSlots[i].item.MaxStack - itemSlots[i].quantity;
                     // enough space in the slot?
@@ -54,7 +54,7 @@ public class ItemContainer : IItemContainer
         {
 
             // Found Empty Slot?
-            if (itemSlots[i] == null)
+            if (itemSlots[i].item == null)
             {
                 if (itemSlot.quantity <= itemSlot.item.MaxStack)
                 {
@@ -136,7 +136,7 @@ public class ItemContainer : IItemContainer
     {
         for (int i = 0; i < itemSlots.Length; i++)
         {
-            if (itemSlots[i] != null)
+            if (itemSlots[i].item != null)
             {
                 // Maching Item Found
                 if (itemSlots[i].item == itemSlot.item)
