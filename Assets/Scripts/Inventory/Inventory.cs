@@ -8,6 +8,8 @@ public class Inventory : ScriptableObject, IItemContainer
 
     public Action OnItemsUpdated = delegate { };
 
+    public ItemSlot GetSlotByIndex(int index) => itemSlots[index];
+
 
     public ItemSlot AddItem(ItemSlot itemSlot)
     {
