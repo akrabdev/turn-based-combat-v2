@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Animator anim;
-    public BattleSystem bs;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,50 +15,50 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (bs.state == BattleState.IDLE)
+            if (BattleSystem.instance.state == BattleState.IDLE)
             {
                 moveLeft();
             }
-            else if (bs.state == BattleState.PLAYERTURN)
+            else if (BattleSystem.instance.state == BattleState.PLAYERTURN)
             {
                 moveLeft();
-                bs.state = BattleState.ENEMYTURN;
+                BattleSystem.instance.SwitchTurn();
             }
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (bs.state == BattleState.IDLE)
+            if (BattleSystem.instance.state == BattleState.IDLE)
             {
                 moveRight();
             }
-            else if (bs.state == BattleState.PLAYERTURN)
+            else if (BattleSystem.instance.state == BattleState.PLAYERTURN)
             {
                 moveRight();
-                bs.state = BattleState.ENEMYTURN;
+                BattleSystem.instance.SwitchTurn();
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            if (bs.state == BattleState.IDLE)
+            if (BattleSystem.instance.state == BattleState.IDLE)
             {
                 moveDown();
             }
-            else if (bs.state == BattleState.PLAYERTURN)
+            else if (BattleSystem.instance.state == BattleState.PLAYERTURN)
             {
                 moveDown();
-                bs.state = BattleState.ENEMYTURN;
+                BattleSystem.instance.SwitchTurn();
             }
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            if (bs.state == BattleState.IDLE)
+            if (BattleSystem.instance.state == BattleState.IDLE)
             {
                 moveUp();
             }
-            else if (bs.state == BattleState.PLAYERTURN)
+            else if (BattleSystem.instance.state == BattleState.PLAYERTURN)
             {
                 moveUp();
-                bs.state = BattleState.ENEMYTURN;
+                BattleSystem.instance.SwitchTurn();
             }
         }
     }

@@ -687,7 +687,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -113.49968, y: -74.86003}
+  m_AnchoredPosition: {x: -13.5, y: -11.619}
   m_SizeDelta: {x: -150.88, y: -35.535004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1373206114
@@ -1320,8 +1320,8 @@ MonoBehaviour:
   magicPower: 10
   maxHP: 100
   currentHP: 100
-  maxMana: 0
-  currentMana: 0
+  maxMana: 20
+  currentMana: 20
   nameText: {fileID: 2101677546}
   levelText: {fileID: 102492891}
   hpSlider: {fileID: 1589395327}
@@ -1342,9 +1342,8 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
-  trainingMode: 0
-  isFrozen: 1
-  BattleSystemSc: {fileID: 0}
+  trainingMode: 1
+  isFrozen: 0
 --- !u!114 &2514056320926447459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1363,7 +1362,7 @@ MonoBehaviour:
     VectorActionSize: 02000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
-  m_Model: {fileID: 5022602860645237092, guid: 9c0cd01fed4d7dc409af9faf35060323, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: EnemyAgent
