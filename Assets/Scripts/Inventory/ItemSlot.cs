@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 // struct uses values not references , we dont need class here
+[Serializable]
 public struct ItemSlot
 {
     public InventoryItem item;
