@@ -17,7 +17,7 @@ public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
     private bool isHovering = false;
 
     // ItemSlotUI Getter
-    public ItemSlotUI ItemSlotUI => ItemSlotUI;
+    public ItemSlotUI ItemSlotUI => itemSlotUI;
 
     private void Start() => canvasGroup = GetComponent<CanvasGroup>();
 
