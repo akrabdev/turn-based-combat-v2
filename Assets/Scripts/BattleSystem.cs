@@ -7,8 +7,10 @@ public enum BattleState { IDLE, START, PLAYERTURN, ENEMYTURN, WON, LOST, ESCAPE}
 
 public class BattleSystem : MonoBehaviour
 {
+    
+    public static BattleSystem instance;
 
-	GameObject player;
+    GameObject player;
 	GameObject enemy;
 
     public GameObject DialoguePanel;
@@ -20,16 +22,24 @@ public class BattleSystem : MonoBehaviour
 
     EnemyAgent agent;
 
-    
-
 	public BattleState state;
 
     public ParticleSystem bloodEffect;
     public ParticleSystem healEffect;
 
-    //public CombatManager combatManager;
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(this);
+        }
+        DontDestroyOnLoad(this);
+    }
 
-    // Start is called before the first frame update
     void Start()
     {
 		state = BattleState.IDLE;
