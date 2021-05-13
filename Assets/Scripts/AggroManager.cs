@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class AggroManager : MonoBehaviour
 {
-    GameObject Battle;
     BattleSystem bs;
     // Start is called before the first frame update
     void Start()
     {
-        Battle = GameObject.FindGameObjectWithTag("BattleSystem");
-        bs = Battle.GetComponent<BattleSystem>();
+        bs = BattleSystem.instance.GetComponent<BattleSystem>();
     }
 
     // Update is called once per frame
@@ -23,14 +21,12 @@ public class AggroManager : MonoBehaviour
     {
         //BattleSystem battleSystem = Instantiate(BattleInstance);
         if(collision.gameObject.CompareTag("Player") && bs.state == BattleState.IDLE)
-            bs.SetupBattle(collision.gameObject, gameObject);
-        
-
+            bs.SetupBattle(collision.gameObject, gameObject.transform.parent.gameObject);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(bs.state == BattleState.WON || bs.state == BattleState.LOST)
+        if(bs.state == BattleState.WON || bs.state == BattleState.LOST || bs.state == BattleState.IDLE)
         {
             return;
         }

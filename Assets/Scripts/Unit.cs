@@ -25,6 +25,8 @@ public class Unit : MonoBehaviour
     public Slider hpSlider;
     public Slider manaSlider;
 
+    public List<Spell> spells;
+
     //Just for deleveling for now
     private bool hpUpdated;
     //[System.Serializable]
