@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public enum BattleState { IDLE, START, PLAYERTURN, ENEMYTURN, WON, LOST, ESCAPE}
 
+/// <summary>
+/// This class is responsible for managing the battle itself
+/// </summary>
 public class BattleSystem : MonoBehaviour
 {
 
@@ -20,23 +23,17 @@ public class BattleSystem : MonoBehaviour
 
     EnemyAgent agent;
 
-    
-
 	public BattleState state;
 
     public ParticleSystem bloodEffect;
     public ParticleSystem healEffect;
 
-    //public CombatManager combatManager;
 
     // Start is called before the first frame update
     void Start()
     {
 		state = BattleState.IDLE;
         infoBarManager = InformationBar.GetComponent<InformationBarManager>();
-        //combatManager.player = playerUnit;
-        //combatManager.enemy = enemyUnit;
-        //SetupBattle();
     }
 
     public void SwitchTurn()
@@ -73,12 +70,9 @@ public class BattleSystem : MonoBehaviour
 
         player = playerInBattle;
         enemy = enemyInBattle;
-        //dialogueText.text = "You have entered a battle against " + enemy.name;
         playerUnit = player.GetComponent<Unit>();
         enemyUnit = enemy.GetComponent<Unit>();
         StartCoroutine(infoBarManager.UpdateText("You have entered a battle against " + enemyUnit.unitName));
-        //playerUnit.currentHP = playerUnit.maxHP;
-        //enemyUnit.currentHP = enemyUnit.maxHP;
         playerUnit.SetHUD();
         enemyUnit.SetHUD();
         agent = enemy.GetComponent<EnemyAgent>();
@@ -237,7 +231,6 @@ public class BattleSystem : MonoBehaviour
         {
             Debug.Log("Player escaped");
             StartCoroutine(infoBarManager.UpdateText("You escaped the fight."));
-            //dialogueText.text = "You escaped the fight.";
             enemyUnit.currentHP = enemyUnit.maxHP;
             enemyUnit.SetHP();
             state = BattleState.IDLE;
@@ -275,6 +268,7 @@ public class BattleSystem : MonoBehaviour
                 Heal(playerUnit);
             }
         }
+
         //StartCoroutine(infoBarManager.UpdateText("Choose an action."));
         //dialogueText.text = "Choose an action:";
         //For automation
@@ -310,10 +304,25 @@ public class BattleSystem : MonoBehaviour
         //            else
         //                Heal(playerUnit);
         //        }
-        //    }
-                
+        //    }    
         //}
     }
+
+    public void OnAttackButton()
+	{
+		if (state != BattleState.PLAYERTURN)
+			return;
+        Attack(playerUnit, enemyUnit);
+    }
+
+	public void OnHealButton()
+	{
+		if (state != BattleState.PLAYERTURN)
+			return;
+        Heal(playerUnit);
+	}
+
+
     //void PlayerShield()
     //{
     //    //playerUnit.Shield();
@@ -323,26 +332,6 @@ public class BattleSystem : MonoBehaviour
 
     //    state = BattleState.ENEMYTURN;
     //}
-
-    public void OnAttackButton()
-	{
-		if (state != BattleState.PLAYERTURN)
-			return;
-        //StartCoroutine(PlayerAttack());
-        Attack(playerUnit, enemyUnit);
-
-    }
-
-	public void OnHealButton()
-	{
-		if (state != BattleState.PLAYERTURN)
-			return;
-
-        //StartCoroutine(PlayerHeal());
-        Heal(playerUnit);
-	}
-
-    
 
     //public void OnShieldButton()
     //{

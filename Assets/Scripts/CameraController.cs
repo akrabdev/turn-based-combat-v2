@@ -13,6 +13,7 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
+    // Allows camera to follow player
     void Update()
     {
         this.transform.position = new Vector3 (player.transform.position.x, player.transform.position.y, -10);
