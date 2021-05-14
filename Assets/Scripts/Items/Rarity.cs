@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Rarity : MonoBehaviour
+[CreateAssetMenu(fileName = "New Rarity", menuName = "Items/Rarity")]
+public class Rarity : ScriptableObject
 {
     [SerializeField] private new string name;
     [SerializeField] private Color textColour;
