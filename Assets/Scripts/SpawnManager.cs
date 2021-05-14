@@ -17,21 +17,25 @@ public class SpawnManager : MonoBehaviour
      *    4) Remove object after some time
      *    5) Add priorities to different objects
      */
-    public List<GameObject> spanwedObject;
-    // Start is called before the first frame update
+    public GameObject spanwedObject;
+    //Start is called before the first frame update
     void Start()
     {
+        spanwedObject.SetActive(false);
         StartCoroutine(objectSpawn());
     }
 
     // Update is called once per frame
     IEnumerator objectSpawn()
     {
-        while(true)
+        while (true)
         {
             Vector3 objectSpawn = new Vector3(Random.Range(-8f, 8f), 0f, 0f);
-            Instantiate(spanwedObject[0], objectSpawn, Quaternion.identity);
+            GameObject obj = Instantiate(spanwedObject, objectSpawn, Quaternion.identity);
+            obj.SetActive(true);
             yield return new WaitForSeconds(5);
+            Destroy(obj);
+
         }
     }
 }
