@@ -5956,11 +5956,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1925253945594304151, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
-        type: 3}
-      propertyPath: bs
-      value: 
-      objectReference: {fileID: 6034814878287353323}
     - target: {fileID: 7146596636743777510, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}
       propertyPath: m_RootOrder
@@ -6053,14 +6048,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1373206112, guid: 2588ab61f93d5ab499fc73b80823c803, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -13.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1373206112, guid: 2588ab61f93d5ab499fc73b80823c803, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -11.619
-      objectReference: {fileID: 0}
     - target: {fileID: 1781895401, guid: 2588ab61f93d5ab499fc73b80823c803, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -6073,20 +6060,16 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2514056320926447459, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 383d4d6909296b1489853e9c36be12ff,
+        type: 3}
     - target: {fileID: 2514056320926447468, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
       propertyPath: m_Name
       value: BlackBoar
-      objectReference: {fileID: 0}
-    - target: {fileID: 5823730836849333166, guid: 2588ab61f93d5ab499fc73b80823c803,
-        type: 3}
-      propertyPath: maxMana
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5823730836849333166, guid: 2588ab61f93d5ab499fc73b80823c803,
-        type: 3}
-      propertyPath: currentMana
-      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6591465980649086214, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
@@ -6145,8 +6128,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7087746454564289345, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
-      propertyPath: BattleSystemSc
-      value: 
-      objectReference: {fileID: 6034814878287353323}
+      propertyPath: isFrozen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7087746454564289345, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: trainingMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2588ab61f93d5ab499fc73b80823c803, type: 3}

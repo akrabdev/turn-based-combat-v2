@@ -9,18 +9,14 @@ public class EnemyAgent : Agent
     public bool trainingMode;
     public bool isFrozen;
     GameObject Player;
-    GameObject BattleSystem;
     Unit EnemyUnit;
     Unit PlayerUnit;
-    public BattleSystem BattleSystemSc;
 
     public override void Initialize()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         EnemyUnit = GetComponent<Unit>();
         PlayerUnit = Player.GetComponent<Unit>();
-        BattleSystem = GameObject.FindGameObjectWithTag("BattleSystem");
-        BattleSystemSc = BattleSystem.GetComponent<BattleSystem>();
         if(!trainingMode)
         {
             MaxStep = 0;
@@ -31,7 +27,8 @@ public class EnemyAgent : Agent
     public override void OnEpisodeBegin()
     {
         //Debug.Log("Episode beginning");
-        BattleSystemSc.SetupBattle(Player, gameObject);
+        if(trainingMode)
+            BattleSystem.instance.SetupBattle(Player, gameObject);
     }
     public override void OnActionReceived(float[] vectorAction)
     {
@@ -39,9 +36,9 @@ public class EnemyAgent : Agent
             return;
         //Debug.Log("Received agent action");
         //Debug.Log(vectorAction[0]);
-        if (BattleSystemSc.state == BattleState.ENEMYTURN)
+        if (BattleSystem.instance.state == BattleState.ENEMYTURN)
         {
-            BattleSystemSc.EnemyTurn(vectorAction);
+            BattleSystem.instance.EnemyTurn(vectorAction);
         }
     }
     public override void CollectObservations(VectorSensor sensor)

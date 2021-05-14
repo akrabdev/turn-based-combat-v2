@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e2cdcc0500a5884db7e5902ebbfea6a, type: 3}
-  m_Name: FireBall
+  m_Script: {fileID: 11500000, guid: 4fc721a961cd75dc0ab63b9969055b04, type: 3}
+  m_Name: New Consumable Item
   m_EditorClassIdentifier: 
-  spellName: Fireball
-  description: Shoots a projectile that deals fire damage.
-  element: 0
-  currentCooldown: 0
-  maxCooldown: 3
-  damage: 20
-  manaCost: 10
+  name: Health Potion
+  icon: {fileID: 7950441763590185231, guid: b6dcca7004f147a46b0c5ddc7e5b3017, type: 3}
+  sellPrice: 1
+  maxStack: 5
+  useText: Does something, maybe?

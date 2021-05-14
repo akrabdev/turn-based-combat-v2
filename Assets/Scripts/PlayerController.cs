@@ -2,143 +2,99 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class is responsible for controlling the player.
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
+    //For animation
     Animator anim;
-    public BattleSystem bs;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
     }
 
+    /// <summary>
+    /// Every frame the key is checked. If a player is in battle a move ends his turn.
+    /// </summary>
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (bs.state == BattleState.IDLE)
+            if (BattleSystem.instance.state == BattleState.IDLE)
             {
                 moveLeft();
             }
-            else if (bs.state == BattleState.PLAYERTURN)
+            else if (BattleSystem.instance.state == BattleState.PLAYERTURN)
             {
                 moveLeft();
-                bs.state = BattleState.ENEMYTURN;
+                BattleSystem.instance.SwitchTurn();
             }
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (bs.state == BattleState.IDLE)
+            if (BattleSystem.instance.state == BattleState.IDLE)
             {
                 moveRight();
             }
-            else if (bs.state == BattleState.PLAYERTURN)
+            else if (BattleSystem.instance.state == BattleState.PLAYERTURN)
             {
                 moveRight();
-                bs.state = BattleState.ENEMYTURN;
+                BattleSystem.instance.SwitchTurn();
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            if (bs.state == BattleState.IDLE)
+            if (BattleSystem.instance.state == BattleState.IDLE)
             {
                 moveDown();
             }
-            else if (bs.state == BattleState.PLAYERTURN)
+            else if (BattleSystem.instance.state == BattleState.PLAYERTURN)
             {
                 moveDown();
-                bs.state = BattleState.ENEMYTURN;
+                BattleSystem.instance.SwitchTurn();
             }
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            if (bs.state == BattleState.IDLE)
+            if (BattleSystem.instance.state == BattleState.IDLE)
             {
                 moveUp();
             }
-            else if (bs.state == BattleState.PLAYERTURN)
+            else if (BattleSystem.instance.state == BattleState.PLAYERTURN)
             {
                 moveUp();
-                bs.state = BattleState.ENEMYTURN;
+                BattleSystem.instance.SwitchTurn();
             }
         }
     }
+
+    /*
+     * Set of functions to change the transform of the object according to user input
+     */
 
     void moveLeft()
     {
         anim.SetTrigger("MoveLeft");
         transform.Translate(-1f, 0, 0);
-        //dialogueText.text = "You move to the left!";
-
-        //state = BattleState.ENEMYTURN;
     }
 
     void moveRight()
     {
         anim.SetTrigger("MoveRight");
         transform.Translate(1f, 0, 0);
-        //dialogueText.text = "You move to the right!";
-
-        //state = BattleState.ENEMYTURN;
     }
 
     void moveUp()
     {
         anim.SetTrigger("MoveUp");
         transform.Translate(0, 1f, 0);
-        //dialogueText.text = "You move up!";
-
-        //state = BattleState.ENEMYTURN;
     }
 
     void moveDown()
     {
         anim.SetTrigger("MoveDown");
         transform.Translate(0, -1f, 0);
-        //dialogueText.text = "You move down!";
-
-        //state = BattleState.ENEMYTURN;
     }
-
-    // Update is called once per frame
-    //public void OnLeftButton()
-    //{
-    //    //if (state != BattleState.PLAYERTURN)
-    //    //    return;
-
-    //    //StartCoroutine(PlayerHeal());
-    //    anim.SetTrigger("MoveLeft");
-    //    moveLeft();
-    //}
-
-    //public void OnRightButton()
-    //{
-    //    //if (state != BattleState.PLAYERTURN)
-    //    //    return;
-
-    //    anim.SetTrigger("MoveRight");
-    //    //StartCoroutine(PlayerHeal());
-    //    moveRight();
-    //}
-
-    //public void OnUpButton()
-    //{
-    //    //if (state != BattleState.PLAYERTURN)
-    //    //    return;
-
-    //    //StartCoroutine(PlayerHeal());
-    //    anim.SetTrigger("MoveUp");
-    //    moveUp();
-
-    //}
-
-    //public void OnDownButton()
-    //{
-    //    //if (state != BattleState.PLAYERTURN)
-    //    //    return;
-
-    //    anim.SetTrigger("MoveDown");
-    //    //StartCoroutine(PlayerHeal());
-    //    moveDown();
-    //}
 }

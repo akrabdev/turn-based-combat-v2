@@ -1325,6 +1325,8 @@ MonoBehaviour:
   levelText: {fileID: 1408746832}
   hpSlider: {fileID: 416130311}
   manaSlider: {fileID: 1345521954}
+  spells:
+  - {fileID: 11400000, guid: f0f1343b5cebe6e4b94e54274bea332a, type: 2}
 --- !u!212 &1925253945594304146
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1454,4 +1456,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e08107d099c59bc4eb0c551ed80241d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bs: {fileID: 0}
