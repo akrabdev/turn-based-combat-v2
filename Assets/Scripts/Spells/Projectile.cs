@@ -5,6 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     // Start is called before the first frame update
+    public ParticleSystem effect;
     bool isFiring = false;
     Unit firer;
     Unit target;
@@ -52,7 +53,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.GetComponent<Unit>() == target)
         {
-            Debug.Log(collision.name);
+            Instantiate(effect, target.transform.position, Quaternion.identity);
             isFiring = false;
             target.TakeDamage(damage);
             Destroy(gameObject);

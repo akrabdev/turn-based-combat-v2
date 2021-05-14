@@ -18,11 +18,11 @@ MonoBehaviour:
   element: 0
   isProjectile: 1
   follow: 0
-  currentCooldown: 2
+  currentCooldown: 0
   maxCooldown: 4
   damage: 20
   manaCost: 10
   maxRange: 0
-  followSpeed: 5
+  followSpeed: 15
   projectile: {fileID: 9204251887801062571, guid: ffeb6c0f0278a90429bd6b745016412a,
     type: 3}
