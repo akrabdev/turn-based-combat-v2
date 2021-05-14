@@ -16,4 +16,5 @@ MonoBehaviour:
   icon: {fileID: 7950441763590185231, guid: b6dcca7004f147a46b0c5ddc7e5b3017, type: 3}
   sellPrice: 1
   maxStack: 5
+  rarity: {fileID: 11400000, guid: 679aa27346e02716ea740259a0b9224c, type: 2}
   useText: Does something, maybe?
