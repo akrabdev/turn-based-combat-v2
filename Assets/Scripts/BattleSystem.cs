@@ -115,6 +115,7 @@ public class BattleSystem : MonoBehaviour
         if (Vector3.Distance(enemy.transform.position, player.transform.position) >= 1.5)
         {
             StartCoroutine(infoBarManager.UpdateText("Must be in range"));
+            SwitchTurn();
             return;
         }
 
@@ -333,6 +334,11 @@ public class BattleSystem : MonoBehaviour
 
     //    state = BattleState.ENEMYTURN;
     //}
+    public void OnSpellButton(int spellId)
+    {
+        playerUnit.spells[spellId].CastSpell(playerUnit, enemyUnit);
+        SwitchTurn();
+    }
 
     public void OnAttackButton()
 	{

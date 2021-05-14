@@ -10,12 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e2cdcc0500a5884db7e5902ebbfea6a, type: 3}
-  m_Name: FireBall
+  m_Name: Fireball
   m_EditorClassIdentifier: 
-  spellName: Fireball
+  name: Fireball
+  icon: {fileID: -1456807707212374025, guid: ff57a2efd62c32f459177189c8e003bb, type: 3}
   description: Shoots a projectile that deals fire damage.
   element: 0
-  currentCooldown: 0
-  maxCooldown: 3
+  isProjectile: 1
+  follow: 0
+  currentCooldown: 2
+  maxCooldown: 4
   damage: 20
   manaCost: 10
+  maxRange: 0
+  followSpeed: 5
+  projectile: {fileID: 9204251887801062571, guid: ffeb6c0f0278a90429bd6b745016412a,
+    type: 3}
