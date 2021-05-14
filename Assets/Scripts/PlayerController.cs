@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Every frame the key is checked. If a player is in battle a move is ends his turn.
+    /// Every frame the key is checked. If a player is in battle a move ends his turn.
     /// </summary>
     void Update()
     {
