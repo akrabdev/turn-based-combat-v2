@@ -49,7 +49,7 @@ public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
             transform.position = Input.mousePosition;
         }
     }
-
+    // button released
     public virtual void OnPointerUp(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
