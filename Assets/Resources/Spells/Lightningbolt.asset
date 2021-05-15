@@ -18,7 +18,7 @@ MonoBehaviour:
   element: {fileID: 0}
   isProjectile: 1
   follow: 1
-  currentCooldown: 0
+  currentCooldown: 8
   maxCooldown: 10
   damage: 15
   manaCost: 30
