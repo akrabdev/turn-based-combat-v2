@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7038799223474511258}
   - component: {fileID: 9067814740421050173}
   m_Layer: 0
-  m_Name: FireEffect
+  m_Name: EnergyEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1538,13 +1538,25 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 2844692110555443176, guid: d9f8cb3ea16297b4989dd2f78fd13dd5,
+    - sprite: {fileID: -3473260803185411360, guid: a7e419dad66c3454aa4d6728cec70179,
         type: 3}
-    - sprite: {fileID: 7825566068605508957, guid: d9f8cb3ea16297b4989dd2f78fd13dd5,
+    - sprite: {fileID: 8876398880077208363, guid: a7e419dad66c3454aa4d6728cec70179,
         type: 3}
-    - sprite: {fileID: 9060376083330843510, guid: d9f8cb3ea16297b4989dd2f78fd13dd5,
+    - sprite: {fileID: -7352818303118489509, guid: a7e419dad66c3454aa4d6728cec70179,
         type: 3}
-    - sprite: {fileID: -8788861438814316821, guid: d9f8cb3ea16297b4989dd2f78fd13dd5,
+    - sprite: {fileID: -2382930403592873237, guid: a7e419dad66c3454aa4d6728cec70179,
+        type: 3}
+    - sprite: {fileID: -73159969591359921, guid: a7e419dad66c3454aa4d6728cec70179,
+        type: 3}
+    - sprite: {fileID: 7263347749796757539, guid: a7e419dad66c3454aa4d6728cec70179,
+        type: 3}
+    - sprite: {fileID: -5982769652426822723, guid: a7e419dad66c3454aa4d6728cec70179,
+        type: 3}
+    - sprite: {fileID: 6249560317974419345, guid: a7e419dad66c3454aa4d6728cec70179,
+        type: 3}
+    - sprite: {fileID: 3152211232999408395, guid: a7e419dad66c3454aa4d6728cec70179,
+        type: 3}
+    - sprite: {fileID: -7079123920233191399, guid: a7e419dad66c3454aa4d6728cec70179,
         type: 3}
     flipU: 0
     flipV: 0

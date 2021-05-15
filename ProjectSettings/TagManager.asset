@@ -6,6 +6,12 @@ TagManager:
   tags:
   - BattleSystem
   - Enemy
+  - Collectible
+  - Health
+  - SpawnManager
+  - Armor
+  - Freeze
+  - XP
   layers:
   - Default
   - TransparentFX

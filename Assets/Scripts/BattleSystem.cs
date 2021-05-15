@@ -18,7 +18,6 @@ public class BattleSystem : MonoBehaviour
 
     public GameObject DialoguePanel;
     public GameObject InformationBar;
-    InformationBarManager infoBarManager;
 
     Unit playerUnit;
 	Unit enemyUnit;
@@ -46,7 +45,6 @@ public class BattleSystem : MonoBehaviour
     void Start()
     {
 		state = BattleState.IDLE;
-        infoBarManager = InformationBar.GetComponent<InformationBarManager>();
     }
 
     public void SwitchTurn()
@@ -80,12 +78,13 @@ public class BattleSystem : MonoBehaviour
 
     public void SetupBattle(GameObject playerInBattle, GameObject enemyInBattle)
     {
-
+        FindObjectOfType<AudioManager>().Play("Battle");
+        FindObjectOfType<AudioManager>().Stop("World");
         player = playerInBattle;
         enemy = enemyInBattle;
         playerUnit = player.GetComponent<Unit>();
         enemyUnit = enemy.GetComponent<Unit>();
-        StartCoroutine(infoBarManager.UpdateText("You have entered a battle against " + enemyUnit.unitName));
+        StartCoroutine(InformationBarManager.instance.UpdateText("You have entered a battle against " + enemyUnit.unitName));
         playerUnit.SetHUD();
         enemyUnit.SetHUD();
         agent = enemy.GetComponent<EnemyAgent>();
@@ -111,7 +110,7 @@ public class BattleSystem : MonoBehaviour
     {
         if (Vector3.Distance(enemy.transform.position, player.transform.position) >= 1.5)
         {
-            StartCoroutine(infoBarManager.UpdateText("Must be in range"));
+            StartCoroutine(InformationBarManager.instance.UpdateText("Must be in range"));
             SwitchTurn();
             return;
         }
@@ -140,7 +139,7 @@ public class BattleSystem : MonoBehaviour
         ParticleSystem blood = Instantiate(bloodEffect, unitBeingAttacked.transform.position, unitBeingAttacked.transform.rotation);
         Destroy(blood.gameObject, 1f);
         //enemyHUD.SetHP(enemyUnit.currentHP);
-        StartCoroutine(infoBarManager.UpdateText(unitAttacking.unitName + "'s attack is successful!"));
+        StartCoroutine(InformationBarManager.instance.UpdateText(unitAttacking.unitName + "'s attack is successful!"));
 
         if (isDead && unitBeingAttacked.gameObject.CompareTag("Player"))
         {
@@ -208,7 +207,9 @@ public class BattleSystem : MonoBehaviour
 
     public void EndBattle()
 	{
-        if(agent.trainingMode)
+        FindObjectOfType<AudioManager>().Play("World");
+        FindObjectOfType<AudioManager>().Stop("Battle");
+        if (agent.trainingMode)
         {
             enemyUnit.currentHP = enemyUnit.maxHP;
             enemyUnit.SetHP();
@@ -220,7 +221,7 @@ public class BattleSystem : MonoBehaviour
             Debug.Log("Agent lost");
 
             //Update player after winning
-            StartCoroutine(infoBarManager.UpdateText("You won the battle!"));
+            StartCoroutine(InformationBarManager.instance.UpdateText("You won the battle!"));
             if(!agent.trainingMode)
             {
                 playerUnit.addExperience(50 * enemyUnit.unitLevel);
@@ -232,7 +233,7 @@ public class BattleSystem : MonoBehaviour
 		{
             Debug.Log("Agent won");
 
-            StartCoroutine(infoBarManager.UpdateText("You were defeated."));
+            StartCoroutine(InformationBarManager.instance.UpdateText("You were defeated."));
             if(!agent.trainingMode)
             {
                 enemyUnit.currentHP = enemyUnit.maxHP;
@@ -244,7 +245,7 @@ public class BattleSystem : MonoBehaviour
         else if (state == BattleState.ESCAPE)
         {
             Debug.Log("Player escaped");
-            StartCoroutine(infoBarManager.UpdateText("You escaped the fight."));
+            StartCoroutine(InformationBarManager.instance.UpdateText("You escaped the fight."));
             enemyUnit.currentHP = enemyUnit.maxHP;
             enemyUnit.SetHP();
             state = BattleState.IDLE;
@@ -261,10 +262,11 @@ public class BattleSystem : MonoBehaviour
 
     void Heal(Unit healingUnit)
     {
+        FindObjectOfType<AudioManager>().Play("HealSound");
         healingUnit.Heal();
         ParticleSystem healing = Instantiate(healEffect, healingUnit.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
         Destroy(healing.gameObject, 1f);
-        StartCoroutine(infoBarManager.UpdateText("You feel renewed strength."));
+        StartCoroutine(InformationBarManager.instance.UpdateText("You feel renewed strength."));
         SwitchTurn();
     }
 

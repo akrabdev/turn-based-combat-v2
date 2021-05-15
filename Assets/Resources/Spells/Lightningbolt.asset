@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e2cdcc0500a5884db7e5902ebbfea6a, type: 3}
+  m_Name: Lightningbolt
+  m_EditorClassIdentifier: 
+  name: Lightningbolt
+  icon: {fileID: 4552843446153001671, guid: ff57a2efd62c32f459177189c8e003bb, type: 3}
+  description: Lightning bolt that follows the target and stuns it.
+  element: {fileID: 0}
+  isProjectile: 1
+  follow: 1
+  currentCooldown: 0
+  maxCooldown: 10
+  damage: 15
+  manaCost: 30
+  maxRange: 0
+  followSpeed: 15
+  projectile: {fileID: 9204251887801062571, guid: 085d1ceaca9620046a69c456be72ee1f,
+    type: 3}
+  projectileSoundEffectName: LightningboltProjectile

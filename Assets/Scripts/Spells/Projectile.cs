@@ -5,6 +5,8 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     // Start is called before the first frame update
+    public ParticleSystem effect;
+    public string soundEffectName;
     bool isFiring = false;
     Unit firer;
     Unit target;
@@ -52,7 +54,8 @@ public class Projectile : MonoBehaviour
     {
         if (collision.GetComponent<Unit>() == target)
         {
-            Debug.Log(collision.name);
+            Instantiate(effect, target.transform.position, Quaternion.identity);
+            FindObjectOfType<AudioManager>().Play(soundEffectName);
             isFiring = false;
             target.TakeDamage(damage);
             Destroy(gameObject);

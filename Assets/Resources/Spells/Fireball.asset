@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Fireball
   icon: {fileID: -1456807707212374025, guid: ff57a2efd62c32f459177189c8e003bb, type: 3}
   description: Shoots a projectile that deals fire damage.
-  element: 0
+  element: {fileID: 0}
   isProjectile: 1
   follow: 0
   currentCooldown: 2
@@ -23,6 +23,7 @@ MonoBehaviour:
   damage: 20
   manaCost: 10
   maxRange: 0
-  followSpeed: 5
+  followSpeed: 15
   projectile: {fileID: 9204251887801062571, guid: ffeb6c0f0278a90429bd6b745016412a,
     type: 3}
+  projectileSoundEffectName: FireballProjectile
