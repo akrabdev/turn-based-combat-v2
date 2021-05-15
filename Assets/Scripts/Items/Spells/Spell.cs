@@ -4,11 +4,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Spell", menuName = "Spells/New Spell")]
 public class Spell : HotbarItem
 {
-    
+
     // Start is called before the first frame update
     [Header("About this spell")]
     public string description;
-    public enum Element { Fire, Energy }
+    //public enum Element { Fire, Energy };
     public Element element;
     public bool isProjectile;
     public bool follow;
@@ -28,7 +28,17 @@ public class Spell : HotbarItem
     public string projectileSoundEffectName;
 
 
-    public override string ColouredName { get; }
+    public override string ColouredName
+    {
+        get
+        {
+            string hexColour = ColorUtility.ToHtmlStringRGB(element.TextColour);
+            return $"<color=#{hexColour}>{Name}</color>";
+        }
+
+
+
+    }
     public override string GetInfoDisplayText() {
         return description;
     }
