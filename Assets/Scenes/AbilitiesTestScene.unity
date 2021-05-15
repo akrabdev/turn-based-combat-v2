@@ -6812,11 +6812,11 @@ MonoBehaviour:
   sounds:
   - name: World
     audio: {fileID: 8300000, guid: e3819625c525dde4d97ec60d9f1e7782, type: 3}
-    volume: 0.5
+    volume: 0
     source: {fileID: 0}
   - name: Battle
     audio: {fileID: 8300000, guid: 9a0e7ebf8f67b5247857f283f60c8517, type: 3}
-    volume: 0.3
+    volume: 0.1
     source: {fileID: 0}
   - name: HealSound
     audio: {fileID: 8300000, guid: b624c653ed3231240b5f4ef9dd7ec316, type: 3}
