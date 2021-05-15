@@ -10,6 +10,8 @@ public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
     //refs: 
 
     [SerializeField] protected ItemSlotUI itemSlotUI = null;
+    [SerializeField] protected HotbarItemEvent onMouseStartHoverItem = null;
+    [SerializeField] protected VoidEvent onMouseEndHoverItem = null;
     private CanvasGroup canvasGroup = null;
     //When drag and release  snap back to its origianl parent
     private Transform originalParent = null;
@@ -26,7 +28,7 @@ public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
     {
         if (isHovering)
         {
-            //raise event
+            onMouseEndHoverItem.Raise();
             isHovering = false;
         }
     }
@@ -35,7 +37,7 @@ public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            //raise event
+            onMouseEndHoverItem.Raise();
             originalParent = transform.parent;
             transform.SetParent(transform.parent.parent);
             canvasGroup.blocksRaycasts = false;
@@ -49,7 +51,7 @@ public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
             transform.position = Input.mousePosition;
         }
     }
-
+    // button released
     public virtual void OnPointerUp(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
@@ -64,13 +66,14 @@ public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
     public void OnPointerEnter(PointerEventData eventData)
     {
 
-        // raise event
+        onMouseStartHoverItem.Raise(ItemSlotUI.SlotItem);
         isHovering = true;
     }
     public void OnPointerExit(PointerEventData eventData)
     {
 
-        // raise event
+
+        onMouseEndHoverItem.Raise();
         isHovering = false;
     }
 }

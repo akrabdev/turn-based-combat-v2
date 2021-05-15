@@ -11,8 +11,9 @@ public class ConsumableItem : InventoryItem
     {
         // StringBuilder better than Concatenating strings, because it dosnt create new Strings
         StringBuilder builder = new StringBuilder();
+        builder.Append(Rarity.Name).AppendLine();
         // Consumable name
-        builder.Append(Name).AppendLine();
+        // builder.Append(ColouredName).AppendLine();
         // Consumable Effect
         builder.Append("<color=green>Use: ").Append(useText).Append("</color>").AppendLine();
         // Extra Info Max Stack & Sell Price
