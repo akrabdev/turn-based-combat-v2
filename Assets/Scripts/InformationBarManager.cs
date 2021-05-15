@@ -5,13 +5,23 @@ using UnityEngine.UI;
 
 public class InformationBarManager : MonoBehaviour
 {
+    public static InformationBarManager instance;
     // Start is called before the first frame update
-    Text informationText;
-    public bool trainingMode;
-    private void Awake()
+    void Awake()
     {
-        informationText = GetComponent<Text>();
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(this);
+        }
+        DontDestroyOnLoad(this);
     }
+    // Start is called before the first frame update
+    public Text informationText;
+    public bool trainingMode;
 
     // Update is called once per frame
     public IEnumerator UpdateText(string inputText)

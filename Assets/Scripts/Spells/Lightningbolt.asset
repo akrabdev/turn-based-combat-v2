@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e2cdcc0500a5884db7e5902ebbfea6a, type: 3}
-  m_Name: Fireball
+  m_Name: Lightningbolt
   m_EditorClassIdentifier: 
-  name: Fireball
-  icon: {fileID: -1456807707212374025, guid: ff57a2efd62c32f459177189c8e003bb, type: 3}
-  description: Shoots a projectile that deals fire damage.
-  element: 0
+  name: Lightningbolt
+  icon: {fileID: 4552843446153001671, guid: ff57a2efd62c32f459177189c8e003bb, type: 3}
+  description: Lightning bolt that follows the target and stuns it.
+  element: 1
   isProjectile: 1
-  follow: 0
-  currentCooldown: 2
-  maxCooldown: 4
-  damage: 20
-  manaCost: 10
+  follow: 1
+  currentCooldown: 6
+  maxCooldown: 10
+  damage: 15
+  manaCost: 30
   maxRange: 0
   followSpeed: 15
-  projectile: {fileID: 9204251887801062571, guid: ffeb6c0f0278a90429bd6b745016412a,
+  projectile: {fileID: 9204251887801062571, guid: 085d1ceaca9620046a69c456be72ee1f,
     type: 3}
-  projectileSoundEffectName: FireballProjectile
+  projectileSoundEffectName: LightningboltProjectile

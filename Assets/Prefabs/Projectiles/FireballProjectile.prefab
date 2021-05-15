@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 920a2870bba0f424e85f648ad1df7d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effect: {fileID: 7038799223474511258, guid: c8a1779a869ad2048a7be497b439b39b, type: 3}
+  soundEffectName: FireballEffect
 --- !u!61 &6973408492053808273
 BoxCollider2D:
   m_ObjectHideFlags: 0
