@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4041365613222224807}
   - component: {fileID: 6973408492053808273}
   m_Layer: 0
-  m_Name: FireballProjectile
+  m_Name: LightningboltProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: -1105947515
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3987681093670230206, guid: d9f8cb3ea16297b4989dd2f78fd13dd5,
+  m_Sprite: {fileID: -7943826441853576481, guid: dc7e26c9ec8a9b34fb2876d1e2276d5e,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -96,8 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 920a2870bba0f424e85f648ad1df7d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effect: {fileID: 7038799223474511258, guid: c8a1779a869ad2048a7be497b439b39b, type: 3}
-  soundEffectName: FireballEffect
+  effect: {fileID: 7038799223474511258, guid: 79af5428b0cd1b54b82b49596568aca5, type: 3}
+  soundEffectName: LightningboltEffect
 --- !u!61 &6973408492053808273
 BoxCollider2D:
   m_ObjectHideFlags: 0

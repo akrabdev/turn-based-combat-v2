@@ -24,6 +24,10 @@ public class Spell : HotbarItem
     [Header("Spell graphics")]
     public GameObject projectile;
 
+    [Header("Spell sounds")]
+    public string projectileSoundEffectName;
+
+
     public override string ColouredName { get; }
     public override string GetInfoDisplayText() {
         return description;
@@ -47,6 +51,7 @@ public class Spell : HotbarItem
                 GameObject instantiatedProj = Instantiate(projectile, spellCaster.transform.position, Quaternion.identity);
                 Projectile instantiatedProjComponent = instantiatedProj.GetComponent<Projectile>();
                 instantiatedProjComponent.Fire(spellCaster, target, damage, follow, followSpeed);
+                FindObjectOfType<AudioManager>().Play(projectileSoundEffectName);
             }
         }
         else
