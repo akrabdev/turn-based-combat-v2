@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 [CreateAssetMenu(fileName = "New Spell", menuName = "Spells/New Spell")]
 public class Spell : HotbarItem
@@ -39,8 +40,20 @@ public class Spell : HotbarItem
 
 
     }
-    public override string GetInfoDisplayText() {
-        return description;
+    public override string GetInfoDisplayText()
+    {
+        StringBuilder builder = new StringBuilder();
+
+        // builder.Append("<size=35>").Append(item.ColouredName).Append("</size>").AppendLine();
+        builder.Append(element.Name).AppendLine();
+
+        builder.Append(description).AppendLine();
+
+        builder.Append("Damage: ").Append(damage).AppendLine();
+        builder.Append("Mana Cost: ").Append(manaCost).AppendLine();
+        builder.Append("Cooldown: ").Append(maxCooldown).AppendLine();
+        builder.Append("Max Range: ").Append(maxRange).AppendLine();
+        return builder.ToString();
     }
 
     public void CastSpell(Unit spellCaster)
@@ -51,7 +64,7 @@ public class Spell : HotbarItem
 
     public void CastSpell(Unit spellCaster, Unit target)
     {
-        if(IsSpellReady())
+        if (IsSpellReady())
         {
             PutOnCooldown();
             spellCaster.currentMana -= manaCost;
@@ -68,10 +81,10 @@ public class Spell : HotbarItem
         {
 
         }
-        
+
     }
 
-    
+
 
     public void PutOnCooldown()
     {
