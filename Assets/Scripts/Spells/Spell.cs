@@ -60,7 +60,7 @@ public class Spell : HotbarItem
             {
                 GameObject instantiatedProj = Instantiate(projectile, spellCaster.transform.position, Quaternion.identity);
                 Projectile instantiatedProjComponent = instantiatedProj.GetComponent<Projectile>();
-                instantiatedProjComponent.Fire(spellCaster, target, damage, follow, followSpeed);
+                instantiatedProjComponent.Fire(spellCaster, target, damage, element, follow, followSpeed);
                 FindObjectOfType<AudioManager>().Play(projectileSoundEffectName);
             }
         }

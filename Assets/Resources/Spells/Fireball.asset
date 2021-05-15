@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Fireball
   icon: {fileID: -1456807707212374025, guid: ff57a2efd62c32f459177189c8e003bb, type: 3}
   description: Shoots a projectile that deals fire damage.
-  element: {fileID: 0}
+  element: {fileID: 11400000, guid: 9698a086854056148bb617c089440425, type: 2}
   isProjectile: 1
   follow: 0
   currentCooldown: 2
