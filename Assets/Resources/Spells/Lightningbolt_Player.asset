@@ -9,20 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e2cdcc0500a5884db7e5902ebbfea6a, type: 3}
-  m_Name: Lightningbolt
+  m_Script: {fileID: 11500000, guid: 03784b19efd069a4dabbb93f8c3d64d8, type: 3}
+  m_Name: Lightningbolt_Player
   m_EditorClassIdentifier: 
   name: Lightningbolt
   icon: {fileID: 4552843446153001671, guid: ff57a2efd62c32f459177189c8e003bb, type: 3}
-  description: Lightning bolt that follows the target and stuns it.
+  description: Lightning bolt that follows the target and stuns it
   element: {fileID: 11400000, guid: 2be73f8acbde09944b8cdaad7c2ba6ef, type: 2}
   isProjectile: 1
   follow: 1
-  currentCooldown: 8
-  maxCooldown: 10
-  damage: 15
-  manaCost: 30
-  maxRange: 0
+  currentCooldown: 0
+  maxCooldown: 8
+  damage: 10
+  manaCost: 20
+  maxRange: 5
   followSpeed: 15
   projectile: {fileID: 9204251887801062571, guid: 085d1ceaca9620046a69c456be72ee1f,
     type: 3}

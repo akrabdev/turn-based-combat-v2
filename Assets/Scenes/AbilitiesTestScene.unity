@@ -7128,9 +7128,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7531800829717688910, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}
+      propertyPath: spells.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3eb12c7506510d441b2876898d371c9e,
+        type: 2}
+    - target: {fileID: 7531800829717688910, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
+        type: 3}
       propertyPath: spells.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: db45e9ac0e342a54b81b860b9b577b55,
+      objectReference: {fileID: 11400000, guid: 383d9366fc977524cb00f69da6b6b659,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4390a9edcb174f4fbd1b1180aa8ed0b, type: 3}
