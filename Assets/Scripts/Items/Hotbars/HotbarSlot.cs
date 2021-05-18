@@ -96,9 +96,9 @@ public class HotbarSlot : ItemSlotUI, IDropHandler
         if (SlotItem is InventoryItem inventoryItem)
         {
             // cehcking if the player still have item referenced in the HotbarSlot:
-            if (inventory.ItemContainer.HasItem(inventoryItem))
+            if (inventory.HasItem(inventoryItem))
             {
-                int quantityCount = inventory.ItemContainer.GetTotalQuantity(inventoryItem);
+                int quantityCount = inventory.GetTotalQuantity(inventoryItem);
                 // one item left doesnt show a number
                 itemQuantityText.text = quantityCount > 1 ? quantityCount.ToString() : "";
 
