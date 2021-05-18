@@ -8,7 +8,7 @@ public class AggroManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bs = BattleSystem.instance.GetComponent<BattleSystem>();
+        bs = BattleSystem.instance;
     }
 
     // Update is called once per frame

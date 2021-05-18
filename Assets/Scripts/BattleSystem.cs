@@ -10,21 +10,21 @@ public enum BattleState { IDLE, START, PLAYERTURN, ENEMYTURN, WON, LOST, ESCAPE}
 /// </summary>
 public class BattleSystem : MonoBehaviour
 {
-    
+
     public static BattleSystem instance;
 
     GameObject player;
-	GameObject enemy;
+    GameObject enemy;
 
     public GameObject DialoguePanel;
     public GameObject InformationBar;
 
     Unit playerUnit;
-	Unit enemyUnit;
+    Unit enemyUnit;
 
     EnemyAgent agent;
 
-	public BattleState state;
+    public BattleState state;
 
     public ParticleSystem bloodEffect;
     public ParticleSystem healEffect;
@@ -44,33 +44,19 @@ public class BattleSystem : MonoBehaviour
 
     void Start()
     {
-		state = BattleState.IDLE;
+        state = BattleState.IDLE;
     }
 
     public void SwitchTurn()
     {
-        if(enemyUnit.isDead || playerUnit.isDead)
-        {
-            Death();
-            return;
-        }
-        CooldownManager.instance.SwitchTurn();
         if (state == BattleState.IDLE)
         {
-            int randomTurn = Random.Range(0, 10);
-            if (randomTurn > 4)
-            {
-                state = BattleState.PLAYERTURN;
-                PlayerTurn();
-            }
-            else
-            {
-                state = BattleState.ENEMYTURN;
-                agent.RequestDecision();
-            }
-            
+            return;
         }
-        else if (state == BattleState.PLAYERTURN)
+
+        CooldownManager.instance.SwitchTurn();
+        
+        if (state == BattleState.PLAYERTURN)
         {
             state = BattleState.ENEMYTURN;
             agent.RequestDecision();
@@ -80,12 +66,7 @@ public class BattleSystem : MonoBehaviour
             state = BattleState.PLAYERTURN;
             PlayerTurn();
         }
-        else if (state == BattleState.WON)
-        {
-        }
-        else if (state == BattleState.LOST)
-        {
-        }
+
     }
 
     public void Death()
@@ -128,7 +109,21 @@ public class BattleSystem : MonoBehaviour
         }
         //agent.BattleSystemSc = this;
 
-        SwitchTurn();
+        if (state == BattleState.IDLE)
+        {
+            int randomTurn = Random.Range(0, 10);
+            if (randomTurn > 4)
+            {
+                state = BattleState.PLAYERTURN;
+                PlayerTurn();
+            }
+            else
+            {
+                state = BattleState.ENEMYTURN;
+                agent.RequestDecision();
+            }
+
+        }
     }
 
     // FOR AUTOMATION
@@ -237,13 +232,13 @@ public class BattleSystem : MonoBehaviour
 	{
         FindObjectOfType<AudioManager>().Play("World");
         FindObjectOfType<AudioManager>().Stop("Battle");
-        if (agent.trainingMode)
-        {
-            enemyUnit.currentHP = enemyUnit.maxHP;
-            enemyUnit.SetHP();
-            playerUnit.currentHP = playerUnit.maxHP;
-            playerUnit.SetHP();
-        }
+        //if (agent.trainingMode)
+        //{
+        //    enemyUnit.currentHP = enemyUnit.maxHP;
+        //    enemyUnit.SetHP();
+        //    playerUnit.currentHP = playerUnit.maxHP;
+        //    playerUnit.SetHP();
+        //}
 		if(state == BattleState.WON)
 		{
             Debug.Log("Agent lost");
@@ -255,7 +250,6 @@ public class BattleSystem : MonoBehaviour
                 playerUnit.addExperience(50 * enemyUnit.unitLevel);
                 Destroy(enemy);
             }
-            state = BattleState.IDLE;
         }
         else if (state == BattleState.LOST)
 		{
@@ -272,8 +266,8 @@ public class BattleSystem : MonoBehaviour
                 playerUnit.currentMana = playerUnit.maxMana;
                 playerUnit.SetHP();
                 playerUnit.SetMana();
+                playerUnit.isDead = false;
             }
-            state = BattleState.IDLE;
         }
         else if (state == BattleState.ESCAPE)
         {
@@ -281,15 +275,14 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(InformationBarManager.instance.UpdateText("You escaped the fight."));
             enemyUnit.currentHP = enemyUnit.maxHP;
             enemyUnit.SetHP();
-            state = BattleState.IDLE;
         }
-        
+        state = BattleState.IDLE;
         if (!agent.trainingMode)
             DialoguePanel.SetActive(false);
-        else
-        {
-            SwitchTurn();
-        }
+        //else
+        //{
+        //    SwitchTurn();
+        //}
 
 	}
 
