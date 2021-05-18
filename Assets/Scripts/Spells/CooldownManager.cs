@@ -37,6 +37,8 @@ public class CooldownManager : MonoBehaviour
     {
         if (!spellsOnCooldown.Contains(spell))
         {
+            if (spell.maxCooldown == 0)
+                return;
             spell.currentCooldown = spell.maxCooldown;
             spellsOnCooldown.Add(spell);
         }

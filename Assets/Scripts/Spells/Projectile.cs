@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour
     Vector3 projDestination;
     Vector3 projDirection;
     int damage;
+    Element element;
     bool follow;
     int followSpeed;
 
@@ -38,11 +39,12 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void Fire(Unit firerInput, Unit targetInput, int damageInput, bool followInput, int followSpeedInput)
+    public void Fire(Unit firerInput, Unit targetInput, int damageInput, Element elementInput, bool followInput, int followSpeedInput)
     {
         firer = firerInput;
         target = targetInput;
         damage = damageInput;
+        element = elementInput;
         follow = followInput;
         followSpeed = followSpeedInput;
         projDirection = (target.transform.position - firer.transform.position).normalized;
@@ -57,7 +59,7 @@ public class Projectile : MonoBehaviour
             Instantiate(effect, target.transform.position, Quaternion.identity);
             FindObjectOfType<AudioManager>().Play(soundEffectName);
             isFiring = false;
-            target.TakeDamage(damage);
+            target.TakeDamage(damage, element);
             Destroy(gameObject);
         }
     }

@@ -31,11 +31,18 @@ public class Unit : MonoBehaviour
 
     public List<Spell> spells;
 
+    [HideInInspector]
+    public bool isDead;
+
     //Just for deleveling for now
     private bool hpUpdated;
 
     private void Start()
     {
+        foreach(Spell spell in spells)
+        {
+            spell.currentCooldown = 0;
+        }
         SetHUD();
     }
 
@@ -44,27 +51,43 @@ public class Unit : MonoBehaviour
     /// </summary>
     /// <param name="dmg"></param>
     /// <returns></returns>
-    public bool TakeDamage(int dmg)
-    {
+    public void TakeDamage(int dmg, Element element = null)
+	{
+        Color dmgColor;
+        if (element == null)
+        {
+            dmgColor = Color.red;
+        }
+        else
+        {
+            dmgColor = new Vector4(element.TextColour.r, element.TextColour.g, element.TextColour.b, 1);
+        }
+        
         int randDmg = Random.Range(dmg - 5, dmg + 5);
-        currentHP -= randDmg;
+        DamagePopupManager.instance.Setup(randDmg, dmgColor, transform);
+		currentHP -= randDmg;
         SetHP();
 
         if (currentHP <= 0)
-            return true;
-        else
-            return false;
-    }
+        {
+            isDead = true;
+            BattleSystem.instance.Death();
+        }
+
+
+	}
 
     /// <summary>
     /// This function generates a random value to heal with according to the unit's magic power and increases the currentHP.
     /// </summary>
 	public void Heal()
-    {
+	{
+        Color healColor = Color.green;
         int randHeal = Random.Range(magicPower - 5, magicPower + 5);
+        DamagePopupManager.instance.Setup(randHeal, healColor, transform);
         currentHP += randHeal;
-        if (currentHP > maxHP)
-            currentHP = maxHP;
+		if (currentHP > maxHP)
+			currentHP = maxHP;
         SetHP();
     }
 

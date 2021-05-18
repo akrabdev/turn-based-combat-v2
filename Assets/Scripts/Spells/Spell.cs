@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
-[CreateAssetMenu(fileName = "New Spell", menuName = "Spells/New Spell")]
+
 public class Spell : HotbarItem
 {
 
@@ -24,6 +24,7 @@ public class Spell : HotbarItem
 
     [Header("Spell graphics")]
     public GameObject projectile;
+    public ParticleSystem[] effect;
 
     [Header("Spell sounds")]
     public string projectileSoundEffectName;
@@ -56,34 +57,12 @@ public class Spell : HotbarItem
         return builder.ToString();
     }
 
-    public void CastSpell(Unit spellCaster)
+    public virtual void CastSpell(Unit spellCaster, Unit target)
     {
-
-        //PutOnCooldown();
-    }
-
-    public void CastSpell(Unit spellCaster, Unit target)
-    {
-        if (IsSpellReady())
-        {
-            PutOnCooldown();
-            spellCaster.currentMana -= manaCost;
-            spellCaster.SetMana();
-            if (isProjectile)
-            {
-                GameObject instantiatedProj = Instantiate(projectile, spellCaster.transform.position, Quaternion.identity);
-                Projectile instantiatedProjComponent = instantiatedProj.GetComponent<Projectile>();
-                instantiatedProjComponent.Fire(spellCaster, target, damage, follow, followSpeed);
-                FindObjectOfType<AudioManager>().Play(projectileSoundEffectName);
-            }
-        }
-        else
-        {
-
-        }
 
     }
 
+    
 
 
     public void PutOnCooldown()
