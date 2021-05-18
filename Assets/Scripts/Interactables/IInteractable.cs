@@ -6,7 +6,7 @@ public interface IInteractable
 {
 
     // what will happen when interact is on ? 
-    void Interact();
+    void Interact(GameObject other);
     // onenter?
 
 }

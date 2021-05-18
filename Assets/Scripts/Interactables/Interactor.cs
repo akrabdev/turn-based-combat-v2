@@ -15,7 +15,8 @@ public class Interactor : MonoBehaviour
         if (currentInteractable == null) { return; }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            currentInteractable.Interact();
+
+            currentInteractable.Interact(transform.root.gameObject); // root of the current game object ie: Interactor
         }
 
 
