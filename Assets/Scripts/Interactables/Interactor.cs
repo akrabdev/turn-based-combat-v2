@@ -11,7 +11,6 @@ public class Interactor : MonoBehaviour
 
     private void CheckForInteraction()
     {
-        Debug.Log(currentInteractable);
         if (currentInteractable == null) { return; }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -24,8 +23,6 @@ public class Interactor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("enter");
-        Debug.Log(other.gameObject);
         //  interact with most recently entered collider:
         var interactable = other.GetComponent<IInteractable>();
         if (interactable == null) { return; }
@@ -37,7 +34,6 @@ public class Interactor : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
 
-        Debug.Log("exit");
         var interactable = other.GetComponent<IInteractable>();
         if (interactable == null) { return; }
         if (interactable != currentInteractable) { return; }

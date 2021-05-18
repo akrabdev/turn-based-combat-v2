@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(fileName = "NewInventory", menuName = "Items/Inventory")]
 public class Inventory : MonoBehaviour, IItemContainer
 
 {
