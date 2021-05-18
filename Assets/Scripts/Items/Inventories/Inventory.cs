@@ -1,17 +1,27 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "NewInventory", menuName = "Items/Inventory")]
-public class Inventory : ScriptableObject, IItemContainer
+public class Inventory : MonoBehaviour, IItemContainer
+
 {
-    [SerializeField] private VoidEvent onInventoryItemsUpdated = null;
+
+    [SerializeField] private int size = 20;
+
+    // UnityEvent void event is single instances (usually for player) for enevy is tons
+    // no need to make one for every enemy
+    // UnityEvent also will allow inspector to do other things
+
+    [SerializeField] private UnityEvent onInventoryItemsUpdated = null;
     private ItemSlot[] itemSlots = new ItemSlot[0];
 
 
-    public void SetSize(int size)
+    public void Start()
     {
         itemSlots = new ItemSlot[size];
     }
+
     public ItemSlot GetSlotByIndex(int index) => itemSlots[index];
 
 
@@ -34,7 +44,7 @@ public class Inventory : ScriptableObject, IItemContainer
                         itemSlot.quantity = 0;
 
                         //invoke
-                        onInventoryItemsUpdated.Raise();
+                        onInventoryItemsUpdated.Invoke();
 
                         return itemSlot;
 
@@ -64,7 +74,7 @@ public class Inventory : ScriptableObject, IItemContainer
                     itemSlot.quantity = 0;
 
                     //invoke 
-                    onInventoryItemsUpdated.Raise();
+                    onInventoryItemsUpdated.Invoke();
                     return itemSlot;
                 }
                 else
@@ -78,7 +88,7 @@ public class Inventory : ScriptableObject, IItemContainer
         }
 
         //invoke
-        onInventoryItemsUpdated.Raise();
+        onInventoryItemsUpdated.Invoke();
         return itemSlot;
 
 
@@ -130,7 +140,7 @@ public class Inventory : ScriptableObject, IItemContainer
         itemSlots[slotIndex] = new ItemSlot();
 
         // here we need to invoke event to update ui
-        onInventoryItemsUpdated.Raise();
+        onInventoryItemsUpdated.Invoke();
     }
 
     public void RemoveItem(ItemSlot itemSlot)
@@ -159,7 +169,7 @@ public class Inventory : ScriptableObject, IItemContainer
                             itemSlots[i] = new ItemSlot();
                             // invoke
                             //TODO Refactor?
-                            onInventoryItemsUpdated.Raise();
+                            onInventoryItemsUpdated.Invoke();
                             return;
                         }
                     }
@@ -194,7 +204,7 @@ public class Inventory : ScriptableObject, IItemContainer
                     // clear firstslot
                     itemSlots[indexOne] = new ItemSlot();
                     //invoke
-                    onInventoryItemsUpdated.Raise();
+                    onInventoryItemsUpdated.Invoke();
                     return;
                 }
             }
@@ -204,7 +214,7 @@ public class Inventory : ScriptableObject, IItemContainer
         itemSlots[indexOne] = secondSlot;
         itemSlots[indexTwo] = firstSlot;
         //invoke
-        onInventoryItemsUpdated.Raise();
+        onInventoryItemsUpdated.Invoke();
         return;
     }
 
@@ -223,25 +233,5 @@ public class Inventory : ScriptableObject, IItemContainer
 
 
 
-
-    // [SerializeField] private ItemSlot testItemSlot = new ItemSlot();
-    // public ItemContainer ItemContainer { get; } = new ItemContainer(20);
-
-
-    // public void OnEnable()
-    // {
-    //     ItemContainer.OnItemsUpdated += onInventoryItemsUpdated.Raise;
-
-    // }
-
-    // public void OnDisable()
-    // {
-    //     ItemContainer.OnItemsUpdated -= onInventoryItemsUpdated.Raise;
-    // }
-    // [ContextMenu("Test Add")]
-    // public void TestAdd()
-    // {
-    //     ItemContainer.AddItem(testItemSlot);
-    // }
 
 }

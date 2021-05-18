@@ -34,11 +34,8 @@ public class Unit : MonoBehaviour
     //Just for deleveling for now
     private bool hpUpdated;
 
-    public Inventory inventory = null;
-
     private void Start()
     {
-        inventory.SetSize(20);
         SetHUD();
     }
 

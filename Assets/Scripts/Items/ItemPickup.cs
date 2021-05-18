@@ -11,7 +11,7 @@ public class ItemPickup : MonoBehaviour, IInteractable
         // is the thing the item interacting with got itemcontainer?
         // var itemContainer = other.GetComponent<IItemContainer>();
 
-        var itemContainer = other.GetComponent<Unit>().inventory;
+        var itemContainer = other.GetComponent<IItemContainer>();
 
         if (itemContainer == null) { return; }
         // item fully added? still error prone
