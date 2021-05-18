@@ -499,7 +499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4901961, g: 0.854902, b: 0.6313726, a: 1}
+  m_Color: {r: 1, g: 0.043975003, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1327,7 +1327,11 @@ MonoBehaviour:
   hpSlider: {fileID: 416130311}
   manaSlider: {fileID: 1345521954}
   spells:
-  - {fileID: 11400000, guid: f0f1343b5cebe6e4b94e54274bea332a, type: 2}
+  - {fileID: 11400000, guid: 3eb12c7506510d441b2876898d371c9e, type: 2}
+  - {fileID: 11400000, guid: 383d9366fc977524cb00f69da6b6b659, type: 2}
+  - {fileID: 11400000, guid: 98ac834df5a98144fa2c2d38eee9c62f, type: 2}
+  - {fileID: 11400000, guid: 5e026cd0e25fff0439c72a8885e403a1, type: 2}
+  isDead: 0
 --- !u!212 &1925253945594304146
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1501,6 +1505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b51b111f73474d0aa4b801d1e274cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spanwedObjects: []
 --- !u!61 &110708801553282559
 BoxCollider2D:
   m_ObjectHideFlags: 0
