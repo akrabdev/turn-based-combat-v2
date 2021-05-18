@@ -52,6 +52,7 @@ public class BattleSystem : MonoBehaviour
         if(enemyUnit.isDead || playerUnit.isDead)
         {
             Death();
+            return;
         }
         CooldownManager.instance.SwitchTurn();
         if (state == BattleState.IDLE)
@@ -67,6 +68,7 @@ public class BattleSystem : MonoBehaviour
                 state = BattleState.ENEMYTURN;
                 agent.RequestDecision();
             }
+            
         }
         else if (state == BattleState.PLAYERTURN)
         {
@@ -265,6 +267,11 @@ public class BattleSystem : MonoBehaviour
                 enemyUnit.currentHP = enemyUnit.maxHP;
                 enemyUnit.SetHP();
                 playerUnit.removeExperience(10 * enemyUnit.unitLevel);
+                player.transform.position = new Vector3(0.51f, 0.49f, 0);
+                playerUnit.currentHP = playerUnit.maxHP;
+                playerUnit.currentMana = playerUnit.maxMana;
+                playerUnit.SetHP();
+                playerUnit.SetMana();
             }
             state = BattleState.IDLE;
         }
