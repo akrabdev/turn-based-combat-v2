@@ -6811,8 +6811,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: World
-    audio: {fileID: 8300000, guid: e3819625c525dde4d97ec60d9f1e7782, type: 3}
-    volume: 0
+    audio: {fileID: 8300000, guid: a4a3faab855e31644a7abe5d822efd70, type: 3}
+    volume: 1
     source: {fileID: 0}
   - name: Battle
     audio: {fileID: 8300000, guid: 9a0e7ebf8f67b5247857f283f60c8517, type: 3}
