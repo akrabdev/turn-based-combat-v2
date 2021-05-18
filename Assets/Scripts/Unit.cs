@@ -45,9 +45,20 @@ public class Unit : MonoBehaviour
     /// </summary>
     /// <param name="dmg"></param>
     /// <returns></returns>
-    public bool TakeDamage(int dmg)
+    public bool TakeDamage(int dmg, Element element = null)
 	{
+        Color dmgColor;
+        if (element == null)
+        {
+            dmgColor = Color.red;
+        }
+        else
+        {
+            dmgColor = new Vector4(element.TextColour.r, element.TextColour.g, element.TextColour.b, 1);
+        }
+        
         int randDmg = Random.Range(dmg - 5, dmg + 5);
+        DamagePopupManager.instance.Setup(randDmg, dmgColor, transform);
 		currentHP -= randDmg;
         SetHP();
 
@@ -62,8 +73,10 @@ public class Unit : MonoBehaviour
     /// </summary>
 	public void Heal()
 	{
+        Color healColor = Color.green;
         int randHeal = Random.Range(magicPower - 5, magicPower + 5);
-		currentHP += randHeal;
+        DamagePopupManager.instance.Setup(randHeal, healColor, transform);
+        currentHP += randHeal;
 		if (currentHP > maxHP)
 			currentHP = maxHP;
         SetHP();
