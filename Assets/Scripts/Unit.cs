@@ -10,15 +10,15 @@ using UnityEngine.UI;
 public class Unit : MonoBehaviour
 {
 
-	public string unitName;
-	public int unitLevel;
+    public string unitName;
+    public int unitLevel;
     public int experiencePoints;
 
-	public int damage;
+    public int damage;
     public int magicPower;
 
-	public int maxHP;
-	public int currentHP;
+    public int maxHP;
+    public int currentHP;
 
     public int maxMana;
     public int currentMana;
@@ -33,10 +33,12 @@ public class Unit : MonoBehaviour
 
     //Just for deleveling for now
     private bool hpUpdated;
-    
+
+    public Inventory inventory = null;
 
     private void Start()
     {
+        inventory.SetSize(20);
         SetHUD();
     }
 
@@ -46,28 +48,28 @@ public class Unit : MonoBehaviour
     /// <param name="dmg"></param>
     /// <returns></returns>
     public bool TakeDamage(int dmg)
-	{
+    {
         int randDmg = Random.Range(dmg - 5, dmg + 5);
-		currentHP -= randDmg;
+        currentHP -= randDmg;
         SetHP();
 
-		if (currentHP <= 0)
-			return true;
-		else
-			return false;
-	}
+        if (currentHP <= 0)
+            return true;
+        else
+            return false;
+    }
 
     /// <summary>
     /// This function generates a random value to heal with according to the unit's magic power and increases the currentHP.
     /// </summary>
 	public void Heal()
-	{
+    {
         int randHeal = Random.Range(magicPower - 5, magicPower + 5);
-		currentHP += randHeal;
-		if (currentHP > maxHP)
-			currentHP = maxHP;
+        currentHP += randHeal;
+        if (currentHP > maxHP)
+            currentHP = maxHP;
         SetHP();
-	}
+    }
 
 
     /// <summary>
@@ -78,7 +80,7 @@ public class Unit : MonoBehaviour
     public void addExperience(int amount)
     {
         experiencePoints += amount;
-        if (experiencePoints >= Mathf.RoundToInt( 200 * Mathf.Log10(unitLevel) + 100))
+        if (experiencePoints >= Mathf.RoundToInt(200 * Mathf.Log10(unitLevel) + 100))
 
         {
             levelUp();
@@ -92,14 +94,14 @@ public class Unit : MonoBehaviour
     public void removeExperience(int amount)
     {
         experiencePoints -= amount;
-        if(experiencePoints < 0)
+        if (experiencePoints < 0)
         {
             experiencePoints = 0;
         }
         //level 2 exp 100, current lvl 1 exp 0
         if (unitLevel == 1)
             return;
-        if (experiencePoints < Mathf.RoundToInt(200 * Mathf.Log10(unitLevel-1) + 100))
+        if (experiencePoints < Mathf.RoundToInt(200 * Mathf.Log10(unitLevel - 1) + 100))
         {
             levelDown();
         }
