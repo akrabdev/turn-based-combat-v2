@@ -57,7 +57,7 @@ public class HotbarSlot : ItemSlotUI, IDropHandler
         SpellbookSlot spellSlot = itemDragHandler.ItemSlotUI as SpellbookSlot;
         if (spellSlot != null)
         {
-            SlotItem = spellSlot.ItemSlot.item;
+            SlotItem = spellSlot.SlotItem;
         }
         HotbarSlot hotbarSlot = itemDragHandler.ItemSlotUI as HotbarSlot;
         if (hotbarSlot != null)
