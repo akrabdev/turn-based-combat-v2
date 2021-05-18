@@ -31,12 +31,19 @@ public class Unit : MonoBehaviour
 
     public List<Spell> spells;
 
+    [HideInInspector]
+    public bool isDead;
+
     //Just for deleveling for now
     private bool hpUpdated;
     
 
     private void Start()
     {
+        foreach(Spell spell in spells)
+        {
+            spell.currentCooldown = 0;
+        }
         SetHUD();
     }
 
@@ -45,7 +52,7 @@ public class Unit : MonoBehaviour
     /// </summary>
     /// <param name="dmg"></param>
     /// <returns></returns>
-    public bool TakeDamage(int dmg, Element element = null)
+    public void TakeDamage(int dmg, Element element = null)
 	{
         Color dmgColor;
         if (element == null)
@@ -62,10 +69,13 @@ public class Unit : MonoBehaviour
 		currentHP -= randDmg;
         SetHP();
 
-		if (currentHP <= 0)
-			return true;
-		else
-			return false;
+        if (currentHP <= 0)
+        {
+            isDead = true;
+            BattleSystem.instance.Death();
+        }
+
+
 	}
 
     /// <summary>

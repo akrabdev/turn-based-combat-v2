@@ -3806,12 +3806,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6034814878287353323}
-        m_MethodName: OnHealButton
-        m_Mode: 1
+        m_MethodName: OnSpellButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4577,7 +4577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &874584807
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5942,12 +5942,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6034814878287353323}
-        m_MethodName: OnAttackButton
-        m_Mode: 1
+        m_MethodName: OnSpellButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7124,7 +7124,7 @@ PrefabInstance:
     - target: {fileID: 7531800829717688910, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}
       propertyPath: spells.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7531800829717688910, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}
@@ -7137,6 +7137,18 @@ PrefabInstance:
       propertyPath: spells.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: 383d9366fc977524cb00f69da6b6b659,
+        type: 2}
+    - target: {fileID: 7531800829717688910, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
+        type: 3}
+      propertyPath: spells.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 98ac834df5a98144fa2c2d38eee9c62f,
+        type: 2}
+    - target: {fileID: 7531800829717688910, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
+        type: 3}
+      propertyPath: spells.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e026cd0e25fff0439c72a8885e403a1,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4390a9edcb174f4fbd1b1180aa8ed0b, type: 3}
@@ -7204,6 +7216,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlackBoar
       objectReference: {fileID: 0}
+    - target: {fileID: 5823730836849333166, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: spells.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823730836849333166, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: spells.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: cf8ffe6484b75f54a9ffd1fa2a8c6209,
+        type: 2}
+    - target: {fileID: 5823730836849333166, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: spells.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: b29a4ce26edf06d40a0072cf8cedaf46,
+        type: 2}
     - target: {fileID: 6591465980649086214, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
       propertyPath: m_RootOrder

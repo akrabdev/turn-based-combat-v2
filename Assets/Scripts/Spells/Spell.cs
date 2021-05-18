@@ -23,6 +23,7 @@ public class Spell : HotbarItem
 
     [Header("Spell graphics")]
     public GameObject projectile;
+    public ParticleSystem[] effect;
 
     [Header("Spell sounds")]
     public string projectileSoundEffectName;

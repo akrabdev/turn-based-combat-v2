@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03784b19efd069a4dabbb93f8c3d64d8, type: 3}
   m_Name: Lightningbolt_Player
   m_EditorClassIdentifier: 
-  name: Lightningbolt
+  name: Player Lightningbolt
   icon: {fileID: 4552843446153001671, guid: ff57a2efd62c32f459177189c8e003bb, type: 3}
   description: Lightning bolt that follows the target and stuns it
   element: {fileID: 11400000, guid: 2be73f8acbde09944b8cdaad7c2ba6ef, type: 2}
   isProjectile: 1
   follow: 1
-  currentCooldown: 0
+  currentCooldown: 5
   maxCooldown: 8
   damage: 10
   manaCost: 20
@@ -26,4 +26,6 @@ MonoBehaviour:
   followSpeed: 15
   projectile: {fileID: 9204251887801062571, guid: 085d1ceaca9620046a69c456be72ee1f,
     type: 3}
+  effect:
+  - {fileID: 7038799223474511258, guid: 79af5428b0cd1b54b82b49596568aca5, type: 3}
   projectileSoundEffectName: LightningboltProjectile
