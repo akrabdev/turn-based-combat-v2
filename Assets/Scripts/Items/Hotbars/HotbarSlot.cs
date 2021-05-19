@@ -8,9 +8,28 @@ public class HotbarSlot : ItemSlotUI, IDropHandler
 {
     [SerializeField] private Inventory inventory = null;
     [SerializeField] private TextMeshProUGUI itemQuantityText = null;
+    [SerializeField] private KeyCode keyCode = KeyCode.None;
     private HotbarItem slotItem = null;
 
 
+    private void Update()
+    {
+        Use();
+    }
+
+
+    private void Use()
+    {
+        if (Input.GetKeyDown(keyCode))
+        {
+
+            Spell spell = slotItem as Spell;
+            // if(BattleSystem.instance.state == BattleState.PLAYERTURN){
+            BattleSystem.instance.OnSpellButton(spell);
+            // spell.CastSpell(pla)
+        }
+
+    }
     public override HotbarItem SlotItem
     {
         get { return slotItem; }
@@ -54,6 +73,11 @@ public class HotbarSlot : ItemSlotUI, IDropHandler
 
         //TODO SPells
 
+        SpellbookSlot spellSlot = itemDragHandler.ItemSlotUI as SpellbookSlot;
+        if (spellSlot != null)
+        {
+            SlotItem = spellSlot.SlotItem;
+        }
         HotbarSlot hotbarSlot = itemDragHandler.ItemSlotUI as HotbarSlot;
         if (hotbarSlot != null)
         {
@@ -91,9 +115,9 @@ public class HotbarSlot : ItemSlotUI, IDropHandler
         if (SlotItem is InventoryItem inventoryItem)
         {
             // cehcking if the player still have item referenced in the HotbarSlot:
-            if (inventory.ItemContainer.HasItem(inventoryItem))
+            if (inventory.HasItem(inventoryItem))
             {
-                int quantityCount = inventory.ItemContainer.GetTotalQuantity(inventoryItem);
+                int quantityCount = inventory.GetTotalQuantity(inventoryItem);
                 // one item left doesnt show a number
                 itemQuantityText.text = quantityCount > 1 ? quantityCount.ToString() : "";
 

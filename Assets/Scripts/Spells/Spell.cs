@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class Spell : HotbarItem
@@ -23,6 +24,7 @@ public class Spell : HotbarItem
 
     [Header("Spell graphics")]
     public GameObject projectile;
+    public ParticleSystem[] effect;
 
     [Header("Spell sounds")]
     public string projectileSoundEffectName;
@@ -39,8 +41,20 @@ public class Spell : HotbarItem
 
 
     }
-    public override string GetInfoDisplayText() {
-        return description;
+    public override string GetInfoDisplayText()
+    {
+        StringBuilder builder = new StringBuilder();
+
+        // builder.Append("<size=35>").Append(item.ColouredName).Append("</size>").AppendLine();
+        builder.Append(element.Name).AppendLine();
+
+        builder.Append(description).AppendLine();
+
+        builder.Append("Damage: ").Append(damage).AppendLine();
+        builder.Append("Mana Cost: ").Append(manaCost).AppendLine();
+        builder.Append("Cooldown: ").Append(maxCooldown).AppendLine();
+        builder.Append("Max Range: ").Append(maxRange).AppendLine();
+        return builder.ToString();
     }
 
     public virtual void CastSpell(Unit spellCaster, Unit target)
@@ -49,6 +63,7 @@ public class Spell : HotbarItem
     }
 
     
+
 
     public void PutOnCooldown()
     {

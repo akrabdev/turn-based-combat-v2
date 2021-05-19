@@ -10,15 +10,15 @@ using UnityEngine.UI;
 public class Unit : MonoBehaviour
 {
 
-	public string unitName;
-	public int unitLevel;
+    public string unitName;
+    public int unitLevel;
     public int experiencePoints;
 
-	public int damage;
+    public int damage;
     public int magicPower;
 
-	public int maxHP;
-	public int currentHP;
+    public int maxHP;
+    public int currentHP;
 
     public int maxMana;
     public int currentMana;
@@ -31,12 +31,18 @@ public class Unit : MonoBehaviour
 
     public List<Spell> spells;
 
+    [HideInInspector]
+    public bool isDead;
+
     //Just for deleveling for now
     private bool hpUpdated;
-    
 
     private void Start()
     {
+        foreach(Spell spell in spells)
+        {
+            spell.currentCooldown = 0;
+        }
         SetHUD();
     }
 
@@ -45,7 +51,7 @@ public class Unit : MonoBehaviour
     /// </summary>
     /// <param name="dmg"></param>
     /// <returns></returns>
-    public bool TakeDamage(int dmg, Element element = null)
+    public void TakeDamage(int dmg, Element element = null)
 	{
         Color dmgColor;
         if (element == null)
@@ -62,10 +68,13 @@ public class Unit : MonoBehaviour
 		currentHP -= randDmg;
         SetHP();
 
-		if (currentHP <= 0)
-			return true;
-		else
-			return false;
+        if (currentHP <= 0)
+        {
+            isDead = true;
+            BattleSystem.instance.Death();
+        }
+
+
 	}
 
     /// <summary>
@@ -80,7 +89,7 @@ public class Unit : MonoBehaviour
 		if (currentHP > maxHP)
 			currentHP = maxHP;
         SetHP();
-	}
+    }
 
 
     /// <summary>
@@ -91,7 +100,7 @@ public class Unit : MonoBehaviour
     public void addExperience(int amount)
     {
         experiencePoints += amount;
-        if (experiencePoints >= Mathf.RoundToInt( 200 * Mathf.Log10(unitLevel) + 100))
+        if (experiencePoints >= Mathf.RoundToInt(200 * Mathf.Log10(unitLevel) + 100))
 
         {
             levelUp();
@@ -105,14 +114,14 @@ public class Unit : MonoBehaviour
     public void removeExperience(int amount)
     {
         experiencePoints -= amount;
-        if(experiencePoints < 0)
+        if (experiencePoints < 0)
         {
             experiencePoints = 0;
         }
         //level 2 exp 100, current lvl 1 exp 0
         if (unitLevel == 1)
             return;
-        if (experiencePoints < Mathf.RoundToInt(200 * Mathf.Log10(unitLevel-1) + 100))
+        if (experiencePoints < Mathf.RoundToInt(200 * Mathf.Log10(unitLevel - 1) + 100))
         {
             levelDown();
         }
