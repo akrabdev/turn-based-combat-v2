@@ -11,11 +11,9 @@ public class InventoryItemDragHandler : ItemDragHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            Debug.Log("OnPointerUp");
 
             base.OnPointerUp(eventData);
 
-            Debug.Log(eventData.hovered.Count);
             if (eventData.hovered.Count == 0)
             {
                 //destroy item or drop item

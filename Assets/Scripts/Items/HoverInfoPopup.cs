@@ -50,6 +50,7 @@ public class HoverInfoPopup : MonoBehaviour
     }
 
     public void DisplayInfo(HotbarItem item)
+
     {
         StringBuilder builder = new StringBuilder();
 

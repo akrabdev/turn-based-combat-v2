@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BattleState { IDLE, START, PLAYERTURN, ENEMYTURN, WON, LOST, ESCAPE}
+public enum BattleState { IDLE, START, PLAYERTURN, ENEMYTURN, WON, LOST, ESCAPE }
 
 /// <summary>
 /// This class is responsible for managing the battle itself
@@ -55,7 +55,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         CooldownManager.instance.SwitchTurn();
-        
+
         if (state == BattleState.PLAYERTURN)
         {
             state = BattleState.ENEMYTURN;
@@ -179,9 +179,9 @@ public class BattleSystem : MonoBehaviour
     //}
 
     public void EnemyTurn(float[] vectorAction)
-	{
-        
-        if(vectorAction != null)
+    {
+
+        if (vectorAction != null)
         {
             if (vectorAction[0] == 0)
             {
@@ -229,7 +229,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     public void EndBattle()
-	{
+    {
         FindObjectOfType<AudioManager>().Play("World");
         FindObjectOfType<AudioManager>().Stop("Battle");
         //if (agent.trainingMode)
@@ -239,24 +239,24 @@ public class BattleSystem : MonoBehaviour
         //    playerUnit.currentHP = playerUnit.maxHP;
         //    playerUnit.SetHP();
         //}
-		if(state == BattleState.WON)
-		{
+        if (state == BattleState.WON)
+        {
             Debug.Log("Agent lost");
 
             //Update player after winning
             StartCoroutine(InformationBarManager.instance.UpdateText("You won the battle!"));
-            if(!agent.trainingMode)
+            if (!agent.trainingMode)
             {
                 playerUnit.addExperience(50 * enemyUnit.unitLevel);
                 Destroy(enemy);
             }
         }
         else if (state == BattleState.LOST)
-		{
+        {
             Debug.Log("Agent won");
 
             StartCoroutine(InformationBarManager.instance.UpdateText("You were defeated."));
-            if(!agent.trainingMode)
+            if (!agent.trainingMode)
             {
                 enemyUnit.currentHP = enemyUnit.maxHP;
                 enemyUnit.SetHP();
@@ -284,7 +284,7 @@ public class BattleSystem : MonoBehaviour
         //    SwitchTurn();
         //}
 
-	}
+    }
 
     void Heal(Unit healingUnit)
     {
@@ -297,8 +297,8 @@ public class BattleSystem : MonoBehaviour
     }
 
     public void PlayerTurn()
-	{
-        if(agent.trainingMode)
+    {
+        if (agent.trainingMode)
         {
             int random = Random.Range(0, 9);
             if (random > 5)
@@ -353,28 +353,28 @@ public class BattleSystem : MonoBehaviour
 
     //    state = BattleState.ENEMYTURN;
     //}
-    public void OnSpellButton(int spellId)
+    public void OnSpellButton(Spell spell)
     {
         if (state == BattleState.PLAYERTURN)
         {
-            playerUnit.spells[spellId].CastSpell(playerUnit, enemyUnit);
+            spell.CastSpell(playerUnit, enemyUnit);
             SwitchTurn();
         }
     }
 
- //   public void OnAttackButton()
-	//{
-	//	if (state != BattleState.PLAYERTURN)
-	//		return;
- //       Attack(playerUnit, enemyUnit);
- //   }
+    //   public void OnAttackButton()
+    //{
+    //	if (state != BattleState.PLAYERTURN)
+    //		return;
+    //       Attack(playerUnit, enemyUnit);
+    //   }
 
-	//public void OnHealButton()
-	//{
-	//	if (state != BattleState.PLAYERTURN)
-	//		return;
- //       Heal(playerUnit);
-	//}
+    //public void OnHealButton()
+    //{
+    //	if (state != BattleState.PLAYERTURN)
+    //		return;
+    //       Heal(playerUnit);
+    //}
 
 
     //void PlayerShield()

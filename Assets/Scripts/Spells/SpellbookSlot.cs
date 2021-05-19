@@ -11,11 +11,11 @@ public class SpellbookSlot : ItemSlotUI, IDropHandler
 
     public override HotbarItem SlotItem
     {
-        get { return ItemSlot.item; }
+        get { return SpellSlot.spell; }
         set { }
     }
 
-    public SpellbookItemSlot ItemSlot => spellbook.SpellbookContainer.GetSlotByIndex(SlotIndex);
+    public SpellSlot SpellSlot => spellbook.GetSlotByIndex(SlotIndex);
 
     public override void OnDrop(PointerEventData eventData)
     {
@@ -28,14 +28,14 @@ public class SpellbookSlot : ItemSlotUI, IDropHandler
 
     public override void UpdateSlotUI()
     {
-        if (ItemSlot.item == null)
+        if (SpellSlot.spell == null)
         {
             EnableSlotUI(false);
             return;
         }
         EnableSlotUI(true);
 
-        itemIconImage.sprite = ItemSlot.item.Icon;
+        itemIconImage.sprite = SpellSlot.spell.Icon;
         //itemQuantityText.text = ItemSlot.quantity > 1 ? ItemSlot.quantity.ToString() : "";
     }
 

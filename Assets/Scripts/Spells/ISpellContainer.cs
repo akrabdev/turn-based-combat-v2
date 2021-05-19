@@ -1,18 +1,19 @@
 ﻿
 // What an Item Container need?
-public interface SSpellContainer
+public interface ISpellContainer
 
 {
     // in interfaces assumes public by default
 
     // Add Item Method
-    SpellbookItemSlot AddItem(SpellbookItemSlot itemSlot);
+    SpellSlot AddItem(SpellSlot spellSlot);
 
     // Swap two items in coontainer
 
     // Container has item?
-    bool HasItem(Spell item);
+    bool HasItem(Spell spell);
 
+    SpellSlot GetSlotByIndex(int index);
 
 
 
