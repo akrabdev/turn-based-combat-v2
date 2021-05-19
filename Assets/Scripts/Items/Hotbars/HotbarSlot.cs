@@ -8,9 +8,28 @@ public class HotbarSlot : ItemSlotUI, IDropHandler
 {
     [SerializeField] private Inventory inventory = null;
     [SerializeField] private TextMeshProUGUI itemQuantityText = null;
+    [SerializeField] private KeyCode keyCode = KeyCode.None;
     private HotbarItem slotItem = null;
 
 
+    private void Update()
+    {
+        Use();
+    }
+
+
+    private void Use()
+    {
+        if (Input.GetKeyDown(keyCode))
+        {
+
+            Spell spell = slotItem as Spell;
+            // if(BattleSystem.instance.state == BattleState.PLAYERTURN){
+            BattleSystem.instance.OnSpellButton(spell);
+            // spell.CastSpell(pla)
+        }
+
+    }
     public override HotbarItem SlotItem
     {
         get { return slotItem; }
