@@ -24,8 +24,9 @@ public class SpawnManager : MonoBehaviour
      *    9) Maybe spawn some items in Player's turn only
      *    10) Change randomness to be more specific to objects as well
      *    11) Spawn more than one object together
-     *    12) Take care of loops (!!!IMPORTANT)
-     *    13)
+     *    12) Change while(true)
+     *    13) Change code to handle more than one enemy spawn
+     *    14) Clean up code
      */
     public List<GameObject> spanwedObjects;
     Unit PlayerUnit;
@@ -33,6 +34,17 @@ public class SpawnManager : MonoBehaviour
     BattleSystem BS;
     List<GameObject> obj = new List<GameObject>();
     public static SpawnManager SMInstance;
+
+    public List<GameObject> spawnedEnemies;
+    List<GameObject> enemyObj = new List<GameObject>();
+    BoxCollider2D bc;
+
+
+
+    float top;
+    float btm;
+    float left;
+    float right;
 
     void Awake()
     {
@@ -51,12 +63,34 @@ public class SpawnManager : MonoBehaviour
     //Start is called before the first frame update
     void Start()
     {
+        bc = GetComponent<BoxCollider2D>();
+        Vector3 worldPosition = transform.TransformPoint(bc.offset);
+
+        top = worldPosition.y + (bc.size.y / 2f);
+        btm = worldPosition.y - (bc.size.y / 2f);
+        left = worldPosition.x - (bc.size.x / 2f);
+        right = worldPosition.x + (bc.size.x / 2f);
+
+        //topLeft = new Vector3(left, top, worldPosition.z);
+        //topRight = new Vector3(right, top, worldPosition.z);
+        //btmLeft = new Vector3(left, btm, worldPosition.z);
+        //btmRight = new Vector3(right, btm, worldPosition.z);
         BS = BattleSystem.instance;
         PlayerUnit = GameObject.FindGameObjectWithTag("Player").GetComponent<Unit>();
-        EnemyUnit = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Unit>();
+        EnemyUnit = spawnedEnemies[0].GetComponent<Unit>();//GameObject.FindGameObjectWithTag("Enemy").GetComponent<Unit>();
         for (int i = 0; i < spanwedObjects.Count; i++)
             spanwedObjects[i].SetActive(false);
-        StartCoroutine(ObjectSpawn());
+        //StartCoroutine(ObjectSpawn());
+    }
+
+    private Vector3 GetRandomPosition()
+    {
+        // You can also take off half the bounds of the thing you want in the box, so it doesn't extend outside.
+        // Right now, the center of the prefab could be right on the extents of the box
+        Vector3 randomPosition = new Vector3(Random.Range(left, right), Random.Range(top, btm), -1f);
+
+        return randomPosition;
+
     }
 
     IEnumerator ObjectSpawn()
@@ -72,7 +106,7 @@ public class SpawnManager : MonoBehaviour
             int TimeToCreate = Random.Range(2, 5);
             for (int k = i; k < j; k++)
             {
-                Vector3 objectSpawn = new Vector3(Random.Range(-8f, 8f), Random.Range(-4f, 4f), -1f);
+                Vector3 objectSpawn = GetRandomPosition(); //new Vector3(Random.Range(-8f, 8f), Random.Range(-4f, 4f), -1f);
                 obj.Add(Instantiate(spanwedObjects[k], objectSpawn, Quaternion.identity));
                 obj[obj.Count-1].SetActive(true);
             }
@@ -122,6 +156,42 @@ public class SpawnManager : MonoBehaviour
         {
             Destroy(obj);
             PlayerUnit.addExperience(10);
+        }
+    }
+
+
+    //Handling only one enemy for now
+    public void EnemySpawn()
+    {
+        Vector3 objectSpawn = GetRandomPosition();
+        GameObject Enemy = Instantiate(spawnedEnemies[0], objectSpawn, Quaternion.identity);
+        //FOR NOW
+        Enemy.SetActive(true);
+        enemyObj.Add(Enemy);
+        //this.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -10);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //BattleSystem battleSystem = Instantiate(BattleInstance);
+        if (collision.gameObject.CompareTag("Player") && BS.state == BattleState.IDLE)
+        {
+            if (enemyObj.Count == 0)
+                EnemySpawn();
+            BS.SetupBattle(collision.gameObject, enemyObj[0]);
+            StartCoroutine(ObjectSpawn());
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (BS.state == BattleState.WON || BS.state == BattleState.LOST || BS.state == BattleState.IDLE)
+        {
+            return;
+        }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            BS.state = BattleState.ESCAPE;
+            BS.EndBattle();
         }
     }
 
