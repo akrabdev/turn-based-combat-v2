@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Panda;
+using UnityEngine.AI;
+
 public class PlayerTasks : MonoBehaviour
 {
 
     public static BattleSystem instance;
+    public NavMeshAgent agent;
     public Unit player;
     public Unit enemy;
     public Spell fireSpell;
@@ -14,6 +17,9 @@ public class PlayerTasks : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
 
     }
 
@@ -42,8 +48,11 @@ public class PlayerTasks : MonoBehaviour
         if (fireSpell.currentCooldown > 0)
         {
             task.Fail();
+            return;
         }
         fireSpell.CastSpell(player, enemy);
+
+        task.Succeed();
 
     }
 
@@ -60,8 +69,25 @@ public class PlayerTasks : MonoBehaviour
         if (lightBoltSpell.currentCooldown > 0)
         {
             task.Fail();
+            return;
         }
         lightBoltSpell.CastSpell(player, enemy);
+
+        task.Succeed();
+
+    }
+
+
+    [Task]
+    void GoToEnemy()
+    {
+        var task = Task.current;
+        agent.destination = enemy.transform.position;
+        if (Vector3.Distance(agent.transform.position, enemy.transform.position) <= 1)
+        {
+            task.Succeed();
+
+        }
 
     }
 }
