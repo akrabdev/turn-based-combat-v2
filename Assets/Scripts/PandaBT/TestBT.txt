@@ -1,0 +1,4 @@
+tree("Root")
+	sequence
+        TestTask
+		Wait(1.0)

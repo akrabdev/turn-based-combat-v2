@@ -74,25 +74,25 @@ public class PlayerController : MonoBehaviour
      * Set of functions to change the transform of the object according to user input
      */
 
-    void moveLeft()
+    public void moveLeft()
     {
         anim.SetTrigger("MoveLeft");
         transform.Translate(-1f, 0, 0);
     }
 
-    void moveRight()
+    public void moveRight()
     {
         anim.SetTrigger("MoveRight");
         transform.Translate(1f, 0, 0);
     }
 
-    void moveUp()
+    public void moveUp()
     {
         anim.SetTrigger("MoveUp");
         transform.Translate(0, 1f, 0);
     }
 
-    void moveDown()
+    public void moveDown()
     {
         anim.SetTrigger("MoveDown");
         transform.Translate(0, -1f, 0);
