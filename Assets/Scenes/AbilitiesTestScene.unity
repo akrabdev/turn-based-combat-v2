@@ -10887,7 +10887,7 @@ MonoBehaviour:
   sounds:
   - name: World
     audio: {fileID: 8300000, guid: a4a3faab855e31644a7abe5d822efd70, type: 3}
-    volume: 1
+    volume: 0
     source: {fileID: 0}
   - name: Battle
     audio: {fileID: 8300000, guid: 9a0e7ebf8f67b5247857f283f60c8517, type: 3}
@@ -11391,6 +11391,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1925253945594304145, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
+        type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7146596636743777510, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}
       propertyPath: m_RootOrder
@@ -11500,6 +11505,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlackBoar
       objectReference: {fileID: 0}
+    - target: {fileID: 6053500627494387622, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6591465980649086214, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
       propertyPath: m_RootOrder
@@ -11554,6 +11564,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831902731722756095, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2588ab61f93d5ab499fc73b80823c803, type: 3}
