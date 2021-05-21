@@ -9,24 +9,25 @@ public class SpawnManager : MonoBehaviour
      *    1) Spawn objects according to level/Increase object effect according to level
      *    2) Spawn different types of objects per level
      *      a) Health -> done
-     *      b) Increased attacks for some time 
-     *      c) Temporary shield
+     *      b) Increased attacks for some time -> Done
+     *      c) Temporary shield -> 
      *      d) Freeze Agent for one turn
      *      e) Increase XP -> Done
-     *      f) Level up (very rare)
+     *      f) Level up (very rare) -> Done
      *      g)
      *    3) Allow player to access object -> Done
      *    4) Remove object after some time -> Change to per turn
      *    5) Add priorities to different objects
-     *    6) Add max times a player can take spawn or spawn a number of times per 1 battle
-     *    7) Add Particle System for all items
-     *    8) Make Heal/Attack functions public to change healing/attacking factor for different levels and to make it more modular
+     *    6) Add max times a player can take spawn or spawn a number of times per 1 battle -> Done (Add UI)
+     *    7) Add Particle System for all items //////
+     *    8) Make Heal/Attack functions public to change healing/attacking factor for different levels and to make it more modular ??
      *    9) Maybe spawn some items in Player's turn only
      *    10) Change randomness to be more specific to objects as well
-     *    11) Spawn more than one object together
-     *    12) Change while(true)
+     *    11) Spawn more than one object together -> Done
+     *    12) Change while(true) -> check this https://www.youtube.com/watch?v=pKN8jVnSKyM
      *    13) Change code to handle more than one enemy spawn
      *    14) Clean up code
+     *    15) Fade in/out border -> Later
      */
     public List<GameObject> spanwedObjects;
     Unit PlayerUnit;
@@ -39,12 +40,14 @@ public class SpawnManager : MonoBehaviour
     List<GameObject> enemyObj = new List<GameObject>();
     BoxCollider2D bc;
 
-
+    Dictionary<string, int> timesTaken;
 
     float top;
     float btm;
     float left;
     float right;
+
+    GameObject Border;
 
     void Awake()
     {
@@ -63,6 +66,8 @@ public class SpawnManager : MonoBehaviour
     //Start is called before the first frame update
     void Start()
     {
+        Border = GameObject.FindGameObjectWithTag("Border");
+        Border.SetActive(false);
         bc = GetComponent<BoxCollider2D>();
         Vector3 worldPosition = transform.TransformPoint(bc.offset);
 
@@ -71,23 +76,30 @@ public class SpawnManager : MonoBehaviour
         left = worldPosition.x - (bc.size.x / 2f);
         right = worldPosition.x + (bc.size.x / 2f);
 
+        Debug.Log("left"+left);
+
+
         //topLeft = new Vector3(left, top, worldPosition.z);
         //topRight = new Vector3(right, top, worldPosition.z);
         //btmLeft = new Vector3(left, btm, worldPosition.z);
         //btmRight = new Vector3(right, btm, worldPosition.z);
         BS = BattleSystem.instance;
         PlayerUnit = GameObject.FindGameObjectWithTag("Player").GetComponent<Unit>();
+        timesTaken = new Dictionary<string, int>(spanwedObjects.Count);
         EnemyUnit = spawnedEnemies[0].GetComponent<Unit>();//GameObject.FindGameObjectWithTag("Enemy").GetComponent<Unit>();
         for (int i = 0; i < spanwedObjects.Count; i++)
+        {
+            timesTaken.Add(spanwedObjects[i].tag, 0);
             spanwedObjects[i].SetActive(false);
+        }
         //StartCoroutine(ObjectSpawn());
+        
     }
 
     private Vector3 GetRandomPosition()
     {
-        // You can also take off half the bounds of the thing you want in the box, so it doesn't extend outside.
-        // Right now, the center of the prefab could be right on the extents of the box
-        Vector3 randomPosition = new Vector3(Random.Range(left, right), Random.Range(top, btm), -1f);
+
+        Vector3 randomPosition = new Vector3(Random.Range(left+0.5f, right-0.5f), Random.Range(top-0.5f, btm+0.5f), -1f);
 
         return randomPosition;
 
@@ -99,13 +111,15 @@ public class SpawnManager : MonoBehaviour
         {
             Debug.Log("Spawning");
             //Change time to be more realistic
-            int i = Random.Range(0, spanwedObjects.Count-1);
-            int j = Random.Range(0, spanwedObjects.Count-1);
+            int i = Random.Range(0, spanwedObjects.Count);
+            int j = Random.Range(0, spanwedObjects.Count);
             Debug.Log(i);
             Debug.Log(j);
             int TimeToCreate = Random.Range(2, 5);
-            for (int k = i; k < j; k++)
+            for (int k = i; k <= j; k++)
             {
+                if (spanwedObjects[k].tag == "LevelUp" && timesTaken[spanwedObjects[k].tag] > 1)
+                    yield break;
                 Vector3 objectSpawn = GetRandomPosition(); //new Vector3(Random.Range(-8f, 8f), Random.Range(-4f, 4f), -1f);
                 obj.Add(Instantiate(spanwedObjects[k], objectSpawn, Quaternion.identity));
                 obj[obj.Count-1].SetActive(true);
@@ -114,7 +128,6 @@ public class SpawnManager : MonoBehaviour
             {
                 int TimeToDestroy = Random.Range(2, 5);
                 yield return new WaitForSeconds(TimeToDestroy);
-                //obj.Remove(spawn);
                 Destroy(obj[k], TimeToDestroy);
 
             }
@@ -127,6 +140,10 @@ public class SpawnManager : MonoBehaviour
     {
         if(obj.CompareTag("Health"))
         {
+            if (timesTaken["Health"] > 2)
+                yield break;
+            else
+                timesTaken["Health"]++;
             Destroy(obj);
             PlayerUnit.Heal();
             ParticleSystem healing = Instantiate(BS.healEffect, PlayerUnit.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
@@ -145,18 +162,60 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(TimeToDampen);
             EnemyUnit.damage *= 5;
         }
-        else if(obj.CompareTag("Freeze"))
-        {
-            if(BS.state == BattleState.ENEMYTURN)
-            {
-                
-            }
-        }
+
         else if(obj.CompareTag("XP"))
         {
+            if (timesTaken["XP"] > 2)
+                yield break;
+            else
+                timesTaken["XP"]++;
             Destroy(obj);
             PlayerUnit.addExperience(10);
         }
+        else if(obj.CompareTag("Attacks"))
+        {
+            if (timesTaken["Attacks"] > 2)
+                yield break;
+            else
+                timesTaken["Attacks"]++;
+            Destroy(obj);
+            PlayerUnit.damage *= 2;
+            int TimeToInc = Random.Range(6, 9);
+            yield return new WaitForSeconds(TimeToInc);
+            PlayerUnit.damage /= 2;
+
+        }
+        else if(obj.CompareTag("Shield"))
+        {
+            if (timesTaken["Shield"] > 2)
+                yield break;
+            else
+                timesTaken["Shield"]++;
+            Destroy(obj);
+            int TimeToDampen = Random.Range(6, 9);
+            Debug.Log(EnemyUnit.damage);
+            var temp = EnemyUnit.damage;
+            EnemyUnit.damage = 0;
+            Debug.Log(EnemyUnit.damage);
+            yield return new WaitForSeconds(TimeToDampen);
+            EnemyUnit.damage = temp;
+        }
+        else if(obj.CompareTag("LevelUp"))
+        {
+            if (timesTaken["LevelUp"] > 1)
+                yield break;
+            else
+                timesTaken["LevelUp"]++;
+            PlayerUnit.levelUp();
+        }
+        //else if(obj.CompareTag("Freeze"))
+        //{
+        //    Destroy(obj);
+        //    if (BS.state == BattleState.ENEMYTURN)
+        //    {
+
+        //    }
+        //}
     }
 
 
@@ -168,7 +227,6 @@ public class SpawnManager : MonoBehaviour
         //FOR NOW
         Enemy.SetActive(true);
         enemyObj.Add(Enemy);
-        //this.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -10);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -177,22 +235,53 @@ public class SpawnManager : MonoBehaviour
         {
             if (enemyObj.Count == 0)
                 EnemySpawn();
+            Border.SetActive(true);
+            enemyObj[0].SetActive(true);
+            //Fade(false, Border);
             BS.SetupBattle(collision.gameObject, enemyObj[0]);
             StartCoroutine(ObjectSpawn());
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
-    {
+    { 
         if (BS.state == BattleState.WON || BS.state == BattleState.LOST || BS.state == BattleState.IDLE)
         {
+            AfterBattle(false);
+            Border.SetActive(false);
             return;
         }
         if (collision.gameObject.CompareTag("Player"))
         {
+            AfterBattle(true);
+            Border.SetActive(false);
             BS.state = BattleState.ESCAPE;
             BS.EndBattle();
         }
     }
+
+    private void AfterBattle(bool escaped)
+    {
+        for(int i = 0; i < obj.Count; i++)
+        {
+            if(!escaped)
+                timesTaken[obj[i].tag] = 0;
+            Destroy(obj[i]);
+        }
+    }
+    //private void Fade(bool fade, GameObject go)
+    //{
+        //Color borderColor = go.GetComponent<Renderer>().material.color;
+        //if (fade)
+        //{
+        //    borderColor.a -= Time.deltaTime * 0.7f;
+        //    go.GetComponent<Renderer>().material.color = borderColor;
+        //}
+        //else
+        //{
+        //    borderColor.a += Time.deltaTime * 1;
+        //    go.GetComponent<Renderer>().material.color = borderColor;
+        //}
+    //}
 
 }

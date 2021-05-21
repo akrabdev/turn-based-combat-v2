@@ -12,6 +12,10 @@ TagManager:
   - Armor
   - Freeze
   - XP
+  - Border
+  - Shield
+  - Attacks
+  - LevelUp
   layers:
   - Default
   - TransparentFX
