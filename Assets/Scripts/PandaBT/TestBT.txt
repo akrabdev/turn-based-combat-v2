@@ -1,4 +1,44 @@
-tree("Root")
+//tree("Root")
+	//while
+   //     IsNowPlayerTurn
+		//while
+			//IsEnoughMana(10)
+			//fallback
+				//CastFireSpell
+				//CastLightBoltSpell
+		//sequence
+			//Wait(1.0)
+			//ReachTarget
+			//MeleeAttack
+
+
+//tree("Root")
+	while
+		IsNowPlayerTurn
+		tree("Logic")
+
+
+
+
+
+//tree("Logic")
 	sequence
-        TestTask
+		IsEnoughMana(10)
 		Wait(1.0)
+		fallback
+			//not Wait(1.0)
+			CastFireSpell
+			//not Wait(1.0)
+			CastLightBoltSpell
+			//not Wait(1.0)
+			MeleeAttack
+			//SwitchTurn
+		sequence
+			//Wait(1.0)
+			ReachTarget
+			//Wait(1.0)
+			MeleeAttack
+
+	
+			
+			

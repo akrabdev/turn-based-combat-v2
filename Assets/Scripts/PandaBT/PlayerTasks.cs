@@ -8,7 +8,7 @@ using Pathfinding;
 public class PlayerTasks : MonoBehaviour
 {
 
-    public static BattleSystem instance;
+    // public static BattleSystem battleSystem;
     // public AIPath aIPath;
     // public AstarPath astarPath;
     // public Path path;
@@ -18,6 +18,8 @@ public class PlayerTasks : MonoBehaviour
     public Spell fireSpell;
     public Spell lightBoltSpell;
     public Spell healSpell;
+    public Spell meleeAttack;
+    private PandaBehaviour pandaBehaviour;
 
     private Path path;
     private Seeker seeker;
@@ -29,6 +31,8 @@ public class PlayerTasks : MonoBehaviour
         // Debug.Log(aIPath.destination);
         seeker = GetComponent<Seeker>();
         playerController = GetComponent<PlayerController>();
+        pandaBehaviour = GetComponent<PandaBehaviour>();
+
 
 
 
@@ -63,7 +67,7 @@ public class PlayerTasks : MonoBehaviour
     bool IsPlayerTurn()
     {
 
-        if (instance.state == BattleState.PLAYERTURN)
+        if (BattleSystem.instance.state == BattleState.PLAYERTURN)
         {
             return true;
         }
@@ -78,8 +82,11 @@ public class PlayerTasks : MonoBehaviour
         if (fireSpell.currentCooldown > 0)
         {
             task.Fail();
+            return;
         }
         fireSpell.CastSpell(player, enemy);
+        pandaBehaviour.Reset();
+        BattleSystem.instance.SwitchTurn();
 
     }
 
@@ -96,18 +103,33 @@ public class PlayerTasks : MonoBehaviour
         if (lightBoltSpell.currentCooldown > 0)
         {
             task.Fail();
+            return;
         }
         lightBoltSpell.CastSpell(player, enemy);
+        BattleSystem.instance.SwitchTurn();
 
     }
 
     [Task]
-    void TestTask()
+    void ReachTarget()
     {
         var task = Task.current;
         Vector3 newv = GetNextMove();
+        Debug.Log(newv);
+        Vector3 v999 = new Vector3(-999.0f, -999.0f, -999.0f);
+        Debug.Log(v999);
+        if (v999.Equals(newv))
+        {
+            Debug.Log("IM HERE");
+
+            task.Succeed();
+            return;
+        }
         Move(player.transform.position, newv);
-        task.Succeed();
+        pandaBehaviour.Reset();
+        BattleSystem.instance.SwitchTurn();
+        task.Fail();
+        // task.Succeed();
     }
 
     [Task]
@@ -118,9 +140,19 @@ public class PlayerTasks : MonoBehaviour
         // Debug.Log(Vector3)path.path[1].position);
 
         Vector3 newv = new Vector3(0, 0, 0);
-        newv = (Vector3)path.path[1].position; //- player.transform.position;
-        return newv;
-        // player.transform.Translate(newv);
+        if (path.path.Count >= 2)
+        {
+            if (Vector3.Distance((Vector3)path.path[1].position, enemy.transform.position) >= 1.1)
+            {
+
+                newv = (Vector3)path.path[1].position; //- player.transform.position;
+                return newv;
+                // player.transform.Translate(newv);
+            }
+
+
+        }
+        return new Vector3(-999.0f, -999.0f, -999.0f);
 
     }
 
@@ -145,15 +177,14 @@ public class PlayerTasks : MonoBehaviour
         }
 
         //Right
-        Debug.Log(xNew);
+        // Debug.Log(xNew);
 
-        Debug.Log(xOld);
-        Debug.Log(yNew);
-        Debug.Log(yOld);
+        // Debug.Log(xOld);
+        // Debug.Log(yNew);
+        // Debug.Log(yOld);
 
         if (xNew > xOld && dy < 0.05)
         {
-            Debug.Log("here");
             playerController.moveRight();
         }
         //Up
@@ -167,5 +198,43 @@ public class PlayerTasks : MonoBehaviour
         {
             playerController.moveDown();
         }
+    }
+
+    [Task]
+    bool IsEnoughMana(int minMana)
+    {
+        if (player.currentMana < 10)
+        {
+            return false;
+        }
+        return true;
+    }
+    [Task]
+    bool IsNowPlayerTurn()
+    {
+        if (BattleSystem.instance.state == BattleState.PLAYERTURN)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    [Task]
+    bool MeleeAttack()
+    {
+        meleeAttack.CastSpell(player, enemy);
+        pandaBehaviour.Reset();
+        BattleSystem.instance.SwitchTurn();
+        return true;
+
+    }
+    [Task]
+    bool SwitchTurn()
+    {
+        pandaBehaviour.Reset();
+        BattleSystem.instance.SwitchTurn();
+        return true;
     }
 }
