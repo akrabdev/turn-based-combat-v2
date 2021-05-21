@@ -9,10 +9,14 @@ public class PlayerController : MonoBehaviour
 {
     //For animation
     Animator anim;
+    BattleSystem battleSystem;
+    Rigidbody2D rigidbody;
     // Start is called before the first frame update
     void Start()
     {
+        battleSystem = BattleSystem.instance;
         anim = GetComponent<Animator>();
+        rigidbody = GetComponent<Rigidbody2D>();
     }
 
     /// <summary>
@@ -20,53 +24,16 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (battleSystem.state == BattleState.IDLE)
         {
-            if (BattleSystem.instance.state == BattleState.IDLE)
-            {
-                moveLeft();
-            }
-            else if (BattleSystem.instance.state == BattleState.PLAYERTURN)
-            {
-                moveLeft();
-                BattleSystem.instance.SwitchTurn();
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            if (BattleSystem.instance.state == BattleState.IDLE)
-            {
+            if (Input.GetKeyDown(KeyCode.RightArrow))
                 moveRight();
-            }
-            else if (BattleSystem.instance.state == BattleState.PLAYERTURN)
-            {
-                moveRight();
-                BattleSystem.instance.SwitchTurn();
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            if (BattleSystem.instance.state == BattleState.IDLE)
-            {
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
                 moveDown();
-            }
-            else if (BattleSystem.instance.state == BattleState.PLAYERTURN)
-            {
-                moveDown();
-                BattleSystem.instance.SwitchTurn();
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if (BattleSystem.instance.state == BattleState.IDLE)
-            {
+            else if (Input.GetKeyDown(KeyCode.UpArrow))
                 moveUp();
-            }
-            else if (BattleSystem.instance.state == BattleState.PLAYERTURN)
-            {
-                moveUp();
-                BattleSystem.instance.SwitchTurn();
-            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+                moveLeft();
         }
     }
 
@@ -74,27 +41,32 @@ public class PlayerController : MonoBehaviour
      * Set of functions to change the transform of the object according to user input
      */
 
-    void moveLeft()
+    public void moveLeft()
     {
-        anim.SetTrigger("MoveLeft");
-        transform.Translate(-1f, 0, 0);
+        rigidbody.MovePosition((Vector2)transform.position + new Vector2(-1f, 0));
+        //anim.SetTrigger("MoveLeft");
     }
 
-    void moveRight()
+    public void moveRight()
     {
-        anim.SetTrigger("MoveRight");
-        transform.Translate(1f, 0, 0);
+        rigidbody.MovePosition((Vector2)transform.position + new Vector2(1f, 0));
+        //anim.SetTrigger("MoveRight");
+        
     }
 
-    void moveUp()
+    public void moveUp()
     {
-        anim.SetTrigger("MoveUp");
-        transform.Translate(0, 1f, 0);
+        rigidbody.MovePosition((Vector2)transform.position + new Vector2(0, 1f));
+        //anim.SetTrigger("MoveUp");
+       
     }
 
-    void moveDown()
+    public void moveDown()
     {
-        anim.SetTrigger("MoveDown");
-        transform.Translate(0, -1f, 0);
+        rigidbody.MovePosition((Vector2)transform.position + new Vector2(0, -1f));
+        //anim.SetTrigger("MoveDown");
+        
     }
+
+    
 }

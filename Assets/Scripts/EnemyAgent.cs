@@ -1,63 +1,105 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Unity.MLAgents;
-using Unity.MLAgents.Sensors;
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
+//using Unity.MLAgents;
+//using Unity.MLAgents.Sensors;
 
-public class EnemyAgent : Agent
-{
-    public bool trainingMode;
-    public bool isFrozen;
-    GameObject Player;
-    Unit EnemyUnit;
-    Unit PlayerUnit;
+//public class EnemyAgent : Agent
+//{
+//    public bool trainingMode;
+//    public bool isFrozen;
+//    GameObject Player;
+//    Unit enemyUnit;
+//    Unit playerUnit;
+//    BattleSystem battleSystem;
 
-    public override void Initialize()
-    {
-        Player = GameObject.FindGameObjectWithTag("Player");
-        EnemyUnit = GetComponent<Unit>();
-        PlayerUnit = Player.GetComponent<Unit>();
-        if(!trainingMode)
-        {
-            MaxStep = 0;
-        }
+//    public override void Initialize()
+//    {
+//        battleSystem = BattleSystem.instance;
+//        enemyUnit = battleSystem.enemyUnit;
+//        playerUnit = battleSystem.playerUnit;
+//        if(!trainingMode)
+//        {
+//            MaxStep = 0;
+//        }
         
-    }
+//    }
 
-    public override void OnEpisodeBegin()
-    {
-        //Debug.Log("Episode beginning");
-        if(trainingMode)
-            BattleSystem.instance.SetupBattle(Player, gameObject);
-    }
-    public override void OnActionReceived(float[] vectorAction)
-    {
-        if (isFrozen)
-            return;
-        //Debug.Log("Received agent action");
-        //Debug.Log(vectorAction[0]);
-        if (BattleSystem.instance.state == BattleState.ENEMYTURN)
-        {
-            BattleSystem.instance.EnemyTurn(vectorAction);
-        }
-    }
-    public override void CollectObservations(VectorSensor sensor)
-    {
-        sensor.AddObservation(PlayerUnit.currentHP);
-        sensor.AddObservation(EnemyUnit.currentHP);
-    }
+//    public override void OnEpisodeBegin()
+//    {
+//        if(trainingMode)
+//            battleSystem.SetupBattle(Player, gameObject);
+//    }
+//    public override void OnActionReceived(float[] vectorAction)
+//    {
+//        //Debug.Log("Received agent action");
+//        //Debug.Log(vectorAction[0]);
+//        {
 
-    public void FreezeAgent()
-    {
-        Debug.Assert(trainingMode == false, "Freeze/unfreeze not supported in training");
-        isFrozen = true;
-        //GetComponent<Rigidbody>().Sleep();
-    }
+//            if (vectorAction != null)
+//            {
+//                if (vectorAction[0] == 0)
+//                {
+//                    //Attack(enemyUnit, playerUnit);
+//                    enemyUnit.spells[0].CastSpell(enemyUnit, playerUnit);
+//                }
+//                else if (vectorAction[0] == 1)
+//                {
+//                    enemyUnit.spells[1].CastSpell(enemyUnit, playerUnit);
+//                    //Heal(enemyUnit);
+//                }
+//                AddReward(enemyUnit.currentHP / enemyUnit.maxHP);
+//                AddReward(-(playerUnit.currentHP / playerUnit.maxHP));
+//                battleSystem.SwitchTurn();
+//                //else if (vectorAction[2] == 1)
+//                //{
+//                //    StartCoroutine(infoBarManager.UpdateText(enemyUnit.unitName + " moves left!"));
+//                //    enemy.transform.Translate(new Vector3(-1, 0, 0));
+//                //    state = BattleState.PLAYERTURN;
+//                //    PlayerTurn();
+//                //}
+//                //else if (vectorAction[3] == 1)
+//                //{
+//                //    StartCoroutine(infoBarManager.UpdateText(enemyUnit.unitName + " moves right!"));
+//                //    enemy.transform.Translate(new Vector3(1, 0, 0));
+//                //    state = BattleState.PLAYERTURN;
+//                //    PlayerTurn();
+//                //}
+//                //else if (vectorAction[4] == 1)
+//                //{
+//                //    StartCoroutine(infoBarManager.UpdateText(enemyUnit.unitName + " moves up!"));
+//                //    enemy.transform.Translate(new Vector3(0, 1, 0));
+//                //    state = BattleState.PLAYERTURN;
+//                //    PlayerTurn();
+//                //}
+//                //else if (vectorAction[5] == 1)
+//                //{
+//                //    StartCoroutine(infoBarManager.UpdateText(enemyUnit.unitName + " moves down!"));
+//                //    enemy.transform.Translate(new Vector3(0, -1, 0));
+//                //    state = BattleState.PLAYERTURN;
+//                //    PlayerTurn();
+//                //}
+//            }
 
-    public void UnfreezeAgent()
-    {
-        Debug.Assert(trainingMode == false, "Freeze/unfreeze not supported in training");
-        isFrozen = false;
-        //GetComponent<Rigidbody>().Sleep();
-    }
-}
+//        }
+//    }
+//    public override void CollectObservations(VectorSensor sensor)
+//    {
+//        sensor.AddObservation(playerUnit.currentHP);
+//        sensor.AddObservation(enemyUnit.currentHP);
+//    }
+
+//    public void FreezeAgent()
+//    {
+//        Debug.Assert(trainingMode == false, "Freeze/unfreeze not supported in training");
+//        isFrozen = true;
+//        //GetComponent<Rigidbody>().Sleep();
+//    }
+
+//    public void UnfreezeAgent()
+//    {
+//        Debug.Assert(trainingMode == false, "Freeze/unfreeze not supported in training");
+//        isFrozen = false;
+//        //GetComponent<Rigidbody>().Sleep();
+//    }
+//}

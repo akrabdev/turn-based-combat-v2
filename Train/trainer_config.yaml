@@ -23,9 +23,16 @@ default:
             strength: 1.0
             gamma: 0.99
 
-EnemyAgent:
+PlayerAgent:
     time_horizon: 128
     batch_size: 2048
     buffer_size: 20480
     hidden_units: 256
     max_steps: 5.0e6
+    self_play:
+        save_steps: 10000
+        team_change: 50000
+        swap_steps: 10000
+        window: 10
+        play_against_latest_model_ratio: 0.5
+        initial_elo: 1200.0

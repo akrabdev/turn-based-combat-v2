@@ -12,6 +12,7 @@ TagManager:
   - Armor
   - Freeze
   - XP
+  - Obstacle
   layers:
   - Default
   - TransparentFX

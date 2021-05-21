@@ -8,7 +8,7 @@ public class LightningboltSpell : Spell
     // Start is called before the first frame update
     public override void CastSpell(Unit spellCaster, Unit target)
     {
-        if (IsSpellReady())
+        if (IsSpellReady() && spellCaster.currentMana >= manaCost)
         {
             PutOnCooldown();
             spellCaster.currentMana -= manaCost;

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03784b19efd069a4dabbb93f8c3d64d8, type: 3}
-  m_Name: Lightningbolt_Player
+  m_Name: Lightningbolt_Player2
   m_EditorClassIdentifier: 
-  name: Player Lightningbolt
+  name: Player Lightningbolt2
   icon: {fileID: 4552843446153001671, guid: ff57a2efd62c32f459177189c8e003bb, type: 3}
   description: Lightning bolt that follows the target and stuns it
   element: {fileID: 11400000, guid: 2be73f8acbde09944b8cdaad7c2ba6ef, type: 2}

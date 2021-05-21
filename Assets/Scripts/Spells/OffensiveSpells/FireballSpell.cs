@@ -7,7 +7,7 @@ public class FireballSpell : Spell
 {
     public override void CastSpell(Unit spellCaster, Unit target)
     {
-        if (IsSpellReady())
+        if (IsSpellReady() && spellCaster.currentMana >= manaCost)
         {
             PutOnCooldown();
             spellCaster.currentMana -= manaCost;

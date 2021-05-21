@@ -56,11 +56,13 @@ public class Projectile : MonoBehaviour
     {
         if (collision.GetComponent<Unit>() == target)
         {
-            Instantiate(effect, target.transform.position, Quaternion.identity);
+            
             FindObjectOfType<AudioManager>().Play(soundEffectName);
             isFiring = false;
             target.TakeDamage(damage, element);
-            Destroy(gameObject);
+            
         }
+        Instantiate(effect, target.transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }
