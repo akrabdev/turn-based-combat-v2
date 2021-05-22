@@ -40,7 +40,10 @@ public class PlayerAgent : Agent
     }
     public override void OnEpisodeBegin()
     {
-        Debug.Log("Episode Begin");
+        if(BattleSystem.instance.state == BattleState.ONGOING)
+        {
+            BattleSystem.instance.SetupBattle(BattleSystem.instance.objects);
+        }
     }
     public override void OnActionReceived(float[] vectorAction)
     {
@@ -84,9 +87,10 @@ public class PlayerAgent : Agent
     {
         sensor.AddObservation(caster.currentHP/caster.maxHP);
         sensor.AddObservation(target.currentHP/target.maxHP);
-        sensor.AddObservation(target.gameObject.transform.position);
-        sensor.AddObservation(caster.gameObject.transform.position);
-        sensor.AddObservation(Vector3.Distance(target.transform.position, caster.transform.position));
+        //sensor.AddObservation(target.gameObject.transform.position);
+        //sensor.AddObservation(caster.gameObject.transform.position);
+        sensor.AddObservation((Vector2)(target.transform.position - caster.transform.position).normalized);
+        sensor.AddObservation(Vector2.Distance(target.transform.position, caster.transform.position)/16);
     }
 
     public override void Heuristic(float[] actionsOut)
