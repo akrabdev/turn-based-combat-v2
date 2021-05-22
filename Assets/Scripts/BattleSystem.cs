@@ -115,8 +115,10 @@ public class BattleSystem : MonoBehaviour
 
     
 
-    public void SwitchTurn()
+    public IEnumerator SwitchTurn()
     {
+        yield return new WaitForSeconds(2f);
+
         CooldownManager.instance.SwitchTurn();
 
         if (state == BattleState.IDLE)
@@ -128,8 +130,8 @@ public class BattleSystem : MonoBehaviour
                 unit.SetHP();
             }
             AddTurn();
+            yield return new WaitForSeconds(.1f);
             objectsAgents[turn].RequestDecision();
-            return;
         }
 
         

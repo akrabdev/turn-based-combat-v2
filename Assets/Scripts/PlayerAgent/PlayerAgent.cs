@@ -47,6 +47,7 @@ public class PlayerAgent : Agent
     }
     public override void OnActionReceived(float[] vectorAction)
     {
+        Debug.Log("ActionReceived");
         if (vectorAction[0] == 0)
         {
             bool successfulMove = caster.spells[0].CastSpell(caster, target);
@@ -81,7 +82,7 @@ public class PlayerAgent : Agent
             playerController.moveRight();
         }
         
-        BattleSystem.instance.SwitchTurn();
+        StartCoroutine(BattleSystem.instance.SwitchTurn());
     }
     public override void CollectObservations(VectorSensor sensor)
     {
@@ -95,14 +96,18 @@ public class PlayerAgent : Agent
 
     public override void Heuristic(float[] actionsOut)
     {
-        //if (Input.GetKey(KeyCode.UpArrow))
-        //    actionsOut[0] = 0;
-        //else if (Input.GetKey(KeyCode.DownArrow))
-        //    actionsOut[0] = 1;
-        //else if (Input.GetKey(KeyCode.LeftArrow))
-        //    actionsOut[0] = 2;
-        //else if (Input.GetKey(KeyCode.RightArrow))
-        //    actionsOut[0] = 3;
+        if (Input.GetKeyDown(KeyCode.F1))
+            actionsOut[0] = 0;
+        else if (Input.GetKeyDown(KeyCode.F2))
+            actionsOut[0] = 1;
+        else if (Input.GetKeyDown(KeyCode.W))
+            actionsOut[0] = 2;
+        else if (Input.GetKeyDown(KeyCode.S))
+            actionsOut[0] = 3;
+        else if (Input.GetKeyDown(KeyCode.A))
+            actionsOut[0] = 4;
+        else if (Input.GetKeyDown(KeyCode.D))
+            actionsOut[0] = 5;
     }
 
     //public void FreezeAgent()
