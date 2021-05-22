@@ -141,22 +141,28 @@ public class BattleSystem : MonoBehaviour
     public void Death()
     {
         //IF PLAYER ISN'T DEAD -> STATE: WON
-        if (!objectsUnits[0].isDead)
+        if (!objectsUnits[0].isDead && objectsUnits[1].isDead)
         {
-            state = BattleState.WON;
+            Debug.Log("Unit 0 win");
             objectsAgents[0].AddReward(1f);
             objectsAgents[1].AddReward(-1f);
+            objectsUnits[1].isDead = false;
             //objects[1].transform.position = new Vector3(0.5f, 0.5f, 0);
-            EndBattle();
+            
         }
-        else
+        else if (!objectsUnits[1].isDead && objectsUnits[0].isDead)
         {
-            state = BattleState.LOST;
-            objectsAgents[1].AddReward(1f);
+            Debug.Log("Enem(y/ies) won");
             objectsAgents[0].AddReward(-1f);
+            objectsAgents[1].AddReward(1f);
+            objectsUnits[0].isDead = false;
             //objects[0].transform.position = new Vector3(0.5f, 0.5f, 0);
-            EndBattle();
         }
+        objectsAgents[0].EndEpisode();
+        objectsAgents[1].EndEpisode();
+        state = BattleState.IDLE;
+        SetupBattle(objects);
+
     }
 
 

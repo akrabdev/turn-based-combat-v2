@@ -57,9 +57,9 @@ public class Spell : HotbarItem
         return builder.ToString();
     }
 
-    public virtual void CastSpell(Unit spellCaster, Unit target)
+    public virtual bool CastSpell(Unit spellCaster, Unit target)
     {
-
+        return true;
     }
 
     

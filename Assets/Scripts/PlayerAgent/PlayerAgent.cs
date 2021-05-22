@@ -40,20 +40,26 @@ public class PlayerAgent : Agent
     }
     public override void OnEpisodeBegin()
     {
-        
+        Debug.Log("Episode Begin");
     }
     public override void OnActionReceived(float[] vectorAction)
     {
         if (vectorAction[0] == 0)
         {
-            caster.spells[0].CastSpell(caster, target);
-            AddReward(0.1f);
+            bool successfulMove = caster.spells[0].CastSpell(caster, target);
+            if (successfulMove)
+                AddReward(0.01f);
+            else
+                AddReward(-0.01f);
         }
         else if (vectorAction[0] == 1)
         {
-            if (caster.currentHP == caster.maxHP)
-                AddReward(-0.1f);
-            caster.spells[1].CastSpell(caster, target);
+            bool successfulMove = caster.spells[1].CastSpell(caster, target);
+            if (successfulMove)
+                AddReward(0.01f);
+            else
+                AddReward(-0.01f);
+            
         }
         else if (vectorAction[0] == 2)
         {
@@ -78,8 +84,8 @@ public class PlayerAgent : Agent
     {
         sensor.AddObservation(caster.currentHP/caster.maxHP);
         sensor.AddObservation(target.currentHP/target.maxHP);
-        sensor.AddObservation(target.transform.position);
-        sensor.AddObservation(caster.transform.position);
+        sensor.AddObservation(target.gameObject.transform.position);
+        sensor.AddObservation(caster.gameObject.transform.position);
         sensor.AddObservation(Vector3.Distance(target.transform.position, caster.transform.position));
     }
 
