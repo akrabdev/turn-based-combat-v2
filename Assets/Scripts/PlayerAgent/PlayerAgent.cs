@@ -47,10 +47,12 @@ public class PlayerAgent : Agent
         if (vectorAction[0] == 0)
         {
             caster.spells[0].CastSpell(caster, target);
-            AddReward(0.01f);
+            AddReward(0.1f);
         }
         else if (vectorAction[0] == 1)
         {
+            if (caster.currentHP == caster.maxHP)
+                AddReward(-0.1f);
             caster.spells[1].CastSpell(caster, target);
         }
         else if (vectorAction[0] == 2)
@@ -74,10 +76,11 @@ public class PlayerAgent : Agent
     }
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(caster.currentHP);
-        sensor.AddObservation(target.currentHP);
+        sensor.AddObservation(caster.currentHP/caster.maxHP);
+        sensor.AddObservation(target.currentHP/target.maxHP);
         sensor.AddObservation(target.transform.position);
         sensor.AddObservation(caster.transform.position);
+        sensor.AddObservation(Vector3.Distance(target.transform.position, caster.transform.position));
     }
 
     public override void Heuristic(float[] actionsOut)

@@ -35,8 +35,8 @@ public class AttackSpell : Spell
         //    //Debug.Log("Critical!");
         //}
         target.TakeDamage(damage, element);
-        ParticleSystem blood = Instantiate(effect[0], target.transform.position, target.transform.rotation);
-        Destroy(blood.gameObject, 1f);
+        //ParticleSystem blood = Instantiate(effect[0], target.transform.position, target.transform.rotation);
+        //Destroy(blood.gameObject, 1f);
         //enemyHUD.SetHP(enemyUnit.currentHP);
         //StartCoroutine(InformationBarManager.instance.UpdateText(unitAttacking.unitName + "'s attack is successful!"));
     }

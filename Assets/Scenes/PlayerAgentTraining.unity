@@ -9833,7 +9833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 8
+    VectorObservationSize: 9
     NumStackedVectorObservations: 1
     VectorActionSize: 06000000
     VectorActionDescriptions: []
@@ -12632,7 +12632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 8
+    VectorObservationSize: 9
     NumStackedVectorObservations: 1
     VectorActionSize: 06000000
     VectorActionDescriptions: []

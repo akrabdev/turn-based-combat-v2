@@ -66,8 +66,8 @@ public class BattleSystem : MonoBehaviour
     public void SetupBattle(GameObject [] objects)
     {
         //SOUND MANAGEMENT
-        FindObjectOfType<AudioManager>().Play("Battle");
-        FindObjectOfType<AudioManager>().Stop("World");
+        //FindObjectOfType<AudioManager>().Play("Battle");
+        //FindObjectOfType<AudioManager>().Stop("World");
 
         
 
@@ -117,10 +117,22 @@ public class BattleSystem : MonoBehaviour
 
     public void SwitchTurn()
     {
-        if (state == BattleState.IDLE)
-            return;
-
         CooldownManager.instance.SwitchTurn();
+
+        if (state == BattleState.IDLE)
+        {
+            state = BattleState.ONGOING;
+            foreach (Unit unit in objectsUnits)
+            {
+                unit.currentHP = unit.maxHP;
+                unit.SetHP();
+            }
+            AddTurn();
+            objectsAgents[turn].RequestDecision();
+            return;
+        }
+
+        
 
         AddTurn();
         objectsAgents[turn].RequestDecision();
@@ -134,7 +146,7 @@ public class BattleSystem : MonoBehaviour
             state = BattleState.WON;
             objectsAgents[0].AddReward(1f);
             objectsAgents[1].AddReward(-1f);
-            objects[1].transform.position = new Vector3(0.5f, 0.5f, 0);
+            //objects[1].transform.position = new Vector3(0.5f, 0.5f, 0);
             EndBattle();
         }
         else
@@ -142,7 +154,7 @@ public class BattleSystem : MonoBehaviour
             state = BattleState.LOST;
             objectsAgents[1].AddReward(1f);
             objectsAgents[0].AddReward(-1f);
-            objects[0].transform.position = new Vector3(0.5f, 0.5f, 0);
+            //objects[0].transform.position = new Vector3(0.5f, 0.5f, 0);
             EndBattle();
         }
     }
@@ -254,8 +266,8 @@ public class BattleSystem : MonoBehaviour
     public void EndBattle()
     {
         //SOUND MANAGEMENT
-        FindObjectOfType<AudioManager>().Play("World");
-        FindObjectOfType<AudioManager>().Stop("Battle");
+        //FindObjectOfType<AudioManager>().Play("World");
+        //FindObjectOfType<AudioManager>().Stop("Battle");
 
         //if (agent.trainingMode)
         //{
