@@ -7,7 +7,7 @@ using Unity.MLAgents.Policies;
 
 public class PlayerAgent : Agent
 {
-    public bool trainingMode;
+    //public bool trainingMode;
     PlayerController playerController;
     BehaviorParameters behaviorParameter;
     Unit caster;

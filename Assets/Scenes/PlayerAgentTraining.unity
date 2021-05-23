@@ -9699,12 +9699,17 @@ PrefabInstance:
     - target: {fileID: 1925253945594304145, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}
       propertyPath: m_Mass
-      value: 10
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1925253945594304145, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}
       propertyPath: m_BodyType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925253945594304145, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
+        type: 3}
+      propertyPath: m_LinearDrag
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1925253945594304145, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}
@@ -9822,7 +9827,6 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 10000
-  trainingMode: 0
   target: {fileID: 7786804924517109337}
 --- !u!114 &536162893
 MonoBehaviour:
@@ -9842,9 +9846,9 @@ MonoBehaviour:
     VectorActionSize: 06000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
-  m_Model: {fileID: 5022602860645237092, guid: 5923ba5f87c996549a9a5584d4b52c3c, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 2
+  m_BehaviorType: 0
   m_BehaviorName: PlayerAgent
   TeamId: 1
   m_UseChildSensors: 0
@@ -10804,7 +10808,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: eqwe
+  m_Text: '
+
+'
 --- !u!222 &1222944068
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12580,8 +12586,10 @@ MonoBehaviour:
   - {fileID: 7786804924517109327}
   - {fileID: 536162891}
   objectsUnits: []
+  playerHasAgent: 0
   turn: 0
   time: 0
+  turnPlayed: 0
   state: 0
   DialoguePanel: {fileID: 874584806}
   InformationBar: {fileID: 1222944064}
@@ -12612,7 +12620,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7786804924517109327}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e8f81d5f89cbb147ab0bbea3aa042ef, type: 3}
   m_Name: 
@@ -12621,7 +12629,6 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 10000
-  trainingMode: 0
   target: {fileID: 536162901}
 --- !u!114 &7786804924517109329
 MonoBehaviour:
@@ -12643,7 +12650,7 @@ MonoBehaviour:
     VectorActionSpaceType: 0
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 1
+  m_BehaviorType: 0
   m_BehaviorName: PlayerAgent
   TeamId: 0
   m_UseChildSensors: 0
@@ -12654,7 +12661,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7786804924517109327}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0baf6c6a7c4f1c2478aac7e6f619b6f7, type: 3}
   m_Name: 
@@ -12767,12 +12774,17 @@ PrefabInstance:
     - target: {fileID: 1925253945594304145, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}
       propertyPath: m_Mass
-      value: 10
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1925253945594304145, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}
       propertyPath: m_BodyType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925253945594304145, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
+        type: 3}
+      propertyPath: m_LinearDrag
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1925253945594304145, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}

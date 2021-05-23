@@ -20,6 +20,7 @@ public class BattleSystem : MonoBehaviour
     Agent[] objectsAgents;
     Rigidbody2D[] objectsBodies;
 
+    public bool playerHasAgent;
 
     public int turn;
     public float time = 0;
@@ -82,9 +83,14 @@ public class BattleSystem : MonoBehaviour
                 objectsUnits[i].SetHUD();
                 objectsUnits[i].currentHP = objectsUnits[i].maxHP;
                 objectsUnits[i].SetHP();
-                if (i == 0)
-                    continue;
                 objectsAgents[i] = objects[i].GetComponent<Agent>();
+                if (i == 0)
+                {
+                    if (objectsAgents[i].enabled)
+                        playerHasAgent = true;
+                    continue;
+                }
+                
                 objectsBodies[i].constraints |= RigidbodyConstraints2D.FreezePosition;
 
             }
@@ -95,7 +101,7 @@ public class BattleSystem : MonoBehaviour
     private void Timer()
     {
         time += Time.deltaTime;
-        if (time > 2)
+        if (time >= 0)
         {
             SwitchTurn();
             time = 0;
@@ -120,12 +126,16 @@ public class BattleSystem : MonoBehaviour
         objectsBodies[turn].constraints &= ~RigidbodyConstraints2D.FreezePosition;
         if (turn == 0)
         {
-            turnPlayed = false;
-            StartCoroutine(InformationBarManager.instance.UpdateText("Player Turn"));
+            //StartCoroutine(InformationBarManager.instance.UpdateText("Player Turn"));
+            if (playerHasAgent)
+                objectsAgents[turn].RequestDecision();
+            else
+                turnPlayed = false;
+            
         }
         else
         {
-            StartCoroutine(InformationBarManager.instance.UpdateText("Enemy Turn"));
+            //StartCoroutine(InformationBarManager.instance.UpdateText("Enemy Turn"));
             objectsAgents[turn].RequestDecision();
         }
 
@@ -137,8 +147,8 @@ public class BattleSystem : MonoBehaviour
         if (objectsUnits[0].isDead)
         {
             Debug.Log("Player Lost");
-            //objectsAgents[0].AddReward(1f);
-            //objectsAgents[1].AddReward(-1f);
+            objectsAgents[0].AddReward(1f);
+            objectsAgents[1].AddReward(-1f);
             objectsUnits[0].isDead = false;
             //objects[1].transform.position = new Vector3(0.5f, 0.5f, 0);
             
@@ -146,13 +156,13 @@ public class BattleSystem : MonoBehaviour
         else
         {
             Debug.Log("Player won");
-            //objectsAgents[0].AddReward(-1f);
-            //objectsAgents[1].AddReward(1f);
+            objectsAgents[0].AddReward(-1f);
+            objectsAgents[1].AddReward(1f);
             objectsUnits[1].isDead = false;
             //objects[0].transform.position = new Vector3(0.5f, 0.5f, 0);
         }
-        //objectsAgents[0].EndEpisode();
-        //objectsAgents[1].EndEpisode();
+        objectsAgents[0].EndEpisode();
+        objectsAgents[1].EndEpisode();
         state = BattleState.IDLE;
         SetupBattle(objects);
 
