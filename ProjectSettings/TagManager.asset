@@ -12,6 +12,10 @@ TagManager:
   - Armor
   - Freeze
   - XP
+  - Shield
+  - LevelUp
+  - Attacks
+  - Border
   layers:
   - Default
   - TransparentFX
@@ -22,7 +26,7 @@ TagManager:
   - 
   - 
   - Interactable
-  - 
+  - Obstacle
   - 
   - 
   - 
