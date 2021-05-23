@@ -9667,6 +9667,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1762955342, guid: a4390a9edcb174f4fbd1b1180aa8ed0b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1776286000, guid: a4390a9edcb174f4fbd1b1180aa8ed0b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -9931,7 +9935,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   informationText: {fileID: 1222944067}
-  trainingMode: 0
 --- !u!4 &769864960
 Transform:
   m_ObjectHideFlags: 0
@@ -10023,7 +10026,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: -1821577085
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!224 &864106693
 RectTransform:
@@ -10766,8 +10769,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -20, y: 254.9}
-  m_SizeDelta: {x: -3.168518, y: -509.93182}
+  m_AnchoredPosition: {x: 26, y: 79}
+  m_SizeDelta: {x: -327.49304, y: -398.67114}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1222944067
 MonoBehaviour:
@@ -10790,10 +10793,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_FontSize: 10
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 1
     m_AlignByGeometry: 0
@@ -10801,7 +10804,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: eqwe
 --- !u!222 &1222944068
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12578,6 +12581,7 @@ MonoBehaviour:
   - {fileID: 536162891}
   objectsUnits: []
   turn: 0
+  time: 0
   state: 0
   DialoguePanel: {fileID: 874584806}
   InformationBar: {fileID: 1222944064}

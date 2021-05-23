@@ -20,7 +20,6 @@ public class PlayerAgent : Agent
         playerController = GetComponent<PlayerController>();
         behaviorParameter = GetComponent<BehaviorParameters>();
         agentId = behaviorParameter.TeamId;
-        
 
         if (agentId == 0)
             targetId = 1;
@@ -30,13 +29,6 @@ public class PlayerAgent : Agent
         caster = GetComponent<Unit>();
 
         //Debug.Log(agentId);
-
-
-
-        if (!trainingMode)
-        {
-            MaxStep = 0;
-        }
     }
     public override void OnEpisodeBegin()
     {
@@ -82,7 +74,7 @@ public class PlayerAgent : Agent
             playerController.moveRight();
         }
         
-        StartCoroutine(BattleSystem.instance.SwitchTurn());
+        //BattleSystem.instance.SwitchTurn();
     }
     public override void CollectObservations(VectorSensor sensor)
     {

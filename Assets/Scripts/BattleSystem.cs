@@ -18,32 +18,20 @@ public class BattleSystem : MonoBehaviour
     public GameObject[] objects;
     public Unit[] objectsUnits;
     Agent[] objectsAgents;
+    Rigidbody2D[] objectsBodies;
+
+
     public int turn;
+    public float time = 0;
+    public bool turnPlayed;
     
     public BattleState state;
 
     public GameObject DialoguePanel;
     public GameObject InformationBar;
 
-    Agent agent;
-    Agent playerAgent;
-
     //public BattleState state;
-    int AddTurn()
-    {
-        turn++;
-        if (turn == objects.Length)
-            turn = 0;
-        return turn;
-    }
 
-    public int nextTurn ()
-    {
-        int next = turn + 1;
-        if (next == objects.Length)
-            return 0;
-        return next;
-    }
     void Awake()
     {
         if (instance == null)
@@ -55,113 +43,116 @@ public class BattleSystem : MonoBehaviour
             Destroy(this);
         }
         DontDestroyOnLoad(this);
+        
+    }
+
+    private void Start()
+    {
         SetupBattle(objects);
     }
 
-    void Start()
+    private void Update()
     {
-        
+        if(state == BattleState.ONGOING)
+            Timer();
     }
 
     public void SetupBattle(GameObject [] objects)
     {
-        //SOUND MANAGEMENT
-        //FindObjectOfType<AudioManager>().Play("Battle");
-        //FindObjectOfType<AudioManager>().Stop("World");
-
-        
-
-        objectsUnits = new Unit[objects.Length];
-        objectsAgents = new Agent[objects.Length];
-
-        //GET AGENT AND UNIT COMPONENTS AND UPDATE HUD FOR EACH OBJECT IN BATTLE
-        for (int i = 0; i < objects.Length; i++)
-        {
-            objectsUnits[i] = objects[i].GetComponent<Unit>();
-            objectsUnits[i].SetHUD();
-            objectsAgents[i] = objects[i].GetComponent<Agent>();
-            
-        }
-
-
-        //StartCoroutine(InformationBarManager.instance.UpdateText("You have entered a battle against " + enemyUnit.unitName));
-        //if (!agent.trainingMode)
-        //{
-        //    agent.UnfreezeAgent();
-        //    DialoguePanel.SetActive(true);
-        //}
-        //else
-        //{
-        //enemyUnit.currentHP = enemyUnit.maxHP;
-        //enemyUnit.SetHP();
-        //playerUnit.currentHP = playerUnit.maxHP;
-        //playerUnit.SetHP();
-        //}
-        //agent.BattleSystemSc = this;
-
         //STATE MUST BE IDLE IN ORDER TO SETUP BATTLE (IN CASE SetupBattle IS CALLED IN A WRONG PLACE)
         if (state == BattleState.IDLE)
         {
+
+            turn = 0;
+
             state = BattleState.ONGOING;
-            foreach (Unit unit in objectsUnits)
+
+            objectsBodies = new Rigidbody2D[objects.Length];
+
+            objectsUnits = new Unit[objects.Length];
+            
+            objectsAgents = new Agent[objects.Length];
+
+            //GET AGENT AND UNIT COMPONENTS AND UPDATE HUD FOR EACH OBJECT IN BATTLE EXCEPT PLAYER
+            for (int i = 0; i < objects.Length; i++)
             {
-                unit.currentHP = unit.maxHP;
-                unit.SetHP();
+                objectsBodies[i] = objects[i].GetComponent<Rigidbody2D>();
+
+                objectsUnits[i] = objects[i].GetComponent<Unit>();
+                objectsUnits[i].SetHUD();
+                objectsUnits[i].currentHP = objectsUnits[i].maxHP;
+                objectsUnits[i].SetHP();
+                if (i == 0)
+                    continue;
+                objectsAgents[i] = objects[i].GetComponent<Agent>();
+                objectsBodies[i].constraints |= RigidbodyConstraints2D.FreezePosition;
+
             }
-            turn = Random.Range(0, 2);
-            objectsAgents[turn].RequestDecision();
+            
         }
     }
 
-    
-
-    public IEnumerator SwitchTurn()
+    private void Timer()
     {
-        yield return new WaitForSeconds(2f);
+        time += Time.deltaTime;
+        if (time > 2)
+        {
+            SwitchTurn();
+            time = 0;
+        }
+    }
+
+    public void AddTurn()
+    {
+        turn++;
+        if (turn == objects.Length)
+        {
+            turn = 0;
+        }
+    }
+
+    public void SwitchTurn()
+    {
 
         CooldownManager.instance.SwitchTurn();
-
-        if (state == BattleState.IDLE)
+        objectsBodies[turn].constraints |= RigidbodyConstraints2D.FreezePosition;
+        AddTurn();
+        objectsBodies[turn].constraints &= ~RigidbodyConstraints2D.FreezePosition;
+        if (turn == 0)
         {
-            state = BattleState.ONGOING;
-            foreach (Unit unit in objectsUnits)
-            {
-                unit.currentHP = unit.maxHP;
-                unit.SetHP();
-            }
-            AddTurn();
-            yield return new WaitForSeconds(.1f);
+            turnPlayed = false;
+            StartCoroutine(InformationBarManager.instance.UpdateText("Player Turn"));
+        }
+        else
+        {
+            StartCoroutine(InformationBarManager.instance.UpdateText("Enemy Turn"));
             objectsAgents[turn].RequestDecision();
         }
 
-        
-
-        AddTurn();
-        objectsAgents[turn].RequestDecision();
     }
 
     public void Death()
     {
         //IF PLAYER ISN'T DEAD -> STATE: WON
-        if (!objectsUnits[0].isDead && objectsUnits[1].isDead)
+        if (objectsUnits[0].isDead)
         {
-            Debug.Log("Unit 0 win");
-            objectsAgents[0].AddReward(1f);
-            objectsAgents[1].AddReward(-1f);
-            objectsUnits[1].isDead = false;
+            Debug.Log("Player Lost");
+            //objectsAgents[0].AddReward(1f);
+            //objectsAgents[1].AddReward(-1f);
+            objectsUnits[0].isDead = false;
             //objects[1].transform.position = new Vector3(0.5f, 0.5f, 0);
             
         }
-        else if (!objectsUnits[1].isDead && objectsUnits[0].isDead)
+        else
         {
-            Debug.Log("Enem(y/ies) won");
-            objectsAgents[0].AddReward(-1f);
-            objectsAgents[1].AddReward(1f);
-            objectsUnits[0].isDead = false;
+            Debug.Log("Player won");
+            //objectsAgents[0].AddReward(-1f);
+            //objectsAgents[1].AddReward(1f);
+            objectsUnits[1].isDead = false;
             //objects[0].transform.position = new Vector3(0.5f, 0.5f, 0);
         }
-        objectsAgents[0].EndEpisode();
-        objectsAgents[1].EndEpisode();
+        //objectsAgents[0].EndEpisode();
+        //objectsAgents[1].EndEpisode();
         state = BattleState.IDLE;
         SetupBattle(objects);
 
