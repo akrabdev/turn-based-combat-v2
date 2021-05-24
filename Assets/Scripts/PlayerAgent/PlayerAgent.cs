@@ -11,6 +11,7 @@ public class PlayerAgent : Agent
     PlayerController playerController;
     BehaviorParameters behaviorParameter;
     Unit caster;
+    GridSensorComponent x;
     public Unit target;
     int agentId;
     int targetId;

@@ -102,7 +102,7 @@ public class BattleSystem : MonoBehaviour
     private void Timer()
     {
         time += Time.deltaTime;
-        if (time >= 2)
+        if (time >= 1)
         {
             SwitchTurn();
             time = 0;
@@ -162,8 +162,8 @@ public class BattleSystem : MonoBehaviour
             objectsUnits[1].isDead = false;
             //objects[0].transform.position = new Vector3(0.5f, 0.5f, 0);
         }
-        objectsAgents[0].EndEpisode();
-        objectsAgents[1].EndEpisode();
+        //objectsAgents[0].EndEpisode();
+        //objectsAgents[1].EndEpisode();
         state = BattleState.IDLE;
         SetupBattle(objects);
 
