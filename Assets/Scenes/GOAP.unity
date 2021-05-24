@@ -5864,7 +5864,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -19.999878, y: 254.9}
+  m_AnchoredPosition: {x: -20, y: 254.8999}
   m_SizeDelta: {x: -3.168518, y: -509.93182}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1222944066
@@ -7019,7 +7019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionName: Attack
-  cost: 2
+  cost: 1
   target: {fileID: 0}
   targetTag: Enemy
   duration: 0
@@ -7027,7 +7027,7 @@ MonoBehaviour:
   - key: hasArrived
     value: 0
   afterEffects:
-  - key: IsWaiting
+  - key: NextSpell
     value: 0
   running: 0
 --- !u!114 &7786804924517109332 stripped
@@ -7055,15 +7055,87 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionName: Heal
+  cost: 0
+  target: {fileID: 0}
+  targetTag: Enemy
+  duration: 0
+  preConditions:
+  - key: NextSpell
+    value: 0
+  afterEffects:
+  - key: NextSpell
+    value: 0
+  running: 0
+--- !u!114 &7786804924517109334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7786804924517109327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7de40e0d03add4eb69e360a83cacf0a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Kill
   cost: 1
   target: {fileID: 0}
   targetTag: Enemy
   duration: 0
   preConditions:
-  - key: hasArrived
+  - key: Kill
     value: 0
   afterEffects:
-  - key: IsWaiting
+  - key: Dead
+    value: 0
+  running: 0
+--- !u!114 &7786804924517109335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7786804924517109327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f65d44ff2c8d4b23a7f3ed5517091e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Attack
+  cost: 1
+  target: {fileID: 0}
+  targetTag: Enemy
+  duration: 0
+  preConditions:
+  - key: NextSpell
+    value: 0
+  afterEffects:
+  - key: Kill
+    value: 0
+  running: 0
+--- !u!114 &7786804924517109336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7786804924517109327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f65d44ff2c8d4b23a7f3ed5517091e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Attack
+  cost: 1
+  target: {fileID: 0}
+  targetTag: Enemy
+  duration: 0
+  preConditions:
+  - key: NextSpell
+    value: 0
+  afterEffects:
+  - key: NextSpell
     value: 0
   running: 0
 --- !u!1001 &8549988861253228739

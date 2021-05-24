@@ -120,7 +120,7 @@ public class GAgent : MonoBehaviour
             transform.Translate(new Vector3(0, -1f, 0));
             //playerController.moveDown();
         }
-        BS.state = BattleState.ENEMYTURN;
+        //BS.state = BattleState.ENEMYTURN;
     }
 
 
@@ -130,9 +130,9 @@ public class GAgent : MonoBehaviour
 
         if (currentAction != null && currentAction.running)
         {
-            if (currentAction.actionName == "Move")
+            if (BS.state == BattleState.PLAYERTURN)
             {
-                if (BS.state == BattleState.PLAYERTURN)
+                if (currentAction.actionName == "Move")
                 {
                     Debug.Log("Turn");
                     var path = seeker.StartPath(player.transform.position, currentAction.target.transform.position);
@@ -160,28 +160,43 @@ public class GAgent : MonoBehaviour
                             invoked = true;
                         }
                     }
-                }
-            }
-            else if (currentAction.actionName == "Attack")
-            {
-                playerUnit.spells[2].CastSpell(playerUnit, currentAction.target.GetComponent<Unit>());
 
-                if (!invoked)
-                {
-                    Invoke("CompleteAction", currentAction.duration);
-                    invoked = true;
                 }
-            }
-            else if (currentAction.actionName == "Heal")
-            {
-                playerUnit.spells[3].CastSpell(playerUnit, currentAction.target.GetComponent<Unit>());
+                else if (currentAction.actionName == "Attack")
+                {
+                    Debug.Log("Attacking");
+                    playerUnit.spells[2].CastSpell(playerUnit, currentAction.target.GetComponent<Unit>());
 
-                if (!invoked)
-                {
-                    Invoke("CompleteAction", currentAction.duration);
-                    invoked = true;
+                    if (!invoked)
+                    {
+                        Invoke("CompleteAction", currentAction.duration);
+                        invoked = true;
+                    }
                 }
+                else if (currentAction.actionName == "Heal")
+                {
+                    playerUnit.spells[3].CastSpell(playerUnit, currentAction.target.GetComponent<Unit>());
+
+                    if (!invoked)
+                    {
+                        Invoke("CompleteAction", currentAction.duration);
+                        invoked = true;
+                    }
+                }
+                else if(currentAction.actionName == "Kill")
+                {
+                    if (currentAction.target.GetComponent<Unit>().currentHP == 0)
+                    {
+                        if (!invoked)
+                        {
+                            Invoke("CompleteAction", currentAction.duration);
+                            invoked = true;
+                        }
+                    }
+                }
+                BS.state = BattleState.ENEMYTURN;
             }
+      
 
             return;
         }
