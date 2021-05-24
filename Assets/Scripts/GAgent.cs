@@ -27,6 +27,7 @@ public class GAgent : MonoBehaviour
 
     Seeker seeker;
     GameObject player;
+    Unit playerUnit;
     private PlayerController playerController;
 
     Animator anim;
@@ -39,6 +40,7 @@ public class GAgent : MonoBehaviour
         seeker = GetComponent<Seeker>();
         playerController = GetComponent<PlayerController>();
         player = GameObject.FindGameObjectWithTag("Player");
+        playerUnit = player.GetComponent<Unit>();
         //enemy = GameObject.FindGameObjectWithTag("Enemy");
         GAction[] acts = GetComponents<GAction>();
         foreach(GAction a in acts)
@@ -86,9 +88,7 @@ public class GAgent : MonoBehaviour
             //transform.Translate(new Vector3(-1f,0,0));
             //playerController.moveLeft();
             anim.SetTrigger("MoveLeft");
-            transform.Translate(new Vector3(-1f, 0, 0) * Time.deltaTime);
-            BS.SwitchTurn();
-            return;
+            transform.Translate(new Vector3(-1f, 0, 0));
         }
 
 
@@ -102,14 +102,14 @@ public class GAgent : MonoBehaviour
         if (xNew > xOld)// && dy < 0.05)
         {
             anim.SetTrigger("MoveRight");
-            transform.Translate(new Vector3(1f, 0, 0) * Time.deltaTime);
+            transform.Translate(new Vector3(1f, 0, 0));
             //playerController.moveRight();
         }
         //Up
         if (yNew > yOld)//(dx < 0.05 && yNew > yOld)
         {
             anim.SetTrigger("MoveUp");
-            transform.Translate(new Vector3(0, 1f, 0) * Time.deltaTime);
+            transform.Translate(new Vector3(0, 1f, 0));
             //playerController.moveUp();
         }
 
@@ -117,7 +117,7 @@ public class GAgent : MonoBehaviour
         if (yNew < yOld)//(dx < 0.05 && yNew < yOld)
         {
             anim.SetTrigger("MoveDown");
-            transform.Translate(new Vector3(0, -1f, 0) * Time.deltaTime);
+            transform.Translate(new Vector3(0, -1f, 0));
             //playerController.moveDown();
         }
         BS.state = BattleState.ENEMYTURN;
@@ -160,6 +160,26 @@ public class GAgent : MonoBehaviour
                             invoked = true;
                         }
                     }
+                }
+            }
+            else if (currentAction.actionName == "Attack")
+            {
+                playerUnit.spells[2].CastSpell(playerUnit, currentAction.target.GetComponent<Unit>());
+
+                if (!invoked)
+                {
+                    Invoke("CompleteAction", currentAction.duration);
+                    invoked = true;
+                }
+            }
+            else if (currentAction.actionName == "Heal")
+            {
+                playerUnit.spells[3].CastSpell(playerUnit, currentAction.target.GetComponent<Unit>());
+
+                if (!invoked)
+                {
+                    Invoke("CompleteAction", currentAction.duration);
+                    invoked = true;
                 }
             }
 

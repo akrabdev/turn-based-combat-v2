@@ -4035,11 +4035,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6034814878287353323}
-        m_MethodName: OnHealButton
-        m_Mode: 1
+        m_MethodName: OnSpellButton
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 11400000, guid: 5e026cd0e25fff0439c72a8885e403a1,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: Spell, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5863,7 +5864,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -19.999847, y: 254.9}
+  m_AnchoredPosition: {x: -19.999878, y: 254.9}
   m_SizeDelta: {x: -3.168518, y: -509.93182}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1222944066
@@ -6051,6 +6052,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1323864822}
   m_CullTransparentMesh: 0
+--- !u!1 &1400730715
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1400730717}
+  - component: {fileID: 1400730716}
+  m_Layer: 0
+  m_Name: DamagePopupManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1400730716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400730715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e61510138d7cbd54cbd17757bb3563a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMesh: {fileID: 8440717789758203618, guid: 9a8352388a4f4044bab219a7b059b731,
+    type: 3}
+--- !u!4 &1400730717
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400730715}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.332373, y: 0.81959856, z: -105.85442}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1508037123
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6278,11 +6324,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6034814878287353323}
-        m_MethodName: OnAttackButton
-        m_Mode: 1
+        m_MethodName: OnSpellButton
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 11400000, guid: 98ac834df5a98144fa2c2d38eee9c62f,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: Spell, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6956,6 +7003,30 @@ MonoBehaviour:
   duration: 0
   preConditions: []
   afterEffects:
+  - key: hasArrived
+    value: 0
+  running: 0
+--- !u!114 &7786804924517109331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7786804924517109327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f65d44ff2c8d4b23a7f3ed5517091e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Attack
+  cost: 2
+  target: {fileID: 0}
+  targetTag: Enemy
+  duration: 0
+  preConditions:
+  - key: hasArrived
+    value: 0
+  afterEffects:
   - key: IsWaiting
     value: 0
   running: 0
@@ -6971,6 +7042,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e08107d099c59bc4eb0c551ed80241d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7786804924517109333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7786804924517109327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b366e9c0f2315410896d83d10c3017a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Heal
+  cost: 1
+  target: {fileID: 0}
+  targetTag: Enemy
+  duration: 0
+  preConditions:
+  - key: hasArrived
+    value: 0
+  afterEffects:
+  - key: IsWaiting
+    value: 0
+  running: 0
 --- !u!1001 &8549988861253228739
 PrefabInstance:
   m_ObjectHideFlags: 0
