@@ -13,22 +13,27 @@ public enum BattleState { IDLE, ONGOING, WON, LOST };
 public class BattleSystem : MonoBehaviour
 {
 
+    //public bool trainingMode;
+
     public static BattleSystem instance;
 
-    public GameObject[] objects;
-    public Unit[] objectsUnits;
-    Agent[] objectsAgents;
-    Rigidbody2D[] objectsBodies;
-
-    public bool playerHasAgent = false;
-
-    public int turn;
-    public float time = 0;
-    public bool turnPlayed;
     
-    public BattleState state;
+    public List<GameObject> objects; //Objects in battle
+    public List<Unit> objectsUnits = new List<Unit>(); //Unit components of the objects
+    List<Agent> objectsAgents = new List<Agent>(); //Agents of the objects
+    List <Rigidbody2D> objectsBodies = new List<Rigidbody2D>(); //Rigidbodies of the objects
 
-    public GameObject DialoguePanel;
+    public bool playerHasAgent = false; //If there's an agent component on player
+
+    public int turn; //Current turn
+    public float time = 0; //Timer if the system is in play mode
+    public bool turnPlayed; //To check if the player has made a move during play mode
+    public float switchTurnTime = 2; //Time to switch turn automatically (even if no move was made)
+
+
+    public BattleState state; //State of the battle
+
+    public GameObject DialoguePanel; 
     public GameObject InformationBar;
 
     //public BattleState state;
@@ -54,116 +59,130 @@ public class BattleSystem : MonoBehaviour
 
     private void Update()
     {
-        if(state == BattleState.ONGOING)
-            Timer();
+        if(!TrainingManager.instance.trainingMode) //If the game is in play mode, count down for turns
+            if(state == BattleState.ONGOING)
+                Timer();
     }
 
-    public void SetupBattle(GameObject [] objects)
+    public void SetupBattle(List<GameObject> objects)
     {
         //STATE MUST BE IDLE IN ORDER TO SETUP BATTLE (IN CASE SetupBattle IS CALLED IN A WRONG PLACE)
         if (state == BattleState.IDLE)
         {
 
             turn = 0;
+            time = 0;
 
             state = BattleState.ONGOING;
 
-            objectsBodies = new Rigidbody2D[objects.Length];
-
-            objectsUnits = new Unit[objects.Length];
-            
-            objectsAgents = new Agent[objects.Length];
-
             //GET AGENT AND UNIT COMPONENTS AND UPDATE HUD FOR EACH OBJECT IN BATTLE EXCEPT PLAYER
-            for (int i = 0; i < objects.Length; i++)
-            {
-                objectsBodies[i] = objects[i].GetComponent<Rigidbody2D>();
+            for (int i = 0; i < objects.Count; i++)
+            { 
+                objectsBodies.Add(objects[i].GetComponent<Rigidbody2D>());
+                objectsBodies[i].constraints |= RigidbodyConstraints2D.FreezePosition;
 
-                objectsUnits[i] = objects[i].GetComponent<Unit>();
+                objectsUnits.Add(objects[i].GetComponent<Unit>());
                 objectsUnits[i].SetHUD();
                 objectsUnits[i].currentHP = objectsUnits[i].maxHP;
                 objectsUnits[i].SetHP();
-                objectsAgents[i] = objects[i].GetComponent<Agent>();
-                if (i == 0)
-                {
-                    //DISABLE PLAYER AGENT IF NOT TRAINING AND SET PLAYER2 TO 0 MAX STEPS
-                    if (objectsAgents[i].enabled)
-                        playerHasAgent = true;
-                    continue;
-                }
-                
-                objectsBodies[i].constraints |= RigidbodyConstraints2D.FreezePosition;
 
+                objectsAgents.Add(objects[i].GetComponent<Agent>());
+                if(!TrainingManager.instance.trainingMode)
+                {
+                    objectsAgents[i].MaxStep = 0;
+                }
             }
-            
+
+            PlayTurn();
         }
+    }
+
+    /// <summary>
+    /// Wait for a move, or turn to be switched automatically in playmode.
+    /// Request agent's decision in train mode.
+    /// </summary>
+    private void PlayTurn()
+    {
+        //Unfreeze current turn
+        objectsBodies[turn].constraints &= ~RigidbodyConstraints2D.FreezePosition;
+
+        //Player turn and train mode is on
+        if (turn == 0 && TrainingManager.instance.trainingMode)
+            objectsAgents[turn].RequestDecision();
+        ///
+        /// Try implementing Heuristics with input cache in Update
+        ///
+        else if (turn == 0 && !TrainingManager.instance.trainingMode) 
+            return;
+        
+        else if (turn != 0)
+            objectsAgents[turn].RequestDecision();
     }
 
     private void Timer()
     {
         time += Time.deltaTime;
-        if (time >= 1)
+        if (time >= switchTurnTime)
         {
             SwitchTurn();
-            time = 0;
         }
     }
 
-    public void AddTurn()
+    public void UpdateTurn()
     {
         turn++;
-        if (turn == objects.Length)
-        {
+        if (turn == objects.Count)
             turn = 0;
-        }
     }
 
     public void SwitchTurn()
     {
-
+        time = 0;
         CooldownManager.instance.SwitchTurn();
         objectsBodies[turn].constraints |= RigidbodyConstraints2D.FreezePosition;
-        AddTurn();
-        objectsBodies[turn].constraints &= ~RigidbodyConstraints2D.FreezePosition;
-        if (turn == 0)
-        {
-            //StartCoroutine(InformationBarManager.instance.UpdateText("Player Turn"));
-            if (playerHasAgent)
-                objectsAgents[turn].RequestDecision();
-            else
-                turnPlayed = false;
-            
-        }
-        else
-        {
-            //StartCoroutine(InformationBarManager.instance.UpdateText("Enemy Turn"));
-            objectsAgents[turn].RequestDecision();
-        }
+        UpdateTurn();
+        PlayTurn();
 
     }
 
-    public void Death()
+    public void TargetDead(Unit deadUnit )
     {
         //IF PLAYER ISN'T DEAD -> STATE: WON
-        if (objectsUnits[0].isDead)
+        if (objectsUnits[0] == deadUnit)
         {
             Debug.Log("Player Lost");
-            objectsAgents[0].AddReward(1f);
-            objectsAgents[1].AddReward(-1f);
+            if (TrainingManager.instance.trainingMode)
+            {
+                objectsAgents[0].AddReward(-1f);
+                for (int i = 1; i < objectsAgents.Count; i++)
+                {
+                    objectsAgents[i].AddReward(1f);
+                }
+            }
+            //objectsUnits[0].transform.position = new Vector2(0.5f, 0.5f);
             objectsUnits[0].isDead = false;
-            //objects[1].transform.position = new Vector3(0.5f, 0.5f, 0);
-            
         }
         else
         {
+            //TODO: Get unit index then remove all of its components from the lists and destroy it (if not training)
             Debug.Log("Player won");
-            objectsAgents[0].AddReward(-1f);
-            objectsAgents[1].AddReward(1f);
+            if (TrainingManager.instance.trainingMode)
+            {
+                objectsAgents[0].AddReward(1f);
+                for (int i = 1; i < objectsAgents.Count; i++)
+                {
+                    objectsAgents[i].AddReward(-1f);
+                }
+            }
             objectsUnits[1].isDead = false;
-            //objects[0].transform.position = new Vector3(0.5f, 0.5f, 0);
         }
-        //objectsAgents[0].EndEpisode();
-        //objectsAgents[1].EndEpisode();
+
+        if(TrainingManager.instance.trainingMode)
+        {
+            objectsAgents[0].EndEpisode();
+            objectsAgents[1].EndEpisode();
+        }
+
         state = BattleState.IDLE;
         SetupBattle(objects);
 

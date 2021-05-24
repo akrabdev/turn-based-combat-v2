@@ -44,19 +44,19 @@ public class PlayerAgent : Agent
         {
             Debug.Log("Attack");
             bool successfulMove = caster.spells[0].CastSpell(caster, target);
-            if (successfulMove)
-                AddReward(0.01f);
-            else
-                AddReward(-0.01f);
+            //if (successfulMove)
+            //    AddReward(0.01f);
+            //else
+            //    AddReward(-0.01f);
         }
         else if (vectorAction[0] == 1)
         {
             Debug.Log("Heal");
             bool successfulMove = caster.spells[1].CastSpell(caster, target);
-            if (successfulMove)
-                AddReward(0.01f);
-            else
-                AddReward(-0.01f);
+            //if (successfulMove)
+            //    AddReward(0.01f);
+            //else
+            //    AddReward(-0.01f);
             
         }
         //else if (vectorAction[0] == 2)
@@ -79,8 +79,10 @@ public class PlayerAgent : Agent
         //    Debug.Log("Right");
         //    playerController.moveRight();
         //}
-        
-        //BattleSystem.instance.SwitchTurn();
+        if (!target.isDead)
+            BattleSystem.instance.SwitchTurn();
+        else
+            BattleSystem.instance.TargetDead(target);
     }
     public override void CollectObservations(VectorSensor sensor)
     {

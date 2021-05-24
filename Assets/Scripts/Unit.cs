@@ -69,10 +69,7 @@ public class Unit : MonoBehaviour
         SetHP();
 
         if (currentHP <= 0)
-        {
             isDead = true;
-            BattleSystem.instance.Death();
-        }
 
 
 	}

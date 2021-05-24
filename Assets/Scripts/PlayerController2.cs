@@ -29,21 +29,24 @@ public class PlayerController2 : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (BattleSystem.instance.turn == 0 && BattleSystem.instance.turnPlayed == false)
+        if (BattleSystem.instance.turn == 0)
         {
-
-            
-                
             if (Input.GetKeyDown(KeyCode.F1))
             {
                 self.spells[0].CastSpell(self, target);
-                BattleSystem.instance.turnPlayed = true;
+                if (!target.isDead)
+                    BattleSystem.instance.SwitchTurn();
+                else
+                    BattleSystem.instance.TargetDead(target);
             }
                 
             else if (Input.GetKeyDown(KeyCode.F2))
             {
                 self.spells[1].CastSpell(self, target);
-                BattleSystem.instance.turnPlayed = true;
+                if (!target.isDead)
+                    BattleSystem.instance.SwitchTurn();
+                else
+                    BattleSystem.instance.TargetDead(target);
             }
             //if (Input.GetKeyDown(KeyCode.UpArrow))
             //{

@@ -9,12 +9,10 @@ public class PlayerController : MonoBehaviour
 {
     //For animation
     Animator anim;
-    BattleSystem battleSystem;
     Rigidbody2D rigidbody;
     // Start is called before the first frame update
     void Start()
     {
-        battleSystem = BattleSystem.instance;
         anim = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody2D>();
     }
@@ -24,17 +22,54 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (battleSystem.state == BattleState.IDLE)
+        if (BattleSystem.instance.state == BattleState.IDLE)
         {
             if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
                 moveRight();
+            }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
                 moveDown();
+            }
             else if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
                 moveUp();
+            }
             else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
                 moveLeft();
+            }
         }
+        //else
+        //{
+        //    if (Input.GetKeyDown(KeyCode.F1))
+        //    {
+        //        moveRight();
+                
+        //    }
+        //    else if (Input.GetKeyDown(KeyCode.F2))
+        //    {
+        //        moveDown();
+        //    }
+        //    //if (Input.GetKeyDown(KeyCode.RightArrow))
+        //    //{
+        //    //    moveRight();
+        //    //    BattleSystem.instance.
+        //    //}
+        //    //else if (Input.GetKeyDown(KeyCode.DownArrow))
+        //    //{
+        //    //    moveDown();
+        //    //}
+        //    //else if (Input.GetKeyDown(KeyCode.UpArrow))
+        //    //{
+        //    //    moveUp();
+        //    //}
+        //    //else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        //    //{
+        //    //    moveLeft();
+        //    //}
+        //}
     }
 
     /*
