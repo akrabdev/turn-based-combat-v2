@@ -9860,7 +9860,7 @@ MonoBehaviour:
     VectorActionSize: 02000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: cd39c55400d8a1c4da49a5609da33468, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: PlayerAgent
@@ -9996,7 +9996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecad9a911d9281444a37e7a64ebe4260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trainingMode: 1
+  trainingMode: 0
   player1: {fileID: 7786804924517109327}
   player2: {fileID: 536162891}
 --- !u!4 &789767381
