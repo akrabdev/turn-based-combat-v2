@@ -39,9 +39,10 @@ public class PlayerAgent : Agent
     }
     public override void OnActionReceived(float[] vectorAction)
     {
-        Debug.Log("ActionReceived");
+        
         if (vectorAction[0] == 0)
         {
+            Debug.Log("Attack");
             bool successfulMove = caster.spells[0].CastSpell(caster, target);
             if (successfulMove)
                 AddReward(0.01f);
@@ -50,6 +51,7 @@ public class PlayerAgent : Agent
         }
         else if (vectorAction[0] == 1)
         {
+            Debug.Log("Heal");
             bool successfulMove = caster.spells[1].CastSpell(caster, target);
             if (successfulMove)
                 AddReward(0.01f);
@@ -57,22 +59,26 @@ public class PlayerAgent : Agent
                 AddReward(-0.01f);
             
         }
-        else if (vectorAction[0] == 2)
-        {
-            playerController.moveUp();
-        }
-        else if (vectorAction[0] == 3)
-        {
-            playerController.moveDown();
-        }
-        else if (vectorAction[0] == 4)
-        {
-            playerController.moveLeft();
-        }
-        else if (vectorAction[0] == 5)
-        {
-            playerController.moveRight();
-        }
+        //else if (vectorAction[0] == 2)
+        //{
+        //    Debug.Log("Up");
+        //    playerController.moveUp();
+        //}
+        //else if (vectorAction[0] == 3)
+        //{
+        //    Debug.Log("Down");
+        //    playerController.moveDown();
+        //}
+        //else if (vectorAction[0] == 4)
+        //{
+        //    Debug.Log("Left");
+        //    playerController.moveLeft();
+        //}
+        //else if (vectorAction[0] == 5)
+        //{
+        //    Debug.Log("Right");
+        //    playerController.moveRight();
+        //}
         
         //BattleSystem.instance.SwitchTurn();
     }

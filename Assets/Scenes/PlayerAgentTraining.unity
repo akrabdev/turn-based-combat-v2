@@ -9696,6 +9696,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 1925253945594304144, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.9998
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925253945594304144, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.9998
+      objectReference: {fileID: 0}
     - target: {fileID: 1925253945594304145, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}
       propertyPath: m_Mass
@@ -9729,12 +9739,12 @@ PrefabInstance:
     - target: {fileID: 7146596636743777510, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7146596636743777510, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7146596636743777510, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}
@@ -9843,10 +9853,10 @@ MonoBehaviour:
   m_BrainParameters:
     VectorObservationSize: 5
     NumStackedVectorObservations: 1
-    VectorActionSize: 06000000
+    VectorActionSize: 02000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 963dc2f7530440340b2c723c940975c2, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: PlayerAgent
@@ -12645,7 +12655,7 @@ MonoBehaviour:
   m_BrainParameters:
     VectorObservationSize: 5
     NumStackedVectorObservations: 1
-    VectorActionSize: 06000000
+    VectorActionSize: 02000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
   m_Model: {fileID: 0}
@@ -12661,7 +12671,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7786804924517109327}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0baf6c6a7c4f1c2478aac7e6f619b6f7, type: 3}
   m_Name: 
@@ -12770,6 +12780,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925253945594304144, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.9998
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925253945594304144, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.9998
       objectReference: {fileID: 0}
     - target: {fileID: 1925253945594304145, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}

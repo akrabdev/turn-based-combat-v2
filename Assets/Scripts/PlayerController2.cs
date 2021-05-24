@@ -32,29 +32,9 @@ public class PlayerController2 : MonoBehaviour
         if (BattleSystem.instance.turn == 0 && BattleSystem.instance.turnPlayed == false)
         {
 
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                moveUp();
-                BattleSystem.instance.turnPlayed = true;
-            }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                moveDown();
-                BattleSystem.instance.turnPlayed = true;
-            }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                moveRight();
-                BattleSystem.instance.turnPlayed = true;
-            }
+            
                 
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                moveLeft();
-                BattleSystem.instance.turnPlayed = true;
-            }
-                
-            else if (Input.GetKeyDown(KeyCode.F1))
+            if (Input.GetKeyDown(KeyCode.F1))
             {
                 self.spells[0].CastSpell(self, target);
                 BattleSystem.instance.turnPlayed = true;
@@ -65,7 +45,28 @@ public class PlayerController2 : MonoBehaviour
                 self.spells[1].CastSpell(self, target);
                 BattleSystem.instance.turnPlayed = true;
             }
-                
+            //if (Input.GetKeyDown(KeyCode.UpArrow))
+            //{
+            //    moveUp();
+            //    BattleSystem.instance.turnPlayed = true;
+            //}
+            //else if (Input.GetKeyDown(KeyCode.DownArrow))
+            //{
+            //    moveDown();
+            //    BattleSystem.instance.turnPlayed = true;
+            //}
+            //else if (Input.GetKeyDown(KeyCode.RightArrow))
+            //{
+            //    moveRight();
+            //    BattleSystem.instance.turnPlayed = true;
+            //}
+
+            //else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            //{
+            //    moveLeft();
+            //    BattleSystem.instance.turnPlayed = true;
+            //}
+
         }
     }
 

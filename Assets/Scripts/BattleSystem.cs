@@ -20,7 +20,7 @@ public class BattleSystem : MonoBehaviour
     Agent[] objectsAgents;
     Rigidbody2D[] objectsBodies;
 
-    public bool playerHasAgent;
+    public bool playerHasAgent = false;
 
     public int turn;
     public float time = 0;
@@ -86,6 +86,7 @@ public class BattleSystem : MonoBehaviour
                 objectsAgents[i] = objects[i].GetComponent<Agent>();
                 if (i == 0)
                 {
+                    //DISABLE PLAYER AGENT IF NOT TRAINING AND SET PLAYER2 TO 0 MAX STEPS
                     if (objectsAgents[i].enabled)
                         playerHasAgent = true;
                     continue;
@@ -101,7 +102,7 @@ public class BattleSystem : MonoBehaviour
     private void Timer()
     {
         time += Time.deltaTime;
-        if (time >= 0)
+        if (time >= 2)
         {
             SwitchTurn();
             time = 0;
