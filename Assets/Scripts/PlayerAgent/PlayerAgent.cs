@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Policies;
+using Unity.MLAgents.Actuators;
 
 public class PlayerAgent : Agent
 {
@@ -37,21 +38,21 @@ public class PlayerAgent : Agent
             BattleSystem.instance.SetupBattle(BattleSystem.instance.objects);
         }
     }
-    public override void OnActionReceived(float[] vectorAction)
+    public override void OnActionReceived(ActionBuffers vectorAction)
     {
         
-        if (vectorAction[0] == 0)
+        if (vectorAction.DiscreteActions[0] == 0)
         {
-            Debug.Log("Attack");
+            //Debug.Log("Attack");
             bool successfulMove = caster.spells[0].CastSpell(caster, target);
             //if (successfulMove)
             //    AddReward(0.01f);
             //else
             //    AddReward(-0.01f);
         }
-        else if (vectorAction[0] == 1)
+        else if (vectorAction.DiscreteActions[0] == 1)
         {
-            Debug.Log("Heal");
+            //Debug.Log("Heal");
             bool successfulMove = caster.spells[1].CastSpell(caster, target);
             //if (successfulMove)
             //    AddReward(0.01f);
@@ -94,21 +95,21 @@ public class PlayerAgent : Agent
         sensor.AddObservation(Vector2.Distance(target.transform.position, caster.transform.position)/16);
     }
 
-    public override void Heuristic(float[] actionsOut)
-    {
-        if (Input.GetKeyDown(KeyCode.F1))
-            actionsOut[0] = 0;
-        else if (Input.GetKeyDown(KeyCode.F2))
-            actionsOut[0] = 1;
-        else if (Input.GetKeyDown(KeyCode.W))
-            actionsOut[0] = 2;
-        else if (Input.GetKeyDown(KeyCode.S))
-            actionsOut[0] = 3;
-        else if (Input.GetKeyDown(KeyCode.A))
-            actionsOut[0] = 4;
-        else if (Input.GetKeyDown(KeyCode.D))
-            actionsOut[0] = 5;
-    }
+    //public override void Heuristic(float[] actionsOut)
+    //{
+    //    if (Input.GetKeyDown(KeyCode.F1))
+    //        actionsOut[0] = 0;
+    //    else if (Input.GetKeyDown(KeyCode.F2))
+    //        actionsOut[0] = 1;
+    //    else if (Input.GetKeyDown(KeyCode.W))
+    //        actionsOut[0] = 2;
+    //    else if (Input.GetKeyDown(KeyCode.S))
+    //        actionsOut[0] = 3;
+    //    else if (Input.GetKeyDown(KeyCode.A))
+    //        actionsOut[0] = 4;
+    //    else if (Input.GetKeyDown(KeyCode.D))
+    //        actionsOut[0] = 5;
+    //}
 
     //public void FreezeAgent()
     //{

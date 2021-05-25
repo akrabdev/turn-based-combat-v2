@@ -7800,7 +7800,7 @@ PrefabInstance:
     - target: {fileID: 5131722002310726757, guid: d9568b73ae4ee4445accd00b0919698b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5131722002310726757, guid: d9568b73ae4ee4445accd00b0919698b,
         type: 3}
@@ -9738,7 +9738,7 @@ PrefabInstance:
     - target: {fileID: 7146596636743777510, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 7146596636743777510, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}
@@ -9857,15 +9857,21 @@ MonoBehaviour:
   m_BrainParameters:
     VectorObservationSize: 5
     NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 0
+      BranchSizes: 02000000
     VectorActionSize: 02000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
-  m_Model: {fileID: 5022602860645237092, guid: cd39c55400d8a1c4da49a5609da33468, type: 3}
-  m_InferenceDevice: 0
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 3
   m_BehaviorType: 0
   m_BehaviorName: PlayerAgent
   TeamId: 1
   m_UseChildSensors: 0
+  m_UseChildActuators: 1
+  m_ObservableAttributeHandling: 0
 --- !u!114 &536162901 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7531800829717688910, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
@@ -9921,7 +9927,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &769864958
 GameObject:
@@ -9965,7 +9971,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &789767379
 GameObject:
@@ -9996,7 +10002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecad9a911d9281444a37e7a64ebe4260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trainingMode: 0
+  trainingMode: 1
   player1: {fileID: 7786804924517109327}
   player2: {fileID: 536162891}
 --- !u!4 &789767381
@@ -10011,7 +10017,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &864106689
 GameObject:
@@ -10229,7 +10235,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1022675910
 GameObject:
@@ -11408,7 +11414,7 @@ PrefabInstance:
     - target: {fileID: 8182554597854403644, guid: 0558752966f7b0f0b86f552f70897c40,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8182554597854403644, guid: 0558752966f7b0f0b86f552f70897c40,
         type: 3}
@@ -11935,7 +11941,7 @@ PrefabInstance:
     - target: {fileID: 5491477028429931915, guid: 055c84c02693ff691baeb5537b8ccd65,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5491477028429931915, guid: 055c84c02693ff691baeb5537b8ccd65,
         type: 3}
@@ -12127,7 +12133,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1829091409
 GameObject:
@@ -12281,7 +12287,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1985979648
 GameObject:
@@ -12375,7 +12381,7 @@ PrefabInstance:
     - target: {fileID: 693285375776992848, guid: ce313f0e37537b118bcf0a32ec7ebce1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 693285375776992848, guid: ce313f0e37537b118bcf0a32ec7ebce1,
         type: 3}
@@ -12519,7 +12525,7 @@ PrefabInstance:
     - target: {fileID: 5540938909786750459, guid: c0f7e596af965bc39a5973851ddd4170,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5540938909786750459, guid: c0f7e596af965bc39a5973851ddd4170,
         type: 3}
@@ -12706,15 +12712,21 @@ MonoBehaviour:
   m_BrainParameters:
     VectorObservationSize: 5
     NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 0
+      BranchSizes: 02000000
     VectorActionSize: 02000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
+    hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
-  m_InferenceDevice: 0
+  m_InferenceDevice: 3
   m_BehaviorType: 0
   m_BehaviorName: PlayerAgent
   TeamId: 0
   m_UseChildSensors: 0
+  m_UseChildActuators: 1
+  m_ObservableAttributeHandling: 0
 --- !u!114 &7786804924517109330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13094,7 +13106,7 @@ PrefabInstance:
     - target: {fileID: 9162654826579892208, guid: dce911f593d403136ace88b4605d4051,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 9162654826579892208, guid: dce911f593d403136ace88b4605d4051,
         type: 3}
