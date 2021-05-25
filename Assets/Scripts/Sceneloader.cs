@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Sceneloader : MonoBehaviour
 {
     public void LoadGame(){
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("FromMainMenu");
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void QuitGame(){
