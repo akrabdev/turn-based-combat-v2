@@ -13,6 +13,7 @@ TagManager:
   - Freeze
   - XP
   - Obstacle
+  - Player2
   layers:
   - Default
   - TransparentFX
