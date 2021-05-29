@@ -76,7 +76,7 @@ public class SpawnManager : MonoBehaviour
         left = worldPosition.x - (bc.size.x / 2f);
         right = worldPosition.x + (bc.size.x / 2f);
 
-        Debug.Log("left" + left);
+        //Debug.Log("left" + left);
 
 
         //topLeft = new Vector3(left, top, worldPosition.z);

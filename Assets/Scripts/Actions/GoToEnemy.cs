@@ -10,6 +10,8 @@ public class GoToEnemy : GAction
     }
     public override bool PostPerform()
     {
+        GWorld.Instance.GetWorld().AddState("CloseToEnemy", 1);
+        GWorld.Instance.GetWorld().ModifyState("FarFromEnemy", -1);
         return true;
     }
 }

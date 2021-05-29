@@ -34,9 +34,9 @@ public class InformationBarManager : MonoBehaviour
         else
         {
             gameObject.SetActive(true);
-            informationText.text += inputText + "\n";
+            //informationText.text += inputText + "\n";
             yield return new WaitForSeconds(3);
-            informationText.text = "";
+            //informationText.text = "";
             gameObject.SetActive(false);
         }
         

@@ -46,7 +46,9 @@ public class GAgent : MonoBehaviour
         foreach(GAction a in acts)
         {
             actions.Add(a);
+            //Debug.Log(a.actionName);
         }
+
     }
 
     bool invoked = false;
@@ -61,19 +63,19 @@ public class GAgent : MonoBehaviour
 
     void Move(Vector3 current, Vector3 next)
     {
-        Debug.Log(current);
-        Debug.Log(next);
-        float xOld = current.x;
-        float yOld = current.y;
+        //Debug.Log(current);
+        //Debug.Log(next);
+        float xOld = current.x + 0.05f;
+        float yOld = current.y + 0.05f;
         float xNew = next.x;
         float yNew = next.y;
-        //float dy = Mathf.Abs(yNew - yOld);
-        //float dx = Mathf.Abs(xNew - xOld);
+        float dy = Mathf.Abs(yNew - yOld);
+        float dx = Mathf.Abs(xNew - xOld);
 
         //Vector3 _move = new Vector3(0, 0, 0);
 
         //Left
-        if (xNew < xOld)// && dy < 0.05)
+        if (xNew < xOld && dy < dx)
         {
             //if (transform.localScale.x > 0)
             //{
@@ -91,7 +93,6 @@ public class GAgent : MonoBehaviour
             transform.Translate(new Vector3(-1f, 0, 0));
         }
 
-
         //////Right
         ////// Debug.Log(xNew);
 
@@ -99,14 +100,14 @@ public class GAgent : MonoBehaviour
         ////// Debug.Log(yNew);
         ////// Debug.Log(yOld);
 
-        if (xNew > xOld)// && dy < 0.05)
+        if (xNew > xOld && dy < dx)
         {
             anim.SetTrigger("MoveRight");
             transform.Translate(new Vector3(1f, 0, 0));
             //playerController.moveRight();
         }
         //Up
-        if (yNew > yOld)//(dx < 0.05 && yNew > yOld)
+        if (yNew > yOld && dx < dy)
         {
             anim.SetTrigger("MoveUp");
             transform.Translate(new Vector3(0, 1f, 0));
@@ -114,7 +115,7 @@ public class GAgent : MonoBehaviour
         }
 
         //Down
-        if (yNew < yOld)//(dx < 0.05 && yNew < yOld)
+        if (yNew < yOld && dx < dy)
         {
             anim.SetTrigger("MoveDown");
             transform.Translate(new Vector3(0, -1f, 0));
@@ -124,25 +125,25 @@ public class GAgent : MonoBehaviour
     }
 
 
-
+    bool moved = false;
     void LateUpdate()
     {
-
         if (currentAction != null && currentAction.running)
         {
             if (BS.state == BattleState.PLAYERTURN)
             {
+                //Debug.Log("PLayerTurn");
                 if (currentAction.actionName == "Move")
                 {
-                    Debug.Log("Turn");
+                    //Debug.Log("Move");
                     var path = seeker.StartPath(player.transform.position, currentAction.target.transform.position);
                     AstarPath.BlockUntilCalculated(path);
                     float distanceToTarget = Vector3.Distance((Vector3)path.path[1].position, currentAction.target.transform.position);
-                    Debug.Log("DistanceToTarget" + distanceToTarget);
-                    Debug.Log(path);
-                    if (path.path.Count > 2 && distanceToTarget >= 0.9f)
+                    //Debug.Log("DistanceToTarget" + distanceToTarget);
+                    //Debug.Log(path);
+                    if (path.path.Count > 2 && distanceToTarget >= 1.1f)
                     {
-                        Debug.Log("Path exists");
+                        //Debug.Log("Path exists");
 
                         //if (!invoked)
                         //{
@@ -164,7 +165,7 @@ public class GAgent : MonoBehaviour
                 }
                 else if (currentAction.actionName == "Attack")
                 {
-                    Debug.Log("Attacking");
+                    //Debug.Log("Attacking");
                     playerUnit.spells[2].CastSpell(playerUnit, currentAction.target.GetComponent<Unit>());
 
                     if (!invoked)
@@ -194,7 +195,57 @@ public class GAgent : MonoBehaviour
                         }
                     }
                 }
-                BS.state = BattleState.ENEMYTURN;
+                else if (currentAction.actionName == "MoveBackAndHeal")
+                {
+                    //Debug.Log("MoveBackAndHeal");
+                    if (!moved)
+                    {
+                        Vector3 playerPosition = transform.position;
+                        Vector3 enemyPosition = currentAction.target.transform.position;
+                        float absoluteDifferenceX = Mathf.Abs(playerPosition.x - enemyPosition.x);
+                        float absoluteDifferenceY = Mathf.Abs(playerPosition.y - enemyPosition.y);
+                        if (absoluteDifferenceX > absoluteDifferenceY)
+                        {
+                            if (playerPosition.x > enemyPosition.x)
+                            {
+                                anim.SetTrigger("MoveRight");
+                                transform.Translate(new Vector3(1f, 0, 0));
+                            }
+                            else
+                            {
+                                anim.SetTrigger("MoveLeft");
+                                transform.Translate(new Vector3(-1f, 0, 0));
+                            }
+                        }
+                        else
+                        {
+                            if (playerPosition.y > enemyPosition.y)
+                            {
+                                anim.SetTrigger("MoveUp");
+                                transform.Translate(new Vector3(0, 1f, 0));
+                            }
+                            else
+                            {
+                                anim.SetTrigger("MoveDown");
+                                transform.Translate(new Vector3(0, -1f, 0));
+                            }
+                        }
+                        moved = true;
+                    }
+                    else
+                    {
+                        playerUnit.spells[3].CastSpell(playerUnit, currentAction.target.GetComponent<Unit>());
+                        if (!invoked)
+                        {
+                            Invoke("CompleteAction", currentAction.duration);
+                            invoked = true;
+                            moved = false;
+                        }
+                        
+                    }
+                    
+                }
+                BS.SwitchTurn();
             }
       
 
@@ -202,13 +253,12 @@ public class GAgent : MonoBehaviour
         }
         if(planner == null || actionQueue == null)
         {
-            Debug.Log("Hello Planner");
             planner = new GPlanner();
             var sortedGoals = from entry in goals orderby entry.Value descending select entry;
             foreach(KeyValuePair<SubGoal, int> sg in sortedGoals)
             {
                 actionQueue = planner.plan(actions, sg.Key.sgoals, null);
-                if(actionQueue != null)
+                if (actionQueue != null)
                 {
                     currentGoal = sg.Key;
                     break;
@@ -235,7 +285,7 @@ public class GAgent : MonoBehaviour
                 {
                     currentAction.running = true;
                     //Move(player.transform.position, currentAction.target.transform.position);
-                    Debug.Log("HHHHHEEEELLLLOOOO");
+                    //Debug.Log("HHHHHEEEELLLLOOOO");
                     
                 }
             }

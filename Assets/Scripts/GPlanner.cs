@@ -38,7 +38,6 @@ public class GPlanner
         bool success = BuildGraph(start, leaves, usableActions, goal);
         if(!success)
         {
-            Debug.Log("No plan");
             return null;
         }
         Node cheapest = null;
@@ -69,11 +68,11 @@ public class GPlanner
             queue.Enqueue(a);
         }
 
-        Debug.Log("The plan is: ");
-        foreach(GAction a in queue)
-        {
-            Debug.Log("Q: " + a.actionName);
-        }
+        //Debug.Log("The plan is: ");
+        //foreach(GAction a in queue)
+        //{
+        //    Debug.Log("Q: " + a.actionName);
+        //}
         return queue;
     }
 
@@ -88,7 +87,9 @@ public class GPlanner
                 foreach(KeyValuePair<string, int> eff in action.aftereffects)
                 {
                     if (!currentState.ContainsKey(eff.Key))
+                    {
                         currentState.Add(eff.Key, eff.Value);
+                    }
                 }
                 Node node = new Node(parent, parent.cost + action.cost, currentState, action);
                 if(GoalAchieved(goal, currentState))

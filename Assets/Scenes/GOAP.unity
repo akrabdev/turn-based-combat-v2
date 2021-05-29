@@ -3637,7 +3637,7 @@ MonoBehaviour:
   manualDebugFloorRoof: 0
   showSearchTree: 0
   unwalkableNodeDebugSize: 0.3
-  logPathResults: 1
+  logPathResults: 0
   maxNearestNodeDistance: 100
   scanOnStartup: 1
   fullGetNearestSearch: 0
@@ -6917,7 +6917,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DialoguePanel: {fileID: 874584806}
   InformationBar: {fileID: 1222944064}
-  state: 3
+  state: 0
   bloodEffect: {fileID: 1459749182504912367, guid: 37d4ccc12ccb812489dbfa0979084ed8,
     type: 3}
   healEffect: {fileID: 1367366625453341121, guid: bfc4e885be7d0924d9a2bbb3354ef0d6,
@@ -7001,9 +7001,11 @@ MonoBehaviour:
   target: {fileID: 897081294}
   targetTag: Enemy
   duration: 0
-  preConditions: []
+  preConditions:
+  - key: FarFromEnemy
+    value: 0
   afterEffects:
-  - key: hasArrived
+  - key: CloseToEnemy
     value: 0
   running: 0
 --- !u!114 &7786804924517109331
@@ -7015,19 +7017,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 7786804924517109327}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f65d44ff2c8d4b23a7f3ed5517091e4, type: 3}
+  m_Script: {fileID: 11500000, guid: 3bff63f6d67824dc29d26e3675ac9137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionName: Attack
+  actionName: MoveBackAndHeal
   cost: 1
-  target: {fileID: 0}
+  target: {fileID: 897081294}
   targetTag: Enemy
   duration: 0
   preConditions:
-  - key: hasArrived
+  - key: MediumHealth
     value: 0
   afterEffects:
-  - key: NextSpell
+  - key: Healed
+    value: 0
+  - key: FarFromEnemy
     value: 0
   running: 0
 --- !u!114 &7786804924517109332 stripped
@@ -7042,7 +7046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e08107d099c59bc4eb0c551ed80241d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7786804924517109333
+--- !u!114 &7786804924517109340
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7055,42 +7059,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionName: Heal
-  cost: 0
-  target: {fileID: 0}
-  targetTag: Enemy
-  duration: 0
-  preConditions:
-  - key: NextSpell
-    value: 0
-  afterEffects:
-  - key: NextSpell
-    value: 0
-  running: 0
---- !u!114 &7786804924517109334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7786804924517109327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7de40e0d03add4eb69e360a83cacf0a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionName: Kill
   cost: 1
-  target: {fileID: 0}
+  target: {fileID: 897081294}
   targetTag: Enemy
   duration: 0
   preConditions:
-  - key: Kill
+  - key: LowHealth
     value: 0
   afterEffects:
-  - key: Dead
+  - key: Healed
     value: 0
   running: 0
---- !u!114 &7786804924517109335
+--- !u!114 &7786804924517109341
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7104,38 +7084,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: Attack
   cost: 1
-  target: {fileID: 0}
+  target: {fileID: 897081294}
   targetTag: Enemy
   duration: 0
   preConditions:
-  - key: NextSpell
+  - key: CloseToEnemy
     value: 0
   afterEffects:
-  - key: Kill
-    value: 0
-  running: 0
---- !u!114 &7786804924517109336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7786804924517109327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f65d44ff2c8d4b23a7f3ed5517091e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionName: Attack
-  cost: 1
-  target: {fileID: 0}
-  targetTag: Enemy
-  duration: 0
-  preConditions:
-  - key: NextSpell
-    value: 0
-  afterEffects:
-  - key: NextSpell
+  - key: EnemyHealthDecreased
     value: 0
   running: 0
 --- !u!1001 &8549988861253228739
@@ -7203,12 +7159,12 @@ PrefabInstance:
     - target: {fileID: 7146596636743777510, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.53
+      value: -2.4
       objectReference: {fileID: 0}
     - target: {fileID: 7146596636743777510, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.65
+      value: -1.27
       objectReference: {fileID: 0}
     - target: {fileID: 7146596636743777510, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
         type: 3}
@@ -7249,6 +7205,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7531800829717688910, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
+        type: 3}
+      propertyPath: maxHP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7531800829717688910, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
+        type: 3}
+      propertyPath: currentHP
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4390a9edcb174f4fbd1b1180aa8ed0b, type: 3}
@@ -7303,8 +7269,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 383d4d6909296b1489853e9c36be12ff,
+      objectReference: {fileID: 0}
+    - target: {fileID: 2514056320926447459, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2514056320926447459, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2514056320926447468, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
       propertyPath: m_Name
@@ -7373,17 +7348,17 @@ PrefabInstance:
     - target: {fileID: 7087746454564289345, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
       propertyPath: isFrozen
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7087746454564289345, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
       propertyPath: trainingMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8316805511017170979, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2588ab61f93d5ab499fc73b80823c803, type: 3}

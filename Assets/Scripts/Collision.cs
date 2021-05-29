@@ -18,7 +18,7 @@ public class Collision : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Collision");
+        //Debug.Log("Collision");
         if (collision.gameObject.CompareTag("Player"))
             StartCoroutine(SpawnManager.SMInstance.CollectObject(gameObject));
     }

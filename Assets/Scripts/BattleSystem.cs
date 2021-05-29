@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.MLAgents.Actuators;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -59,12 +60,13 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.PLAYERTURN)
         {
             state = BattleState.ENEMYTURN;
+            //Debug.Log("Requesting Decision");
             agent.RequestDecision();
         }
         else if (state == BattleState.ENEMYTURN)
         {
             state = BattleState.PLAYERTURN;
-            PlayerTurn();
+            //PlayerTurn();
         }
 
     }
@@ -85,7 +87,7 @@ public class BattleSystem : MonoBehaviour
 
     public void SetupBattle(GameObject playerInBattle, GameObject enemyInBattle)
     {
-        FindObjectOfType<AudioManager>().Play("Battle");
+        //FindObjectOfType<AudioManager>().Play("Battle");
         FindObjectOfType<AudioManager>().Stop("World");
         player = playerInBattle;
         enemy = enemyInBattle;
@@ -102,6 +104,7 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
+            //Debug.Log("training mode");
             enemyUnit.currentHP = enemyUnit.maxHP;
             enemyUnit.SetHP();
             playerUnit.currentHP = playerUnit.maxHP;
@@ -115,7 +118,7 @@ public class BattleSystem : MonoBehaviour
             if (randomTurn > 4)
             {
                 state = BattleState.PLAYERTURN;
-                PlayerTurn();
+                //PlayerTurn();
             }
             else
             {
@@ -178,59 +181,63 @@ public class BattleSystem : MonoBehaviour
     //    }
     //}
 
-    public void EnemyTurn(float[] vectorAction)
+    public void EnemyTurn(ActionBuffers actions)
     {
-
-        if (vectorAction != null)
+        //Debug.Log("EnemyTurn function");
+        if (!actions.Equals(null))
         {
-            if (vectorAction[0] == 0)
+
+            //Debug.Log("Value = "+actions.DiscreteActions[0]);
+            if (actions.DiscreteActions[0] == 0)
             {
                 //Attack(enemyUnit, playerUnit);
                 enemyUnit.spells[0].CastSpell(enemyUnit, playerUnit);
+                //Debug.Log("ATTACKING");
             }
-            else if (vectorAction[0] == 1)
+            else if (actions.DiscreteActions[0] == 1)
             {
                 enemyUnit.spells[1].CastSpell(enemyUnit, playerUnit);
+                //Debug.Log("HEALING");
                 //Heal(enemyUnit);
+            }
+            else if (actions.DiscreteActions[0] == 2)
+            {
+                //StartCoroutine(infoBarManager.UpdateText(enemyUnit.unitName + " moves left!"));
+                enemy.transform.Translate(new Vector3(-1, 0, 0));
+                state = BattleState.PLAYERTURN;
+                //PlayerTurn();
+            }
+            else if (actions.DiscreteActions[0] == 3)
+            {
+                //StartCoroutine(infoBarManager.UpdateText(enemyUnit.unitName + " moves right!"));
+                enemy.transform.Translate(new Vector3(1, 0, 0));
+                state = BattleState.PLAYERTURN;
+                //PlayerTurn();
+            }
+            else if (actions.DiscreteActions[0] == 4)
+            {
+                //StartCoroutine(infoBarManager.UpdateText(enemyUnit.unitName + " moves up!"));
+                enemy.transform.Translate(new Vector3(0, 1, 0));
+                state = BattleState.PLAYERTURN;
+                //PlayerTurn();
+            }
+            else if (actions.DiscreteActions[0] == 5)
+            {
+                //StartCoroutine(infoBarManager.UpdateText(enemyUnit.unitName + " moves down!"));
+                enemy.transform.Translate(new Vector3(0, -1, 0));
+                state = BattleState.PLAYERTURN;
+                //PlayerTurn();
             }
             agent.AddReward(enemyUnit.currentHP / enemyUnit.maxHP);
             agent.AddReward(-(playerUnit.currentHP / playerUnit.maxHP));
             SwitchTurn();
-            //else if (vectorAction[2] == 1)
-            //{
-            //    StartCoroutine(infoBarManager.UpdateText(enemyUnit.unitName + " moves left!"));
-            //    enemy.transform.Translate(new Vector3(-1, 0, 0));
-            //    state = BattleState.PLAYERTURN;
-            //    PlayerTurn();
-            //}
-            //else if (vectorAction[3] == 1)
-            //{
-            //    StartCoroutine(infoBarManager.UpdateText(enemyUnit.unitName + " moves right!"));
-            //    enemy.transform.Translate(new Vector3(1, 0, 0));
-            //    state = BattleState.PLAYERTURN;
-            //    PlayerTurn();
-            //}
-            //else if (vectorAction[4] == 1)
-            //{
-            //    StartCoroutine(infoBarManager.UpdateText(enemyUnit.unitName + " moves up!"));
-            //    enemy.transform.Translate(new Vector3(0, 1, 0));
-            //    state = BattleState.PLAYERTURN;
-            //    PlayerTurn();
-            //}
-            //else if (vectorAction[5] == 1)
-            //{
-            //    StartCoroutine(infoBarManager.UpdateText(enemyUnit.unitName + " moves down!"));
-            //    enemy.transform.Translate(new Vector3(0, -1, 0));
-            //    state = BattleState.PLAYERTURN;
-            //    PlayerTurn();
-            //}
         }
 
     }
 
     public void EndBattle()
     {
-        FindObjectOfType<AudioManager>().Play("World");
+        //FindObjectOfType<AudioManager>().Play("World");
         FindObjectOfType<AudioManager>().Stop("Battle");
         //if (agent.trainingMode)
         //{
@@ -241,7 +248,7 @@ public class BattleSystem : MonoBehaviour
         //}
         if (state == BattleState.WON)
         {
-            Debug.Log("Agent lost");
+            //Debug.Log("Agent lost");
 
             //Update player after winning
             StartCoroutine(InformationBarManager.instance.UpdateText("You won the battle!"));
@@ -253,7 +260,7 @@ public class BattleSystem : MonoBehaviour
         }
         else if (state == BattleState.LOST)
         {
-            Debug.Log("Agent won");
+            //Debug.Log("Agent won");
 
             StartCoroutine(InformationBarManager.instance.UpdateText("You were defeated."));
             if (!agent.trainingMode)
@@ -271,7 +278,7 @@ public class BattleSystem : MonoBehaviour
         }
         else if (state == BattleState.ESCAPE)
         {
-            Debug.Log("Player escaped");
+            //Debug.Log("Player escaped");
             StartCoroutine(InformationBarManager.instance.UpdateText("You escaped the fight."));
             enemyUnit.currentHP = enemyUnit.maxHP;
             enemyUnit.SetHP();

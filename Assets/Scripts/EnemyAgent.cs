@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
+using Unity.MLAgents.Actuators;
 
 public class EnemyAgent : Agent
 {
@@ -27,18 +28,19 @@ public class EnemyAgent : Agent
     public override void OnEpisodeBegin()
     {
         //Debug.Log("Episode beginning");
-        if(trainingMode)
+        if(trainingMode) 
             BattleSystem.instance.SetupBattle(Player, gameObject);
     }
-    public override void OnActionReceived(float[] vectorAction)
+    public override void OnActionReceived(ActionBuffers actions)
     {
         if (isFrozen)
             return;
         //Debug.Log("Received agent action");
-        //Debug.Log(vectorAction[0]);
+        //Debug.Log("Enter Action Received");
+        //Debug.Log(actions.Equals(null));
         if (BattleSystem.instance.state == BattleState.ENEMYTURN)
         {
-            BattleSystem.instance.EnemyTurn(vectorAction);
+            BattleSystem.instance.EnemyTurn(actions);
         }
     }
     public override void CollectObservations(VectorSensor sensor)

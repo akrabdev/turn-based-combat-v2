@@ -1,0 +1,46 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1622239151",
+        "python_version": "3.7.10 (default, Feb 26 2021, 10:16:00) \n[Clang 10.0.0 ]",
+        "command_line_arguments": "/opt/anaconda3/envs/ml-agents-1.0/bin/mlagents-learn ./trainer_config.yaml --run-id new_21",
+        "mlagents_version": "0.16.0",
+        "mlagents_envs_version": "0.16.0",
+        "communication_protocol_version": "1.0.0",
+        "tensorflow_version": "2.5.0",
+        "end_time_seconds": "1622239151"
+    },
+    "total": 0.026037499000000075,
+    "count": 1,
+    "self": 0.0010534400000001831,
+    "children": {
+        "run_training.setup": {
+            "total": 0.009229460000000245,
+            "count": 1,
+            "self": 0.009229460000000245
+        },
+        "TrainerController.start_learning": {
+            "total": 0.015754598999999647,
+            "count": 1,
+            "self": 0.002525019999999767,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 0.013159083999999766,
+                    "count": 1,
+                    "self": 0.013159083999999766
+                },
+                "trainer_threads": {
+                    "total": 1.7759999999533704e-06,
+                    "count": 1,
+                    "self": 1.7759999999533704e-06
+                },
+                "TrainerController._save_model": {
+                    "total": 6.87190000001614e-05,
+                    "count": 1,
+                    "self": 6.87190000001614e-05
+                }
+            }
+        }
+    }
+}
