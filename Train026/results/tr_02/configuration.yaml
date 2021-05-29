@@ -1,6 +1,6 @@
 default_settings: null
 behaviors:
-  EnemyAgent:
+  PlayerAgent:
     trainer_type: ppo
     hyperparameters:
       batch_size: 2048
@@ -15,7 +15,7 @@ behaviors:
       normalize: false
       hidden_units: 256
       num_layers: 2
-      vis_encode_type: simple
+      vis_encode_type: match3
       memory: null
       goal_conditioning_type: hyper
     reward_signals:
@@ -36,7 +36,13 @@ behaviors:
     time_horizon: 128
     summary_freq: 10000
     threaded: false
-    self_play: null
+    self_play:
+      save_steps: 10000
+      team_change: 50000
+      swap_steps: 10000
+      window: 10
+      play_against_latest_model_ratio: 0.5
+      initial_elo: 1200.0
     behavioral_cloning: null
 env_settings:
   env_path: null
@@ -54,10 +60,10 @@ engine_settings:
   no_graphics: false
 environment_parameters: null
 checkpoint_settings:
-  run_id: tr_03
+  run_id: tr_02
   initialize_from: null
   load_model: false
-  resume: false
+  resume: true
   force: false
   train_model: false
   inference: false

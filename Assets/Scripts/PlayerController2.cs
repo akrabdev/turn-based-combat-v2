@@ -48,27 +48,23 @@ public class PlayerController2 : MonoBehaviour
                 else
                     BattleSystem.instance.TargetDead(target);
             }
-            //if (Input.GetKeyDown(KeyCode.UpArrow))
-            //{
-            //    moveUp();
-            //    BattleSystem.instance.turnPlayed = true;
-            //}
-            //else if (Input.GetKeyDown(KeyCode.DownArrow))
-            //{
-            //    moveDown();
-            //    BattleSystem.instance.turnPlayed = true;
-            //}
-            //else if (Input.GetKeyDown(KeyCode.RightArrow))
-            //{
-            //    moveRight();
-            //    BattleSystem.instance.turnPlayed = true;
-            //}
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                moveUp();
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                moveDown();
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                moveRight();
+            }
 
-            //else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            //{
-            //    moveLeft();
-            //    BattleSystem.instance.turnPlayed = true;
-            //}
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                moveLeft();
+            }
 
         }
     }

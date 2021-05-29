@@ -38,6 +38,33 @@ public class PlayerAgent : Agent
             BattleSystem.instance.SetupBattle(BattleSystem.instance.objects);
         }
     }
+
+    public override void WriteDiscreteActionMask(IDiscreteActionMask actionMask)
+    {
+        //Mask up
+        if ((Vector2)caster.transform.position == ((Vector2)target.transform.position + new Vector2(0, -1f)))
+        {
+            actionMask.SetActionEnabled(0, 2, false);
+        }
+        //Mask down
+        else if ((Vector2)caster.transform.position == ((Vector2)target.transform.position + new Vector2(0, 1f)))
+        {
+            actionMask.SetActionEnabled(0, 3, false);
+        }
+        //Mask left
+        else if ((Vector2)caster.transform.position == ((Vector2)target.transform.position + new Vector2(1f, 0)))
+        {
+            actionMask.SetActionEnabled(0, 4, false);
+        }
+        //Mask right
+        else if ((Vector2)caster.transform.position == ((Vector2)target.transform.position + new Vector2(-1f, 0)))
+        {
+            actionMask.SetActionEnabled(0, 5, false);
+        }
+        
+
+    }
+
     public override void OnActionReceived(ActionBuffers vectorAction)
     {
         
@@ -60,26 +87,22 @@ public class PlayerAgent : Agent
             //    AddReward(-0.01f);
             
         }
-        //else if (vectorAction[0] == 2)
-        //{
-        //    Debug.Log("Up");
-        //    playerController.moveUp();
-        //}
-        //else if (vectorAction[0] == 3)
-        //{
-        //    Debug.Log("Down");
-        //    playerController.moveDown();
-        //}
-        //else if (vectorAction[0] == 4)
-        //{
-        //    Debug.Log("Left");
-        //    playerController.moveLeft();
-        //}
-        //else if (vectorAction[0] == 5)
-        //{
-        //    Debug.Log("Right");
-        //    playerController.moveRight();
-        //}
+        else if (vectorAction.DiscreteActions[0] == 2)
+        {
+            playerController.moveUp();
+        }
+        else if (vectorAction.DiscreteActions[0] == 3)
+        {
+            playerController.moveDown();
+        }
+        else if (vectorAction.DiscreteActions[0] == 4)
+        {
+            playerController.moveLeft();
+        }
+        else if (vectorAction.DiscreteActions[0] == 5)
+        {
+            playerController.moveRight();
+        }
         if (!target.isDead)
             BattleSystem.instance.SwitchTurn();
         else
@@ -124,18 +147,18 @@ public class PlayerAgent : Agent
     //    isFrozen = false;
     //    //GetComponent<Rigidbody>().Sleep();
     //}
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Obstacle"))
-        {
-            AddReward(-1f);
-        }
-    }
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.collider.CompareTag("Obstacle"))
-        {
-            AddReward(-1f);
-        }
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.collider.CompareTag("Obstacle"))
+    //    {
+    //        AddReward(-1f);
+    //    }
+    //}
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if (collision.collider.CompareTag("Obstacle"))
+    //    {
+    //        AddReward(-1f);
+    //    }
+    //}
 }

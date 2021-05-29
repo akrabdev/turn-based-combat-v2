@@ -79,7 +79,7 @@ public class BattleSystem : MonoBehaviour
             for (int i = 0; i < objects.Count; i++)
             { 
                 objectsBodies.Add(objects[i].GetComponent<Rigidbody2D>());
-                objectsBodies[i].constraints |= RigidbodyConstraints2D.FreezePosition;
+                //objectsBodies[i].constraints |= RigidbodyConstraints2D.FreezePosition;
 
                 objectsUnits.Add(objects[i].GetComponent<Unit>());
                 objectsUnits[i].SetHUD();
@@ -104,7 +104,7 @@ public class BattleSystem : MonoBehaviour
     private void PlayTurn()
     {
         //Unfreeze current turn
-        objectsBodies[turn].constraints &= ~RigidbodyConstraints2D.FreezePosition;
+        //objectsBodies[turn].constraints &= ~RigidbodyConstraints2D.FreezePosition;
 
         //Player turn and train mode is on
         if (turn == 0 && TrainingManager.instance.trainingMode)
@@ -139,7 +139,7 @@ public class BattleSystem : MonoBehaviour
     {
         time = 0;
         CooldownManager.instance.SwitchTurn();
-        objectsBodies[turn].constraints |= RigidbodyConstraints2D.FreezePosition;
+        //objectsBodies[turn].constraints |= RigidbodyConstraints2D.FreezePosition;
         UpdateTurn();
         PlayTurn();
 

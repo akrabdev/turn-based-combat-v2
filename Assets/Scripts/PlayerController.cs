@@ -79,27 +79,27 @@ public class PlayerController : MonoBehaviour
     public void moveLeft()
     {
         rigidbody.MovePosition((Vector2)transform.position + new Vector2(-1f, 0));
-        //anim.SetTrigger("MoveLeft");
+        anim.SetTrigger("MoveLeft");
     }
 
     public void moveRight()
     {
         rigidbody.MovePosition((Vector2)transform.position + new Vector2(1f, 0));
-        //anim.SetTrigger("MoveRight");
-        
+        anim.SetTrigger("MoveRight");
+
     }
 
     public void moveUp()
     {
         rigidbody.MovePosition((Vector2)transform.position + new Vector2(0, 1f));
-        //anim.SetTrigger("MoveUp");
+        anim.SetTrigger("MoveUp");
        
     }
 
     public void moveDown()
     {
         rigidbody.MovePosition((Vector2)transform.position + new Vector2(0, -1f));
-        //anim.SetTrigger("MoveDown");
+        anim.SetTrigger("MoveDown");
         
     }
 
