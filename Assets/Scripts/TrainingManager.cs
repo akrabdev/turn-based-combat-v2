@@ -25,20 +25,15 @@ public class TrainingManager : MonoBehaviour
     }
     void Start()
     {
-        PlayerAgent agent1 = player1.GetComponent<PlayerAgent>();
-        PlayerAgent agent2 = player2.GetComponent<PlayerAgent>();
-        PlayerController2 playerController = player1.GetComponent<PlayerController2>();
+        
         if (trainingMode)
         {
+            PlayerAgent agent1 = player1.GetComponent<PlayerAgent>();
+            PlayerAgent agent2 = player2.GetComponent<PlayerAgent>();
+            PlayerController2 playerController = player1.GetComponent<PlayerController2>();
             agent1.enabled = true;
             playerController.enabled = false;
             BattleSystem.instance.switchTurnTime = 0;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

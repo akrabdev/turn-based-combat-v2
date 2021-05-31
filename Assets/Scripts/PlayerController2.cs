@@ -29,7 +29,7 @@ public class PlayerController2 : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (BattleSystem.instance.turn == 0)
+        if (BattleSystem.instance.state == BattleState.PLAYERTURN)
         {
             if (Input.GetKeyDown(KeyCode.F1))
             {

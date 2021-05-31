@@ -8,7 +8,7 @@ using Unity.MLAgents;
 /// <summary>
 /// This class is responsible for managing the battle itself
 /// </summary>
-public enum BattleState { IDLE, ONGOING, WON, LOST };
+public enum BattleState { IDLE, PLAYERTURN, ENEMYTURN, WON, LOST };
 
 public class BattleSystem : MonoBehaviour
 {
@@ -18,22 +18,24 @@ public class BattleSystem : MonoBehaviour
     public static BattleSystem instance;
 
     
-    public List<GameObject> objects; //Objects in battle
-    public List<Unit> objectsUnits = new List<Unit>(); //Unit components of the objects
-    List<Agent> objectsAgents = new List<Agent>(); //Agents of the objects
-    List <Rigidbody2D> objectsBodies = new List<Rigidbody2D>(); //Rigidbodies of the objects
+    public GameObject player; //Player in battle
+    public GameObject enemy;
+    public Unit playerUnit; //Unit components of the objects
+    public Unit enemyUnit;
+    public Agent playerAgent;
+    public Agent enemyAgent;
+    //Agents of the objects
+    /*List <Rigidbody2D> objectsBodies = new List<Rigidbody2D>();*/ //Rigidbodies of the objects
 
-    public bool playerHasAgent = false; //If there's an agent component on player
+    /*public bool playerHasAgent = false; *///If there's an agent component on player
 
-    public int turn; //Current turn
+    //public int turn; //Current turn
+    /*public bool turnPlayed;*/ //To check if the player has made a move during play mode
     public float time = 0; //Timer if the system is in play mode
-    public bool turnPlayed; //To check if the player has made a move during play mode
     public float switchTurnTime = 2; //Time to switch turn automatically (even if no move was made)
-
 
     public BattleState state; //State of the battle
 
-    public GameObject DialoguePanel; 
     public GameObject InformationBar;
 
     //public BattleState state;
@@ -54,45 +56,57 @@ public class BattleSystem : MonoBehaviour
 
     private void Start()
     {
-        SetupBattle(objects);
+        if(TrainingManager.instance.trainingMode)
+            SetupBattle(player, enemy);
     }
 
     private void Update()
     {
         if(!TrainingManager.instance.trainingMode) //If the game is in play mode, count down for turns
-            if(state == BattleState.ONGOING)
+            if(state != BattleState.IDLE)
                 Timer();
     }
 
-    public void SetupBattle(List<GameObject> objects)
+    public void SetupBattle(GameObject player, GameObject enemy)
     {
         //STATE MUST BE IDLE IN ORDER TO SETUP BATTLE (IN CASE SetupBattle IS CALLED IN A WRONG PLACE)
         if (state == BattleState.IDLE)
         {
-
-            turn = 0;
+            state = BattleState.PLAYERTURN;
             time = 0;
 
-            state = BattleState.ONGOING;
-
             //GET AGENT AND UNIT COMPONENTS AND UPDATE HUD FOR EACH OBJECT IN BATTLE EXCEPT PLAYER
-            for (int i = 0; i < objects.Count; i++)
-            { 
-                objectsBodies.Add(objects[i].GetComponent<Rigidbody2D>());
-                //objectsBodies[i].constraints |= RigidbodyConstraints2D.FreezePosition;
+            //objectsBodies.Add(objects[i].GetComponent<Rigidbody2D>());
+            //objectsBodies[i].constraints |= RigidbodyConstraints2D.FreezePosition;
 
-                objectsUnits.Add(objects[i].GetComponent<Unit>());
-                objectsUnits[i].SetHUD();
-                objectsUnits[i].currentHP = objectsUnits[i].maxHP;
-                objectsUnits[i].SetHP();
+            playerUnit = player.GetComponent<Unit>();
+            enemyUnit = player.GetComponent<Unit>();
 
-                objectsAgents.Add(objects[i].GetComponent<Agent>());
-                if(!TrainingManager.instance.trainingMode)
-                {
-                    objectsAgents[i].MaxStep = 0;
-                }
+            //Update HUD for player and enemy
+            playerUnit.SetHUD();
+            enemyUnit.SetHUD();
+            //Only reset player's HP if training mode is on
+            if (TrainingManager.instance.trainingMode)
+            {
+                playerUnit.currentHP = playerUnit.maxHP;
+                playerUnit.currentMana = playerUnit.maxMana;
+                playerUnit.SetHP();
+                playerUnit.SetMana();
             }
 
+            enemyUnit.currentHP = enemyUnit.maxHP;
+            enemyUnit.currentMana = enemyUnit.maxMana;
+            enemyUnit.SetHP();
+            enemyUnit.SetMana();
+
+            playerAgent = player.GetComponent<Agent>();
+            enemyAgent = player.GetComponent<Agent>();
+
+            if(!TrainingManager.instance.trainingMode)
+            {
+                playerAgent.MaxStep = 0;
+                enemyAgent.MaxStep = 0;
+            }
             PlayTurn();
         }
     }
@@ -107,16 +121,16 @@ public class BattleSystem : MonoBehaviour
         //objectsBodies[turn].constraints &= ~RigidbodyConstraints2D.FreezePosition;
 
         //Player turn and train mode is on
-        if (turn == 0 && TrainingManager.instance.trainingMode)
-            objectsAgents[turn].RequestDecision();
+        if (state == BattleState.PLAYERTURN && TrainingManager.instance.trainingMode)
+            playerAgent.RequestDecision();
         ///
         /// Try implementing Heuristics with input cache in Update
         ///
-        else if (turn == 0 && !TrainingManager.instance.trainingMode) 
+        else if (state == BattleState.PLAYERTURN && !TrainingManager.instance.trainingMode) 
             return;
         
-        else if (turn != 0)
-            objectsAgents[turn].RequestDecision();
+        else if (state == BattleState.ENEMYTURN)
+            enemyAgent.RequestDecision();
     }
 
     private void Timer()
@@ -130,9 +144,10 @@ public class BattleSystem : MonoBehaviour
 
     public void UpdateTurn()
     {
-        turn++;
-        if (turn == objects.Count)
-            turn = 0;
+        if (state == BattleState.PLAYERTURN)
+            state = BattleState.ENEMYTURN;
+        else if (state == BattleState.ENEMYTURN)
+            state = BattleState.PLAYERTURN;
     }
 
     public void SwitchTurn()
@@ -148,19 +163,16 @@ public class BattleSystem : MonoBehaviour
     public void TargetDead(Unit deadUnit )
     {
         //IF PLAYER ISN'T DEAD -> STATE: WON
-        if (objectsUnits[0] == deadUnit)
+        if (playerUnit == deadUnit)
         {
             Debug.Log("Player Lost");
             if (TrainingManager.instance.trainingMode)
             {
-                objectsAgents[0].AddReward(-1f);
-                for (int i = 1; i < objectsAgents.Count; i++)
-                {
-                    objectsAgents[i].AddReward(1f);
-                }
+                playerAgent.AddReward(-1f);
+                enemyAgent.AddReward(1f);
             }
             //objectsUnits[0].transform.position = new Vector2(0.5f, 0.5f);
-            objectsUnits[0].isDead = false;
+            playerUnit.isDead = false;
         }
         else
         {
@@ -168,23 +180,20 @@ public class BattleSystem : MonoBehaviour
             Debug.Log("Player won");
             if (TrainingManager.instance.trainingMode)
             {
-                objectsAgents[0].AddReward(1f);
-                for (int i = 1; i < objectsAgents.Count; i++)
-                {
-                    objectsAgents[i].AddReward(-1f);
-                }
+                playerAgent.AddReward(1f);
+                enemyAgent.AddReward(-1f);
             }
-            objectsUnits[1].isDead = false;
+            enemyUnit.isDead = false;
         }
 
         if(TrainingManager.instance.trainingMode)
         {
-            objectsAgents[0].EndEpisode();
-            objectsAgents[1].EndEpisode();
+            playerAgent.EndEpisode();
+            enemyAgent.EndEpisode();
         }
 
         state = BattleState.IDLE;
-        SetupBattle(objects);
+        SetupBattle(player, enemy);
 
     }
 
@@ -292,67 +301,67 @@ public class BattleSystem : MonoBehaviour
 
     //}
 
-    public void EndBattle()
-    {
-        //SOUND MANAGEMENT
-        //FindObjectOfType<AudioManager>().Play("World");
-        //FindObjectOfType<AudioManager>().Stop("Battle");
+    //public void EndBattle()
+    //{
+    //    //SOUND MANAGEMENT
+    //    //FindObjectOfType<AudioManager>().Play("World");
+    //    //FindObjectOfType<AudioManager>().Stop("Battle");
 
-        //if (agent.trainingMode)
-        //{
-        //    enemyUnit.currentHP = enemyUnit.maxHP;
-        //    enemyUnit.SetHP();
-        //    playerUnit.currentHP = playerUnit.maxHP;
-        //    playerUnit.SetHP();
-        //}
+    //    //if (agent.trainingMode)
+    //    //{
+    //    //    enemyUnit.currentHP = enemyUnit.maxHP;
+    //    //    enemyUnit.SetHP();
+    //    //    playerUnit.currentHP = playerUnit.maxHP;
+    //    //    playerUnit.SetHP();
+    //    //}
 
-        if (state == BattleState.WON)
-        {
-            Debug.Log("Unit 0 win");
+    //    if (state == BattleState.WON)
+    //    {
+    //        Debug.Log("Unit 0 win");
 
-            //Update player after winning
-            //StartCoroutine(InformationBarManager.instance.UpdateText("You won the battle!"));
-            //if (!agent.trainingMode)
-            //{
-            //    playerUnit.addExperience(50 * enemyUnit.unitLevel);
-            //    Destroy(enemy);
-            //}
-        }
-        else if (state == BattleState.LOST)
-        {
-            Debug.Log("Enem(y/ies) won");
+    //        //Update player after winning
+    //        //StartCoroutine(InformationBarManager.instance.UpdateText("You won the battle!"));
+    //        //if (!agent.trainingMode)
+    //        //{
+    //        //    playerUnit.addExperience(50 * enemyUnit.unitLevel);
+    //        //    Destroy(enemy);
+    //        //}
+    //    }
+    //    else if (state == BattleState.LOST)
+    //    {
+    //        Debug.Log("Enem(y/ies) won");
 
-            //StartCoroutine(InformationBarManager.instance.UpdateText("You were defeated."));
-            //if (!agent.trainingMode)
-            //{
-            //    enemyUnit.currentHP = enemyUnit.maxHP;
-            //    enemyUnit.SetHP();
-            //    playerUnit.removeExperience(10 * enemyUnit.unitLevel);
-            //    player.transform.position = new Vector3(0.51f, 0.49f, 0);
-            //    playerUnit.currentHP = playerUnit.maxHP;
-            //    playerUnit.currentMana = playerUnit.maxMana;
-            //    playerUnit.SetHP();
-            //    playerUnit.SetMana();
-            //    playerUnit.isDead = false;
-            //}
-        }
-        //else if (state == BattleState.ESCAPE)
-        //{
-        //    Debug.Log("Player escaped");
-        //    StartCoroutine(InformationBarManager.instance.UpdateText("You escaped the fight."));
-        //    enemyUnit.currentHP = enemyUnit.maxHP;
-        //    enemyUnit.SetHP();
-        //}
-        state = BattleState.IDLE;
-        SetupBattle(objects);
-        //if (!agent.trainingMode)
-        //    DialoguePanel.SetActive(false);
-        //else
-        //{
-        //    SwitchTurn();
-        //}
+    //        //StartCoroutine(InformationBarManager.instance.UpdateText("You were defeated."));
+    //        //if (!agent.trainingMode)
+    //        //{
+    //        //    enemyUnit.currentHP = enemyUnit.maxHP;
+    //        //    enemyUnit.SetHP();
+    //        //    playerUnit.removeExperience(10 * enemyUnit.unitLevel);
+    //        //    player.transform.position = new Vector3(0.51f, 0.49f, 0);
+    //        //    playerUnit.currentHP = playerUnit.maxHP;
+    //        //    playerUnit.currentMana = playerUnit.maxMana;
+    //        //    playerUnit.SetHP();
+    //        //    playerUnit.SetMana();
+    //        //    playerUnit.isDead = false;
+    //        //}
+    //    }
+    //    //else if (state == BattleState.ESCAPE)
+    //    //{
+    //    //    Debug.Log("Player escaped");
+    //    //    StartCoroutine(InformationBarManager.instance.UpdateText("You escaped the fight."));
+    //    //    enemyUnit.currentHP = enemyUnit.maxHP;
+    //    //    enemyUnit.SetHP();
+    //    //}
+    //    state = BattleState.IDLE;
+    //    SetupBattle(objects);
+    //    //if (!agent.trainingMode)
+    //    //    DialoguePanel.SetActive(false);
+    //    //else
+    //    //{
+    //    //    SwitchTurn();
+    //    //}
 
-    }
+    //}
 
     //void Heal(Unit healingUnit)
     //{

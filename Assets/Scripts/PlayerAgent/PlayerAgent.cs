@@ -33,9 +33,9 @@ public class PlayerAgent : Agent
     }
     public override void OnEpisodeBegin()
     {
-        if(BattleSystem.instance.state == BattleState.ONGOING)
+        if(BattleSystem.instance.state != BattleState.IDLE)
         {
-            BattleSystem.instance.SetupBattle(BattleSystem.instance.objects);
+            BattleSystem.instance.SetupBattle(BattleSystem.instance.player, BattleSystem.instance.enemy);
         }
     }
 
