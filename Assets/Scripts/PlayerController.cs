@@ -22,31 +22,38 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (BattleSystem.instance.state == BattleState.IDLE)
-        {
+        if(BattleSystem.instance.state == BattleState.PLAYERTURN)
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 moveRight();
+                BattleSystem.instance.SwitchTurn();
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 moveDown();
+                BattleSystem.instance.SwitchTurn();
             }
             else if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 moveUp();
+                BattleSystem.instance.SwitchTurn();
             }
             else if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 moveLeft();
+                BattleSystem.instance.SwitchTurn();
             }
-        }
+            else if (Input.GetKeyDown(KeyCode.F1))
+            {
+                BattleSystem.instance.playerUnit.spells[5].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
+                BattleSystem.instance.SwitchTurn();
+            }
         //else
         //{
         //    if (Input.GetKeyDown(KeyCode.F1))
         //    {
         //        moveRight();
-                
+
         //    }
         //    else if (Input.GetKeyDown(KeyCode.F2))
         //    {

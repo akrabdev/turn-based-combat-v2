@@ -13,6 +13,7 @@ public class LightningboltSpell : Spell
             PutOnCooldown();
             spellCaster.currentMana -= manaCost;
             spellCaster.SetMana();
+            target.statusEffects.Add(new Stun(2, target));
             if (isProjectile)
             {
                 GameObject instantiatedProj = Instantiate(projectile, spellCaster.transform.position, Quaternion.identity);

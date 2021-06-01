@@ -56,8 +56,9 @@ public class BattleSystem : MonoBehaviour
 
     private void Start()
     {
-        if(TrainingManager.instance.trainingMode)
-            SetupBattle(player, enemy);
+        //if(TrainingManager.instance.trainingMode)
+        //    SetupBattle(player, enemy);
+        SetupBattle(player, enemy);
     }
 
     private void Update()
@@ -80,7 +81,7 @@ public class BattleSystem : MonoBehaviour
             //objectsBodies[i].constraints |= RigidbodyConstraints2D.FreezePosition;
 
             playerUnit = player.GetComponent<Unit>();
-            enemyUnit = player.GetComponent<Unit>();
+            enemyUnit = enemy.GetComponent<Unit>();
 
             //Update HUD for player and enemy
             playerUnit.SetHUD();
@@ -100,7 +101,7 @@ public class BattleSystem : MonoBehaviour
             enemyUnit.SetMana();
 
             playerAgent = player.GetComponent<Agent>();
-            enemyAgent = player.GetComponent<Agent>();
+            enemyAgent = enemy.GetComponent<Agent>();
 
             if(!TrainingManager.instance.trainingMode)
             {
@@ -122,15 +123,22 @@ public class BattleSystem : MonoBehaviour
 
         //Player turn and train mode is on
         if (state == BattleState.PLAYERTURN && TrainingManager.instance.trainingMode)
-            playerAgent.RequestDecision();
+        {
+            if(!playerUnit.isStunned)
+                playerAgent.RequestDecision();
+        }
         ///
         /// Try implementing Heuristics with input cache in Update
         ///
-        else if (state == BattleState.PLAYERTURN && !TrainingManager.instance.trainingMode) 
+        else if (state == BattleState.PLAYERTURN && !TrainingManager.instance.trainingMode)
             return;
-        
+
         else if (state == BattleState.ENEMYTURN)
-            enemyAgent.RequestDecision();
+        {
+            if (!enemyUnit.isStunned)
+                enemyAgent.RequestDecision();
+        }
+        
     }
 
     private void Timer()
@@ -154,8 +162,23 @@ public class BattleSystem : MonoBehaviour
     {
         time = 0;
         CooldownManager.instance.SwitchTurn();
+        
+        
         //objectsBodies[turn].constraints |= RigidbodyConstraints2D.FreezePosition;
         UpdateTurn();
+
+        if (state == BattleState.PLAYERTURN)
+        {
+            foreach (StatusEffect statusEffect in playerUnit.statusEffects)
+                statusEffect.Timer();
+        }
+        else if (state == BattleState.ENEMYTURN)
+        {
+            foreach (StatusEffect statusEffect in enemyUnit.statusEffects)
+                statusEffect.Timer();
+        }
+
+
         PlayTurn();
 
     }

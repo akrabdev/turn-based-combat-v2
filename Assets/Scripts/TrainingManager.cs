@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.MLAgents;
 
 public class TrainingManager : MonoBehaviour
 {
     public static TrainingManager instance;
     public bool trainingMode;
-    public GameObject player1;
-    public GameObject player2;
+    public GameObject player;
+    public GameObject enemy;
     // Start is called before the first frame update
 
     void Awake()
@@ -28,11 +29,9 @@ public class TrainingManager : MonoBehaviour
         
         if (trainingMode)
         {
-            PlayerAgent agent1 = player1.GetComponent<PlayerAgent>();
-            PlayerAgent agent2 = player2.GetComponent<PlayerAgent>();
-            PlayerController2 playerController = player1.GetComponent<PlayerController2>();
-            agent1.enabled = true;
-            playerController.enabled = false;
+            Agent playerAgent = player.GetComponent<Agent>();
+            Agent enemyAgent = enemy.GetComponent<Agent>();
+            playerAgent.enabled = true;
             BattleSystem.instance.switchTurnTime = 0;
         }
     }

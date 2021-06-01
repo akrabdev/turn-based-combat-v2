@@ -40,7 +40,7 @@ public class Grid <T>
         {
             for (int j = 0; j < gridArray.GetLength(1); j++)
             {
-                debugTextMesh[i, j] = GridText(gridArray[i, j].ToString(), null, new Vector2(i, j), 2, Color.black);
+                debugTextMesh[i, j] = GridText(gridArray[i, j]?.ToString(), null, new Vector2(i, j), 2, Color.black);
                 Debug.DrawLine(new Vector2(i, j), new Vector2(i, j + 1), Color.red, 100f);
                 Debug.DrawLine(new Vector2(i, j), new Vector2(i + 1, j), Color.red, 100f);
             }
