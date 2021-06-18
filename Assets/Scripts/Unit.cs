@@ -17,11 +17,15 @@ public class Unit : MonoBehaviour
     public int damage;
     public int magicPower;
 
+    public int lookDir;
+
     public int maxHP;
     public int currentHP;
 
     public int maxMana;
     public int currentMana;
+
+    public Element element;
 
     public Text nameText;
     public Text levelText;

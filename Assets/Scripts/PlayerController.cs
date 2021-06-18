@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.F1))
             {
-                BattleSystem.instance.playerUnit.spells[5].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
+                BattleSystem.instance.playerUnit.spells[3].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
                 BattleSystem.instance.SwitchTurn();
             }
         //else
@@ -87,6 +87,7 @@ public class PlayerController : MonoBehaviour
     {
         rigidbody.MovePosition((Vector2)transform.position + new Vector2(-1f, 0));
         anim.SetTrigger("MoveLeft");
+        
     }
 
     public void moveRight()
