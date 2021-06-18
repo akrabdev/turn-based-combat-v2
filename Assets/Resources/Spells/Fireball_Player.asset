@@ -23,7 +23,7 @@ MonoBehaviour:
   damage: 20
   manaCost: 10
   maxRange: 0
-  followSpeed: 15
+  followSpeed: 20
   projectile: {fileID: 9204251887801062571, guid: ffeb6c0f0278a90429bd6b745016412a,
     type: 3}
   effect:

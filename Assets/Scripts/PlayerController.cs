@@ -9,10 +9,12 @@ public class PlayerController : MonoBehaviour
 {
     //For animation
     Animator anim;
+    Rigidbody2D rigidbody;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+        rigidbody = GetComponent<Rigidbody2D>();
     }
 
     /// <summary>
@@ -20,81 +22,94 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            if (BattleSystem.instance.state == BattleState.IDLE)
-            {
-                moveLeft();
-            }
-            else if (BattleSystem.instance.state == BattleState.PLAYERTURN)
-            {
-                moveLeft();
-                BattleSystem.instance.SwitchTurn();
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            if (BattleSystem.instance.state == BattleState.IDLE)
-            {
-                moveRight();
-            }
-            else if (BattleSystem.instance.state == BattleState.PLAYERTURN)
+        if(BattleSystem.instance.state == BattleState.PLAYERTURN)
+            if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 moveRight();
                 BattleSystem.instance.SwitchTurn();
             }
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            if (BattleSystem.instance.state == BattleState.IDLE)
-            {
-                moveDown();
-            }
-            else if (BattleSystem.instance.state == BattleState.PLAYERTURN)
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 moveDown();
                 BattleSystem.instance.SwitchTurn();
             }
-        }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if (BattleSystem.instance.state == BattleState.IDLE)
-            {
-                moveUp();
-            }
-            else if (BattleSystem.instance.state == BattleState.PLAYERTURN)
+            else if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 moveUp();
                 BattleSystem.instance.SwitchTurn();
             }
-        }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                moveLeft();
+                BattleSystem.instance.SwitchTurn();
+            }
+            else if (Input.GetKeyDown(KeyCode.F1))
+            {
+                BattleSystem.instance.playerUnit.spells[3].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
+                BattleSystem.instance.SwitchTurn();
+            }
+        //else
+        //{
+        //    if (Input.GetKeyDown(KeyCode.F1))
+        //    {
+        //        moveRight();
+
+        //    }
+        //    else if (Input.GetKeyDown(KeyCode.F2))
+        //    {
+        //        moveDown();
+        //    }
+        //    //if (Input.GetKeyDown(KeyCode.RightArrow))
+        //    //{
+        //    //    moveRight();
+        //    //    BattleSystem.instance.
+        //    //}
+        //    //else if (Input.GetKeyDown(KeyCode.DownArrow))
+        //    //{
+        //    //    moveDown();
+        //    //}
+        //    //else if (Input.GetKeyDown(KeyCode.UpArrow))
+        //    //{
+        //    //    moveUp();
+        //    //}
+        //    //else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        //    //{
+        //    //    moveLeft();
+        //    //}
+        //}
     }
 
     /*
      * Set of functions to change the transform of the object according to user input
      */
 
-    void moveLeft()
+    public void moveLeft()
     {
+        rigidbody.MovePosition((Vector2)transform.position + new Vector2(-1f, 0));
         anim.SetTrigger("MoveLeft");
-        transform.Translate(-1f, 0, 0);
+        
     }
 
-    void moveRight()
+    public void moveRight()
     {
+        rigidbody.MovePosition((Vector2)transform.position + new Vector2(1f, 0));
         anim.SetTrigger("MoveRight");
-        transform.Translate(1f, 0, 0);
+
     }
 
-    void moveUp()
+    public void moveUp()
     {
+        rigidbody.MovePosition((Vector2)transform.position + new Vector2(0, 1f));
         anim.SetTrigger("MoveUp");
-        transform.Translate(0, 1f, 0);
+       
     }
 
-    void moveDown()
+    public void moveDown()
     {
+        rigidbody.MovePosition((Vector2)transform.position + new Vector2(0, -1f));
         anim.SetTrigger("MoveDown");
-        transform.Translate(0, -1f, 0);
+        
     }
+
+    
 }

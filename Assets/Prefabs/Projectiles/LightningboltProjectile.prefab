@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7533858792166170555}
   - component: {fileID: 6392054291487824051}
   - component: {fileID: 4041365613222224807}
-  - component: {fileID: 6973408492053808273}
+  - component: {fileID: -3898584471599186477}
   m_Layer: 0
   m_Name: LightningboltProjectile
   m_TagString: Untagged
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 7038799223474511258, guid: 79af5428b0cd1b54b82b49596568aca5, type: 3}
   soundEffectName: LightningboltEffect
---- !u!61 &6973408492053808273
+--- !u!61 &-3898584471599186477
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,7 +108,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.020057797, y: 0.1404388}

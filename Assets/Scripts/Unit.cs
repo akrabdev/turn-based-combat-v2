@@ -17,11 +17,15 @@ public class Unit : MonoBehaviour
     public int damage;
     public int magicPower;
 
+    public int lookDir;
+
     public int maxHP;
     public int currentHP;
 
     public int maxMana;
     public int currentMana;
+
+    public Element element;
 
     public Text nameText;
     public Text levelText;
@@ -34,11 +38,16 @@ public class Unit : MonoBehaviour
     [HideInInspector]
     public bool isDead;
 
+    public List<StatusEffect> statusEffects;
+    public bool isStunned;
+    public bool isShielded;
+
     //Just for deleveling for now
     private bool hpUpdated;
 
     private void Start()
     {
+        statusEffects = new List<StatusEffect>();
         foreach(Spell spell in spells)
         {
             spell.currentCooldown = 0;
@@ -64,15 +73,14 @@ public class Unit : MonoBehaviour
         }
         
         int randDmg = Random.Range(dmg - 5, dmg + 5);
-        DamagePopupManager.instance.Setup(randDmg, dmgColor, transform);
+        if (isShielded)
+            randDmg = 0;
+        DamagePopupManager.instance.Setup(randDmg.ToString(), dmgColor, transform);
 		currentHP -= randDmg;
         SetHP();
 
         if (currentHP <= 0)
-        {
             isDead = true;
-            BattleSystem.instance.Death();
-        }
 
 
 	}
@@ -84,7 +92,7 @@ public class Unit : MonoBehaviour
 	{
         Color healColor = Color.green;
         int randHeal = Random.Range(magicPower - 5, magicPower + 5);
-        DamagePopupManager.instance.Setup(randHeal, healColor, transform);
+        DamagePopupManager.instance.Setup(randHeal.ToString(), healColor, transform);
         currentHP += randHeal;
 		if (currentHP > maxHP)
 			currentHP = maxHP;

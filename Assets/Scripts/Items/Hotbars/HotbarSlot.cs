@@ -25,7 +25,7 @@ public class HotbarSlot : ItemSlotUI, IDropHandler
 
             Spell spell = slotItem as Spell;
             // if(BattleSystem.instance.state == BattleState.PLAYERTURN){
-            BattleSystem.instance.OnSpellButton(spell);
+            //BattleSystem.instance.OnSpellButton(spell);
             // spell.CastSpell(pla)
         }
 
