@@ -51,8 +51,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Unit
+  - name: Doors
+    uniqueID: 2926966477
+    locked: 0
+  - name: Objects
     uniqueID: 2204291631
+    locked: 0
+  - name: Second Floor Objects
+    uniqueID: 399113059
     locked: 0
   - name: Canvas
     uniqueID: 2097310883

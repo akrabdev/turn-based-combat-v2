@@ -22,26 +22,97 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Update()
     {
+
         if(BattleSystem.instance.state == BattleState.PLAYERTURN)
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                moveRight();
-                BattleSystem.instance.SwitchTurn();
+                Collider2D hitCollider = Physics2D.OverlapBox((Vector2)gameObject.transform.position + new Vector2(1, 0) , new Vector2(0.15f, 0.15f), 0f);
+                if (hitCollider)
+                {
+                    Debug.Log("Hit : " + hitCollider.name);
+                    if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle"))
+                        BattleSystem.instance.SwitchTurn();
+                    else
+                    {
+                        moveRight();
+                        BattleSystem.instance.SwitchTurn();
+                    }
+
+                }
+                
+                else
+                {
+                    moveRight();
+                    BattleSystem.instance.SwitchTurn();
+                }
+                
+                
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                moveDown();
-                BattleSystem.instance.SwitchTurn();
+                Collider2D hitCollider = Physics2D.OverlapBox((Vector2)gameObject.transform.position + new Vector2(0, -1), new Vector2(0.15f, 0.15f), 0f);
+                if (hitCollider)
+                {
+                    Debug.Log("Hit : " + hitCollider.name);
+                    if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle"))
+                        BattleSystem.instance.SwitchTurn();
+                    else
+                    {
+                        moveDown();
+                        BattleSystem.instance.SwitchTurn();
+                    }
+
+                }
+
+                else
+                {
+                    moveDown();
+                    BattleSystem.instance.SwitchTurn();
+                }
             }
             else if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                moveUp();
-                BattleSystem.instance.SwitchTurn();
+                Collider2D hitCollider = Physics2D.OverlapBox((Vector2)gameObject.transform.position + new Vector2(0, 1), new Vector2(0.15f, 0.15f), 0f);
+                if (hitCollider)
+                {
+                    Debug.Log("Hit : " + hitCollider.name);
+                    if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle"))
+                        BattleSystem.instance.SwitchTurn();
+                    else
+                    {
+                        moveUp();
+                        BattleSystem.instance.SwitchTurn();
+                    }
+
+                }
+
+                else
+                {
+                    moveUp();
+                    BattleSystem.instance.SwitchTurn();
+                }
             }
             else if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                moveLeft();
-                BattleSystem.instance.SwitchTurn();
+                Collider2D hitCollider = Physics2D.OverlapBox((Vector2)gameObject.transform.position + new Vector2(-1, 0), new Vector2(0.15f, 0.15f), 0f);
+                if (hitCollider)
+                {
+                    Debug.Log("Hit : " + hitCollider.name);
+                    if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle"))
+                        BattleSystem.instance.SwitchTurn();
+                    else
+                    {
+                        moveLeft();
+                        BattleSystem.instance.SwitchTurn();
+                    }
+
+                }
+
+                else
+                {
+                    moveLeft();
+                    BattleSystem.instance.SwitchTurn();
+                }
             }
             else if (Input.GetKeyDown(KeyCode.F1))
             {
@@ -82,6 +153,12 @@ public class PlayerController : MonoBehaviour
     /*
      * Set of functions to change the transform of the object according to user input
      */
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        //Check that it is being run in Play Mode, so it doesn't try to draw this in Editor mode
+        Gizmos.DrawWireCube(transform.position + new Vector3(1, 0), transform.localScale);
+    }
 
     public void moveLeft()
     {

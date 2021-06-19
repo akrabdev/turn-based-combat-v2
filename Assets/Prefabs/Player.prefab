@@ -300,7 +300,6 @@ GameObject:
   - component: {fileID: 746606054}
   - component: {fileID: 746606057}
   - component: {fileID: 746606056}
-  - component: {fileID: 746606055}
   - component: {fileID: 962588386}
   m_Layer: 5
   m_Name: PlayerBattleHud
@@ -369,19 +368,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &746606055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746606053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f36616fc90507ed419289ae37266212f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToFollow: {fileID: 1925253945594304140}
 --- !u!114 &962588386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1394,6 +1380,7 @@ MonoBehaviour:
   experiencePoints: 0
   damage: 10
   magicPower: 10
+  lookDir: 0
   maxHP: 100
   currentHP: 100
   maxMana: 20

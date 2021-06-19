@@ -346,15 +346,16 @@ MonoBehaviour:
   experiencePoints: 0
   damage: 10
   magicPower: 10
+  lookDir: 0
   maxHP: 100
   currentHP: 100
   maxMana: 20
   currentMana: 20
   element: {fileID: 0}
-  nameText: {fileID: 0}
-  levelText: {fileID: 0}
-  hpSlider: {fileID: 0}
-  manaSlider: {fileID: 0}
+  nameText: {fileID: 8528980956005760206}
+  levelText: {fileID: 4548191865744871993}
+  hpSlider: {fileID: 3686446120645427669}
+  manaSlider: {fileID: 4355083846660158630}
   spells:
   - {fileID: 11400000, guid: cf8ffe6484b75f54a9ffd1fa2a8c6209, type: 2}
   - {fileID: 11400000, guid: b29a4ce26edf06d40a0072cf8cedaf46, type: 2}
