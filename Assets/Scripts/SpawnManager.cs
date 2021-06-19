@@ -146,8 +146,8 @@ public class SpawnManager : MonoBehaviour
                 timesTaken["Health"]++;
             Destroy(obj);
             PlayerUnit.Heal();
-            ParticleSystem healing = Instantiate(BS.healEffect, PlayerUnit.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
-            Destroy(healing.gameObject, 1f);
+            //ParticleSystem healing = Instantiate(BS.healEffect, PlayerUnit.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
+            //Destroy(healing.gameObject, 1f);
             Debug.Log("Healed");
             yield return new WaitForSeconds(0);
         }
@@ -231,7 +231,7 @@ public class SpawnManager : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //BattleSystem battleSystem = Instantiate(BattleInstance);
-        if (collision.gameObject.CompareTag("Player") && BS.state == BattleState.IDLE)
+        if (collision.gameObject.CompareTag("Player"))
         {
             if (enemyObj.Count == 0)
                 EnemySpawn();
@@ -256,7 +256,8 @@ public class SpawnManager : MonoBehaviour
             AfterBattle(true);
             Border.SetActive(false);
             BS.state = BattleState.ESCAPE;
-            BS.EndBattle();
+            //BS.EndBattle();
+            //BS.TargetDead(PlayerUnit);
         }
     }
 

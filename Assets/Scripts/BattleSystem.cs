@@ -8,7 +8,7 @@ using Unity.MLAgents;
 /// <summary>
 /// This class is responsible for managing the battle itself
 /// </summary>
-public enum BattleState { IDLE, PLAYERTURN, ENEMYTURN, WON, LOST };
+public enum BattleState { IDLE, PLAYERTURN, ENEMYTURN, WON, LOST, ESCAPE };
 
 public class BattleSystem : MonoBehaviour
 {
