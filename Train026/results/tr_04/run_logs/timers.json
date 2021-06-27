@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1624662715",
+        "python_version": "3.7.10 (default, Feb 26 2021, 13:06:18) [MSC v.1916 64 bit (AMD64)]",
+        "command_line_arguments": "D:\\Dev\\anaconda3\\envs\\ml_agents_026\\Scripts\\mlagents-learn ./trainer_config.yaml --run-id tr_04 --resume",
+        "mlagents_version": "0.26.0",
+        "mlagents_envs_version": "0.26.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.7.1+cu110",
+        "numpy_version": "1.20.3",
+        "end_time_seconds": "1624662716"
+    },
+    "total": 1.3536574000000001,
+    "count": 1,
+    "self": 0.005788200000000243,
+    "children": {
+        "run_training.setup": {
+            "total": 0.13734919999999984,
+            "count": 1,
+            "self": 0.13734919999999984
+        },
+        "TrainerController.start_learning": {
+            "total": 1.21052,
+            "count": 1,
+            "self": 0.00041090000000010285,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 1.210099,
+                    "count": 1,
+                    "self": 1.210099
+                },
+                "trainer_threads": {
+                    "total": 1.9999999998354667e-06,
+                    "count": 1,
+                    "self": 1.9999999998354667e-06
+                },
+                "TrainerController._save_models": {
+                    "total": 8.100000000066387e-06,
+                    "count": 1,
+                    "self": 8.100000000066387e-06
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,57 @@
+{
+    "EnemyAgent": {
+        "elo": 1200.0,
+        "checkpoints": [
+            {
+                "steps": 6016,
+                "file_path": "results\\tr_04\\EnemyAgent\\EnemyAgent-6016.onnx",
+                "reward": null,
+                "creation_time": 1624662192.9078417,
+                "auxillary_file_paths": [
+                    "results\\tr_04\\EnemyAgent\\EnemyAgent-6016.pt"
+                ]
+            },
+            {
+                "steps": 7424,
+                "file_path": "results\\tr_04\\EnemyAgent\\EnemyAgent-7424.onnx",
+                "reward": null,
+                "creation_time": 1624662225.2840974,
+                "auxillary_file_paths": [
+                    "results\\tr_04\\EnemyAgent\\EnemyAgent-7424.pt"
+                ]
+            },
+            {
+                "steps": 9270,
+                "file_path": "results\\tr_04\\EnemyAgent\\EnemyAgent-9270.onnx",
+                "reward": 0.0,
+                "creation_time": 1624662327.5917523,
+                "auxillary_file_paths": [
+                    "results\\tr_04\\EnemyAgent\\EnemyAgent-9270.pt"
+                ]
+            },
+            {
+                "steps": 15030,
+                "file_path": "results\\tr_04\\EnemyAgent\\EnemyAgent-15030.onnx",
+                "reward": null,
+                "creation_time": 1624662428.2162151,
+                "auxillary_file_paths": [
+                    "results\\tr_04\\EnemyAgent\\EnemyAgent-15030.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 15030,
+            "file_path": "results\\tr_04\\EnemyAgent.onnx",
+            "reward": null,
+            "creation_time": 1624662428.2162151,
+            "auxillary_file_paths": [
+                "results\\tr_04\\EnemyAgent\\EnemyAgent-15030.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.26.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

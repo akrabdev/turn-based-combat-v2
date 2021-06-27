@@ -8,12 +8,9 @@ public class LightningboltSpell : Spell
     // Start is called before the first frame update
     public override bool CastSpell(Unit spellCaster, Unit target)
     {
-        if (IsSpellReady() && spellCaster.currentMana >= manaCost)
+        bool successfulBaseChecks = base.CastSpell(spellCaster, target);
+        if (successfulBaseChecks)
         {
-            PutOnCooldown();
-            spellCaster.currentMana -= manaCost;
-            spellCaster.SetMana();
-            target.statusEffects.Add(new Stun(2, target));
             if (isProjectile)
             {
                 GameObject instantiatedProj = Instantiate(projectile, spellCaster.transform.position, Quaternion.identity);
@@ -21,12 +18,27 @@ public class LightningboltSpell : Spell
                 instantiatedProjComponent.Fire(spellCaster, target, damage, element, follow, followSpeed);
                 FindObjectOfType<AudioManager>().Play(projectileSoundEffectName);
             }
+            /////TODO: STUN IF PROJECTILE HITS
+            target.statusEffects.Add(new Stun(2, target));
             return true;
         }
         else
-        {
             return false;
-        }
+
+
+
+        //    if (IsSpellReady() && spellCaster.currentMana >= manaCost)
+        //{
+        //    PutOnCooldown();
+        //    spellCaster.currentMana -= manaCost;
+        //    spellCaster.SetMana();
+            
+        //    return true;
+        //}
+        //else
+        //{
+        //    return false;
+        //}
 
     }
 }

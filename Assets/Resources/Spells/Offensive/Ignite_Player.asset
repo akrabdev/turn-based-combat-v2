@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e04b43184d6f3834c9c70865f5e762b6, type: 3}
+  m_Name: Ignite_Player
+  m_EditorClassIdentifier: 
+  name: Player Ignite
+  icon: {fileID: -4785528655665393319, guid: ff57a2efd62c32f459177189c8e003bb, type: 3}
+  description: Sets the target on fire, burning the target for 5 damage every turn
+    for 5 turns
+  element: {fileID: 11400000, guid: 9698a086854056148bb617c089440425, type: 2}
+  isProjectile: 0
+  follow: 0
+  currentCooldown: 0
+  maxCooldown: 10
+  damage: 0
+  manaCost: 10
+  maxRange: 3
+  followSpeed: 0
+  onSelf: 0
+  multiple: 0
+  multipleNumber: 0
+  projectile: {fileID: 0}
+  effect: []
+  projectileSoundEffectName: 

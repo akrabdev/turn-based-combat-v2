@@ -31,7 +31,9 @@ public class BattleSystem : MonoBehaviour
 
     //public int turn; //Current turn
     /*public bool turnPlayed;*/ //To check if the player has made a move during play mode
-    public float time = 0; //Timer if the system is in play mode
+    [SerializeField]
+    float time = 0; //Timer if the system is in play mode
+
     public float switchTurnTime = 2; //Time to switch turn automatically (even if no move was made)
 
     public BattleState state; //State of the battle
@@ -54,12 +56,12 @@ public class BattleSystem : MonoBehaviour
         
     }
 
-    private void Start()
-    {
-        //if(TrainingManager.instance.trainingMode)
-        //    SetupBattle(player, enemy);
-        SetupBattle(player, enemy);
-    }
+    //private void Start()
+    //{
+    //    if (TrainingManager.instance.trainingMode)
+    //        SetupBattle(player, enemy);
+    //    //SetupBattle(player, enemy);
+    //}
 
     private void Update()
     {
@@ -118,26 +120,14 @@ public class BattleSystem : MonoBehaviour
     /// </summary>
     private void PlayTurn()
     {
-        //Unfreeze current turn
-        //objectsBodies[turn].constraints &= ~RigidbodyConstraints2D.FreezePosition;
 
         //Player turn and train mode is on
         if (state == BattleState.PLAYERTURN && TrainingManager.instance.trainingMode)
-        {
-            if(!playerUnit.isStunned)
-                playerAgent.RequestDecision();
-        }
-        ///
-        /// Try implementing Heuristics with input cache in Update
-        ///
+            playerAgent.RequestDecision();
         else if (state == BattleState.PLAYERTURN && !TrainingManager.instance.trainingMode)
             return;
-
         else if (state == BattleState.ENEMYTURN)
-        {
-            if (!enemyUnit.isStunned)
-                enemyAgent.RequestDecision();
-        }
+            enemyAgent.RequestDecision();
         
     }
 
@@ -147,9 +137,12 @@ public class BattleSystem : MonoBehaviour
         if (time >= switchTurnTime)
         {
             SwitchTurn();
-        }
+        }   
     }
 
+    /// <summary>
+    /// Update battle system state to other unit
+    /// </summary>
     public void UpdateTurn()
     {
         if (state == BattleState.PLAYERTURN)
@@ -158,17 +151,19 @@ public class BattleSystem : MonoBehaviour
             state = BattleState.PLAYERTURN;
     }
 
+
+    /// <summary>
+    /// Code for switching turns
+    /// </summary>
     public void SwitchTurn()
     {
         time = 0;
         CooldownManager.instance.SwitchTurn();
-        
-        
-        //objectsBodies[turn].constraints |= RigidbodyConstraints2D.FreezePosition;
         UpdateTurn();
 
         if (state == BattleState.PLAYERTURN)
         {
+            // Update status effect timers
             foreach (StatusEffect statusEffect in playerUnit.statusEffects)
                 statusEffect.Timer();
         }
@@ -178,21 +173,21 @@ public class BattleSystem : MonoBehaviour
                 statusEffect.Timer();
         }
 
-
+        // Request an action
         PlayTurn();
 
     }
 
     public void TargetDead(Unit deadUnit )
     {
-        //IF PLAYER ISN'T DEAD -> STATE: WON
+        //If player isn't dead -> state: won
         if (playerUnit == deadUnit)
         {
             Debug.Log("Player Lost");
             if (TrainingManager.instance.trainingMode)
             {
-                playerAgent.AddReward(-1f);
-                enemyAgent.AddReward(1f);
+                playerAgent.SetReward(-1f);
+                enemyAgent.SetReward(1f);
             }
             //objectsUnits[0].transform.position = new Vector2(0.5f, 0.5f);
             playerUnit.isDead = false;
@@ -203,20 +198,21 @@ public class BattleSystem : MonoBehaviour
             Debug.Log("Player won");
             if (TrainingManager.instance.trainingMode)
             {
-                playerAgent.AddReward(1f);
-                enemyAgent.AddReward(-1f);
+                playerAgent.SetReward(1f);
+                enemyAgent.SetReward(-1f);
             }
             enemyUnit.isDead = false;
         }
-
-        if(TrainingManager.instance.trainingMode)
+        state = BattleState.IDLE;
+        if (TrainingManager.instance.trainingMode)
         {
+
             playerAgent.EndEpisode();
             enemyAgent.EndEpisode();
         }
 
-        state = BattleState.IDLE;
-        SetupBattle(player, enemy);
+        
+        //SetupBattle(player, enemy);
 
     }
 

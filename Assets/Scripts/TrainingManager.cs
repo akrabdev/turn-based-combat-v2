@@ -7,8 +7,8 @@ public class TrainingManager : MonoBehaviour
 {
     public static TrainingManager instance;
     public bool trainingMode;
-    public GameObject player;
-    public GameObject enemy;
+    //public GameObject player;
+    //public GameObject enemy;
     // Start is called before the first frame update
 
     void Awake()
@@ -29,9 +29,9 @@ public class TrainingManager : MonoBehaviour
         
         if (trainingMode)
         {
-            Agent playerAgent = player.GetComponent<Agent>();
-            Agent enemyAgent = enemy.GetComponent<Agent>();
-            playerAgent.enabled = true;
+            //Agent playerAgent = player.GetComponent<Agent>();
+            //Agent enemyAgent = enemy.GetComponent<Agent>();
+            //playerAgent.enabled = true;
             BattleSystem.instance.switchTurnTime = 0;
         }
     }

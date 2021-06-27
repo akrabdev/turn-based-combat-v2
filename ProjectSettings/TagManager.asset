@@ -51,6 +51,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Borders
+    uniqueID: 3078854015
+    locked: 0
   - name: Doors
     uniqueID: 2926966477
     locked: 0
