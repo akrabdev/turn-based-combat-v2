@@ -145,7 +145,7 @@ public class SpawnManager : MonoBehaviour
             else
                 timesTaken["Health"]++;
             Destroy(obj);
-            PlayerUnit.Heal();
+            PlayerUnit.Heal(10);
             //ParticleSystem healing = Instantiate(BS.healEffect, PlayerUnit.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
             //Destroy(healing.gameObject, 1f);
             Debug.Log("Healed");
@@ -156,11 +156,10 @@ public class SpawnManager : MonoBehaviour
             //Change to every turn
             Destroy(obj);
             int TimeToDampen = Random.Range(6, 9);
-            Debug.Log(EnemyUnit.damage);
-            EnemyUnit.damage /= 5;
-            Debug.Log(EnemyUnit.damage);
+            var temp = EnemyUnit.damagePower;
+            EnemyUnit.damagePower /= 5;
             yield return new WaitForSeconds(TimeToDampen);
-            EnemyUnit.damage *= 5;
+            EnemyUnit.damagePower = temp;
         }
 
         else if(obj.CompareTag("XP"))
@@ -179,10 +178,10 @@ public class SpawnManager : MonoBehaviour
             else
                 timesTaken["Attacks"]++;
             Destroy(obj);
-            PlayerUnit.damage *= 2;
+            PlayerUnit.damagePower *= 2;
             int TimeToInc = Random.Range(6, 9);
             yield return new WaitForSeconds(TimeToInc);
-            PlayerUnit.damage /= 2;
+            PlayerUnit.damagePower /= 2;
 
         }
         else if(obj.CompareTag("Shield"))
@@ -193,12 +192,10 @@ public class SpawnManager : MonoBehaviour
                 timesTaken["Shield"]++;
             Destroy(obj);
             int TimeToDampen = Random.Range(6, 9);
-            Debug.Log(EnemyUnit.damage);
-            var temp = EnemyUnit.damage;
-            EnemyUnit.damage = 0;
-            Debug.Log(EnemyUnit.damage);
+            var temp = EnemyUnit.damagePower;
+            EnemyUnit.damagePower = 0;
             yield return new WaitForSeconds(TimeToDampen);
-            EnemyUnit.damage = temp;
+            EnemyUnit.damagePower = temp;
         }
         else if(obj.CompareTag("LevelUp"))
         {
