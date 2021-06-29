@@ -18175,6 +18175,8 @@ MonoBehaviour:
   - {x: 19.990551, y: 4.8923078, z: 0}
   - {x: 19.043736, y: 5.871983, z: 0}
   - {x: 17.551846, y: 6.9651437, z: 0}
+  - {x: 16.676746, y: 6.799723, z: 0}
+  - {x: 12.079466, y: 3.540933, z: 0}
   - {x: 11.592394, y: 2.8999484, z: 0}
   - {x: 11.609037, y: 1.7082025, z: 0}
   - {x: 11.671916, y: 0.04355213, z: 0}
@@ -25372,11 +25374,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2269186303959838694, guid: 231106d5165a5454d8dfe5cca5f52fcd,
-        type: 3}
-      propertyPath: damagePower
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4509970857218959061, guid: 231106d5165a5454d8dfe5cca5f52fcd,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -25407,16 +25404,6 @@ PrefabInstance:
       propertyPath: opponent
       value: 
       objectReference: {fileID: 415402806}
-    - target: {fileID: 5742028763616295607, guid: 231106d5165a5454d8dfe5cca5f52fcd,
-        type: 3}
-      propertyPath: m_BrainParameters.VectorActionSize.Array.data[0]
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5742028763616295607, guid: 231106d5165a5454d8dfe5cca5f52fcd,
-        type: 3}
-      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 6400338178966911494, guid: 231106d5165a5454d8dfe5cca5f52fcd,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -25431,11 +25418,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MagicianTwo
-      objectReference: {fileID: 0}
-    - target: {fileID: 7875793388525898532, guid: 231106d5165a5454d8dfe5cca5f52fcd,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8761722357574696708, guid: 231106d5165a5454d8dfe5cca5f52fcd,
         type: 3}
@@ -25697,14 +25679,6 @@ PrefabInstance:
       propertyPath: opponent
       value: 
       objectReference: {fileID: 2514056319382090135}
-    - target: {fileID: 1681721087, guid: 2588ab61f93d5ab499fc73b80823c803, type: 3}
-      propertyPath: m_BrainParameters.VectorActionSize.Array.data[0]
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1681721087, guid: 2588ab61f93d5ab499fc73b80823c803, type: 3}
-      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 105474943438007681, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -25754,11 +25728,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5823730836849333166, guid: 2588ab61f93d5ab499fc73b80823c803,
-        type: 3}
-      propertyPath: damagePower
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6591465980649086214, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}

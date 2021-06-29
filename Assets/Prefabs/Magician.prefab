@@ -347,7 +347,7 @@ MonoBehaviour:
   unitName: Magician
   unitLevel: 1
   experiencePoints: 0
-  damagePower: 0
+  damagePower: 1
   magicPower: 10
   lookDir: 0
   maxHP: 100
@@ -484,8 +484,8 @@ MonoBehaviour:
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
-      BranchSizes: 09000000
-    VectorActionSize: 09000000
+      BranchSizes: 06000000
+    VectorActionSize: 06000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
