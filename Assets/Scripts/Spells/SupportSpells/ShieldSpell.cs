@@ -8,9 +8,14 @@ public class ShieldSpell : Spell
     // Start is called before the first frame update
     public override bool CastSpell(Unit spellCaster, Unit target)
     {
-        PutOnCooldown();
-        //FindObjectOfType<AudioManager>().Play("HealSound");
-        spellCaster.statusEffects.Add(new Shield(3, spellCaster));
-        return true;
+        bool successfulBaseChecks = base.CastSpell(spellCaster, target);
+        if (successfulBaseChecks)
+        {
+            spellCaster.statusEffects.Add(new Shield(3, spellCaster));
+            return true;
+        }
+        else
+            return false;
+        
     }
 }

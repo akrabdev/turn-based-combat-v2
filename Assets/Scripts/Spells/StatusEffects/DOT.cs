@@ -23,7 +23,7 @@ public class DOT : StatusEffect
             return;
         }
         base.Timer();
-        dotUnit.TakeDamage(dmg, element);
+        dotUnit.TakeDamage(dmg, null, element);
 
     }
 }

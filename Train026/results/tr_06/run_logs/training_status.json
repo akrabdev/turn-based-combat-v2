@@ -1,0 +1,66 @@
+{
+    "EnemyAgent": {
+        "elo": 1246.5690048291583,
+        "checkpoints": [
+            {
+                "steps": 8064,
+                "file_path": "results\\tr_06\\EnemyAgent\\EnemyAgent-8064.onnx",
+                "reward": null,
+                "creation_time": 1624663307.5252924,
+                "auxillary_file_paths": [
+                    "results\\tr_06\\EnemyAgent\\EnemyAgent-8064.pt"
+                ]
+            },
+            {
+                "steps": 12672,
+                "file_path": "results\\tr_06\\EnemyAgent\\EnemyAgent-12672.onnx",
+                "reward": null,
+                "creation_time": 1624663828.3995695,
+                "auxillary_file_paths": [
+                    "results\\tr_06\\EnemyAgent\\EnemyAgent-12672.pt"
+                ]
+            },
+            {
+                "steps": 13056,
+                "file_path": "results\\tr_06\\EnemyAgent\\EnemyAgent-13056.onnx",
+                "reward": null,
+                "creation_time": 1624663905.7428353,
+                "auxillary_file_paths": [
+                    "results\\tr_06\\EnemyAgent\\EnemyAgent-13056.pt"
+                ]
+            },
+            {
+                "steps": 13299,
+                "file_path": "results\\tr_06\\EnemyAgent\\EnemyAgent-13299.onnx",
+                "reward": 0.4666666666666667,
+                "creation_time": 1624664081.473963,
+                "auxillary_file_paths": [
+                    "results\\tr_06\\EnemyAgent\\EnemyAgent-13299.pt"
+                ]
+            },
+            {
+                "steps": 65589,
+                "file_path": "results\\tr_06\\EnemyAgent\\EnemyAgent-65589.onnx",
+                "reward": 0.09578544061302682,
+                "creation_time": 1624664626.3520243,
+                "auxillary_file_paths": [
+                    "results\\tr_06\\EnemyAgent\\EnemyAgent-65589.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 65589,
+            "file_path": "results\\tr_06\\EnemyAgent.onnx",
+            "reward": 0.09578544061302682,
+            "creation_time": 1624664626.3520243,
+            "auxillary_file_paths": [
+                "results\\tr_06\\EnemyAgent\\EnemyAgent-65589.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.26.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

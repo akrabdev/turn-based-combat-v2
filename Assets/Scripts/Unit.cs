@@ -14,7 +14,7 @@ public class Unit : MonoBehaviour
     public int unitLevel;
     public int experiencePoints;
 
-    public int damage;
+    public int damagePower;
     public int magicPower;
 
     public int lookDir;
@@ -60,7 +60,7 @@ public class Unit : MonoBehaviour
     /// </summary>
     /// <param name="dmg"></param>
     /// <returns></returns>
-    public void TakeDamage(int dmg, Element element = null)
+    public void TakeDamage(int dmg, Unit dmgDealer = null, Element element = null)
 	{
         Color dmgColor;
         if (element == null)
@@ -72,11 +72,15 @@ public class Unit : MonoBehaviour
             dmgColor = new Vector4(element.TextColour.r, element.TextColour.g, element.TextColour.b, 1);
         }
         
-        int randDmg = Random.Range(dmg - 5, dmg + 5);
+        //int randDmg = Random.Range(dmg - 5, dmg + 5);
         if (isShielded)
-            randDmg = 0;
-        DamagePopupManager.instance.Setup(randDmg.ToString(), dmgColor, transform);
-		currentHP -= randDmg;
+            dmg = 0;
+        if (dmgDealer)
+        {
+            dmg *= dmgDealer.damagePower;
+        }
+        DamagePopupManager.instance.Setup(dmg.ToString(), dmgColor, transform);
+		currentHP -= dmg;
         SetHP();
 
         if (currentHP <= 0)
@@ -88,15 +92,24 @@ public class Unit : MonoBehaviour
     /// <summary>
     /// This function generates a random value to heal with according to the unit's magic power and increases the currentHP.
     /// </summary>
-	public void Heal()
+	public void Heal(int value)
 	{
         Color healColor = Color.green;
-        int randHeal = Random.Range(magicPower - 5, magicPower + 5);
-        DamagePopupManager.instance.Setup(randHeal.ToString(), healColor, transform);
-        currentHP += randHeal;
+        DamagePopupManager.instance.Setup((value * magicPower).ToString(), healColor, transform);
+        currentHP += value*magicPower;
 		if (currentHP > maxHP)
 			currentHP = maxHP;
         SetHP();
+    }
+
+    public void ManaHeal(int value)
+    {
+        Color healColor = Color.blue;
+        DamagePopupManager.instance.Setup((value*magicPower).ToString(), healColor, transform);
+        currentMana += value * magicPower;
+        if (currentMana > maxMana)
+            currentMana = maxMana;
+        SetMana();
     }
 
 
@@ -145,7 +158,7 @@ public class Unit : MonoBehaviour
         int rand = Random.Range(0, 9);
         if (rand >= 5)
         {
-            damage = Mathf.RoundToInt(20 * Mathf.Log10(unitLevel) + 10);
+            damagePower = Mathf.RoundToInt(20 * Mathf.Log10(unitLevel) + 10);
             hpUpdated = true;
         }
         else
@@ -164,7 +177,7 @@ public class Unit : MonoBehaviour
         //Player chooses which stat to increase in the future
         int rand = Random.Range(0, 9);
         if (hpUpdated)
-            damage = Mathf.RoundToInt(20 * Mathf.Log10(unitLevel) + 10);
+            damagePower = Mathf.RoundToInt(20 * Mathf.Log10(unitLevel) + 10);
         else
             maxHP = Mathf.RoundToInt(50 * Mathf.Log10(unitLevel) + 100);
         //\ 200\cdot\log\left(x\right)\ +\ 100

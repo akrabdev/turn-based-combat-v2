@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Fire.meta
 guid: 02b17a2d27b7e481a98c7d3900404198
+=======
+guid: aab8db3ee04924e4c9895e66e6b9c839
+>>>>>>> Player_Agent_Training_17:Assets/Mapping.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

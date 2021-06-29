@@ -16,6 +16,8 @@ public class CameraController : MonoBehaviour
     // Allows camera to follow player
     void Update()
     {
-        this.transform.position = new Vector3 (player.transform.position.x, player.transform.position.y, -10);
+        Vector2 targetPos = new Vector2(player.transform.position.x, player.transform.position.y);
+        transform.position = Vector2.Lerp(transform.position, targetPos, 5f * Time.deltaTime);
+        transform.Translate(0, 0, player.transform.position.z - 0.5f);
     }
 }

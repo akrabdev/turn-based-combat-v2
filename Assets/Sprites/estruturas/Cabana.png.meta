@@ -1,7 +1,133 @@
 fileFormatVersion: 2
 guid: c1dea78e86173044fa46f14a765562f3
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 8607755260825349930
+    second: Cabana_0
+  - first:
+      213: -4219033908154368338
+    second: Cabana_1
+  - first:
+      213: 786797904504925075
+    second: Cabana_2
+  - first:
+      213: 3931654541405764129
+    second: Cabana_3
+  - first:
+      213: -7412589116574596905
+    second: Cabana_4
+  - first:
+      213: -4992689272743455810
+    second: Cabana_5
+  - first:
+      213: -1177660553126886857
+    second: Cabana_6
+  - first:
+      213: 4036158197808314876
+    second: Cabana_7
+  - first:
+      213: -6633984191971567743
+    second: Cabana_8
+  - first:
+      213: 5793131972505615923
+    second: Cabana_9
+  - first:
+      213: -5370987599573108280
+    second: Cabana_10
+  - first:
+      213: -5721689354101106763
+    second: Cabana_11
+  - first:
+      213: -2120361715671961719
+    second: Cabana_12
+  - first:
+      213: -2630145509100203204
+    second: Cabana_13
+  - first:
+      213: 6002739335365078281
+    second: Cabana_14
+  - first:
+      213: 7307020464463120261
+    second: Cabana_15
+  - first:
+      213: -6427681162258757130
+    second: Cabana_16
+  - first:
+      213: 2858408160218530643
+    second: Cabana_17
+  - first:
+      213: 878073277058187506
+    second: Cabana_18
+  - first:
+      213: -7993934929597501080
+    second: Cabana_19
+  - first:
+      213: 4474574837291895985
+    second: Cabana_20
+  - first:
+      213: -292010276452066117
+    second: Cabana_21
+  - first:
+      213: -4468563560657271176
+    second: Cabana_22
+  - first:
+      213: -1720422675273069467
+    second: Cabana_23
+  - first:
+      213: 6300207502052305876
+    second: Cabana_24
+  - first:
+      213: -5042637869146239864
+    second: Cabana_25
+  - first:
+      213: -1505216053882124724
+    second: Cabana_26
+  - first:
+      213: -6477461512134578089
+    second: Cabana_27
+  - first:
+      213: -6783336051225613577
+    second: Cabana_28
+  - first:
+      213: -612770300735919689
+    second: Cabana_29
+  - first:
+      213: -1512252622089880326
+    second: Cabana_30
+  - first:
+      213: -3056575332182902206
+    second: Cabana_31
+  - first:
+      213: -4146322253766285627
+    second: Cabana_32
+  - first:
+      213: -1572055960436265995
+    second: Cabana_33
+  - first:
+      213: 1430263686333226237
+    second: Cabana_34
+  - first:
+      213: -7144879239634655006
+    second: Cabana_35
+  - first:
+      213: -7700096818665720634
+    second: Cabana_36
+  - first:
+      213: -3520636712127666518
+    second: Cabana_37
+  - first:
+      213: -1113991718596197737
+    second: Cabana_38
+  - first:
+      213: 4973656739231622114
+    second: Cabana_39
+  - first:
+      213: 2350585494209338166
+    second: Cabana_40
+  - first:
+      213: 2815398812295199241
+    second: Cabana_41
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -40,14 +166,14 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -62,7 +188,19 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -73,7 +211,217 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Cabana_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 195
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2faefacdc3e47770800000000000000
+      internalID: 8607755260825349930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cabana_1
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 195
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eae7121930bf275c0800000000000000
+      internalID: -4219033908154368338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cabana_2
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 195
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39ba90886844bea00800000000000000
+      internalID: 786797904504925075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cabana_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 130
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12aba0089fa009630800000000000000
+      internalID: 3931654541405764129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cabana_4
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 130
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d005a8d871312990800000000000000
+      internalID: -7412589116574596905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cabana_5
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 130
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb319301f8766bab0800000000000000
+      internalID: -4992689272743455810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cabana_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 65
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 732c1e867fb18afe0800000000000000
+      internalID: -1177660553126886857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cabana_7
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 65
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf935a51f70530830800000000000000
+      internalID: 4036158197808314876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cabana_8
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 65
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1875af7968a5fe3a0800000000000000
+      internalID: -6633984191971567743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cabana_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33eb72ee5d6556050800000000000000
+      internalID: 5793131972505615923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

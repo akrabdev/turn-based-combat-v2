@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbd35fffec418fd428e2778a6eb6af12, type: 3}
+  m_Name: Sworddancing_Player
+  m_EditorClassIdentifier: 
+  name: Player_Sworddancing
+  icon: {fileID: 2021249631803190836, guid: ff57a2efd62c32f459177189c8e003bb, type: 3}
+  description: Short-range attack that deals 30 damage to target
+  element: {fileID: 11400000, guid: 38e684adca0c994448c4f6b642f0bf38, type: 2}
+  isProjectile: 0
+  follow: 0
+  currentCooldown: 0
+  maxCooldown: 10
+  damage: 30
+  manaCost: 15
+  maxRange: 1.5
+  followSpeed: 0
+  onSelf: 0
+  multiple: 0
+  multipleNumber: 0
+  projectile: {fileID: 0}
+  effect:
+  - {fileID: 7038799223474511258, guid: 1e0f5d2798e7b6b40aefc59848154cbf, type: 3}
+  projectileSoundEffectName: 
