@@ -23,7 +23,7 @@ MonoBehaviour:
   damage: 20
   manaCost: 10
   maxRange: 5
-  followSpeed: 10
+  followSpeed: 50
   onSelf: 0
   multiple: 1
   multipleNumber: 3

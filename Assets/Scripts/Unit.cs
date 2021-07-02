@@ -79,7 +79,8 @@ public class Unit : MonoBehaviour
         {
             dmg *= dmgDealer.damagePower;
         }
-        DamagePopupManager.instance.Setup(dmg.ToString(), dmgColor, transform);
+        if (!TrainingManager.instance.trainingMode)
+            DamagePopupManager.instance.Setup(dmg.ToString(), dmgColor, transform);
 		currentHP -= dmg;
         SetHP();
 
@@ -95,7 +96,8 @@ public class Unit : MonoBehaviour
 	public void Heal(int value)
 	{
         Color healColor = Color.green;
-        DamagePopupManager.instance.Setup((value * magicPower).ToString(), healColor, transform);
+        if (!TrainingManager.instance.trainingMode)
+            DamagePopupManager.instance.Setup((value * magicPower).ToString(), healColor, transform);
         currentHP += value*magicPower;
 		if (currentHP > maxHP)
 			currentHP = maxHP;
@@ -105,7 +107,8 @@ public class Unit : MonoBehaviour
     public void ManaHeal(int value)
     {
         Color healColor = Color.blue;
-        DamagePopupManager.instance.Setup((value*magicPower).ToString(), healColor, transform);
+        if (!TrainingManager.instance.trainingMode)
+            DamagePopupManager.instance.Setup((value*magicPower).ToString(), healColor, transform);
         currentMana += value * magicPower;
         if (currentMana > maxMana)
             currentMana = maxMana;

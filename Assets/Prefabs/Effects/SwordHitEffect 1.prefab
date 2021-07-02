@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7038799223474511258}
   - component: {fileID: 9067814740421050173}
   m_Layer: 0
-  m_Name: SwordHitEffect
+  m_Name: SwordHitEffect 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4798,7 +4798,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1105947515
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0

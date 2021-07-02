@@ -20,7 +20,8 @@ public class Stun : StatusEffect
             return;
         }
         base.Timer();
-        DamagePopupManager.instance.Setup("STUNNED!", Color.magenta, stunnedUnit.transform);
+        if (!TrainingManager.instance.trainingMode)
+            DamagePopupManager.instance.Setup("STUNNED!", Color.magenta, stunnedUnit.transform);
         
     }
 

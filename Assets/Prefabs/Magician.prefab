@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 506811173356925758}
   - component: {fileID: 4466508515223342566}
   - component: {fileID: 4548191865744871993}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: LevelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3778468460238870266}
   - component: {fileID: 4355083846660158630}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 4389456963750168105}
   - component: {fileID: 1347397446739390346}
   - component: {fileID: 2842028642049274871}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: ManaPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3522436192463460168}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 1681721087}
   - component: {fileID: 1681721086}
   - component: {fileID: 5074780808093879589}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Magician
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -348,7 +348,7 @@ MonoBehaviour:
   unitLevel: 1
   experiencePoints: 0
   damagePower: 1
-  magicPower: 10
+  magicPower: 1
   lookDir: 0
   maxHP: 100
   currentHP: 100
@@ -428,7 +428,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2514056320926447468}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -480,20 +480,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 6
+    VectorObservationSize: 7
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
-      BranchSizes: 06000000
-    VectorActionSize: 06000000
+      BranchSizes: 09000000
+    VectorActionSize: 09000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: EnemyAgent
-  TeamId: 0
+  m_BehaviorName: MagicianAgent
+  TeamId: 1
   m_UseChildSensors: 0
   m_UseChildActuators: 1
   m_ObservableAttributeHandling: 0
@@ -515,6 +515,9 @@ MonoBehaviour:
   MaxStep: 10000
   isFrozen: 0
   opponent: {fileID: 0}
+  colliderLayerMask:
+    serializedVersion: 2
+    m_Bits: 1536
 --- !u!95 &5074780808093879589
 Animator:
   serializedVersion: 3
@@ -546,7 +549,7 @@ GameObject:
   - component: {fileID: 3564350583417951083}
   - component: {fileID: 8528980956005760206}
   - component: {fileID: 4312812035163631017}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -638,7 +641,7 @@ GameObject:
   - component: {fileID: 8158668907217410717}
   - component: {fileID: 7650070900074670550}
   - component: {fileID: 1428439882091042132}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -712,7 +715,7 @@ GameObject:
   - component: {fileID: 3906921796314055500}
   - component: {fileID: 6866888642012202861}
   - component: {fileID: 2082734388177434263}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -785,7 +788,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4310782247380366445}
   - component: {fileID: 3686446120645427669}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -876,7 +879,7 @@ GameObject:
   - component: {fileID: 6054439523116334045}
   - component: {fileID: 5807207621873326099}
   - component: {fileID: 1714250257378004337}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: BlackBoarBattleHud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -968,7 +971,7 @@ GameObject:
   - component: {fileID: 5968449008488300006}
   - component: {fileID: 7941571838414971012}
   - component: {fileID: 3591930950367253755}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1040,7 +1043,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2957153441049576141}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1079,7 +1082,7 @@ GameObject:
   - component: {fileID: 9027425601024234462}
   - component: {fileID: 4062925973163264024}
   - component: {fileID: 3512962094125196876}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: HPPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1168,7 +1171,7 @@ GameObject:
   - component: {fileID: 3756244150490219582}
   - component: {fileID: 435329967039015432}
   - component: {fileID: 6846107386292328335}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1242,7 +1245,7 @@ GameObject:
   - component: {fileID: 3810121766724012785}
   - component: {fileID: 1528951350283688520}
   - component: {fileID: 3961386370419358150}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1314,7 +1317,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7877245311217737435}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1352,7 +1355,7 @@ GameObject:
   - component: {fileID: 105474943438007681}
   - component: {fileID: 5997745059031339973}
   - component: {fileID: 2625590571589531167}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1426,7 +1429,7 @@ GameObject:
   - component: {fileID: 1681816080194397323}
   - component: {fileID: 6886865766249985452}
   - component: {fileID: 3660922211791682868}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpawnArea
   m_TagString: Respawn
   m_Icon: {fileID: 0}
@@ -1498,7 +1501,7 @@ GameObject:
   - component: {fileID: 3860794545957822434}
   - component: {fileID: 4464205181010524831}
   - component: {fileID: 2735353854846455109}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1607,7 +1610,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 411777626728093968}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}

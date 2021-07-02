@@ -35,7 +35,10 @@ public class Projectile : MonoBehaviour
                 projDestination = target.transform.position;
                 projDirection = (target.transform.position - firer.transform.position).normalized;
             }
-            transform.Translate((projDestination - transform.position).normalized * followSpeed * Time.deltaTime, Space.World);
+            if (!TrainingManager.instance.trainingMode)
+                transform.Translate((projDestination - transform.position).normalized * followSpeed * Time.deltaTime, Space.World);
+            else
+                transform.Translate((projDestination - transform.position).normalized * 3, Space.World);
             transform.up = projDirection;
             if (Vector3.Distance(projDestination, transform.position) <= 0.2)
                 Destroy(gameObject);
@@ -70,17 +73,20 @@ public class Projectile : MonoBehaviour
         GameObject instantiatedProj = Instantiate(gameObject, firer.transform.position, Quaternion.identity);
         Projectile instantiatedProjComponent = instantiatedProj.GetComponent<Projectile>();
         instantiatedProjComponent.Fire(firer, target, damage, element, follow, followSpeed);
-        FindObjectOfType<AudioManager>().Play(soundEffectName);
+        if (!TrainingManager.instance.trainingMode)
+            FindObjectOfType<AudioManager>().Play(soundEffectName);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<Unit>() == target)
         {
-            FindObjectOfType<AudioManager>().Play(soundEffectName);
+            if (!TrainingManager.instance.trainingMode)
+                FindObjectOfType<AudioManager>().Play(soundEffectName);
             isFiring = false;
             target.TakeDamage(damage, firer, element);
-            Instantiate(effect, target.transform.position, Quaternion.identity);
+            if (!TrainingManager.instance.trainingMode)
+                Instantiate(effect, target.transform.position, Quaternion.identity);
             if (multipleNumber > 0)
                 Destroy(gameObject, (0.1f * multipleNumber) - counter);
             else

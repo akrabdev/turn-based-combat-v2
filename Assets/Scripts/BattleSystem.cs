@@ -68,6 +68,8 @@ public class BattleSystem : MonoBehaviour
         if(!TrainingManager.instance.trainingMode) //If the game is in play mode, count down for turns
             if(state != BattleState.IDLE)
                 Timer();
+        //if (player.transform.position.y <= -9.5f || enemy.transform.position.y <= -9.5f)
+        //    state = BattleState.IDLE;
     }
 
     public void SetupBattle(GameObject player, GameObject enemy)
@@ -81,7 +83,8 @@ public class BattleSystem : MonoBehaviour
             //GET AGENT AND UNIT COMPONENTS AND UPDATE HUD FOR EACH OBJECT IN BATTLE EXCEPT PLAYER
             //objectsBodies.Add(objects[i].GetComponent<Rigidbody2D>());
             //objectsBodies[i].constraints |= RigidbodyConstraints2D.FreezePosition;
-
+            this.player = player;
+            this.enemy = enemy;
             playerUnit = player.GetComponent<Unit>();
             enemyUnit = enemy.GetComponent<Unit>();
 
@@ -157,21 +160,41 @@ public class BattleSystem : MonoBehaviour
     /// </summary>
     public void SwitchTurn()
     {
+        if(TrainingManager.instance.trainingMode)
+        {
+            // Negative reward for opponent HP ratio
+            playerAgent.AddReward(-(enemyUnit.currentHP / enemyUnit.maxHP));
+            enemyAgent.AddReward(-(playerUnit.currentHP / playerUnit.maxHP));
+
+            // Positive reward for self HP ratio
+            playerAgent.AddReward(playerUnit.currentHP / playerUnit.maxHP);
+            enemyAgent.AddReward(enemyUnit.currentHP / enemyUnit.maxHP);
+
+            // Existential reward
+            playerAgent.AddReward(-0.001f);
+            enemyAgent.AddReward(-0.001f);
+        }
+        
         time = 0;
         CooldownManager.instance.SwitchTurn();
         UpdateTurn();
 
+        // Update status effect timers
         if (state == BattleState.PLAYERTURN)
-        {
-            // Update status effect timers
-            foreach (StatusEffect statusEffect in playerUnit.statusEffects)
-                statusEffect.Timer();
-        }
+            for (int i = 0; i < playerUnit.statusEffects.Count; i++)
+                playerUnit.statusEffects[i].Timer();
         else if (state == BattleState.ENEMYTURN)
-        {
-            foreach (StatusEffect statusEffect in enemyUnit.statusEffects)
-                statusEffect.Timer();
-        }
+            for (int i = 0; i < enemyUnit.statusEffects.Count; i++)
+                enemyUnit.statusEffects[i].Timer();
+
+        // Mana regeneration every turn
+        playerUnit.currentMana += 2;
+        if (playerUnit.currentMana > playerUnit.maxMana)
+            playerUnit.currentMana = playerUnit.maxMana;
+        enemyUnit.currentMana += 2;
+        if (enemyUnit.currentMana > enemyUnit.maxMana)
+            enemyUnit.currentMana = enemyUnit.maxMana;
+
 
         // Request an action
         PlayTurn();

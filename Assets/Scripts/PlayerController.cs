@@ -25,10 +25,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        if(BattleSystem.instance.state == BattleState.PLAYERTURN)
+        if (BattleSystem.instance.state == BattleState.PLAYERTURN)
+        {
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                Collider2D hitCollider = Physics2D.OverlapBox((Vector2)gameObject.transform.position + new Vector2(1, 0) , new Vector2(0.15f, 0.15f), 0f);
+                Collider2D hitCollider = Physics2D.OverlapBox((Vector2)gameObject.transform.position + new Vector2(1, 0), new Vector2(0.15f, 0.15f), 0f);
                 if (hitCollider)
                 {
                     Debug.Log("Hit : " + hitCollider.name);
@@ -41,14 +42,14 @@ public class PlayerController : MonoBehaviour
                     }
 
                 }
-                
+
                 else
                 {
                     moveRight();
                     BattleSystem.instance.SwitchTurn();
                 }
-                
-                
+
+
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
@@ -131,7 +132,7 @@ public class PlayerController : MonoBehaviour
                 BattleSystem.instance.playerUnit.spells[6].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
                 BattleSystem.instance.SwitchTurn();
             }
-            
+
             else if (Input.GetKeyDown(KeyCode.F4))
             {
                 BattleSystem.instance.playerUnit.spells[7].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
@@ -167,35 +168,90 @@ public class PlayerController : MonoBehaviour
                 BattleSystem.instance.playerUnit.spells[13].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
                 BattleSystem.instance.SwitchTurn();
             }
-        //else
-        //{
-        //    if (Input.GetKeyDown(KeyCode.F1))
-        //    {
-        //        moveRight();
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                Collider2D hitCollider = Physics2D.OverlapBox((Vector2)gameObject.transform.position + new Vector2(1, 0), new Vector2(0.15f, 0.15f), 0f);
+                if (hitCollider)
+                {
+                    Debug.Log("Hit : " + hitCollider.name);
+                    if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle"))
+                        return;
+                    else
+                    {
+                        moveRight();
+                    }
 
-        //    }
-        //    else if (Input.GetKeyDown(KeyCode.F2))
-        //    {
-        //        moveDown();
-        //    }
-        //    //if (Input.GetKeyDown(KeyCode.RightArrow))
-        //    //{
-        //    //    moveRight();
-        //    //    BattleSystem.instance.
-        //    //}
-        //    //else if (Input.GetKeyDown(KeyCode.DownArrow))
-        //    //{
-        //    //    moveDown();
-        //    //}
-        //    //else if (Input.GetKeyDown(KeyCode.UpArrow))
-        //    //{
-        //    //    moveUp();
-        //    //}
-        //    //else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        //    //{
-        //    //    moveLeft();
-        //    //}
-        //}
+                }
+
+                else
+                {
+                    moveRight();
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                Collider2D hitCollider = Physics2D.OverlapBox((Vector2)gameObject.transform.position + new Vector2(0, -1), new Vector2(0.15f, 0.15f), 0f);
+                if (hitCollider)
+                {
+                    Debug.Log("Hit : " + hitCollider.name);
+                    if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle"))
+                        return;
+                    else
+                    {
+                        moveDown();
+                    }
+
+                }
+
+                else
+                {
+                    moveDown();
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                Collider2D hitCollider = Physics2D.OverlapBox((Vector2)gameObject.transform.position + new Vector2(0, 1), new Vector2(0.15f, 0.15f), 0f);
+                if (hitCollider)
+                {
+                    Debug.Log("Hit : " + hitCollider.name);
+                    if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle"))
+                        return;
+                    else
+                    {
+                        moveUp();
+                    }
+
+                }
+
+                else
+                {
+                    moveUp();
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                Collider2D hitCollider = Physics2D.OverlapBox((Vector2)gameObject.transform.position + new Vector2(-1, 0), new Vector2(0.15f, 0.15f), 0f);
+                if (hitCollider)
+                {
+                    Debug.Log("Hit : " + hitCollider.name);
+                    if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle"))
+                        return;
+                    else
+                    {
+                        moveLeft();
+                    }
+
+                }
+
+                else
+                {
+                    moveLeft();
+                }
+            }
+        }
     }
 
     /*

@@ -1,60 +1,60 @@
 {
-    "PlayerAgent": {
-        "elo": 2211.4276535630343,
+    "MagicianAgent": {
         "checkpoints": [
             {
-                "steps": 499923,
-                "file_path": "results\\tr_01\\PlayerAgent\\PlayerAgent-499923.onnx",
-                "reward": 1992.3720930232557,
-                "creation_time": 1621950739.1202996,
+                "steps": 999991,
+                "file_path": "results\\tr_41\\MagicianAgent\\MagicianAgent-999991.onnx",
+                "reward": 19977.998682022095,
+                "creation_time": 1625165711.8252375,
                 "auxillary_file_paths": [
-                    "results\\tr_01\\PlayerAgent\\PlayerAgent-499923.pt"
+                    "results\\tr_41\\MagicianAgent\\MagicianAgent-999991.pt"
                 ]
             },
             {
-                "steps": 999986,
-                "file_path": "results\\tr_01\\PlayerAgent\\PlayerAgent-999986.onnx",
-                "reward": 3246.8917525773195,
-                "creation_time": 1621954896.272778,
+                "steps": 1499989,
+                "file_path": "results\\tr_41\\MagicianAgent\\MagicianAgent-1499989.onnx",
+                "reward": null,
+                "creation_time": 1625170063.8488052,
                 "auxillary_file_paths": [
-                    "results\\tr_01\\PlayerAgent\\PlayerAgent-999986.pt"
+                    "results\\tr_41\\MagicianAgent\\MagicianAgent-1499989.pt"
                 ]
             },
             {
-                "steps": 1499910,
-                "file_path": "results\\tr_01\\PlayerAgent\\PlayerAgent-1499910.onnx",
-                "reward": 12710.297674418605,
-                "creation_time": 1621959003.5130987,
+                "steps": 1999962,
+                "file_path": "results\\tr_41\\MagicianAgent\\MagicianAgent-1999962.onnx",
+                "reward": -19.998468892648816,
+                "creation_time": 1625174752.2896156,
                 "auxillary_file_paths": [
-                    "results\\tr_01\\PlayerAgent\\PlayerAgent-1499910.pt"
+                    "results\\tr_41\\MagicianAgent\\MagicianAgent-1999962.pt"
                 ]
             },
             {
-                "steps": 1816579,
-                "file_path": "results\\tr_01\\PlayerAgent\\PlayerAgent-1816579.onnx",
-                "reward": 16814.790322580644,
-                "creation_time": 1621961607.2401083,
+                "steps": 2499996,
+                "file_path": "results\\tr_41\\MagicianAgent\\MagicianAgent-2499996.onnx",
+                "reward": -2.587208857572319,
+                "creation_time": 1625179948.2455914,
                 "auxillary_file_paths": [
-                    "results\\tr_01\\PlayerAgent\\PlayerAgent-1816579.pt"
+                    "results\\tr_41\\MagicianAgent\\MagicianAgent-2499996.pt"
                 ]
             },
             {
-                "steps": 1816852,
-                "file_path": "results\\tr_01\\PlayerAgent\\PlayerAgent-1816852.onnx",
-                "reward": -1.7142857142857142,
-                "creation_time": 1621969663.9044034,
+                "steps": 2955852,
+                "file_path": "results\\tr_41\\MagicianAgent\\MagicianAgent-2955852.onnx",
+                "reward": 0.06571410991707627,
+                "creation_time": 1625184922.4724,
                 "auxillary_file_paths": [
-                    "results\\tr_01\\PlayerAgent\\PlayerAgent-1816852.pt"
+                    "results\\tr_41\\MagicianAgent\\MagicianAgent-2955852.pt"
                 ]
             }
         ],
+        "elo": 980.283624390745,
         "final_checkpoint": {
-            "steps": 1816852,
-            "file_path": "results\\tr_01\\PlayerAgent.onnx",
-            "reward": -1.7142857142857142,
-            "creation_time": 1621969663.9044034,
+            "steps": 2955852,
+            "file_path": "results\\tr_41\\MagicianAgent.onnx",
+            "reward": 0.06571410991707627,
+            "creation_time": 1625184922.4724,
             "auxillary_file_paths": [
-                "results\\tr_01\\PlayerAgent\\PlayerAgent-1816852.pt"
+                "results\\tr_41\\MagicianAgent\\MagicianAgent-2955852.pt"
             ]
         }
     },

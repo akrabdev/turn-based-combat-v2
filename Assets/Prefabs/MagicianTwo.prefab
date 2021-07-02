@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3668203327105052566}
   - component: {fileID: 8632733193751721040}
   - component: {fileID: 9182633847067449860}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: HPPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7396638881325792901}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 8885475843594270393}
   - component: {fileID: 6528009009903101440}
   - component: {fileID: 8743284951626728846}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 8903357647689513078}
   - component: {fileID: 5306738930431874624}
   - component: {fileID: 1201769343603469255}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5339339709816857944}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 8807779266030035882}
   - component: {fileID: 8240393563062830807}
   - component: {fileID: 7663478853797409037}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -434,7 +434,7 @@ GameObject:
   - component: {fileID: 6411096638942042307}
   - component: {fileID: 1170029156339108324}
   - component: {fileID: 9034781493871739260}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpawnArea
   m_TagString: Respawn
   m_Icon: {fileID: 0}
@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 5681695938717028809}
   - component: {fileID: 2059145474119266189}
   - component: {fileID: 7764258578376215127}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -576,7 +576,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2521541199772197523}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -613,7 +613,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8917155536279939762}
   - component: {fileID: 8349556145729947886}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -703,7 +703,7 @@ GameObject:
   - component: {fileID: 5235230810238537590}
   - component: {fileID: 8238193576420618670}
   - component: {fileID: 8120452864123006577}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: LevelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -779,7 +779,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9173266954395462400}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -818,7 +818,7 @@ GameObject:
   - component: {fileID: 8306242341180553825}
   - component: {fileID: 6709556859679462338}
   - component: {fileID: 7556795269510369215}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: ManaPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -906,7 +906,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8393919301554997285}
   - component: {fileID: 8973188661208268189}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -996,7 +996,7 @@ GameObject:
   - component: {fileID: 8761722357574696708}
   - component: {fileID: 1217060875028724517}
   - component: {fileID: 6001208512416303839}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1070,7 +1070,7 @@ GameObject:
   - component: {fileID: 4509970857218959061}
   - component: {fileID: 2703648855086421406}
   - component: {fileID: 6664516273710835996}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1145,7 +1145,7 @@ GameObject:
   - component: {fileID: 9140289931896483619}
   - component: {fileID: 4175626584161173638}
   - component: {fileID: 8391867530534490593}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1242,7 +1242,7 @@ GameObject:
   - component: {fileID: 5742028763616295605}
   - component: {fileID: 5742028763616295607}
   - component: {fileID: 5742028763616295606}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MagicianTwo
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1281,7 +1281,7 @@ MonoBehaviour:
   unitLevel: 1
   experiencePoints: 0
   damagePower: 1
-  magicPower: 10
+  magicPower: 1
   lookDir: 0
   maxHP: 100
   currentHP: 100
@@ -1361,7 +1361,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7875793388525898532}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -1432,20 +1432,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 6
+    VectorObservationSize: 7
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
-      BranchSizes: 06000000
-    VectorActionSize: 06000000
+      BranchSizes: 09000000
+    VectorActionSize: 09000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: EnemyAgent
-  TeamId: 1
+  m_BehaviorName: MagicianAgent
+  TeamId: 0
   m_UseChildSensors: 0
   m_UseChildActuators: 1
   m_ObservableAttributeHandling: 0
@@ -1467,6 +1467,9 @@ MonoBehaviour:
   MaxStep: 10000
   isFrozen: 0
   opponent: {fileID: 0}
+  colliderLayerMask:
+    serializedVersion: 2
+    m_Bits: 1536
 --- !u!1 &8335535034022818358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1478,7 +1481,7 @@ GameObject:
   - component: {fileID: 2124564864179077550}
   - component: {fileID: 2421222728522128588}
   - component: {fileID: 9112702444949645491}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1553,7 +1556,7 @@ GameObject:
   - component: {fileID: 1993537828134225813}
   - component: {fileID: 2249706536347821147}
   - component: {fileID: 6369766878557172025}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: BlackBoarBattleHud
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -9139335853216851191}
   m_Layer: 0
   m_Name: FireballProjectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1105947515
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 3987681093670230206, guid: d9f8cb3ea16297b4989dd2f78fd13dd5,
     type: 3}
@@ -99,6 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 7038799223474511258, guid: c8a1779a869ad2048a7be497b439b39b, type: 3}
   soundEffectName: FireballEffect
+  multipleNumber: 0
+  counter: 0
 --- !u!61 &6973408492053808273
 BoxCollider2D:
   m_ObjectHideFlags: 0

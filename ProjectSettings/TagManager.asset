@@ -16,6 +16,8 @@ TagManager:
   - Shield
   - Attacks
   - LevelUp
+  - Obstacle
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -26,8 +28,8 @@ TagManager:
   - 
   - 
   - Interactable
-  - 
-  - 
+  - Obstacle
+  - Unit
   - 
   - 
   - 

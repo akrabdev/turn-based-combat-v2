@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -3898584471599186477}
   m_Layer: 0
   m_Name: SnipeshotProjectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1105947515
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: -8705396118031094242, guid: e332f53b0a9538f47a4d0426652b8db7,
     type: 3}
@@ -98,7 +98,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 7038799223474511258, guid: 3ef147947e81d1547abdd4d1c29bee3b, type: 3}
   soundEffectName: LightningboltEffect
-  prefab: {fileID: 9204251887801062571}
+  multipleNumber: 0
+  counter: 0
 --- !u!61 &-3898584471599186477
 BoxCollider2D:
   m_ObjectHideFlags: 0

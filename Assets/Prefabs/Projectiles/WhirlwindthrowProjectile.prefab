@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -3898584471599186477}
   m_Layer: 0
   m_Name: WhirlwindthrowProjectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1105947515
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 3870026601545350422, guid: 3e1d8bb44a7d5e843abe272413abf359,
     type: 3}

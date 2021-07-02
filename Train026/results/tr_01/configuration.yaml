@@ -1,6 +1,6 @@
 default_settings: null
 behaviors:
-  PlayerAgent:
+  MagicianAgent:
     trainer_type: ppo
     hyperparameters:
       batch_size: 2048
@@ -15,7 +15,7 @@ behaviors:
       normalize: false
       hidden_units: 256
       num_layers: 2
-      vis_encode_type: simple
+      vis_encode_type: match3
       memory: null
       goal_conditioning_type: hyper
     reward_signals:
@@ -60,10 +60,10 @@ engine_settings:
   no_graphics: false
 environment_parameters: null
 checkpoint_settings:
-  run_id: tr_01
+  run_id: tr_41
   initialize_from: null
   load_model: false
-  resume: true
+  resume: false
   force: false
   train_model: false
   inference: false
