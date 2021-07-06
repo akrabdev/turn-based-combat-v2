@@ -19,8 +19,11 @@ public class Spell : HotbarItem
     public int maxCooldown;
     public int damage;
     public int manaCost;
-    public int maxRange;
+    public float maxRange;
     public int followSpeed;
+    public bool onSelf;
+    public bool multiple;
+    public int multipleNumber;
 
     [Header("Spell graphics")]
     public GameObject projectile;
@@ -57,9 +60,34 @@ public class Spell : HotbarItem
         return builder.ToString();
     }
 
-    public virtual void CastSpell(Unit spellCaster, Unit target)
+    public virtual bool CastSpell(Unit spellCaster, Unit target)
     {
+        if (IsSpellReady() && spellCaster.currentMana >= manaCost)
+        {
+            if(!onSelf)
+            {
 
+                if (Vector3.Distance(target.transform.position, spellCaster.transform.position) <= maxRange)
+                {
+                    PutOnCooldown();
+                    spellCaster.currentMana -= manaCost;
+                    spellCaster.SetMana();
+                    return true;
+                }
+                else
+                    return false;
+            }
+            else
+            {
+                PutOnCooldown();
+                spellCaster.currentMana -= manaCost;
+                spellCaster.SetMana();
+                return true;
+            }
+        }
+        else
+            return false;
+            
     }
 
     

@@ -5,8 +5,8 @@ using UnityEngine;
 public class DamageFloatEffect : MonoBehaviour
 {
     // Update is called once per frame
-    public float moveSpeed = 3f;
-    public float disappearTime = 1f;
+    public float moveSpeed;
+    public float disappearTime;
     private void Awake()
     {
         Destroy(gameObject, disappearTime);

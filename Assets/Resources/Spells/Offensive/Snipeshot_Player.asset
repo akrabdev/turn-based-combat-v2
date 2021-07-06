@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51b0dc42805b8548b9a2f393ef9ea5a, type: 3}
+  m_Name: Snipeshot_Player
+  m_EditorClassIdentifier: 
+  name: Player_Snipeshot
+  icon: {fileID: 13794926428811262, guid: ff57a2efd62c32f459177189c8e003bb, type: 3}
+  description: Ranged normal attack that deals 25 damage to target
+  element: {fileID: 11400000, guid: 38e684adca0c994448c4f6b642f0bf38, type: 2}
+  isProjectile: 1
+  follow: 1
+  currentCooldown: 0
+  maxCooldown: 2
+  damage: 25
+  manaCost: 0
+  maxRange: 7
+  followSpeed: 15
+  onSelf: 0
+  multiple: 0
+  multipleNumber: 0
+  projectile: {fileID: 9204251887801062571, guid: 6b1ff4455108b8941870e409deaaf232,
+    type: 3}
+  effect:
+  - {fileID: 7038799223474511258, guid: 3ef147947e81d1547abdd4d1c29bee3b, type: 3}
+  projectileSoundEffectName: 

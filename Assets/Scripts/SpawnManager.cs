@@ -76,7 +76,7 @@ public class SpawnManager : MonoBehaviour
         left = worldPosition.x - (bc.size.x / 2f);
         right = worldPosition.x + (bc.size.x / 2f);
 
-        //Debug.Log("left" + left);
+        Debug.Log("left"+left);
 
 
         //topLeft = new Vector3(left, top, worldPosition.z);
@@ -93,13 +93,13 @@ public class SpawnManager : MonoBehaviour
             spanwedObjects[i].SetActive(false);
         }
         //StartCoroutine(ObjectSpawn());
-
+        
     }
 
     private Vector3 GetRandomPosition()
     {
 
-        Vector3 randomPosition = new Vector3(Random.Range(left + 0.5f, right - 0.5f), Random.Range(top - 0.5f, btm + 0.5f), -1f);
+        Vector3 randomPosition = new Vector3(Random.Range(left+0.5f, right-0.5f), Random.Range(top-0.5f, btm+0.5f), -1f);
 
         return randomPosition;
 
@@ -122,9 +122,9 @@ public class SpawnManager : MonoBehaviour
                     yield break;
                 Vector3 objectSpawn = GetRandomPosition(); //new Vector3(Random.Range(-8f, 8f), Random.Range(-4f, 4f), -1f);
                 obj.Add(Instantiate(spanwedObjects[k], objectSpawn, Quaternion.identity));
-                obj[obj.Count - 1].SetActive(true);
+                obj[obj.Count-1].SetActive(true);
             }
-            for (int k = 0; k < obj.Count; k++)
+            for(int k = 0; k < obj.Count; k++)
             {
                 int TimeToDestroy = Random.Range(2, 5);
                 yield return new WaitForSeconds(TimeToDestroy);
@@ -138,32 +138,31 @@ public class SpawnManager : MonoBehaviour
 
     public IEnumerator CollectObject(GameObject obj)
     {
-        if (obj.CompareTag("Health"))
+        if(obj.CompareTag("Health"))
         {
             if (timesTaken["Health"] > 2)
                 yield break;
             else
                 timesTaken["Health"]++;
             Destroy(obj);
-            PlayerUnit.Heal();
-            ParticleSystem healing = Instantiate(BS.healEffect, PlayerUnit.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
-            Destroy(healing.gameObject, 1f);
+            PlayerUnit.Heal(10);
+            //ParticleSystem healing = Instantiate(BS.healEffect, PlayerUnit.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
+            //Destroy(healing.gameObject, 1f);
             Debug.Log("Healed");
             yield return new WaitForSeconds(0);
         }
-        else if (obj.CompareTag("Armor"))
+        else if(obj.CompareTag("Armor"))
         {
             //Change to every turn
             Destroy(obj);
             int TimeToDampen = Random.Range(6, 9);
-            Debug.Log(EnemyUnit.damage);
-            EnemyUnit.damage /= 5;
-            Debug.Log(EnemyUnit.damage);
+            var temp = EnemyUnit.damagePower;
+            EnemyUnit.damagePower /= 5;
             yield return new WaitForSeconds(TimeToDampen);
-            EnemyUnit.damage *= 5;
+            EnemyUnit.damagePower = temp;
         }
 
-        else if (obj.CompareTag("XP"))
+        else if(obj.CompareTag("XP"))
         {
             if (timesTaken["XP"] > 2)
                 yield break;
@@ -172,20 +171,20 @@ public class SpawnManager : MonoBehaviour
             Destroy(obj);
             PlayerUnit.addExperience(10);
         }
-        else if (obj.CompareTag("Attacks"))
+        else if(obj.CompareTag("Attacks"))
         {
             if (timesTaken["Attacks"] > 2)
                 yield break;
             else
                 timesTaken["Attacks"]++;
             Destroy(obj);
-            PlayerUnit.damage *= 2;
+            PlayerUnit.damagePower *= 2;
             int TimeToInc = Random.Range(6, 9);
             yield return new WaitForSeconds(TimeToInc);
-            PlayerUnit.damage /= 2;
+            PlayerUnit.damagePower /= 2;
 
         }
-        else if (obj.CompareTag("Shield"))
+        else if(obj.CompareTag("Shield"))
         {
             if (timesTaken["Shield"] > 2)
                 yield break;
@@ -193,14 +192,12 @@ public class SpawnManager : MonoBehaviour
                 timesTaken["Shield"]++;
             Destroy(obj);
             int TimeToDampen = Random.Range(6, 9);
-            Debug.Log(EnemyUnit.damage);
-            var temp = EnemyUnit.damage;
-            EnemyUnit.damage = 0;
-            Debug.Log(EnemyUnit.damage);
+            var temp = EnemyUnit.damagePower;
+            EnemyUnit.damagePower = 0;
             yield return new WaitForSeconds(TimeToDampen);
-            EnemyUnit.damage = temp;
+            EnemyUnit.damagePower = temp;
         }
-        else if (obj.CompareTag("LevelUp"))
+        else if(obj.CompareTag("LevelUp"))
         {
             if (timesTaken["LevelUp"] > 1)
                 yield break;
@@ -231,7 +228,7 @@ public class SpawnManager : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //BattleSystem battleSystem = Instantiate(BattleInstance);
-        if (collision.gameObject.CompareTag("Player") && BS.state == BattleState.IDLE)
+        if (collision.gameObject.CompareTag("Player"))
         {
             if (enemyObj.Count == 0)
                 EnemySpawn();
@@ -244,7 +241,7 @@ public class SpawnManager : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D collision)
-    {
+    { 
         if (BS.state == BattleState.WON || BS.state == BattleState.LOST || BS.state == BattleState.IDLE)
         {
             AfterBattle(false);
@@ -256,32 +253,33 @@ public class SpawnManager : MonoBehaviour
             AfterBattle(true);
             Border.SetActive(false);
             BS.state = BattleState.ESCAPE;
-            BS.EndBattle();
+            //BS.EndBattle();
+            //BS.TargetDead(PlayerUnit);
         }
     }
 
     private void AfterBattle(bool escaped)
     {
-        for (int i = 0; i < obj.Count; i++)
+        for(int i = 0; i < obj.Count; i++)
         {
-            if (!escaped)
+            if(!escaped)
                 timesTaken[obj[i].tag] = 0;
             Destroy(obj[i]);
         }
     }
     //private void Fade(bool fade, GameObject go)
     //{
-    //Color borderColor = go.GetComponent<Renderer>().material.color;
-    //if (fade)
-    //{
-    //    borderColor.a -= Time.deltaTime * 0.7f;
-    //    go.GetComponent<Renderer>().material.color = borderColor;
-    //}
-    //else
-    //{
-    //    borderColor.a += Time.deltaTime * 1;
-    //    go.GetComponent<Renderer>().material.color = borderColor;
-    //}
+        //Color borderColor = go.GetComponent<Renderer>().material.color;
+        //if (fade)
+        //{
+        //    borderColor.a -= Time.deltaTime * 0.7f;
+        //    go.GetComponent<Renderer>().material.color = borderColor;
+        //}
+        //else
+        //{
+        //    borderColor.a += Time.deltaTime * 1;
+        //    go.GetComponent<Renderer>().material.color = borderColor;
+        //}
     //}
 
 }

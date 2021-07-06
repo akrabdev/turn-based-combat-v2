@@ -21,24 +21,16 @@ public class InformationBarManager : MonoBehaviour
     }
     // Start is called before the first frame update
     public Text informationText;
-    public bool trainingMode;
 
     // Update is called once per frame
     public IEnumerator UpdateText(string inputText)
     {
         /*informationText.text = inputText + "\n"*/;
-        if(trainingMode)
-        {
-            yield return new WaitForSeconds(0);
-        }
-        else
-        {
-            gameObject.SetActive(true);
-            //informationText.text += inputText + "\n";
-            yield return new WaitForSeconds(3);
-            //informationText.text = "";
-            gameObject.SetActive(false);
-        }
+        gameObject.SetActive(true);
+        informationText.text += inputText + "\n";
+        yield return new WaitForSeconds(1);
+        informationText.text = "";
+        gameObject.SetActive(false);
         
         
     }
