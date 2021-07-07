@@ -163,12 +163,12 @@ public class BattleSystem : MonoBehaviour
         if(TrainingManager.instance.trainingMode)
         {
             // Negative reward for opponent HP ratio
-            playerAgent.AddReward(-(enemyUnit.currentHP / enemyUnit.maxHP));
-            enemyAgent.AddReward(-(playerUnit.currentHP / playerUnit.maxHP));
+            //playerAgent.AddReward(-(enemyUnit.currentHP / enemyUnit.maxHP));
+            //enemyAgent.AddReward(-(playerUnit.currentHP / playerUnit.maxHP));
 
             // Positive reward for self HP ratio
-            playerAgent.AddReward(playerUnit.currentHP / playerUnit.maxHP);
-            enemyAgent.AddReward(enemyUnit.currentHP / enemyUnit.maxHP);
+            //playerAgent.AddReward(playerUnit.currentHP / playerUnit.maxHP);
+            //enemyAgent.AddReward(enemyUnit.currentHP / enemyUnit.maxHP);
 
             // Existential reward
             playerAgent.AddReward(-0.001f);

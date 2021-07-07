@@ -18,6 +18,7 @@ public class MLAgent : Agent
     Animator anim;
     int teamId;
     public LayerMask colliderLayerMask;
+    bool castProjectile;
 
     public override void Initialize()
     {
@@ -133,15 +134,35 @@ public class MLAgent : Agent
         {
             //Debug.Log(gameObject.name + " took action: " + vectorAction.DiscreteActions[0]);
             if (vectorAction.DiscreteActions[0] == 0)
+            {
                 selfUnit.spells[0].CastSpell(selfUnit, opponentUnit);
+                if (selfUnit.spells[0].isProjectile)
+                    castProjectile = true;
+            }
             else if (vectorAction.DiscreteActions[0] == 1)
+            { 
                 selfUnit.spells[1].CastSpell(selfUnit, opponentUnit);
+                if (selfUnit.spells[1].isProjectile)
+                    castProjectile = true;
+            }
             else if (vectorAction.DiscreteActions[0] == 2)
+            { 
                 selfUnit.spells[2].CastSpell(selfUnit, opponentUnit);
+                if (selfUnit.spells[2].isProjectile)
+                    castProjectile = true;
+            }
             else if (vectorAction.DiscreteActions[0] == 3)
+            { 
                 selfUnit.spells[3].CastSpell(selfUnit, opponentUnit);
+                if (selfUnit.spells[3].isProjectile)
+                    castProjectile = true;
+            }
             else if (vectorAction.DiscreteActions[0] == 4)
+            { 
                 selfUnit.spells[4].CastSpell(selfUnit, opponentUnit);
+                if (selfUnit.spells[4].isProjectile)
+                    castProjectile = true;
+            }
             else if (vectorAction.DiscreteActions[0] == 5)
             {
                 rigidbodyComponent.MovePosition((Vector2)transform.position + new Vector2(1f, 0));
@@ -187,9 +208,9 @@ public class MLAgent : Agent
             //    PlayerTurn();
             //}
 
-            if (!opponentUnit.isDead)
+            if (!opponentUnit.isDead && !castProjectile)
                 BattleSystem.instance.SwitchTurn();
-            else
+            else if (opponentUnit.isDead)
                 BattleSystem.instance.TargetDead(opponentUnit);
 
         }
