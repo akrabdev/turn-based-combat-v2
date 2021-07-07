@@ -6,7 +6,7 @@ using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Policies;
 using Unity.MLAgents.Actuators;
 
-public class MagicianAgent : Agent
+public class MLAgent : Agent
 {
     public bool isFrozen;
     BehaviorParameters agentBehavior;

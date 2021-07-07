@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d68b68c7877cfd141b3bf0082895879a, type: 3}
   m_Name: Sharpshooter_Player
   m_EditorClassIdentifier: 
-  name: New Hotbar Item Name
+  name: Player Sharpshooter
   icon: {fileID: -4271080740574823357, guid: ff57a2efd62c32f459177189c8e003bb, type: 3}
   description: Increase caster damage power by 1 for 2 turnsease for 2 turns
   element: {fileID: 0}

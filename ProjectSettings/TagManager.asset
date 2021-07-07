@@ -55,6 +55,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Bushes
+    uniqueID: 2857525273
+    locked: 0
   - name: Interior
     uniqueID: 1851742349
     locked: 0
