@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewFireballSpell", menuName = "Spells/New Fireball Spell")]
 public class FireballSpell : Spell
 {
-    public override void CastSpell(Unit spellCaster, Unit target)
+    public override bool CastSpell(Unit spellCaster, Unit target)
     {
-        if (IsSpellReady())
+        if (IsSpellReady() && spellCaster.currentMana >= manaCost)
         {
             PutOnCooldown();
             spellCaster.currentMana -= manaCost;
@@ -20,10 +20,12 @@ public class FireballSpell : Spell
                 instantiatedProjComponent.Fire(spellCaster, target, damage, element, follow, followSpeed);
                 FindObjectOfType<AudioManager>().Play(projectileSoundEffectName);
             }
+            return true;
         }
+        
         else
         {
-
+            return false;
         }
 
     }

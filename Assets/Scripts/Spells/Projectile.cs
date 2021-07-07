@@ -16,6 +16,8 @@ public class Projectile : MonoBehaviour
     Element element;
     bool follow;
     int followSpeed;
+    public int multipleNumber;
+    public float counter = 0f;
 
     //private void Start()
     //{
@@ -25,6 +27,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        counter += Time.deltaTime;
         if (isFiring)
         {
             if (follow)
@@ -32,14 +35,17 @@ public class Projectile : MonoBehaviour
                 projDestination = target.transform.position;
                 projDirection = (target.transform.position - firer.transform.position).normalized;
             }
-            transform.Translate((projDestination - transform.position).normalized * followSpeed * Time.deltaTime, Space.World);
+            if (!TrainingManager.instance.trainingMode)
+                transform.Translate((projDestination - transform.position).normalized * followSpeed * Time.deltaTime, Space.World);
+            else
+                transform.Translate((projDestination - transform.position).normalized * 3, Space.World);
             transform.up = projDirection;
             if (Vector3.Distance(projDestination, transform.position) <= 0.2)
                 Destroy(gameObject);
         }
     }
 
-    public void Fire(Unit firerInput, Unit targetInput, int damageInput, Element elementInput, bool followInput, int followSpeedInput)
+    public void Fire(Unit firerInput, Unit targetInput, int damageInput, Element elementInput, bool followInput, int followSpeedInput, bool multiple = false, int multipleNumberInput = 0)
     {
         firer = firerInput;
         target = targetInput;
@@ -49,18 +55,44 @@ public class Projectile : MonoBehaviour
         followSpeed = followSpeedInput;
         projDirection = (target.transform.position - firer.transform.position).normalized;
         projDestination = target.transform.position;
+        multipleNumber = multipleNumberInput;
+        if (multiple)
+        {
+            for (int i = 1; i < multipleNumber; i++)
+            {
+                Debug.Log(i);
+                Invoke("FireMore", 0.1f * i);
+            }
+        }
         isFiring = true;
+        
+    }
+
+    private void FireMore()
+    {
+        GameObject instantiatedProj = Instantiate(gameObject, firer.transform.position, Quaternion.identity);
+        Projectile instantiatedProjComponent = instantiatedProj.GetComponent<Projectile>();
+        instantiatedProjComponent.Fire(firer, target, damage, element, follow, followSpeed);
+        if (!TrainingManager.instance.trainingMode)
+            FindObjectOfType<AudioManager>().Play(soundEffectName);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<Unit>() == target)
         {
-            Instantiate(effect, target.transform.position, Quaternion.identity);
-            FindObjectOfType<AudioManager>().Play(soundEffectName);
+            if (!TrainingManager.instance.trainingMode)
+                FindObjectOfType<AudioManager>().Play(soundEffectName);
             isFiring = false;
-            target.TakeDamage(damage, element);
-            Destroy(gameObject);
+            target.TakeDamage(damage, firer, element);
+            if (!TrainingManager.instance.trainingMode)
+                Instantiate(effect, target.transform.position, Quaternion.identity);
+            if (multipleNumber > 0)
+                Destroy(gameObject, (0.1f * multipleNumber) - counter);
+            else
+                Destroy(gameObject);
+
         }
+        
     }
 }

@@ -21,9 +21,9 @@ public class DamagePopupManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    public void Setup(int damageAmount, Color color, Transform damageTaker)
+    public void Setup(string text, Color color, Transform damageTaker)
     {
-        textMesh.SetText(damageAmount.ToString());
+        textMesh.SetText(text);
         textMesh.color = color;
         Instantiate(textMesh, damageTaker.position, Quaternion.identity);
     }

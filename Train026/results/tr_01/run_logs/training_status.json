@@ -1,0 +1,66 @@
+{
+    "MagicianAgent": {
+        "checkpoints": [
+            {
+                "steps": 999991,
+                "file_path": "results\\tr_41\\MagicianAgent\\MagicianAgent-999991.onnx",
+                "reward": 19977.998682022095,
+                "creation_time": 1625165711.8252375,
+                "auxillary_file_paths": [
+                    "results\\tr_41\\MagicianAgent\\MagicianAgent-999991.pt"
+                ]
+            },
+            {
+                "steps": 1499989,
+                "file_path": "results\\tr_41\\MagicianAgent\\MagicianAgent-1499989.onnx",
+                "reward": null,
+                "creation_time": 1625170063.8488052,
+                "auxillary_file_paths": [
+                    "results\\tr_41\\MagicianAgent\\MagicianAgent-1499989.pt"
+                ]
+            },
+            {
+                "steps": 1999962,
+                "file_path": "results\\tr_41\\MagicianAgent\\MagicianAgent-1999962.onnx",
+                "reward": -19.998468892648816,
+                "creation_time": 1625174752.2896156,
+                "auxillary_file_paths": [
+                    "results\\tr_41\\MagicianAgent\\MagicianAgent-1999962.pt"
+                ]
+            },
+            {
+                "steps": 2499996,
+                "file_path": "results\\tr_41\\MagicianAgent\\MagicianAgent-2499996.onnx",
+                "reward": -2.587208857572319,
+                "creation_time": 1625179948.2455914,
+                "auxillary_file_paths": [
+                    "results\\tr_41\\MagicianAgent\\MagicianAgent-2499996.pt"
+                ]
+            },
+            {
+                "steps": 2955852,
+                "file_path": "results\\tr_41\\MagicianAgent\\MagicianAgent-2955852.onnx",
+                "reward": 0.06571410991707627,
+                "creation_time": 1625184922.4724,
+                "auxillary_file_paths": [
+                    "results\\tr_41\\MagicianAgent\\MagicianAgent-2955852.pt"
+                ]
+            }
+        ],
+        "elo": 980.283624390745,
+        "final_checkpoint": {
+            "steps": 2955852,
+            "file_path": "results\\tr_41\\MagicianAgent.onnx",
+            "reward": 0.06571410991707627,
+            "creation_time": 1625184922.4724,
+            "auxillary_file_paths": [
+                "results\\tr_41\\MagicianAgent\\MagicianAgent-2955852.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.26.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

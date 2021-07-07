@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03784b19efd069a4dabbb93f8c3d64d8, type: 3}
+  m_Name: Lightningbolt_Player
+  m_EditorClassIdentifier: 
+  name: Player Lightningbolt
+  icon: {fileID: 4552843446153001671, guid: ff57a2efd62c32f459177189c8e003bb, type: 3}
+  description: Shoots a lighting bolt dealing 40 damage to the target and applying
+    stun effect to it
+  element: {fileID: 11400000, guid: 2be73f8acbde09944b8cdaad7c2ba6ef, type: 2}
+  isProjectile: 1
+  follow: 1
+  currentCooldown: 0
+  maxCooldown: 10
+  damage: 40
+  manaCost: 10
+  maxRange: 4
+  followSpeed: 50
+  onSelf: 0
+  multiple: 0
+  multipleNumber: 0
+  projectile: {fileID: 9204251887801062571, guid: 085d1ceaca9620046a69c456be72ee1f,
+    type: 3}
+  effect:
+  - {fileID: 7038799223474511258, guid: 79af5428b0cd1b54b82b49596568aca5, type: 3}
+  projectileSoundEffectName: LightningboltProjectile

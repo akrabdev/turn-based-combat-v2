@@ -12,6 +12,12 @@ TagManager:
   - Armor
   - Freeze
   - XP
+  - Border
+  - Shield
+  - Attacks
+  - LevelUp
+  - Obstacle
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -23,7 +29,7 @@ TagManager:
   - 
   - Interactable
   - Obstacle
-  - 
+  - Unit
   - 
   - 
   - 
@@ -49,8 +55,23 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Unit
+  - name: Bushes
+    uniqueID: 2857525273
+    locked: 0
+  - name: Interior
+    uniqueID: 1851742349
+    locked: 0
+  - name: Borders
+    uniqueID: 3078854015
+    locked: 0
+  - name: Doors
+    uniqueID: 2926966477
+    locked: 0
+  - name: Objects
     uniqueID: 2204291631
+    locked: 0
+  - name: Second Floor Objects
+    uniqueID: 399113059
     locked: 0
   - name: Canvas
     uniqueID: 2097310883
