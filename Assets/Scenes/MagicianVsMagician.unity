@@ -27170,6 +27170,11 @@ PrefabInstance:
       propertyPath: m_BehaviorName
       value: Agent
       objectReference: {fileID: 0}
+    - target: {fileID: 5742028763616295607, guid: 231106d5165a5454d8dfe5cca5f52fcd,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 6400338178966911494, guid: 231106d5165a5454d8dfe5cca5f52fcd,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -27539,6 +27544,10 @@ PrefabInstance:
     - target: {fileID: 1681721087, guid: 2588ab61f93d5ab499fc73b80823c803, type: 3}
       propertyPath: m_BehaviorName
       value: Agent
+      objectReference: {fileID: 0}
+    - target: {fileID: 1681721087, guid: 2588ab61f93d5ab499fc73b80823c803, type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 105474943438007681, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
