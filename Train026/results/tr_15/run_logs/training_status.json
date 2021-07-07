@@ -1,0 +1,66 @@
+{
+    "Agent": {
+        "elo": 1210.4171560593795,
+        "checkpoints": [
+            {
+                "steps": 436,
+                "file_path": "results\\tr_15\\Agent\\Agent-436.onnx",
+                "reward": -0.009266669147958357,
+                "creation_time": 1625687239.7805736,
+                "auxillary_file_paths": [
+                    "results\\tr_15\\Agent\\Agent-436.pt"
+                ]
+            },
+            {
+                "steps": 497,
+                "file_path": "results\\tr_15\\Agent\\Agent-497.onnx",
+                "reward": 0.24174999500003955,
+                "creation_time": 1625687400.2961948,
+                "auxillary_file_paths": [
+                    "results\\tr_15\\Agent\\Agent-497.pt"
+                ]
+            },
+            {
+                "steps": 517,
+                "file_path": "results\\tr_15\\Agent\\Agent-517.onnx",
+                "reward": 0.6550000094187757,
+                "creation_time": 1625687517.8934274,
+                "auxillary_file_paths": [
+                    "results\\tr_15\\Agent\\Agent-517.pt"
+                ]
+            },
+            {
+                "steps": 530,
+                "file_path": "results\\tr_15\\Agent\\Agent-530.onnx",
+                "reward": -0.5115000163204968,
+                "creation_time": 1625687748.712319,
+                "auxillary_file_paths": [
+                    "results\\tr_15\\Agent\\Agent-530.pt"
+                ]
+            },
+            {
+                "steps": 536,
+                "file_path": "results\\tr_15\\Agent\\Agent-536.onnx",
+                "reward": -0.010000000707805157,
+                "creation_time": 1625687969.6409547,
+                "auxillary_file_paths": [
+                    "results\\tr_15\\Agent\\Agent-536.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 536,
+            "file_path": "results\\tr_15\\Agent.onnx",
+            "reward": -0.010000000707805157,
+            "creation_time": 1625687969.6409547,
+            "auxillary_file_paths": [
+                "results\\tr_15\\Agent\\Agent-536.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.26.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

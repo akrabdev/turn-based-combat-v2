@@ -16,6 +16,7 @@ public class Projectile : MonoBehaviour
     Element element;
     bool follow;
     int followSpeed;
+    bool multiple;
     public int multipleNumber;
     public float counter = 0f;
 
@@ -38,14 +39,14 @@ public class Projectile : MonoBehaviour
             if (!TrainingManager.instance.trainingMode)
                 transform.Translate((projDestination - transform.position).normalized * followSpeed * Time.deltaTime, Space.World);
             else
-                transform.Translate((projDestination - transform.position).normalized * 3, Space.World);
+                transform.Translate((projDestination - transform.position).normalized * 0.01f, Space.World);
             transform.up = projDirection;
             if (Vector3.Distance(projDestination, transform.position) <= 0.2)
                 Destroy(gameObject);
         }
     }
 
-    public void Fire(Unit firerInput, Unit targetInput, int damageInput, Element elementInput, bool followInput, int followSpeedInput, bool multiple = false, int multipleNumberInput = 0)
+    public void Fire(Unit firerInput, Unit targetInput, int damageInput, Element elementInput, bool followInput, int followSpeedInput, bool multipleInput = false, int multipleNumberInput = 0)
     {
         firer = firerInput;
         target = targetInput;
@@ -55,15 +56,10 @@ public class Projectile : MonoBehaviour
         followSpeed = followSpeedInput;
         projDirection = (target.transform.position - firer.transform.position).normalized;
         projDestination = target.transform.position;
+        multiple = multipleInput;
         multipleNumber = multipleNumberInput;
-        if (multiple)
-        {
-            for (int i = 1; i < multipleNumber; i++)
-            {
-                Debug.Log(i);
-                Invoke("FireMore", 0.1f * i);
-            }
-        }
+        if (multiple && multipleNumber > 1)
+            Invoke("FireMore", 0.3f / multipleNumber);
         isFiring = true;
         
     }
@@ -72,14 +68,15 @@ public class Projectile : MonoBehaviour
     {
         GameObject instantiatedProj = Instantiate(gameObject, firer.transform.position, Quaternion.identity);
         Projectile instantiatedProjComponent = instantiatedProj.GetComponent<Projectile>();
-        instantiatedProjComponent.Fire(firer, target, damage, element, follow, followSpeed);
+        instantiatedProjComponent.Fire(firer, target, damage, element, follow, followSpeed, true, multipleNumber-1);
         if (!TrainingManager.instance.trainingMode)
             FindObjectOfType<AudioManager>().Play(soundEffectName);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Unit>() == target)
+        Debug.Log("hit "+collision.name);
+        if (collision.GetComponent<Unit>().name == target.name)
         {
             if (!TrainingManager.instance.trainingMode)
                 FindObjectOfType<AudioManager>().Play(soundEffectName);
@@ -91,6 +88,15 @@ public class Projectile : MonoBehaviour
                 Destroy(gameObject, (0.1f * multipleNumber) - counter);
             else
                 Destroy(gameObject);
+
+            if ((multiple && multipleNumber == 1) || !multiple)
+            {
+                if (!target.isDead)
+                    BattleSystem.instance.SwitchTurn();
+                else
+                    BattleSystem.instance.TargetDead(target);
+            }
+
 
         }
         

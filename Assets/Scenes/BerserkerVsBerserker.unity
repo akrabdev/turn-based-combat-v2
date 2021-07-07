@@ -40690,7 +40690,7 @@ PrefabInstance:
     - target: {fileID: 7647223630646241246, guid: 0c0afb4b3d1fbea428da1bcac1abf0b7,
         type: 3}
       propertyPath: TeamId
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7647223630646241247, guid: 0c0afb4b3d1fbea428da1bcac1abf0b7,
         type: 3}
@@ -41069,7 +41069,7 @@ PrefabInstance:
     - target: {fileID: 5867356450252126400, guid: 2434273b288498d479b18e32e2407f8d,
         type: 3}
       propertyPath: TeamId
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5867356450252126401, guid: 2434273b288498d479b18e32e2407f8d,
         type: 3}

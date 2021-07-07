@@ -1,0 +1,30 @@
+{
+    "Agent": {
+        "elo": 1199.5,
+        "checkpoints": [
+            {
+                "steps": 59,
+                "file_path": "results\\tr_09\\Agent\\Agent-59.onnx",
+                "reward": -0.5570000000298023,
+                "creation_time": 1625669318.6807628,
+                "auxillary_file_paths": [
+                    "results\\tr_09\\Agent\\Agent-59.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 59,
+            "file_path": "results\\tr_09\\Agent.onnx",
+            "reward": -0.5570000000298023,
+            "creation_time": 1625669318.6807628,
+            "auxillary_file_paths": [
+                "results\\tr_09\\Agent\\Agent-59.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.26.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

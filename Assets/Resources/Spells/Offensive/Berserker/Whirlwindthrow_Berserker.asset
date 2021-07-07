@@ -18,12 +18,12 @@ MonoBehaviour:
   element: {fileID: 11400000, guid: 813414465e936744ab481c57de41a50b, type: 2}
   isProjectile: 1
   follow: 1
-  currentCooldown: 0
+  currentCooldown: 10
   maxCooldown: 10
   damage: 20
   manaCost: 10
   maxRange: 2.5
-  followSpeed: 50
+  followSpeed: 20
   onSelf: 0
   multiple: 0
   multipleNumber: 0
