@@ -1,6 +1,6 @@
 default_settings: null
 behaviors:
-  MagicianAgent:
+  Agent:
     trainer_type: ppo
     hyperparameters:
       batch_size: 2048
@@ -60,10 +60,10 @@ engine_settings:
   no_graphics: false
 environment_parameters: null
 checkpoint_settings:
-  run_id: tr_41
+  run_id: tr_01
   initialize_from: null
   load_model: false
-  resume: false
+  resume: true
   force: false
   train_model: false
   inference: false

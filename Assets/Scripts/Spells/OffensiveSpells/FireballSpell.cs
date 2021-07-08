@@ -7,11 +7,9 @@ public class FireballSpell : Spell
 {
     public override bool CastSpell(Unit spellCaster, Unit target)
     {
-        if (IsSpellReady() && spellCaster.currentMana >= manaCost)
+        bool successfulBaseChecks = base.CastSpell(spellCaster, target);
+        if (successfulBaseChecks)
         {
-            PutOnCooldown();
-            spellCaster.currentMana -= manaCost;
-            spellCaster.SetMana();
             if (isProjectile)
             {
                 GameObject instantiatedProj = Instantiate(projectile, spellCaster.transform.position, Quaternion.identity);

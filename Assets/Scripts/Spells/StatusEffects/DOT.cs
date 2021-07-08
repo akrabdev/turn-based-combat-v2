@@ -24,6 +24,10 @@ public class DOT : StatusEffect
         }
         base.Timer();
         dotUnit.TakeDamage(dmg, null, element);
+        if(dotUnit.isDead)
+        {
+            BattleSystem.instance.TargetDead(dotUnit);
+        }
 
     }
 }

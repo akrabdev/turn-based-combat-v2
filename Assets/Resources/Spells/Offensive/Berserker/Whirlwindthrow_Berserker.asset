@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eabd891cef05c074b9be8560da67c4e5, type: 3}
+  m_Name: Whirlwindthrow_Berserker
+  m_EditorClassIdentifier: 
+  name: Berserker Whirlwindthrow
+  icon: {fileID: -3935731183713691273, guid: ff57a2efd62c32f459177189c8e003bb, type: 3}
+  description: Throws the wielded weapon at the target, dealing 30 physical damage
+  element: {fileID: 11400000, guid: 813414465e936744ab481c57de41a50b, type: 2}
+  isProjectile: 1
+  follow: 1
+  currentCooldown: 10
+  maxCooldown: 10
+  damage: 20
+  manaCost: 10
+  maxRange: 2.5
+  followSpeed: 20
+  onSelf: 0
+  multiple: 0
+  multipleNumber: 0
+  projectile: {fileID: 9204251887801062571, guid: a81563b86f2e14043873bfb3c594ef5b,
+    type: 3}
+  effect:
+  - {fileID: 7038799223474511258, guid: 3b85f3aa2dd8b414ab19ebdd6375b2db, type: 3}
+  projectileSoundEffectName: FireballProjectile

@@ -12,7 +12,8 @@ public class SworddancingSpell : Spell
         if (successfulBaseChecks)
         {
             target.TakeDamage(damage, spellCaster, element);
-            Instantiate(effect[0], target.transform.position, Quaternion.identity);
+            if(!TrainingManager.instance.trainingMode)
+                Instantiate(effect[0], target.transform.position, Quaternion.identity);
             return true;
         }
         else

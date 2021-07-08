@@ -126,11 +126,20 @@ public class BattleSystem : MonoBehaviour
 
         //Player turn and train mode is on
         if (state == BattleState.PLAYERTURN && TrainingManager.instance.trainingMode)
-            playerAgent.RequestDecision();
+        {
+            if (!playerUnit.isStunned)
+                playerAgent.RequestDecision();
+            else
+                SwitchTurn();
+        }
         else if (state == BattleState.PLAYERTURN && !TrainingManager.instance.trainingMode)
             return;
         else if (state == BattleState.ENEMYTURN)
-            enemyAgent.RequestDecision();
+            if (!enemyUnit.isStunned)
+                enemyAgent.RequestDecision();
+            else
+                SwitchTurn();
+        
         
     }
 
@@ -163,12 +172,12 @@ public class BattleSystem : MonoBehaviour
         if(TrainingManager.instance.trainingMode)
         {
             // Negative reward for opponent HP ratio
-            playerAgent.AddReward(-(enemyUnit.currentHP / enemyUnit.maxHP));
-            enemyAgent.AddReward(-(playerUnit.currentHP / playerUnit.maxHP));
+            //playerAgent.AddReward(-(enemyUnit.currentHP / enemyUnit.maxHP));
+            //enemyAgent.AddReward(-(playerUnit.currentHP / playerUnit.maxHP));
 
             // Positive reward for self HP ratio
-            playerAgent.AddReward(playerUnit.currentHP / playerUnit.maxHP);
-            enemyAgent.AddReward(enemyUnit.currentHP / enemyUnit.maxHP);
+            //playerAgent.AddReward(playerUnit.currentHP / playerUnit.maxHP);
+            //enemyAgent.AddReward(enemyUnit.currentHP / enemyUnit.maxHP);
 
             // Existential reward
             playerAgent.AddReward(-0.001f);
