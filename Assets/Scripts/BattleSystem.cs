@@ -40,6 +40,8 @@ public class BattleSystem : MonoBehaviour
 
     public GameObject InformationBar;
 
+    public bool playerPlayedTurn = false;
+
     //public BattleState state;
 
     void Awake()
@@ -172,7 +174,13 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.PLAYERTURN)
             state = BattleState.ENEMYTURN;
         else if (state == BattleState.ENEMYTURN)
-            state = BattleState.PLAYERTURN;
+        {
+            if ((TrainingManager.instance.trainingMode && !TrainingManager.instance.selfPlay) || !TrainingManager.instance.trainingMode)
+            {
+                playerPlayedTurn = false;
+                state = BattleState.PLAYERTURN;
+            }
+        }
     }
 
 
