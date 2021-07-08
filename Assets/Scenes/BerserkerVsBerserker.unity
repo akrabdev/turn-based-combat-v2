@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -36844,6 +36844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trainingMode: 1
+  selfPlay: 1
 --- !u!4 &789767381
 Transform:
   m_ObjectHideFlags: 0
@@ -40657,6 +40658,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4247573084707353231, guid: 0c0afb4b3d1fbea428da1bcac1abf0b7,
+        type: 3}
+      propertyPath: maxHP
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4247573084707353231, guid: 0c0afb4b3d1fbea428da1bcac1abf0b7,
+        type: 3}
+      propertyPath: currentHP
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 5243277963360474701, guid: 0c0afb4b3d1fbea428da1bcac1abf0b7,
         type: 3}
       propertyPath: m_Name
@@ -40912,6 +40923,7 @@ MonoBehaviour:
   switchTurnTime: 0
   state: 0
   InformationBar: {fileID: 0}
+  playerPlayedTurn: 0
 --- !u!4 &6034814878287353324
 Transform:
   m_ObjectHideFlags: 0
@@ -40981,6 +40993,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 125825694931774865, guid: 2434273b288498d479b18e32e2407f8d,
+        type: 3}
+      propertyPath: maxHP
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 125825694931774865, guid: 2434273b288498d479b18e32e2407f8d,
+        type: 3}
+      propertyPath: currentHP
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 726380229417493305, guid: 2434273b288498d479b18e32e2407f8d,
         type: 3}
       propertyPath: m_RootOrder
