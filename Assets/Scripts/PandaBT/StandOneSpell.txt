@@ -5,10 +5,9 @@ tree("Root")
 
         
 tree("Logic")
-    sequence
-        IsEnoughMana(5)
-        Wait(1.0)
-        fallback
-            CastFireSpell
+    fallback
+        CastFireSpell
+        CastLightBoltSpell
+
 
 

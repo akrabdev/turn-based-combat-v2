@@ -66,6 +66,7 @@ public class PlayerTasks : MonoBehaviour
     [Task]
     bool IsPlayerTurn()
     {
+        Debug.Log(BattleSystem.instance.state == BattleState.PLAYERTURN);
 
         if (BattleSystem.instance.state == BattleState.PLAYERTURN)
         {
@@ -79,7 +80,7 @@ public class PlayerTasks : MonoBehaviour
     void CastFireSpell()
     {
         var task = Task.current;
-        if (fireSpell.currentCooldown > 0)
+        if (fireSpell.currentCooldown > 0 || player.currentMana < 5)
         {
             Debug.Log(fireSpell.currentCooldown);
             task.Fail();
@@ -87,7 +88,7 @@ public class PlayerTasks : MonoBehaviour
         }
         fireSpell.CastSpell(player, enemy);
         pandaBehaviour.Reset();
-        BattleSystem.instance.SwitchTurn();
+        // BattleSystem.instance.SwitchTurn();
 
     }
 
@@ -101,13 +102,13 @@ public class PlayerTasks : MonoBehaviour
     void CastLightBoltSpell()
     {
         var task = Task.current;
-        if (lightBoltSpell.currentCooldown > 0)
+        if (lightBoltSpell.currentCooldown > 0 || player.currentMana < 10)
         {
             task.Fail();
             return;
         }
         lightBoltSpell.CastSpell(player, enemy);
-        BattleSystem.instance.SwitchTurn();
+        // BattleSystem.instance.SwitchTurn();
 
     }
 
@@ -170,33 +171,44 @@ public class PlayerTasks : MonoBehaviour
 
 
 
+        Debug.Log("In Move");
+
+
         //Left
         if (xNew < xOld && dy < 0.05)
         {
+            Debug.Log("Left");
             playerController.moveLeft();
 
         }
 
         //Right
-        // Debug.Log(xNew);
+        Debug.Log(xNew);
 
-        // Debug.Log(xOld);
+        Debug.Log(xOld);
+        Debug.Log(dy);
         // Debug.Log(yNew);
         // Debug.Log(yOld);
 
-        if (xNew > xOld && dy < 0.05)
+        // if (xNew > xOld && dy < 0.05)
+        if (xNew > xOld)
         {
-            playerController.moveRight();
+            Debug.Log("Right");
+            // playerController.moveRight();
+            transform.Translate(new Vector3(1.0f, 0.0f, 0.0f));
         }
         //Up
         if (dx < 0.05 && yNew > yOld)
         {
+
+            Debug.Log("Up");
             playerController.moveUp();
         }
 
         //Down
         if (dx < 0.05 && yNew < yOld)
         {
+            Debug.Log("Down");
             playerController.moveDown();
         }
     }
@@ -236,6 +248,6 @@ public class PlayerTasks : MonoBehaviour
     {
         pandaBehaviour.Reset();
         BattleSystem.instance.SwitchTurn();
-        return true;
+        return false;
     }
 }

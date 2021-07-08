@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -18499,7 +18499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scripts:
-  - {fileID: 4900000, guid: 24db9c6ec6149a735bef3b4af4d0717b, type: 3}
+  - {fileID: 4900000, guid: d83bb75f8ab3252d49a756350c51cf7d, type: 3}
   autoReset: 0
   tickOn: 0
   sourceInfos:
@@ -18536,18 +18536,6 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: 1
---- !u!114 &415402810 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1681721086, guid: 2588ab61f93d5ab499fc73b80823c803,
-    type: 3}
-  m_PrefabInstance: {fileID: 8947653763900799131}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 415402806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0f7eaa085b63048b240cb34e915621, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &415402814 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5823730836849333166, guid: 2588ab61f93d5ab499fc73b80823c803,
@@ -19831,7 +19819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972006a76c3d2ba4c8432bdba22060e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7786804924517109327}
+  player: {fileID: 415402806}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -19882,8 +19870,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.1740646, y: 6.129354, z: -11.377452}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -27484,11 +27472,11 @@ MonoBehaviour:
   enemy: {fileID: 2514056319382090135}
   playerUnit: {fileID: 415402814}
   enemyUnit: {fileID: 2514056319382090142}
-  playerAgent: {fileID: 415402810}
+  playerAgent: {fileID: 0}
   enemyAgent: {fileID: 2514056319382090136}
   time: 0
   switchTurnTime: 0
-  state: 0
+  state: 2
   InformationBar: {fileID: 0}
 --- !u!4 &6034814878287353324
 Transform:
@@ -27504,19 +27492,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7786804924517109327 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1925253945594304140, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
-    type: 3}
-  m_PrefabInstance: {fileID: 8549988861253228739}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7786804924517109332 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1925253945594304151, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
     type: 3}
   m_PrefabInstance: {fileID: 8549988861253228739}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7786804924517109327}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e08107d099c59bc4eb0c551ed80241d6, type: 3}
@@ -27528,7 +27510,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8549988861253228739}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7786804924517109327}
+  m_GameObject: {fileID: 0}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f3d7433bdf58b941ac6b5cb5c78b797, type: 3}
@@ -27540,7 +27522,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8549988861253228739}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7786804924517109327}
+  m_GameObject: {fileID: 0}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae89d6845d8fade388205b40e49b5652, type: 3}
@@ -27761,6 +27743,10 @@ PrefabInstance:
       propertyPath: opponent
       value: 
       objectReference: {fileID: 2514056319382090135}
+    - target: {fileID: 1681721086, guid: 2588ab61f93d5ab499fc73b80823c803, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1681721087, guid: 2588ab61f93d5ab499fc73b80823c803, type: 3}
       propertyPath: m_BehaviorName
       value: Agent
@@ -27824,6 +27810,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823730836849333166, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: maxHP
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823730836849333166, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: currentHP
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 6591465980649086214, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
