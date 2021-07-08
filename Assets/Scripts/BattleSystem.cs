@@ -180,6 +180,10 @@ public class BattleSystem : MonoBehaviour
                 playerPlayedTurn = false;
                 state = BattleState.PLAYERTURN;
             }
+            else
+            {
+                state = BattleState.PLAYERTURN;
+            }
         }
     }
 
