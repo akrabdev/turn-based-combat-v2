@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -18500,7 +18500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scripts:
   - {fileID: 4900000, guid: d83bb75f8ab3252d49a756350c51cf7d, type: 3}
-  autoReset: 0
+  autoReset: 1
   tickOn: 0
   sourceInfos:
   - isFoldout: 1
@@ -18536,6 +18536,18 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: 1
+--- !u!114 &415402810 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1681721086, guid: 2588ab61f93d5ab499fc73b80823c803,
+    type: 3}
+  m_PrefabInstance: {fileID: 8947653763900799131}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415402806}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c0f7eaa085b63048b240cb34e915621, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &415402814 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5823730836849333166, guid: 2588ab61f93d5ab499fc73b80823c803,
@@ -23096,7 +23108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecad9a911d9281444a37e7a64ebe4260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trainingMode: 0
+  trainingMode: 1
+  selfPlay: 0
 --- !u!4 &789767381
 Transform:
   m_ObjectHideFlags: 0
@@ -27352,6 +27365,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2269186303959838694, guid: 231106d5165a5454d8dfe5cca5f52fcd,
+        type: 3}
+      propertyPath: maxHP
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2269186303959838694, guid: 231106d5165a5454d8dfe5cca5f52fcd,
+        type: 3}
+      propertyPath: currentHP
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4509970857218959061, guid: 231106d5165a5454d8dfe5cca5f52fcd,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -27379,13 +27402,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5742028763616295606, guid: 231106d5165a5454d8dfe5cca5f52fcd,
         type: 3}
+      propertyPath: MaxStep
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5742028763616295606, guid: 231106d5165a5454d8dfe5cca5f52fcd,
+        type: 3}
       propertyPath: opponent
       value: 
       objectReference: {fileID: 415402806}
     - target: {fileID: 5742028763616295607, guid: 231106d5165a5454d8dfe5cca5f52fcd,
         type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 437e77cabb4f44e2b8882f80fb50a767,
+        type: 3}
+    - target: {fileID: 5742028763616295607, guid: 231106d5165a5454d8dfe5cca5f52fcd,
+        type: 3}
       propertyPath: m_BehaviorName
       value: Agent
+      objectReference: {fileID: 0}
+    - target: {fileID: 5742028763616295607, guid: 231106d5165a5454d8dfe5cca5f52fcd,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 6400338178966911494, guid: 231106d5165a5454d8dfe5cca5f52fcd,
         type: 3}
@@ -27472,12 +27511,13 @@ MonoBehaviour:
   enemy: {fileID: 2514056319382090135}
   playerUnit: {fileID: 415402814}
   enemyUnit: {fileID: 2514056319382090142}
-  playerAgent: {fileID: 0}
+  playerAgent: {fileID: 415402810}
   enemyAgent: {fileID: 2514056319382090136}
   time: 0
   switchTurnTime: 0
-  state: 2
+  state: 0
   InformationBar: {fileID: 0}
+  playerPlayedTurn: 0
 --- !u!4 &6034814878287353324
 Transform:
   m_ObjectHideFlags: 0
@@ -27814,12 +27854,12 @@ PrefabInstance:
     - target: {fileID: 5823730836849333166, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
       propertyPath: maxHP
-      value: 2000
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5823730836849333166, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}
       propertyPath: currentHP
-      value: 2000
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6591465980649086214, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}

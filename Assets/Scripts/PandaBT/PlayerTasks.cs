@@ -24,6 +24,7 @@ public class PlayerTasks : MonoBehaviour
     private Path path;
     private Seeker seeker;
     private PlayerController playerController;
+
     // private nextLocation;
     // Start is called before the first frame update
     void Start()
@@ -66,29 +67,52 @@ public class PlayerTasks : MonoBehaviour
     [Task]
     bool IsPlayerTurn()
     {
-        Debug.Log(BattleSystem.instance.state == BattleState.PLAYERTURN);
+        // Debug.Log(BattleSystem.instance.state == BattleState.instance.playerPlayedTurn);
 
-        if (BattleSystem.instance.state == BattleState.PLAYERTURN)
+        if (BattleSystem.instance.state == BattleState.PLAYERTURN && BattleSystem.instance.playerPlayedTurn == false)
         {
             return true;
         }
         return false;
+
     }
 
+
+    // [Task]
+    // void CastFireSpell()
+    // {
+    //     var task = Task.current;
+    //     if (fireSpell.currentCooldown > 0 || player.currentMana < 5)
+    //     {
+    //         Debug.Log(fireSpell.currentCooldown);
+    //         task.Fail();
+    //         return;
+    //     }
+    //     fireSpell.CastSpell(player, enemy);
+    //     // pandaBehaviour.Reset();
+    //     task.Succeed();
+    //     // BattleSystem.instance.SwitchTurn();
+
+    // }
 
     [Task]
     void CastFireSpell()
     {
         var task = Task.current;
-        if (fireSpell.currentCooldown > 0 || player.currentMana < 5)
+        // if(BattleSystem.instance.playerPlayedTurn == false)
+        bool result = fireSpell.CastSpell(player, enemy);
+        if (result && BattleSystem.instance.playerPlayedTurn == false)
         {
-            Debug.Log(fireSpell.currentCooldown);
-            task.Fail();
-            return;
+            BattleSystem.instance.playerPlayedTurn = true;
+            // pandaBehaviour.Reset();
+            task.Succeed();
         }
-        fireSpell.CastSpell(player, enemy);
-        pandaBehaviour.Reset();
-        // BattleSystem.instance.SwitchTurn();
+
+        else
+        {
+            task.Fail();
+
+        }
 
     }
 
@@ -98,17 +122,42 @@ public class PlayerTasks : MonoBehaviour
         healSpell.CastSpell(player, player);
     }
 
+    // [Task]
+    // void CastLightBoltSpell()
+    // {
+    //     var task = Task.current;
+    //     if (lightBoltSpell.currentCooldown > 0 || player.currentMana < 10)
+    //     {
+
+    //         // BattleSystem.instance.SwitchTurn();
+    //         task.Fail();
+    //         return;
+    //     }
+    //     lightBoltSpell.CastSpell(player, enemy);
+    //     task.Succeed();
+
+    //     // BattleSystem.instance.SwitchTurn();
+
+    // }
     [Task]
     void CastLightBoltSpell()
     {
         var task = Task.current;
-        if (lightBoltSpell.currentCooldown > 0 || player.currentMana < 10)
+        bool result = false;
+        // if (BattleSystem.instance.state == BattleState.PLAYERTURN)
+        // {
+        result = lightBoltSpell.CastSpell(player, enemy);
+        // }
+        if (result)
+        {
+            BattleSystem.instance.playerPlayedTurn = true;
+            task.Succeed();
+        }
+        else
         {
             task.Fail();
-            return;
+
         }
-        lightBoltSpell.CastSpell(player, enemy);
-        // BattleSystem.instance.SwitchTurn();
 
     }
 
@@ -124,6 +173,7 @@ public class PlayerTasks : MonoBehaviour
         {
             Debug.Log("IM HERE");
 
+            BattleSystem.instance.SwitchTurn();
             task.Succeed();
             return;
         }
@@ -177,8 +227,9 @@ public class PlayerTasks : MonoBehaviour
         //Left
         if (xNew < xOld && dy < 0.05)
         {
+            transform.Translate(new Vector3(-1.0f, 0.0f, 0.0f));
             Debug.Log("Left");
-            playerController.moveLeft();
+            // playerController.moveLeft();
 
         }
 
@@ -201,15 +252,17 @@ public class PlayerTasks : MonoBehaviour
         if (dx < 0.05 && yNew > yOld)
         {
 
+            transform.Translate(new Vector3(0.0f, 1.0f, 0.0f));
             Debug.Log("Up");
-            playerController.moveUp();
+            // playerController.moveUp();
         }
 
         //Down
         if (dx < 0.05 && yNew < yOld)
         {
             Debug.Log("Down");
-            playerController.moveDown();
+            transform.Translate(new Vector3(0.0f, -1.0f, 0.0f));
+            // playerController.moveDown();
         }
     }
 
