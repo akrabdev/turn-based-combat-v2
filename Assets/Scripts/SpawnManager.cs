@@ -76,7 +76,6 @@ public class SpawnManager : MonoBehaviour
         left = worldPosition.x - (bc.size.x / 2f);
         right = worldPosition.x + (bc.size.x / 2f);
 
-        Debug.Log("left"+left);
 
 
         //topLeft = new Vector3(left, top, worldPosition.z);
@@ -99,7 +98,7 @@ public class SpawnManager : MonoBehaviour
     private Vector3 GetRandomPosition()
     {
 
-        Vector3 randomPosition = new Vector3(Random.Range(left+0.5f, right-0.5f), Random.Range(top-0.5f, btm+0.5f), -1f);
+        Vector3 randomPosition = new Vector3(Random.Range(left+0.5f, right-0.5f), Random.Range(top-0.5f, btm+0.5f), 0f);
 
         return randomPosition;
 
@@ -109,12 +108,10 @@ public class SpawnManager : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("Spawning");
             //Change time to be more realistic
             int i = Random.Range(0, spanwedObjects.Count);
             int j = Random.Range(0, spanwedObjects.Count);
-            Debug.Log(i);
-            Debug.Log(j);
+
             int TimeToCreate = Random.Range(2, 5);
             for (int k = i; k <= j; k++)
             {
@@ -140,7 +137,7 @@ public class SpawnManager : MonoBehaviour
     {
         if(obj.CompareTag("Health"))
         {
-            if (timesTaken["Health"] > 2)
+            if (timesTaken["Health"] > 5)
                 yield break;
             else
                 timesTaken["Health"]++;
@@ -164,16 +161,20 @@ public class SpawnManager : MonoBehaviour
 
         else if(obj.CompareTag("XP"))
         {
-            if (timesTaken["XP"] > 2)
+            if (timesTaken["XP"] > 6)
+            {
+                Debug.Log("breaking");
                 yield break;
+            }
             else
                 timesTaken["XP"]++;
+            Debug.Log("Destroying XP");
             Destroy(obj);
             PlayerUnit.addExperience(10);
         }
         else if(obj.CompareTag("Attacks"))
         {
-            if (timesTaken["Attacks"] > 2)
+            if (timesTaken["Attacks"] > 6)
                 yield break;
             else
                 timesTaken["Attacks"]++;
@@ -186,7 +187,7 @@ public class SpawnManager : MonoBehaviour
         }
         else if(obj.CompareTag("Shield"))
         {
-            if (timesTaken["Shield"] > 2)
+            if (timesTaken["Shield"] > 8)
                 yield break;
             else
                 timesTaken["Shield"]++;
@@ -204,6 +205,7 @@ public class SpawnManager : MonoBehaviour
             else
                 timesTaken["LevelUp"]++;
             PlayerUnit.levelUp();
+            Destroy(obj);
         }
         //else if(obj.CompareTag("Freeze"))
         //{
@@ -253,6 +255,8 @@ public class SpawnManager : MonoBehaviour
             AfterBattle(true);
             Border.SetActive(false);
             BS.state = BattleState.ESCAPE;
+            enemyObj[0].SetActive(false);
+            enemyObj.Remove(enemyObj[0]);
             //BS.EndBattle();
             //BS.TargetDead(PlayerUnit);
         }
