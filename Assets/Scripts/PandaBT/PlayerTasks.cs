@@ -81,6 +81,7 @@ public class PlayerTasks : MonoBehaviour
         var task = Task.current;
         if (fireSpell.currentCooldown > 0)
         {
+            Debug.Log(fireSpell.currentCooldown);
             task.Fail();
             return;
         }

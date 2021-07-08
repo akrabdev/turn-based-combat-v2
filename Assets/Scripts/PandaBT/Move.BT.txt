@@ -1,0 +1,11 @@
+tree("Root")
+	While
+		IsNowPlayerTurn
+		tree("Logic")
+
+tree("Logic")
+	sequence
+		ReachTarget
+		SwitchTurn
+		
+
