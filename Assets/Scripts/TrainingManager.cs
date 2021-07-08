@@ -7,6 +7,7 @@ public class TrainingManager : MonoBehaviour
 {
     public static TrainingManager instance;
     public bool trainingMode;
+    public bool selfPlay;
     //public GameObject player;
     //public GameObject enemy;
     // Start is called before the first frame update
