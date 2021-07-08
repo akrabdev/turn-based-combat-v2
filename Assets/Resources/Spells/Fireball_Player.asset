@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6db29403199d894aba0c16e6be5c775, type: 3}
+  m_Name: Fireball_Player
+  m_EditorClassIdentifier: 
+  name: Player Fireball
+  icon: {fileID: -1456807707212374025, guid: ff57a2efd62c32f459177189c8e003bb, type: 3}
+  description: Shoots a projectile that deals fire damage
+  element: {fileID: 11400000, guid: 9698a086854056148bb617c089440425, type: 2}
+  isProjectile: 1
+  follow: 1
+  currentCooldown: 2
+  maxCooldown: 4
+  damage: 20
+  manaCost: 10
+  maxRange: 0
+  followSpeed: 15
+  projectile: {fileID: 9204251887801062571, guid: ffeb6c0f0278a90429bd6b745016412a,
+    type: 3}
+  effect:
+  - {fileID: 7038799223474511258, guid: c8a1779a869ad2048a7be497b439b39b, type: 3}
+  projectileSoundEffectName: FireballProjectile

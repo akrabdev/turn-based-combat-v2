@@ -1,0 +1,15 @@
+tree("Root")
+	while
+		IsNowPlayerTurn
+		tree("Logic")
+
+        
+tree("Logic")
+    sequence
+        IsEnoughMana(10)
+        Wait(1.0)
+        fallback
+            CastFireSpell
+			CastLightBoltSpell
+			MeleeAttack
+
