@@ -18536,18 +18536,6 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: 1
---- !u!114 &415402810 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1681721086, guid: 2588ab61f93d5ab499fc73b80823c803,
-    type: 3}
-  m_PrefabInstance: {fileID: 8947653763900799131}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 415402806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0f7eaa085b63048b240cb34e915621, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &415402814 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5823730836849333166, guid: 2588ab61f93d5ab499fc73b80823c803,
@@ -27104,18 +27092,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5742028763616295603}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2514056319382090136 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5742028763616295606, guid: 231106d5165a5454d8dfe5cca5f52fcd,
-    type: 3}
-  m_PrefabInstance: {fileID: 5742028763616295603}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2514056319382090135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0f7eaa085b63048b240cb34e915621, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2514056319382090142 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2269186303959838694, guid: 231106d5165a5454d8dfe5cca5f52fcd,
@@ -27484,8 +27460,8 @@ MonoBehaviour:
   enemy: {fileID: 2514056319382090135}
   playerUnit: {fileID: 415402814}
   enemyUnit: {fileID: 2514056319382090142}
-  playerAgent: {fileID: 415402810}
-  enemyAgent: {fileID: 2514056319382090136}
+  playerAgent: {fileID: 0}
+  enemyAgent: {fileID: 0}
   time: 0
   switchTurnTime: 0
   state: 0
