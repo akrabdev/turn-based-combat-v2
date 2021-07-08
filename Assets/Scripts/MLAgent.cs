@@ -48,7 +48,7 @@ public class MLAgent : Agent
     public override void OnActionReceived(ActionBuffers vectorAction)
     {
         bool castProjectile = false;
-        //Debug.Log(gameObject.name + " took action: " + vectorAction.DiscreteActions[0]);
+        
         if (vectorAction.DiscreteActions[0] == 0)
         {
             if (!selfUnit.spells[0].CastSpell(selfUnit, opponentUnit))
@@ -99,12 +99,14 @@ public class MLAgent : Agent
         }
         else if (vectorAction.DiscreteActions[0] == 4)
         {
+            
             if (!selfUnit.spells[4].CastSpell(selfUnit, opponentUnit))
             {
                 AddReward(-0.01f);
             }
             else
             {
+                Debug.Log(gameObject.name + " took action: " + vectorAction.DiscreteActions[0]);
                 if (selfUnit.spells[4].isProjectile)
                     castProjectile = true;
             }
@@ -233,22 +235,22 @@ public class MLAgent : Agent
 
         if (!opponentUnit.isDead && !castProjectile)
         {
-            Debug.Log(teamId + " Oppnent not dead, action taken was not projectile, switching turns!");
+            //Debug.Log(teamId + " Oppnent not dead, action taken was not projectile, switching turns!");
             BattleSystem.instance.SwitchTurn();
         }
         else if (!opponentUnit.isDead && castProjectile)
         {
-            Debug.Log(teamId + " Oppnent not dead, action taken was projectile, aborting switch turn till projectile collision!");
+            //Debug.Log(teamId + " Oppnent not dead, action taken was projectile, aborting switch turn till projectile collision!");
             return;
         }
         else if (opponentUnit.isDead && !castProjectile)
         {
-            Debug.Log(teamId + " Oppnent dead, action taken was not projectile, calling target dead!");
+            //Debug.Log(teamId + " Oppnent dead, action taken was not projectile, calling target dead!");
             BattleSystem.instance.TargetDead(opponentUnit);
         }
         else
         {
-            Debug.Log(teamId + " Opponent dead and projectile?! Returning");
+            //Debug.Log(teamId + " Opponent dead and projectile?! Returning");
             return;
         }
 
@@ -552,6 +554,10 @@ public class MLAgent : Agent
         {
             sensor.AddObservation(true);
         }
+
+        //One boolean for opponent stun effect
+        sensor.AddObservation(opponentUnit.isStunned);
+
     }
 
     public void FreezeAgent()

@@ -126,11 +126,20 @@ public class BattleSystem : MonoBehaviour
 
         //Player turn and train mode is on
         if (state == BattleState.PLAYERTURN && TrainingManager.instance.trainingMode)
-            playerAgent.RequestDecision();
+        {
+            if (!playerUnit.isStunned)
+                playerAgent.RequestDecision();
+            else
+                SwitchTurn();
+        }
         else if (state == BattleState.PLAYERTURN && !TrainingManager.instance.trainingMode)
             return;
         else if (state == BattleState.ENEMYTURN)
-            enemyAgent.RequestDecision();
+            if (!enemyUnit.isStunned)
+                enemyAgent.RequestDecision();
+            else
+                SwitchTurn();
+        
         
     }
 

@@ -39,7 +39,7 @@ public class Projectile : MonoBehaviour
             if (!TrainingManager.instance.trainingMode)
                 transform.Translate((projDestination - transform.position).normalized * followSpeed * Time.deltaTime, Space.World);
             else
-                transform.Translate((projDestination - transform.position).normalized * 0.01f, Space.World);
+                transform.Translate((projDestination - transform.position).normalized * 0.08f, Space.World);
             transform.up = projDirection;
             if (Vector3.Distance(projDestination, transform.position) <= 0.2)
                 Destroy(gameObject);
@@ -59,7 +59,7 @@ public class Projectile : MonoBehaviour
         multiple = multipleInput;
         multipleNumber = multipleNumberInput;
         if (multiple && multipleNumber > 1)
-            Invoke("FireMore", 0.3f / multipleNumber);
+            Invoke("FireMore", 1f / multipleNumber);
         isFiring = true;
         
     }
@@ -75,7 +75,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("hit "+collision.name);
+        //Debug.Log("hit "+collision.name);
         if (collision.GetComponent<Unit>().name == target.name)
         {
             if (!TrainingManager.instance.trainingMode)
@@ -85,7 +85,7 @@ public class Projectile : MonoBehaviour
             if (!TrainingManager.instance.trainingMode)
                 Instantiate(effect, target.transform.position, Quaternion.identity);
             if (multipleNumber > 0)
-                Destroy(gameObject, (0.1f * multipleNumber) - counter);
+                Destroy(gameObject, (1f / multipleNumber) + 0.1f);
             else
                 Destroy(gameObject);
 

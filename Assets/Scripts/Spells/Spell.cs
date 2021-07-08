@@ -69,7 +69,7 @@ public class Spell : HotbarItem
                 
                 if (Vector3.Distance(target.transform.position, spellCaster.transform.position) <= maxRange)
                 {
-                    Debug.Log("Distance: " + Vector3.Distance(target.transform.position, spellCaster.transform.position) + " " + maxRange);
+                    //Debug.Log("Distance: " + Vector3.Distance(target.transform.position, spellCaster.transform.position) + " " + maxRange);
                     PutOnCooldown();
                     spellCaster.currentMana -= manaCost;
                     spellCaster.SetMana();
