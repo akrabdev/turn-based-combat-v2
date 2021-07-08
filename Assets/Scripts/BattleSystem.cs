@@ -181,7 +181,7 @@ public class BattleSystem : MonoBehaviour
     /// </summary>
     public void SwitchTurn()
     {
-        if(TrainingManager.instance.trainingMode)
+        if(TrainingManager.instance.trainingMode && TrainingManager.instance.selfPlay)
         {
             // Negative reward for opponent HP ratio
             //playerAgent.AddReward(-(enemyUnit.currentHP / enemyUnit.maxHP));
@@ -195,7 +195,11 @@ public class BattleSystem : MonoBehaviour
             playerAgent.AddReward(-0.001f);
             enemyAgent.AddReward(-0.001f);
         }
-        
+        else if (TrainingManager.instance.trainingMode && !TrainingManager.instance.selfPlay)
+        {
+            enemyAgent.AddReward(-0.001f);
+        }
+
         time = 0;
         CooldownManager.instance.SwitchTurn();
         UpdateTurn();
@@ -228,9 +232,13 @@ public class BattleSystem : MonoBehaviour
         if (playerUnit == deadUnit)
         {
             Debug.Log("Player Lost");
-            if (TrainingManager.instance.trainingMode)
+            if (TrainingManager.instance.trainingMode && TrainingManager.instance.selfPlay)
             {
                 playerAgent.SetReward(-1f);
+                enemyAgent.SetReward(1f);
+            }
+            else if (TrainingManager.instance.trainingMode && !TrainingManager.instance.selfPlay)
+            {
                 enemyAgent.SetReward(1f);
             }
             //objectsUnits[0].transform.position = new Vector2(0.5f, 0.5f);
@@ -240,18 +248,26 @@ public class BattleSystem : MonoBehaviour
         {
             //TODO: Get unit index then remove all of its components from the lists and destroy it (if not training)
             Debug.Log("Player won");
-            if (TrainingManager.instance.trainingMode)
+            if (TrainingManager.instance.trainingMode && TrainingManager.instance.selfPlay)
             {
                 playerAgent.SetReward(1f);
+                enemyAgent.SetReward(-1f);
+            }
+            else if (TrainingManager.instance.trainingMode && !TrainingManager.instance.selfPlay)
+            {
                 enemyAgent.SetReward(-1f);
             }
             enemyUnit.isDead = false;
         }
         state = BattleState.IDLE;
-        if (TrainingManager.instance.trainingMode)
+        if (TrainingManager.instance.trainingMode && TrainingManager.instance.selfPlay)
         {
 
             playerAgent.EndEpisode();
+            enemyAgent.EndEpisode();
+        }
+        else if (TrainingManager.instance.trainingMode && !TrainingManager.instance.selfPlay)
+        {
             enemyAgent.EndEpisode();
         }
 
