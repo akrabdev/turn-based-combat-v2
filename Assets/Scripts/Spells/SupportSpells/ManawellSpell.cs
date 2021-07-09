@@ -8,7 +8,8 @@ public class ManawellSpell : Spell
     // Start is called before the first frame update
     public override bool CastSpell(Unit spellCaster, Unit target)
     {
-        //FindObjectOfType<AudioManager>().Play("HealSound");
+        if (!TrainingManager.instance.trainingMode)
+            FindObjectOfType<AudioManager>().Play("HealSound");
         bool successfulBaseChecks = base.CastSpell(spellCaster, target);
         if (successfulBaseChecks)
         {

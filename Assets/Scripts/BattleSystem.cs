@@ -79,6 +79,12 @@ public class BattleSystem : MonoBehaviour
         //STATE MUST BE IDLE IN ORDER TO SETUP BATTLE (IN CASE SetupBattle IS CALLED IN A WRONG PLACE)
         if (state == BattleState.IDLE)
         {
+            if(!TrainingManager.instance.trainingMode)
+            {
+                FindObjectOfType<AudioManager>().Stop("World");
+                FindObjectOfType<AudioManager>().Play("Battle");
+                
+            }
             state = BattleState.PLAYERTURN;
             time = 0;
 
@@ -286,7 +292,10 @@ public class BattleSystem : MonoBehaviour
         {
             SpawnManager.SMInstance.AfterBattle();
         }
+        FindObjectOfType<AudioManager>().Stop("Battle");
+        FindObjectOfType<AudioManager>().Play("World");
         
+
         //SetupBattle(player, enemy);
 
     }

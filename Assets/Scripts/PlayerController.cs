@@ -127,33 +127,64 @@ public class PlayerController : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.F1))
             {
-                BattleSystem.instance.playerUnit.spells[0].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
-                BattleSystem.instance.playerPlayedTurn = true;
+                if (BattleSystem.instance.playerUnit.spells[0].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit))
+                {
+                    if(BattleSystem.instance.playerUnit.spells[0].isProjectile)
+                    {
+                        BattleSystem.instance.playerPlayedTurn = true;
+                        return;
+                    }
+                }
+                
                 BattleSystem.instance.SwitchTurn();
             }
             else if (Input.GetKeyDown(KeyCode.F2))
             {
-                BattleSystem.instance.playerUnit.spells[1].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
-                BattleSystem.instance.playerPlayedTurn = true;
+                if (BattleSystem.instance.playerUnit.spells[1].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit))
+                {
+                    if (BattleSystem.instance.playerUnit.spells[1].isProjectile)
+                    {
+                        BattleSystem.instance.playerPlayedTurn = true;
+                        return;
+                    }
+                }
                 BattleSystem.instance.SwitchTurn();
             }
             else if (Input.GetKeyDown(KeyCode.F3))
             {
-                BattleSystem.instance.playerUnit.spells[2].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
-                BattleSystem.instance.playerPlayedTurn = true;
+                if (BattleSystem.instance.playerUnit.spells[2].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit))
+                {
+                    if (BattleSystem.instance.playerUnit.spells[2].isProjectile)
+                    {
+                        BattleSystem.instance.playerPlayedTurn = true;
+                        return;
+                    }
+                }
                 BattleSystem.instance.SwitchTurn();
             }
 
             else if (Input.GetKeyDown(KeyCode.F4))
             {
-                BattleSystem.instance.playerUnit.spells[3].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
-                BattleSystem.instance.playerPlayedTurn = true;
+                if (BattleSystem.instance.playerUnit.spells[3].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit))
+                {
+                    if (BattleSystem.instance.playerUnit.spells[3].isProjectile)
+                    {
+                        BattleSystem.instance.playerPlayedTurn = true;
+                        return;
+                    }
+                }
                 BattleSystem.instance.SwitchTurn();
             }
             else if (Input.GetKeyDown(KeyCode.F5))
             {
-                BattleSystem.instance.playerUnit.spells[4].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
-                BattleSystem.instance.playerPlayedTurn = true;
+                if (BattleSystem.instance.playerUnit.spells[4].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit))
+                {
+                    if (BattleSystem.instance.playerUnit.spells[4].isProjectile)
+                    {
+                        BattleSystem.instance.playerPlayedTurn = true;
+                        return;
+                    }
+                }
                 BattleSystem.instance.SwitchTurn();
             }
             //else if (Input.GetKeyDown(KeyCode.F6))

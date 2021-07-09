@@ -31084,8 +31084,8 @@ MonoBehaviour:
     volume: 0
     source: {fileID: 0}
   - name: Battle
-    audio: {fileID: 8300000, guid: 9a0e7ebf8f67b5247857f283f60c8517, type: 3}
-    volume: 0.1
+    audio: {fileID: 8300000, guid: bde97c95b4b307945a732c92c85266bf, type: 3}
+    volume: 0.5
     source: {fileID: 0}
   - name: HealSound
     audio: {fileID: 8300000, guid: b624c653ed3231240b5f4ef9dd7ec316, type: 3}

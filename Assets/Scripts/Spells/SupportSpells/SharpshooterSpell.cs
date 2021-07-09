@@ -13,8 +13,11 @@ public class SharpshooterSpell : Spell
         {
             //FindObjectOfType<AudioManager>().Play("HealSound");
             spellCaster.statusEffects.Add(new DamageBuff(3, 1, spellCaster));
-            if(!TrainingManager.instance.trainingMode)
+            if (!TrainingManager.instance.trainingMode)
+            {
                 DamagePopupManager.instance.Setup("SHARPSHOOOOOOTEEER!", Color.red, spellCaster.transform);
+                FindObjectOfType<AudioManager>().Play("HealSound");
+            }
             return true;
         }
         else
