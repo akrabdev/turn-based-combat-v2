@@ -282,7 +282,10 @@ public class BattleSystem : MonoBehaviour
         {
             enemyAgent.EndEpisode();
         }
-
+        else
+        {
+            SpawnManager.SMInstance.AfterBattle();
+        }
         
         //SetupBattle(player, enemy);
 

@@ -95,6 +95,11 @@ public class SpawnManager : MonoBehaviour
         
     }
 
+    //private void Update()
+    //{
+
+    //}
+
     private Vector3 GetRandomPosition()
     {
 
@@ -106,7 +111,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator ObjectSpawn()
     {
-        while (true)
+        while (BS.state != BattleState.IDLE)
         {
             //Change time to be more realistic
             int i = Random.Range(0, spanwedObjects.Count);
@@ -242,32 +247,41 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    { 
-        if (BS.state == BattleState.WON || BS.state == BattleState.LOST || BS.state == BattleState.IDLE)
-        {
-            AfterBattle(false);
-            Border.SetActive(false);
-            return;
-        }
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            AfterBattle(true);
-            Border.SetActive(false);
-            BS.state = BattleState.ESCAPE;
-            enemyObj[0].SetActive(false);
-            enemyObj.Remove(enemyObj[0]);
-            //BS.EndBattle();
-            //BS.TargetDead(PlayerUnit);
-        }
-    }
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{ 
+    //    if (BS.state == BattleState.WON || BS.state == BattleState.LOST || BS.state == BattleState.IDLE)
+    //    {
+    //        AfterBattle();
+    //        Border.SetActive(false);
+    //        if (enemyObj.Count == 1)
+    //        {
+    //            Destroy(enemyObj[0]);
+    //        }
+    //        return;
+    //    }
+    //    //if (collision.gameObject.CompareTag("Player"))
+    //    //{
+    //    //    AfterBattle(true);
+    //    //    Border.SetActive(false);
+    //    //    BS.state = BattleState.ESCAPE;
+    //    //    enemyObj[0].SetActive(false);
+    //    //    enemyObj.Remove(enemyObj[0]);
+    //    //    //BS.EndBattle();
+    //    //    //BS.TargetDead(PlayerUnit);
+    //    //}
+    //}
 
-    private void AfterBattle(bool escaped)
+    public void AfterBattle()
     {
-        for(int i = 0; i < obj.Count; i++)
+        Border.SetActive(false);
+        if (enemyObj.Count == 1)
         {
-            if(!escaped)
-                timesTaken[obj[i].tag] = 0;
+            Destroy(enemyObj[0]);
+        }
+        for (int i = 0; i < obj.Count; i++)
+        {
+            //if(!escaped)
+            //    timesTaken[obj[i].tag] = 0;
             Destroy(obj[i]);
         }
     }
