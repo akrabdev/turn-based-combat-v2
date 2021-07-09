@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -19739,7 +19739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972006a76c3d2ba4c8432bdba22060e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7786804924517109327}
+  player: {fileID: 415402806}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -27130,6 +27130,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2269186303959838694, guid: 231106d5165a5454d8dfe5cca5f52fcd,
+        type: 3}
+      propertyPath: maxHP
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2269186303959838694, guid: 231106d5165a5454d8dfe5cca5f52fcd,
+        type: 3}
+      propertyPath: currentHP
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4509970857218959061, guid: 231106d5165a5454d8dfe5cca5f52fcd,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -27285,19 +27295,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7786804924517109327 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1925253945594304140, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
-    type: 3}
-  m_PrefabInstance: {fileID: 8549988861253228739}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7786804924517109332 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1925253945594304151, guid: a4390a9edcb174f4fbd1b1180aa8ed0b,
     type: 3}
   m_PrefabInstance: {fileID: 8549988861253228739}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7786804924517109327}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e08107d099c59bc4eb0c551ed80241d6, type: 3}
@@ -27309,7 +27313,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8549988861253228739}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7786804924517109327}
+  m_GameObject: {fileID: 0}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f3d7433bdf58b941ac6b5cb5c78b797, type: 3}
@@ -27321,7 +27325,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8549988861253228739}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7786804924517109327}
+  m_GameObject: {fileID: 0}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae89d6845d8fade388205b40e49b5652, type: 3}
@@ -27617,6 +27621,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823730836849333166, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: maxHP
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823730836849333166, guid: 2588ab61f93d5ab499fc73b80823c803,
+        type: 3}
+      propertyPath: currentHP
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6591465980649086214, guid: 2588ab61f93d5ab499fc73b80823c803,
         type: 3}

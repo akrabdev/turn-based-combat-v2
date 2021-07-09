@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        if (BattleSystem.instance.state == BattleState.PLAYERTURN)
+        if (BattleSystem.instance.state == BattleState.PLAYERTURN && !BattleSystem.instance.playerPlayedTurn)
         {
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
                     else
                     {
                         moveRight();
+                        BattleSystem.instance.playerPlayedTurn = true;
                         BattleSystem.instance.SwitchTurn();
                     }
 
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     moveRight();
+                    BattleSystem.instance.playerPlayedTurn = true;
                     BattleSystem.instance.SwitchTurn();
                 }
 
@@ -62,6 +64,7 @@ public class PlayerController : MonoBehaviour
                     else
                     {
                         moveDown();
+                        BattleSystem.instance.playerPlayedTurn = true;
                         BattleSystem.instance.SwitchTurn();
                     }
 
@@ -70,6 +73,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     moveDown();
+                    BattleSystem.instance.playerPlayedTurn = true;
                     BattleSystem.instance.SwitchTurn();
                 }
             }
@@ -84,6 +88,7 @@ public class PlayerController : MonoBehaviour
                     else
                     {
                         moveUp();
+                        BattleSystem.instance.playerPlayedTurn = true;
                         BattleSystem.instance.SwitchTurn();
                     }
 
@@ -92,6 +97,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     moveUp();
+                    BattleSystem.instance.playerPlayedTurn = true;
                     BattleSystem.instance.SwitchTurn();
                 }
             }
@@ -106,6 +112,7 @@ public class PlayerController : MonoBehaviour
                     else
                     {
                         moveLeft();
+                        BattleSystem.instance.playerPlayedTurn = true;
                         BattleSystem.instance.SwitchTurn();
                     }
 
@@ -114,60 +121,66 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     moveLeft();
+                    BattleSystem.instance.playerPlayedTurn = true;
                     BattleSystem.instance.SwitchTurn();
                 }
             }
             else if (Input.GetKeyDown(KeyCode.F1))
             {
                 BattleSystem.instance.playerUnit.spells[0].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
+                BattleSystem.instance.playerPlayedTurn = true;
                 BattleSystem.instance.SwitchTurn();
             }
             else if (Input.GetKeyDown(KeyCode.F2))
             {
-                BattleSystem.instance.playerUnit.spells[2].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
+                BattleSystem.instance.playerUnit.spells[1].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
+                BattleSystem.instance.playerPlayedTurn = true;
                 BattleSystem.instance.SwitchTurn();
             }
             else if (Input.GetKeyDown(KeyCode.F3))
             {
-                BattleSystem.instance.playerUnit.spells[6].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
+                BattleSystem.instance.playerUnit.spells[2].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
+                BattleSystem.instance.playerPlayedTurn = true;
                 BattleSystem.instance.SwitchTurn();
             }
 
             else if (Input.GetKeyDown(KeyCode.F4))
             {
-                BattleSystem.instance.playerUnit.spells[7].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
+                BattleSystem.instance.playerUnit.spells[3].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
+                BattleSystem.instance.playerPlayedTurn = true;
                 BattleSystem.instance.SwitchTurn();
             }
             else if (Input.GetKeyDown(KeyCode.F5))
             {
-                BattleSystem.instance.playerUnit.spells[8].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
+                BattleSystem.instance.playerUnit.spells[4].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
+                BattleSystem.instance.playerPlayedTurn = true;
                 BattleSystem.instance.SwitchTurn();
             }
-            else if (Input.GetKeyDown(KeyCode.F6))
-            {
-                BattleSystem.instance.playerUnit.spells[9].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
-                BattleSystem.instance.SwitchTurn();
-            }
-            else if (Input.GetKeyDown(KeyCode.F7))
-            {
-                BattleSystem.instance.playerUnit.spells[10].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
-                BattleSystem.instance.SwitchTurn();
-            }
-            else if (Input.GetKeyDown(KeyCode.F8))
-            {
-                BattleSystem.instance.playerUnit.spells[11].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
-                BattleSystem.instance.SwitchTurn();
-            }
-            else if (Input.GetKeyDown(KeyCode.Keypad1))
-            {
-                BattleSystem.instance.playerUnit.spells[12].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
-                BattleSystem.instance.SwitchTurn();
-            }
-            else if (Input.GetKeyDown(KeyCode.Keypad2))
-            {
-                BattleSystem.instance.playerUnit.spells[13].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
-                BattleSystem.instance.SwitchTurn();
-            }
+            //else if (Input.GetKeyDown(KeyCode.F6))
+            //{
+            //    BattleSystem.instance.playerUnit.spells[9].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
+            //    BattleSystem.instance.SwitchTurn();
+            //}
+            //else if (Input.GetKeyDown(KeyCode.F7))
+            //{
+            //    BattleSystem.instance.playerUnit.spells[10].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
+            //    BattleSystem.instance.SwitchTurn();
+            //}
+            //else if (Input.GetKeyDown(KeyCode.F8))
+            //{
+            //    BattleSystem.instance.playerUnit.spells[11].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
+            //    BattleSystem.instance.SwitchTurn();
+            //}
+            //else if (Input.GetKeyDown(KeyCode.Keypad1))
+            //{
+            //    BattleSystem.instance.playerUnit.spells[12].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
+            //    BattleSystem.instance.SwitchTurn();
+            //}
+            //else if (Input.GetKeyDown(KeyCode.Keypad2))
+            //{
+            //    BattleSystem.instance.playerUnit.spells[13].CastSpell(BattleSystem.instance.playerUnit, BattleSystem.instance.enemyUnit);
+            //    BattleSystem.instance.SwitchTurn();
+            //}
         }
         else
         {
