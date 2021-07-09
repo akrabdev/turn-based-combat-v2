@@ -116,7 +116,7 @@ public class MLAgent : Agent
             Collider2D hitCollider = Physics2D.OverlapBox((Vector2)gameObject.transform.position + new Vector2(1, 0), new Vector2(0.15f, 0.15f), 0f, colliderLayerMask);
             if (hitCollider)
             {
-                if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle"))
+                if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle") || hitCollider.CompareTag("Player"))
                 {
                     AddReward(-0.01f);
                 }
@@ -142,7 +142,7 @@ public class MLAgent : Agent
             Collider2D hitCollider = Physics2D.OverlapBox((Vector2)gameObject.transform.position + new Vector2(0, -1), new Vector2(0.15f, 0.15f), 0f, colliderLayerMask);
             if (hitCollider)
             {
-                if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle"))
+                if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle") || hitCollider.CompareTag("Player"))
                 {
                     AddReward(-0.01f);
                 }
@@ -166,7 +166,7 @@ public class MLAgent : Agent
             Collider2D hitCollider = Physics2D.OverlapBox((Vector2)gameObject.transform.position + new Vector2(0, 1), new Vector2(0.15f, 0.15f), 0f, colliderLayerMask);
             if (hitCollider)
             {
-                if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle"))
+                if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle") || hitCollider.CompareTag("Player"))
                 {
                     AddReward(-0.01f);
                 }
@@ -191,7 +191,7 @@ public class MLAgent : Agent
             Collider2D hitCollider = Physics2D.OverlapBox((Vector2)gameObject.transform.position + new Vector2(-1, 0), new Vector2(0.15f, 0.15f), 0f, colliderLayerMask);
             if (hitCollider)
             {
-                if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle"))
+                if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle") || hitCollider.CompareTag("Player"))
                 {
                     AddReward(-0.01f);
                 }
@@ -493,7 +493,7 @@ public class MLAgent : Agent
         Collider2D hitCollider = Physics2D.OverlapBox((Vector2)gameObject.transform.position + new Vector2(0, 1), new Vector2(0.15f, 0.15f), 0f, colliderLayerMask);
         if (hitCollider)
         {
-            if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle"))
+            if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle") || hitCollider.CompareTag("Player"))
             {
                 sensor.AddObservation(false);
             }
@@ -509,7 +509,7 @@ public class MLAgent : Agent
         hitCollider = Physics2D.OverlapBox((Vector2)gameObject.transform.position + new Vector2(0, -1), new Vector2(0.15f, 0.15f), 0f, colliderLayerMask);
         if (hitCollider)
         {
-            if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle"))
+            if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle") || hitCollider.CompareTag("Player"))
             {
                 sensor.AddObservation(false);
             }
@@ -525,7 +525,7 @@ public class MLAgent : Agent
         hitCollider = Physics2D.OverlapBox((Vector2)gameObject.transform.position + new Vector2(1, 0), new Vector2(0.15f, 0.15f), 0f, colliderLayerMask);
         if (hitCollider)
         {
-            if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle"))
+            if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle") || hitCollider.CompareTag("Player"))
             {
                 sensor.AddObservation(false);
             }
@@ -541,7 +541,7 @@ public class MLAgent : Agent
         hitCollider = Physics2D.OverlapBox((Vector2)gameObject.transform.position + new Vector2(-1, 0), new Vector2(0.15f, 0.15f), 0f, colliderLayerMask);
         if (hitCollider)
         {
-            if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle"))
+            if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle") || hitCollider.CompareTag("Player"))
             {
                 sensor.AddObservation(false);
             }

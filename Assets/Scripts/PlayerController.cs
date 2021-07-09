@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
                 if (hitCollider)
                 {
                     Debug.Log("Hit : " + hitCollider.name);
-                    if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle"))
+                    if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle") )
                         BattleSystem.instance.SwitchTurn();
                     else
                     {
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
                 if (hitCollider)
                 {
                     Debug.Log("Hit : " + hitCollider.name);
-                    if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle"))
+                    if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle") || hitCollider.CompareTag("Player"))
                         BattleSystem.instance.SwitchTurn();
                     else
                     {
@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
                 if (hitCollider)
                 {
                     Debug.Log("Hit : " + hitCollider.name);
-                    if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle"))
+                    if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Obstacle") || hitCollider.CompareTag("Player"))
                         BattleSystem.instance.SwitchTurn();
                     else
                     {
