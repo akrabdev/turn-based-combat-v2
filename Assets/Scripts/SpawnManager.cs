@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -103,11 +104,17 @@ public class SpawnManager : MonoBehaviour
 
     private Vector3 GetRandomPosition()
     {
-
-        float x = Random.Range(left + 0.5f, right - 0.5f);
+        float x = 0.0f;
+        while (Math.Ceiling(x) == x) { 
+        x = UnityEngine.Random.Range(left, right);
         x = x - (x % 0.5f);
-        float y = Random.Range(top - 0.5f, btm + 0.5f);
-        y = y - (y % 0.5f);
+        }
+        float y = 0.0f;
+        while (Math.Ceiling(y) == y)
+        {
+            y = UnityEngine.Random.Range(top, btm);
+            y = y - (y % 0.5f);
+        }
         Vector3 randomPosition = new Vector3(x, y, 0f);
 
         return randomPosition;
@@ -119,10 +126,10 @@ public class SpawnManager : MonoBehaviour
         while (BS.state != BattleState.IDLE)
         {
             //Change time to be more realistic
-            int i = Random.Range(0, spanwedObjects.Count);
-            int j = Random.Range(0, spanwedObjects.Count);
+            int i = UnityEngine.Random.Range(0, spanwedObjects.Count);
+            int j = UnityEngine.Random.Range(0, spanwedObjects.Count);
 
-            int TimeToCreate = Random.Range(2, 5);
+            int TimeToCreate = UnityEngine.Random.Range(2, 5);
             for (int k = i; k <= j; k++)
             {
                 if (spanwedObjects[k].tag == "LevelUp" && timesTaken[spanwedObjects[k].tag] > 1)
@@ -133,7 +140,7 @@ public class SpawnManager : MonoBehaviour
             }
             for(int k = 0; k < obj.Count; k++)
             {
-                int TimeToDestroy = Random.Range(2, 5);
+                int TimeToDestroy = UnityEngine.Random.Range(2, 5);
                 yield return new WaitForSeconds(TimeToDestroy);
                 Destroy(obj[k], TimeToDestroy);
 
@@ -162,7 +169,7 @@ public class SpawnManager : MonoBehaviour
         {
             //Change to every turn
             Destroy(obj);
-            int TimeToDampen = Random.Range(6, 9);
+            int TimeToDampen = UnityEngine.Random.Range(6, 9);
             var temp = EnemyUnit.damagePower;
             EnemyUnit.damagePower /= 5;
             yield return new WaitForSeconds(TimeToDampen);
@@ -190,7 +197,7 @@ public class SpawnManager : MonoBehaviour
                 timesTaken["Attacks"]++;
             Destroy(obj);
             PlayerUnit.damagePower *= 2;
-            int TimeToInc = Random.Range(6, 9);
+            int TimeToInc = UnityEngine.Random.Range(6, 9);
             yield return new WaitForSeconds(TimeToInc);
             PlayerUnit.damagePower /= 2;
 
@@ -202,7 +209,7 @@ public class SpawnManager : MonoBehaviour
             else
                 timesTaken["Shield"]++;
             Destroy(obj);
-            int TimeToDampen = Random.Range(6, 9);
+            int TimeToDampen = UnityEngine.Random.Range(6, 9);
             var temp = EnemyUnit.damagePower;
             EnemyUnit.damagePower = 0;
             yield return new WaitForSeconds(TimeToDampen);
