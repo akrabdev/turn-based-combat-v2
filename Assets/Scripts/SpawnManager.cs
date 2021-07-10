@@ -46,7 +46,7 @@ public class SpawnManager : MonoBehaviour
     float btm;
     float left;
     float right;
-
+    bool battleDone;
     GameObject Border;
 
     void Awake()
@@ -66,6 +66,7 @@ public class SpawnManager : MonoBehaviour
     //Start is called before the first frame update
     void Start()
     {
+        battleDone = false;
         Border = GameObject.FindGameObjectWithTag("Border");
         Border.SetActive(false);
         bc = GetComponent<BoxCollider2D>();
@@ -103,7 +104,11 @@ public class SpawnManager : MonoBehaviour
     private Vector3 GetRandomPosition()
     {
 
-        Vector3 randomPosition = new Vector3(Random.Range(left+0.5f, right-0.5f), Random.Range(top-0.5f, btm+0.5f), 0f);
+        float x = Random.Range(left + 0.5f, right - 0.5f);
+        x = x - (x % 0.5f);
+        float y = Random.Range(top - 0.5f, btm + 0.5f);
+        y = y - (y % 0.5f);
+        Vector3 randomPosition = new Vector3(x, y, 0f);
 
         return randomPosition;
 
@@ -235,7 +240,7 @@ public class SpawnManager : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //BattleSystem battleSystem = Instantiate(BattleInstance);
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && battleDone == false)
         {
             if (enemyObj.Count == 0)
                 EnemySpawn();
@@ -284,6 +289,7 @@ public class SpawnManager : MonoBehaviour
             //    timesTaken[obj[i].tag] = 0;
             Destroy(obj[i]);
         }
+        battleDone = true; 
     }
     //private void Fade(bool fade, GameObject go)
     //{
