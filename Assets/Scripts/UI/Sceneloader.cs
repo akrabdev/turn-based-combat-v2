@@ -13,15 +13,15 @@ public class Sceneloader : MonoBehaviour
 
     public void LoadScene1mlagents()
     {
-        SceneManager.LoadScene("Scene1 mlagents");
+        SceneManager.LoadScene("MagicianVsMagici _ Playn 1");
     }
     public void LoadScene2mlagents()
     {
-        SceneManager.LoadScene("Scene2 mlagents");
+        SceneManager.LoadScene("ArcherVsArcher _ Play");
     }
     public void LoadScene3mlagents()
     {
-        SceneManager.LoadScene("Scene3 mlagents");
+        SceneManager.LoadScene("BerserkerVsBerserker _ Play");
     }
 
     public void LoadMainMenu()
