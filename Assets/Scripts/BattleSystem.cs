@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.MLAgents;
+using Panda;
 
 //public enum BattleState { IDLE, START, PLAYERTURN, ENEMYTURN, WON, LOST, ESCAPE }
 
@@ -17,7 +18,7 @@ public class BattleSystem : MonoBehaviour
 
     public static BattleSystem instance;
 
-    
+    public PandaBehaviour PB;
     public GameObject player; //Player in battle
     public GameObject enemy;
     public Unit playerUnit; //Unit components of the objects
@@ -55,7 +56,7 @@ public class BattleSystem : MonoBehaviour
             Destroy(this);
         }
         DontDestroyOnLoad(this);
-        
+
     }
 
     //private void Start()
@@ -67,8 +68,8 @@ public class BattleSystem : MonoBehaviour
 
     private void Update()
     {
-        if(!TrainingManager.instance.trainingMode) //If the game is in play mode, count down for turns
-            if(state != BattleState.IDLE)
+        if (!TrainingManager.instance.trainingMode) //If the game is in play mode, count down for turns
+            if (state != BattleState.IDLE)
                 Timer();
         //if (player.transform.position.y <= -9.5f || enemy.transform.position.y <= -9.5f)
         //    state = BattleState.IDLE;
@@ -110,7 +111,7 @@ public class BattleSystem : MonoBehaviour
             playerAgent = player.GetComponent<Agent>();
             enemyAgent = enemy.GetComponent<Agent>();
 
-            if(!TrainingManager.instance.trainingMode)
+            if (!TrainingManager.instance.trainingMode)
             {
                 playerAgent.MaxStep = 0;
                 enemyAgent.MaxStep = 0;
@@ -137,14 +138,19 @@ public class BattleSystem : MonoBehaviour
         else if (state == BattleState.PLAYERTURN && TrainingManager.instance.trainingMode && !TrainingManager.instance.selfPlay)
         {
             if (!playerUnit.isStunned)
+            {
+                PB.Tick();
                 return;
+            }
             else
                 SwitchTurn();
         }
         else if (state == BattleState.PLAYERTURN && !TrainingManager.instance.trainingMode)
         {
             if (!playerUnit.isStunned)
+            {
                 return;
+            }
             else
                 SwitchTurn();
         }
@@ -153,8 +159,8 @@ public class BattleSystem : MonoBehaviour
                 enemyAgent.RequestDecision();
             else
                 SwitchTurn();
-        
-        
+
+
     }
 
     private void Timer()
@@ -163,7 +169,7 @@ public class BattleSystem : MonoBehaviour
         if (time >= switchTurnTime)
         {
             SwitchTurn();
-        }   
+        }
     }
 
     /// <summary>
@@ -193,7 +199,7 @@ public class BattleSystem : MonoBehaviour
     /// </summary>
     public void SwitchTurn()
     {
-        if(TrainingManager.instance.trainingMode && TrainingManager.instance.selfPlay)
+        if (TrainingManager.instance.trainingMode && TrainingManager.instance.selfPlay)
         {
             // Negative reward for opponent HP ratio
             //playerAgent.AddReward(-(enemyUnit.currentHP / enemyUnit.maxHP));
@@ -238,7 +244,7 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    public void TargetDead(Unit deadUnit )
+    public void TargetDead(Unit deadUnit)
     {
         //If player isn't dead -> state: won
         if (playerUnit == deadUnit)
@@ -283,7 +289,7 @@ public class BattleSystem : MonoBehaviour
             enemyAgent.EndEpisode();
         }
 
-        
+
         //SetupBattle(player, enemy);
 
     }

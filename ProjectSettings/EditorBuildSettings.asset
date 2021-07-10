@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Player-BT.unity
     guid: b017562b2252cfa5c951c0bec156a685
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BTMagicianVsMagician.unity
     guid: 2bdb5806104f2ed57b709e8380bc3ecc
+  - enabled: 1
+    path: Assets/Scenes/mvm.unity
+    guid: eece55067c93f7fda892348d57a2d0bc
   m_configObjects: {}

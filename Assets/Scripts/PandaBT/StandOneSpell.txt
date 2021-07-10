@@ -1,6 +1,4 @@
 tree("Root")
-	while
-		IsNowPlayerTurn
 		tree("Logic")
         
 tree("Logic")
@@ -10,7 +8,10 @@ tree("Logic")
             //Wait(0.5)
         CastLightBoltSpell
         //not
-          //  Wait(0.5)
+            //Wait(0.5)
+        ReachTarget
+      //  not
+        //  Wait(0.015)
         SwitchTurn
 
 

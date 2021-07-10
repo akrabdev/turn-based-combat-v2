@@ -301,6 +301,6 @@ public class PlayerTasks : MonoBehaviour
     {
         pandaBehaviour.Reset();
         BattleSystem.instance.SwitchTurn();
-        return false;
+        return true;
     }
 }
