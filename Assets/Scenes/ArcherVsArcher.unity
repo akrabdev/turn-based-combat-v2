@@ -23338,6 +23338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trainingMode: 1
+  selfPlay: 1
 --- !u!4 &789767381
 Transform:
   m_ObjectHideFlags: 0
@@ -26463,6 +26464,7 @@ MonoBehaviour:
   switchTurnTime: 0
   state: 0
   InformationBar: {fileID: 0}
+  playerPlayedTurn: 0
 --- !u!4 &6034814878287353324
 Transform:
   m_ObjectHideFlags: 0

@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UI/MainMenu.unity
     guid: 8397abfbc61a4d24999f8133f714dae7
+  - enabled: 1
+    path: Assets/Scenes/ArcherVsArcher_Play.unity
+    guid: a7b8ca690abf14624ad9290f3d024f6e
+  - enabled: 1
+    path: Assets/Scenes/MagicianVsMagician_Play.unity
+    guid: 4f5efd923bcc44bf997619867c598a5c
+  - enabled: 1
+    path: Assets/Scenes/BerserkerVsBerserker_Play.unity
+    guid: b398b3593f5a3491baf0259b213faf38
   m_configObjects: {}
