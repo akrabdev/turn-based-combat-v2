@@ -16,7 +16,7 @@ public class SharpshooterSpell : Spell
             if (!TrainingManager.instance.trainingMode)
             {
                 DamagePopupManager.instance.Setup("SHARPSHOOOOOOTEEER!", Color.red, spellCaster.transform);
-                FindObjectOfType<AudioManager>().Play("HealSound");
+                FindObjectOfType<AudioManager>().Play("Sharpshooter");
             }
             return true;
         }

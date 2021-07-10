@@ -13,8 +13,11 @@ public class RageSpell : Spell
         {
             //FindObjectOfType<AudioManager>().Play("HealSound");
             spellCaster.statusEffects.Add(new Rage(3, 2, spellCaster));
-            if(!TrainingManager.instance.trainingMode)
+            if (!TrainingManager.instance.trainingMode)
+            {
                 DamagePopupManager.instance.Setup("RAAAGE!", Color.red, spellCaster.transform);
+                FindObjectOfType<AudioManager>().Play("Rage");
+            }
             spellCaster.TakeDamage(20, null, element);
             return true;
         }

@@ -44423,6 +44423,10 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: aeee260c5e2c06f43beadffb48ba37b3, type: 3}
     volume: 1
     source: {fileID: 0}
+  - name: Rage
+    audio: {fileID: 8300000, guid: 5b14701dc631b254b95ff3ccbcdd6bf2, type: 3}
+    volume: 0.5
+    source: {fileID: 0}
 --- !u!4 &1935178905
 Transform:
   m_ObjectHideFlags: 0
