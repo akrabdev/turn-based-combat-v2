@@ -1,16 +1,7 @@
 {
     "Agent": {
-        "elo": 1268.207252274743,
+        "elo": 1261.9852268167479,
         "checkpoints": [
-            {
-                "steps": 53527,
-                "file_path": "results\\tr_17\\Agent\\Agent-53527.onnx",
-                "reward": -0.42771211447137775,
-                "creation_time": 1625703315.814611,
-                "auxillary_file_paths": [
-                    "results\\tr_17\\Agent\\Agent-53527.pt"
-                ]
-            },
             {
                 "steps": 53738,
                 "file_path": "results\\tr_17\\Agent\\Agent-53738.onnx",
@@ -46,15 +37,24 @@
                 "auxillary_file_paths": [
                     "results\\tr_17\\Agent\\Agent-89271.pt"
                 ]
+            },
+            {
+                "steps": 89603,
+                "file_path": "results\\tr_17\\Agent\\Agent-89603.onnx",
+                "reward": -0.41817142963409426,
+                "creation_time": 1625960655.9482856,
+                "auxillary_file_paths": [
+                    "results\\tr_17\\Agent\\Agent-89603.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 89271,
+            "steps": 89603,
             "file_path": "results\\tr_17\\Agent.onnx",
-            "reward": -0.5315660396415107,
-            "creation_time": 1625711156.960146,
+            "reward": -0.41817142963409426,
+            "creation_time": 1625960655.9482856,
             "auxillary_file_paths": [
-                "results\\tr_17\\Agent\\Agent-89271.pt"
+                "results\\tr_17\\Agent\\Agent-89603.pt"
             ]
         }
     },

@@ -10,15 +10,24 @@
                 "auxillary_file_paths": [
                     "results\\tr_24\\Agent\\Agent-371454.pt"
                 ]
+            },
+            {
+                "steps": 375716,
+                "file_path": "results\\tr_24\\Agent\\Agent-375716.onnx",
+                "reward": -0.2049230742913026,
+                "creation_time": 1625962002.5539587,
+                "auxillary_file_paths": [
+                    "results\\tr_24\\Agent\\Agent-375716.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 371454,
+            "steps": 375716,
             "file_path": "results\\tr_24\\Agent.onnx",
-            "reward": -0.069888883166843,
-            "creation_time": 1625781022.0657892,
+            "reward": -0.2049230742913026,
+            "creation_time": 1625962002.5539587,
             "auxillary_file_paths": [
-                "results\\tr_24\\Agent\\Agent-371454.pt"
+                "results\\tr_24\\Agent\\Agent-375716.pt"
             ]
         }
     },

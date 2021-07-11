@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -31531,11 +31531,11 @@ MonoBehaviour:
   sounds:
   - name: World
     audio: {fileID: 8300000, guid: a4a3faab855e31644a7abe5d822efd70, type: 3}
-    volume: 0
+    volume: 1
     source: {fileID: 0}
   - name: Battle
-    audio: {fileID: 8300000, guid: 9a0e7ebf8f67b5247857f283f60c8517, type: 3}
-    volume: 0.1
+    audio: {fileID: 8300000, guid: bde97c95b4b307945a732c92c85266bf, type: 3}
+    volume: 1
     source: {fileID: 0}
   - name: HealSound
     audio: {fileID: 8300000, guid: b624c653ed3231240b5f4ef9dd7ec316, type: 3}
@@ -33051,6 +33051,12 @@ PrefabInstance:
       propertyPath: TeamId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5742028763616295607, guid: 231106d5165a5454d8dfe5cca5f52fcd,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 088e9097807777f46a80179a19581116,
+        type: 3}
     - target: {fileID: 5742028763616295607, guid: 231106d5165a5454d8dfe5cca5f52fcd,
         type: 3}
       propertyPath: m_BehaviorName

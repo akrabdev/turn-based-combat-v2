@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BerserkerVsBerserker_Play.unity
     guid: b398b3593f5a3491baf0259b213faf38
+  - enabled: 1
+    path: Assets/Scenes/UI/You Won.unity
+    guid: 4540f396909addd4c85db777013e19e5
+  - enabled: 1
+    path: Assets/Scenes/UI/You Lost.unity
+    guid: 643e663e687c2644eb54969cca450e26
   m_configObjects: {}

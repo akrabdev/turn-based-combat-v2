@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.MLAgents;
+using UnityEngine.SceneManagement;
 
 //public enum BattleState { IDLE, START, PLAYERTURN, ENEMYTURN, WON, LOST, ESCAPE }
 
@@ -260,6 +261,9 @@ public class BattleSystem : MonoBehaviour
                 enemyAgent.SetReward(1f);
             }
             //objectsUnits[0].transform.position = new Vector2(0.5f, 0.5f);
+            /////REMOVE THIS MIGHT CAUSE ERRORS
+            if (!TrainingManager.instance.trainingMode)
+                SceneManager.LoadScene("You Lost");
             playerUnit.isDead = false;
         }
         else
@@ -275,6 +279,9 @@ public class BattleSystem : MonoBehaviour
             {
                 enemyAgent.SetReward(-1f);
             }
+            /////REMOVE THIS MIGHT CAUSE ERRORS
+            if (!TrainingManager.instance.trainingMode)
+                SceneManager.LoadScene("You Won");
             enemyUnit.isDead = false;
         }
         state = BattleState.IDLE;
